@@ -5,6 +5,7 @@ import './index.css'
 import router from './router.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { ContextProvider } from './context/ContextProvider.jsx'
+import { Icon } from '@iconify/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
