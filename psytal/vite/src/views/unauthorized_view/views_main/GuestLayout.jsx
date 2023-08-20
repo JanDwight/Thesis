@@ -55,8 +55,8 @@ export default function GuestLayout() {
                         src={logo}
                         alt="Department of Psychology"/>
                          <div className="flex flex-col px-2 ">
-                            <p className="font-semibold text-sm ml-2 font-franklin text-gray-600 ">Department of</p>
-                            <p className="font-semibold text-sm ml-2 font-franklin text-gray-600">Psychology</p>
+                            <p className="font-semibold text-sm ml-2 font-franklin text-white ">Department of</p>
+                            <p className="font-semibold text-sm ml-2 font-franklin text-white">Psychology</p>
                       </div>
                     </div>
                     <div className="hidden md:flex space-x-4">
@@ -115,8 +115,8 @@ export default function GuestLayout() {
             </>
           )}
         </Disclosure>
-        <main className={`mt-2 ${isNavbarTransparent ? 'pt-0' : 'pt-16'}`}>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <main className={` ${isNavbarTransparent ? 'pt-0' : 'pt-16'}`}>
+        <div className="h-screen">
             <Outlet />
           </div>
         </main>
