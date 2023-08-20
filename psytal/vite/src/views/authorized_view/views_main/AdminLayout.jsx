@@ -11,9 +11,9 @@ import avatar from "@assets/icons8avatar.png";
 import { NavLink, Outlet } from 'react-router-dom';
 
 const navigation = [
-  { img: home, name: 'Home', to: 'home'},
+  { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: students, name: 'Students', to: '/preregistration'},
+  { img: students, name: 'Students', to: '/students'},
   { img: home, name: 'Add User', to: '/adduser'}
 ]
 
