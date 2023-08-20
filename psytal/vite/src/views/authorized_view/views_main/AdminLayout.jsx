@@ -8,8 +8,19 @@ import school from "@assets/icons8school.png";
 import users from "@assets/icons8usersettings.png";
 import settings from "@assets/icons8settings.png";
 import avatar from "@assets/icons8avatar.png";
-import AddPost from '../views_components/AddPost';
-import PostArticles from '../views_components/PostArticles';
+import { NavLink, Outlet } from 'react-router-dom';
+
+const navigation = [
+  { img: home, name: 'Home', to: 'home'},
+  { img: dashboard, name: 'Dashboard', to: 'dashboard'},
+  { img: students, name: 'Students', to: '/preregistration'},
+  { img: home, name: 'Add User', to: '/adduser'}
+]
+
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export default function AdminLayout() {
 
@@ -58,7 +69,8 @@ export default function AdminLayout() {
     
       {/*sidebar*/}
       <div className="flex justify-center items-center pt-6">
-        <aside class="flex flex-col w-60 h-50 px-5 py-2 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+        <aside class="flex flex-col w-60 h-50 px-5 py-10 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+
 
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
@@ -67,14 +79,34 @@ export default function AdminLayout() {
           </div>
 
           <div class="flex flex-col justify-between flex-1 mt-3">
-            <nav>
-              <a class="flex items-center px-4 py-2 text-gray-800 bg-gray-100 rounded-full dark:bg-lime-200 dark:text-gray-800" href="#">
+            
+            {navigation.map((item) => (
+                          
+                          <NavLink
+                            key={item.name}
+                            to={item.to}
+                            
+                            className={({ isActive }) => classNames(
+                              isActive
+                                ? 'bg-lime-200 text-gray-700'
+                                : 'text-gray-800 hover:bg-lime-200 hover:text-gray-700',
+                              'rounded-full px-3 py-2 text-sm font-medium flex items-center mt-5'
+                            )}
+                          >
+                            <img src={item.img} className='w-12  pr-5'/>
+                            {item.name}
+                          </NavLink>
+                        ))}
+            
+            
+            {/*<nav>
+              <a class="flex items-center px-4 py-2 text-gray-800 bg-gray-100 rounded-full dark:bg-lime-200 dark:text-gray-800" href="/home">
                 <img src= {home}
                   className="block btn- h-5 w-auto" alt="Home" />
                   <span class="mx-4 font-medium">Home</span>
               </a>
 
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="/admin/dashboard">
                 <img src= {dashboard}
                   className="block btn- h-5 w-auto" alt="school" />
                   <span class="mx-4 font-medium">Dashboard</span>
@@ -103,19 +135,11 @@ export default function AdminLayout() {
                   className="block btn- h-5 w-auto" alt="users" />
                   <span class="mx-4 font-medium">Settings</span>
               </a>
-            </nav>
+            </nav>*/}
           </div>
         </aside>
 
-        <div className="flex flex-col justify-center items-center ml-10">
-          <div className="w-1/2">
-            <AddPost />
-          </div>
-
-          <div >
-            <PostArticles />
-          </div>
-        </div>
+        <Outlet />
         
 
       </div>

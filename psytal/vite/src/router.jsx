@@ -9,7 +9,8 @@ import Accounts from "./views/authorized_view/views_main/Accounts"
 import PreRegistration from "./views/authorized_view/views_main/PreRegistration"
 import AddUser from "./views/authorized_view/views_main/AddUser";
 import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
-import Landing from "./views/authorized_view/views_main/Landing";
+import Dashboard from "./views/authorized_view/views_main/Dashboard";
+
 const router = createBrowserRouter([
     {
         path: '/admin',
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
                 element: <PreRegistration />
                 
             },
+
+            {
+                path: 'dashboard',
+                element: <Dashboard />
+            }
         ]
     },
     
