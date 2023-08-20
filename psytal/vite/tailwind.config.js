@@ -5,8 +5,18 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'franklin' : ['Franklin Gothic Medium' , 'sans serif'],
+      },
+      colors:{
+              'viridian' : '#588665',
+              'viridianHue' : '#496C54',
+              'neonGreen' : '#35B736',
+      }
+    },
   },
+  variants:{},
   plugins: [
     require("@tailwindcss/forms")
   ],

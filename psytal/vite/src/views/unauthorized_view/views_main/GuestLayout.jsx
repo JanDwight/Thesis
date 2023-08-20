@@ -3,12 +3,13 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
-
+import { useState, useEffect } from 'react';
+import logo from "@assets/PsychLogo.png";
 
 const navigation = [
   { name: 'Landing Page', to: 'landingpage'},
-  { name: 'Login', to: 'login'},
-  { name: 'About us', to: 'aboutus'}
+ { name: 'About us', to: 'aboutus'} ,
+  { name: 'Login', to: 'login'}
 ]
 
 function classNames(...classes) {
@@ -18,27 +19,47 @@ function classNames(...classes) {
 export default function GuestLayout() {
   const {userToken} = useStateContext();
 
+  const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsNavbarTransparent(false);
+      } else {
+        setIsNavbarTransparent(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   if (userToken) {
     return <Navigate to='/home' />
   }
 
   return (
     <>
-      <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+      <div className="relative">
+      <Disclosure as="nav" className={`fixed w-full ${isNavbarTransparent ? 'bg-transparent' : 'bg-gray-800'}`}>
           {({ open }) => (
             <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
+             <div className="flex justify-between items-center px-10 py-3">
+                    <div className="flex items-center">
                       <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
-                      />
+                        className="h-10 w-10"
+                        src={logo}
+                        alt="Department of Psychology"/>
+                         <div className="flex flex-col px-2 ">
+                            <p className="font-semibold text-sm ml-2 font-franklin text-gray-600 ">Department of</p>
+                            <p className="font-semibold text-sm ml-2 font-franklin text-gray-600">Psychology</p>
+                      </div>
                     </div>
-                    <div className="hidden md:block">
+                    <div className="hidden md:flex space-x-4">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
                           <NavLink
@@ -56,8 +77,8 @@ export default function GuestLayout() {
                         ))}
                       </div>
                     </div>
-                  </div>
-                  
+                 
+                  {/*Background*/}
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -70,7 +91,7 @@ export default function GuestLayout() {
                       )}
                     </Disclosure.Button>
                   </div>
-                </div>
+                
               </div>
 
               <Disclosure.Panel className="md:hidden">
@@ -94,8 +115,8 @@ export default function GuestLayout() {
             </>
           )}
         </Disclosure>
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <main className={`mt-2 ${isNavbarTransparent ? 'pt-0' : 'pt-16'}`}>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Outlet />
           </div>
         </main>

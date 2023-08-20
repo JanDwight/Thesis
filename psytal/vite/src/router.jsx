@@ -8,10 +8,37 @@ import Home from "./views/authorized_view/views_main/Home";
 import Accounts from "./views/authorized_view/views_main/Accounts"
 import PreRegistration from "./views/authorized_view/views_main/PreRegistration"
 import AddUser from "./views/authorized_view/views_main/AddUser";
-
+import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
+import Landing from "./views/authorized_view/views_main/Landing";
 const router = createBrowserRouter([
+    {
+        path: '/admin',
+        element: <AdminLayout />,
+        children:[
+            {
+                path: 'home',
+                element: <Home />
+            },
+            {
+                path: 'accounts',
+                element: <Accounts />
+            },
+            
+            {
+                path: 'adduser',
+                element: <AddUser />
+            },
+            {
+        
+                path: 'preregistration',
+                element: <PreRegistration />
+                
+            },
+        ]
+    },
     
-
+    
+    
     {
         path: '/',
         element: <DefaultLayout />,
@@ -31,13 +58,11 @@ const router = createBrowserRouter([
                 element: <AddUser />
             },
 
-            {
-                path: '/preregistration',
-                element: <PreRegistration />
-            }
+            
             
         ]
     },
+    
     {
         path: '/',
         element: <GuestLayout />,
