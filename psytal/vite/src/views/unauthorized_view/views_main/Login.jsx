@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
+import PsychLogo from '../../../assets/PsychLogo.png';
 
 export default function Login() {
   const {setCurrentUser, setUserToken} = useStateContext();
@@ -45,7 +46,7 @@ export default function Login() {
         <div className="box-border md:box-content bg-white p-9 shadow-2xl">
           <img
             className="mx-auto h-20 w-auto"
-            src="https://scontent.fcrk1-1.fna.fbcdn.net/v/t39.30808-6/270985660_112489034629955_1560527536208119722_n.png?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=BZvXheuO7tMAX_HzG2b&_nc_ht=scontent.fcrk1-1.fna&oh=00_AfC2dCGFRCUrLSzHM0lQZusoN-3I-AkC3aCaAFiA-2ox6A&oe=64E07113"
+            src={PsychLogo}
             alt="psychology logo"
           />
           <h2 className="mt-3 text-center text-2xl leading-9 tracking-tight text-gray-400">

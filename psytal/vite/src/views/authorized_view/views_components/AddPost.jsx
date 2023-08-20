@@ -6,7 +6,7 @@ export default function AddPost() {
   return (
     <>
         {/*Create Post*/}
-  <div className="bg-gray-200 w-full h-34 rounded-md shadow-md">
+  <div className="bg-gray-200 w-full h-34 rounded-3xl shadow-md">
     <div className="w-full h-10 flex justify-between px-3 md:px-10 lg:px-24 xl:px-5">
       <div className="flex h-full items-center">
         <img src={create} className="h-5 w-auto mt-2"/>
