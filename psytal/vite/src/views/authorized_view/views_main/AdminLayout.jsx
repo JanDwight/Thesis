@@ -13,8 +13,8 @@ import { NavLink, Outlet } from 'react-router-dom';
 const navigation = [
   { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: students, name: 'Students', to: '/students'},
-  { img: home, name: 'Add User', to: '/adduser'}
+  { img: students, name: 'Users', to: 'users'},
+  { img: home, name: 'Add User', to: 'adduser'}
 ]
 
 
@@ -81,15 +81,13 @@ export default function AdminLayout() {
           <div class="flex flex-col justify-between flex-1 mt-3">
             
             {navigation.map((item) => (
-                          
                           <NavLink
                             key={item.name}
                             to={item.to}
-                            
                             className={({ isActive }) => classNames(
                               isActive
-                                ? 'bg-lime-200 text-gray-700'
-                                : 'text-gray-800 hover:bg-lime-200 hover:text-gray-700',
+                                ? 'bg-green-500  text-gray-700'
+                                : 'text-gray-800 hover:bg-green-100 hover:text-gray-700',
                               'rounded-full px-3 py-2 text-sm font-medium flex items-center mt-5'
                             )}
                           >
@@ -139,7 +137,10 @@ export default function AdminLayout() {
           </div>
         </aside>
 
-        <Outlet />
+            <div className="flex flex-col justify-center items-center w-3/5 ml-10 ">
+            <Outlet />
+            </div>
+        
         
 
       </div>
