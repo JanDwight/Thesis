@@ -10,6 +10,8 @@ import PreRegistration from "./views/authorized_view/views_main/PreRegistration"
 import AddUser from "./views/authorized_view/views_main/AddUser";
 import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
 import Dashboard from "./views/authorized_view/views_main/Dashboard";
+import Users from "./views/authorized_view/views_main/Users";
+import StudentList from "./views/authorized_view/views_components/StudentList";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,17 @@ const router = createBrowserRouter([
             {
                 path: 'dashboard',
                 element: <Dashboard />
+            },
+
+            {
+                path: 'users',
+                element: <Users />,
+                children:[
+                    {
+                        path: '',
+                        element: <StudentList />
+                    }
+                ]
             }
         ]
     },
