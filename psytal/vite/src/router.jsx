@@ -22,6 +22,7 @@ const router = createBrowserRouter([
                 path: '',
                 element: <Home />
             },
+            
             {
                 path: 'accounts',
                 element: <Accounts />
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
                 path: 'adduser',
                 element: <AddUser />
             },
+
             {
         
                 path: 'preregistration',
@@ -71,13 +73,13 @@ const router = createBrowserRouter([
                 path: '/accounts',
                 element: <Accounts />
             },
-            
-            {
-                path: '/adduser',
-                element: <AddUser />
-            },
 
-            
+            {
+        
+                path: 'preregistration',
+                element: <PreRegistration />
+                
+            },
             
         ]
     },

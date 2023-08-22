@@ -115,7 +115,7 @@ export default function GuestLayout() {
             </>
           )}
         </Disclosure>
-        <main className={` ${isNavbarTransparent ? 'pt-0' : 'pt-16'}`}>
+        <main >
         <div className="h-screen">
             <Outlet />
           </div>
