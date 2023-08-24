@@ -7,11 +7,13 @@ import DefaultLayout from "./views/authorized_view/views_main/DefaultLayout";
 import Home from "./views/authorized_view/views_main/Home";
 import Accounts from "./views/authorized_view/views_main/Accounts"
 import PreRegistration from "./views/authorized_view/views_main/PreRegistration"
-import AddUser from "./views/authorized_view/views_main/AddUser";
+import Links from "./views/authorized_view/views_main/Links";
 import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
 import Dashboard from "./views/authorized_view/views_main/Dashboard";
-import Users from "./views/authorized_view/views_main/Users";
+import ManageUsers from "./views/authorized_view/views_main/ManageUsers";
 import StudentList from "./views/authorized_view/views_components/StudentList";
+import EmployeeList from "./views/authorized_view/views_components/StudentList";
+import PreEnrollment from "./views/authorized_view/views_main/PreEnrollment"
 
 const router = createBrowserRouter([
     {
@@ -22,16 +24,7 @@ const router = createBrowserRouter([
                 path: '',
                 element: <Home />
             },
-            
-            {
-                path: 'accounts',
-                element: <Accounts />
-            },
-            
-            {
-                path: 'adduser',
-                element: <AddUser />
-            },
+           
 
             {
         
@@ -44,14 +37,26 @@ const router = createBrowserRouter([
                 path: 'dashboard',
                 element: <Dashboard />
             },
+            {
+                path: 'preenrollment',
+                element: <PreEnrollment />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
 
             {
-                path: 'users',
-                element: <Users />,
+                path: 'manageusers',
+                element: <ManageUsers />,
                 children:[
                     {
                         path: '',
                         element: <StudentList />
+                    },
+                    {
+                        path: '',
+                        element: <EmployeeList />
                     }
                 ]
             }
@@ -73,13 +78,9 @@ const router = createBrowserRouter([
                 path: '/accounts',
                 element: <Accounts />
             },
+            
 
-            {
-        
-                path: 'preregistration',
-                element: <PreRegistration />
-                
-            },
+            
             
         ]
     },

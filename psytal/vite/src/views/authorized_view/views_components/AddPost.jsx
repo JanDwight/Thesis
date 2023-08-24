@@ -6,13 +6,13 @@ export default function AddPost() {
   return (
     <>
         {/*Create Post*/}
-  <div className="bg-gray-200 w-full h-34 rounded-3xl shadow-md">
+  <div className="bg-gray-200 w-full h-34 rounded-lg shadow-md">
     <div className="w-full h-10 flex justify-between px-3 md:px-10 lg:px-24 xl:px-5">
       <div className="flex h-full items-center">
-        <img src={create} className="h-5 w-auto mt-2"/>
-        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-2">Create Announcement </span>
-        <img src={image} className="h-6 w-auto mt-2"/>
-        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-2"> Attach Photo / File</span>
+        <img src={create} className="h-4 w-auto ml-2 mt-5"/>
+        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-5">Create Announcement </span>
+        <img src={image} className="h-5 w-auto mt-5"/>
+        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-5"> Attach Photo / File</span>
       </div>
     </div>
       <div className="w-full h-16 flex items-center justify-between px-5">
