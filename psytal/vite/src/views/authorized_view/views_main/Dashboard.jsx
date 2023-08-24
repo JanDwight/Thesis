@@ -49,40 +49,41 @@ export default function Dashboard() {
   };
   
   return (
-   <div className="bg-white w-full rounded-lg shadow-md">
-    <div className="rounded-t bg-white h-10 mb-0 px-6 pt-5 pb-10">
+   <div className="bg-gray-100 w-full rounded-lg shadow-md">
+    <div className="rounded-t h-10 mb-0 px-6 pt-5 pb-10">
     <div className="flex justify-between">
-                  <h6 className="block uppercase tracking-wide text-green-800 text-lg font-semibold">dashboard</h6>
+    <h6 className="block uppercase tracking-wide text-green-600 text-lg font-semibold pb-5">dashboard</h6>
     </div>
+    <hr className="border-gray-400" />
     </div>
-    <div className="grid grid-cols-4 gap-4 mx-6">
-  <div className="flex flex-col items-center border border-gray-300 pb-5">
+    <div className="grid grid-cols-4 gap-4 mx-6 my-5">
+  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
     <span className="bg-dash1 w-40 h-10 px-4 py-2 rounded-xl text-white">
       Total Students
     </span>
-    <span className="text-lg mt-2">{data.totalStudents}</span>
+    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalStudents}</span>
   </div>
-  <div className="flex flex-col items-center border border-gray-300 pb-5">
+  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
     <span className="bg-dash2 w-40 h-10 px-4 py-2 rounded-xl text-white">
       Total Employees
     </span>
-    <span className="text-lg mt-2">{data.totalEmployees}</span>
+    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalEmployees}</span>
   </div>
-  <div className="flex flex-col items-center border border-gray-300 pb-5">
+  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
     <span className="bg-dash3 w-40 h-10 px-4 py-2 rounded-xl text-white">
       Total Posts
     </span>
-    <span className="text-lg mt-2">{data.totalPosts}</span>
+    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalPosts}</span>
   </div>
-  <div className="flex flex-col items-center border border-gray-300 pb-5">
+  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
     <span className="bg-dash4 w-40 h-10 px-4 py-2 rounded-xl text-white">
       Total Logins
     </span>
-    <span className="text-lg mt-2">{data.totalLogins}</span>
+    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalLogins}</span>
   </div>
 </div>
 
-        <h2 className="text-lg mx-5 mt-10">Logs: </h2>
+        <h2 className="text-base mx-5 mt-10">Logs: </h2>
         <div className="mx-5">
           {tableData.map((item, index) => (
             <div key={index} className="border p-2">
