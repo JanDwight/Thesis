@@ -24,14 +24,6 @@ const router = createBrowserRouter([
                 path: '',
                 element: <Home />
             },
-           
-
-            {
-        
-                path: 'preregistration',
-                element: <PreRegistration />
-                
-            },
 
             {
                 path: 'dashboard',
@@ -70,7 +62,7 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
             {
-                path: '/home',
+                path: '/',
                 element: <Home />
             },
 
@@ -79,7 +71,12 @@ const router = createBrowserRouter([
                 element: <Accounts />
             },
             
-
+            {
+        
+                path: 'preregistration',
+                element: <PreRegistration />
+                
+            },
             
             
         ]

@@ -14,7 +14,7 @@ import axiosClient from '../../../axios';
 const navigation = [
   { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: students, name: 'Users', to: 'users'},
+  { img: students, name: 'Manage Users', to: 'manageusers'},
   { img: home, name: 'Add User', to: 'adduser'}
 ]
 function classNames(...classes) {

@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/icons8calendar.png";
 
+//Please edit the form, di sya tugma sa form na provided ng school para sa incomimng firstyears
     export default function PreRegistration (){
       const [rows, setRows] = useState([{ id: 0 }]);
 
