@@ -1,49 +1,42 @@
-import React, {useState} from 'react'
+import { Fragment } from 'react'
 import logo from "@assets/PsychLogo.png";
 import notif from "@assets/iconbell.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
-import school from "@assets/icons8school.png";
-import users from "@assets/icons8usersettings.png";
+import students from "@assets/icons8student.png";
 import avatar from "@assets/icons8avatar.png";
-import chevside from "@assets/icons8chevronside.png";
-import chevdown from "@assets/icons8chevrondown.png";
-
-import { NavLink, Outlet, useLocation} from 'react-router-dom';
+import { NavLink, Navigate, Outlet } from 'react-router-dom';
+import { Menu, Transition } from '@headlessui/react'
+import { UserIcon, BellIcon } from '@heroicons/react/24/solid'
+import { useStateContext } from '../../../context/ContextProvider';
+import axiosClient from '../../../axios';
 
 const navigation = [
   { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: school, name: 'School Setup', subItems: [
-    { name: 'Pre-enrollment', to: 'preenrollment' },
-    { name: 'Links', to: 'links' }
-  ]},
-  { img: users, name: 'Manage Users', to: 'manageusers'},
-
-];
-
-
-
+  { img: students, name: 'Manage Users', to: 'manageusers'},
+  { img: home, name: 'Add User', to: 'adduser'}
+]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const ChevronSideIcon = () => <img src={chevside} alt="Chevron Side Icon" style={{height: '16px'}} />;
-const ChevronDownIcon = () => <img src={chevdown} alt="Chevron Down Icon" style={{height: '16px'}} />;
-
 export default function AdminLayout() {
-  const location = useLocation();
-  const [schoolSetupOpen, setSchoolSetupOpen] = useState(false); // State for school setup section
+  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
-  const navigationWithChevrons = navigation.map((item) => {
-    if (item.subItems) {
-      return {
-        ...item,
-        isOpen: schoolSetupOpen, // Set the open state based on schoolSetupOpen
-      };
-    }
-    return item;
-  });
+  if (!userToken) {
+    return <Navigate to='/landingpage' />
+  }
+
+  const logout = (ev) => {
+    ev.preventDefault();
+    axiosClient.post('/logout')
+      .then(res => {
+        setCurrentUser({});
+        setUserToken(null);
+        setUserRole(null)
+      })
+  }
 
   return (
     <>
@@ -68,20 +61,56 @@ export default function AdminLayout() {
                     </svg>
                       </span>
                 </p>
-                <input className="border border-viridianHue focus:ring-white focus:border-white sm:text-sm w-full rounded-lg py-2 pl-10 pr-20 bg-viridianHue text-white" placeholder="Type to search"/>
+                <input placeholder="Type to search" type="search" className="border border-viridianHue focus:ring-white focus:border-white sm:text-sm w-full rounded-lg py-2 pl-10 pr-20 bg-viridianHue text-white"/>
               </div>
-              <div className="pt-0 pr-0 pb-0 pl-0 mt-0 mr-20 mb-0 ml-0">
-                        <span className="items-center justify-center flex">
-                        <img src= {notif}
-                        className="block btn- h-6 w-auto" alt="notifications" />
-                        </span>
-                    
-                </div>
-                <div className="justify-center items-center flex relative">
-                  <img src= {avatar}
-                    className="object-cover btn- h-8 w-8 rounded-full mr-2 bg-gray-300" alt="" />
-                  
-                </div>
+              <div className="hidden md:block">
+                      <div className="ml-4 flex items-center md:ml-6">
+                        {/* Profile dropdown */}
+                      <Menu as="div" className="relative ml-3">
+                        <div>
+                          <Menu.Button className="relative flex max-w-xs items-center rounded-full shadow-2xl shadow-black text-sm  focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">Open user menu</span>
+                            <UserIcon className=' w-8 h-8 text-white' />
+                          </Menu.Button> 
+                        </div>
+
+                        {/**Animation/Transitions */}
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Item>
+                                  <button
+                                    onClick={(ev) => logout(ev)}
+                                    className={'block px-4 py-2 text-sm text-gray-700'}
+                                  >
+                                    Sign out
+                                  </button>
+                              </Menu.Item>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+
+                        {/**Notification */}
+                        <button
+                          type="button"
+                          className="relative rounded-full p-1 ml-4 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                          <span className="absolute -inset-1.5" />
+                          <span className="sr-only">View notifications</span>
+                          <BellIcon className="h-7 w-7" aria-hidden="true" />
+                        </button>
+
+
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -90,77 +119,72 @@ export default function AdminLayout() {
     
       {/*sidebar*/}
       <div className="flex justify-center items-center pt-6">
-        <aside class="flex flex-col w-60 h-50 px-5 py-6 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
-
-
+        <aside class="flex flex-col w-60 h-50 px-5 py-10 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
             <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
-          </div>
-            
-          <div className="flex flex-col justify-between flex-1 mt-3">
 
-          {navigationWithChevrons.map((item) => (
-          <div key={item.name}>
-          {item.subItems ? (
-            <div className="group">
-              <div
-                className={`flex items-center px-3 py-2 text-sm font-medium mt-5 ${
-                  (location.pathname.includes(item.to) && !item.isOpen) // Check for active state
-                    ? 'bg-lime-500 text-gray-700' 
-                    : 'text-gray-800 hover:bg-green-100 hover:text-gray-700'
-                } group-hover:bg-lime-500 group-hover:text-gray-700`}// Apply bg-lime-500 if active
-                onClick={() => {
-                  // Toggle the dropdown
-                  setSchoolSetupOpen(!schoolSetupOpen);
-                }}
-                            >
-                              <img src={item.img} className="w-12 pr-5" alt="" />
-                              <span className="ml-auto">
-                  {schoolSetupOpen ? <ChevronSideIcon /> : <ChevronDownIcon />}
-                </span>
-              </div>
-              {item.isOpen && (
-                <div className="pl-10">
-                  {item.subItems.map((subItem) => (
-                    <NavLink
-                      key={subItem.name}
-                      to={subItem.to}
-                      className={`text-gray-800 pl-3 pr-2 py-2 text-sm font-medium flex items-center ${
-                        (location.pathname === subItem.to) // Check for active state
-                          ? 'bg-lime-500 text-gray-700' // Apply bg-green-500 if active
-                          : 'text-gray-800 hover:bg-green-100 hover:text-gray-700'
-                      }`}
-              >
-                 {subItem.name}
-              </NavLink>
-            ))}
           </div>
-        )}
-      </div>
-    ) : (
-      <NavLink
-        to={item.to}
-        className={classNames(
-          'rounded-full px-3 py-2 text-sm font-medium flex items-center mt-5',
-          (location.pathname === item.to) // Check for active state
-            ? 'bg-lime-500 text-gray-700' // Apply bg-green-500 if active
-            : 'text-gray-800 hover:bg-green-100 hover:text-gray-700'
-        )}
-                  >
-                    <img src={item.img} className="w-12 pr-5" alt="" />
-                    {item.name}
-                  </NavLink>
-                )}
-              </div>
-            ))}
+
+          <div class="flex flex-col justify-between flex-1 mt-3">
+            
+            {navigation.map((item) => (
+                          <NavLink
+                            key={item.name}
+                            to={item.to}
+                            className={({ isActive }) => classNames(
+                              isActive
+                                ? 'bg-green-500  text-gray-700'
+                                : 'text-gray-800 hover:bg-green-100 hover:text-gray-700',
+                              'rounded-full px-3 py-2 text-sm font-medium flex items-center mt-5'
+                            )}
+                          >
+                            <img src={item.img} className='w-12  pr-5'/>
+                            {item.name}
+                          </NavLink>
+                        ))}
+            
+            
+            {/*<nav>
+              <a class="flex items-center px-4 py-2 text-gray-800 bg-gray-100 rounded-full dark:bg-lime-200 dark:text-gray-800" href="/home">
+                <img src= {home}
+                  className="block btn- h-5 w-auto" alt="Home" />
+                  <span class="mx-4 font-medium">Home</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="/admin/dashboard">
+                <img src= {dashboard}
+                  className="block btn- h-5 w-auto" alt="school" />
+                  <span class="mx-4 font-medium">Dashboard</span>
+              </a> 
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
+                <img src= {school}
+                  className="block btn- h-5 w-auto" alt="school" />
+                  <span class="mx-4 font-medium">School Setup</span>
+              </a> 
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
+                <img src= {students}
+                  className="block btn- h-5 w-auto" alt="students" />
+                  <span class="mx-4 font-medium">Students</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-lg dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
+                <img src= {users}
+                  className="block btn- h-5 w-auto" alt="users" />
+                  <span class="mx-4 font-medium">Users</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-lg dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
+                <img src= {settings}
+                  className="block btn- h-5 w-auto" alt="users" />
+                  <span class="mx-4 font-medium">Settings</span>
+              </a>
+            </nav>*/}
           </div>
         </aside>
-
-        <div className="flex flex-col justify-center items-center w-3/5 ml-10">
-          <Outlet />
-        </div>
+            <div className="flex flex-col justify-center items-center w-3/5 ml-10 ">
+            <Outlet />
+            </div>
+        
+        
       </div>
     </>
   );
