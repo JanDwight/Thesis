@@ -14,6 +14,7 @@ export default {
               'viridianHue' : '#496C54',
               'neonGreen' : '#35B736',
               'highlightGreen' : '#B5E3B4',
+              'grayGreen' : '#DBEADC',
       }
     },
   },
