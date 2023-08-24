@@ -33,7 +33,7 @@ export default function ManageUsers() {
     setError({ __html: '' });
 
     axiosClient
-      .post('/adduser', { name: fullName, password }) // Back end, needs to edited 
+      .post('/adduser', { name: fullName, password }) // Back end, needs edit
       .then(({ data }) => {
         setCurrentUser(data.user);
         setUserToken(data.token);
