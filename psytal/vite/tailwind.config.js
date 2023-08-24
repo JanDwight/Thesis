@@ -13,6 +13,7 @@ export default {
               'viridian' : '#588665',
               'viridianHue' : '#496C54',
               'neonGreen' : '#35B736',
+              'highlightGreen' : '#B5E3B4',
       }
     },
   },

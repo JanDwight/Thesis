@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function StudentList() {
+export default function Links() {
   return (
     <>
-    <div>StudentList
+    <div>Links
       
     </div>
     </>

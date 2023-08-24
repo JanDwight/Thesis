@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function StudentList() {
+export default function PreEnrollment() {
   return (
     <>
-    <div>StudentList
+    <div>preenrollment
       
     </div>
     </>
