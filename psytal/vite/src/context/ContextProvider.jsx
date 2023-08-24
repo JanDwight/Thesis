@@ -5,8 +5,10 @@ import { createContext } from "react";
 const StateContext = createContext({
     currenUser: {},
     userToken: null,
+    userRole: {},
     setCurrentUser: () => {},
     setUserToken: () => {},
+    setUserRole: () => {},
     userPermission: {},
     setUserPermission: null,
 })
@@ -15,7 +17,8 @@ export const ContextProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState({});
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
     const [userPermission, setUserPermission] = useState();
-
+    const [userRole, setUserRole] = useState();
+    
     const setUserToken = (token) => {
         if (token) {
           localStorage.setItem('TOKEN', token)
@@ -25,6 +28,8 @@ export const ContextProvider = ({children}) => {
         _setUserToken(token);
       }
 
+  
+
     return (
         <StateContext.Provider value={{
             currentUser,
@@ -32,7 +37,9 @@ export const ContextProvider = ({children}) => {
             userToken,
             setUserToken,
             userPermission,
-            setUserPermission
+            setUserPermission,
+            userRole,
+            setUserRole
         }}>
 
         {children}

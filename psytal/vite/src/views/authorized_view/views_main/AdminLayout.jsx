@@ -1,14 +1,15 @@
-import React from 'react'
+import { Fragment } from 'react'
 import logo from "@assets/PsychLogo.png";
 import notif from "@assets/iconbell.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
 import students from "@assets/icons8student.png";
-import school from "@assets/icons8school.png";
-import users from "@assets/icons8usersettings.png";
-import settings from "@assets/icons8settings.png";
 import avatar from "@assets/icons8avatar.png";
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Navigate, Outlet } from 'react-router-dom';
+import { Menu, Transition } from '@headlessui/react'
+import { UserIcon, BellIcon } from '@heroicons/react/24/solid'
+import { useStateContext } from '../../../context/ContextProvider';
+import axiosClient from '../../../axios';
 
 const navigation = [
   { img: home, name: 'Home', to: ''},
@@ -23,6 +24,21 @@ function classNames(...classes) {
 }
 
 export default function AdminLayout() {
+  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+
+  if (!userToken) {
+    return <Navigate to='/landingpage' />
+  }
+
+  const logout = (ev) => {
+    ev.preventDefault();
+    axiosClient.post('/logout')
+      .then(res => {
+        setCurrentUser({});
+        setUserToken(null);
+        setUserRole(null)
+      })
+  }
 
   return (
     <>
@@ -49,18 +65,54 @@ export default function AdminLayout() {
                 </p>
                 <input placeholder="Type to search" type="search" className="border border-viridianHue focus:ring-white focus:border-white sm:text-sm w-full rounded-lg py-2 pl-10 pr-20 bg-viridianHue text-white"/>
               </div>
-              <div className="pt-0 pr-0 pb-0 pl-0 mt-0 mr-20 mb-0 ml-0">
-                        <span className="items-center justify-center flex">
-                        <img src= {notif}
-                        className="block btn- h-6 w-auto" alt="notifications" />
-                        </span>
-                    
-                </div>
-                <div className="justify-center items-center flex relative">
-                  <img src= {avatar}
-                    className="object-cover btn- h-8 w-8 rounded-full mr-2 bg-gray-300" alt="" />
-                  
-                </div>
+              <div className="hidden md:block">
+                      <div className="ml-4 flex items-center md:ml-6">
+                        {/* Profile dropdown */}
+                      <Menu as="div" className="relative ml-3">
+                        <div>
+                          <Menu.Button className="relative flex max-w-xs items-center rounded-full shadow-2xl shadow-black text-sm  focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">Open user menu</span>
+                            <UserIcon className=' w-8 h-8 text-white' />
+                          </Menu.Button> 
+                        </div>
+
+                        {/**Animation/Transitions */}
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Item>
+                                  <button
+                                    onClick={(ev) => logout(ev)}
+                                    className={'block px-4 py-2 text-sm text-gray-700'}
+                                  >
+                                    Sign out
+                                  </button>
+                              </Menu.Item>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                      
+                        {/**Notification */}
+                        <button
+                          type="button"
+                          className="relative rounded-full p-1 ml-4 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                          <span className="absolute -inset-1.5" />
+                          <span className="sr-only">View notifications</span>
+                          <BellIcon className="h-7 w-7" aria-hidden="true" />
+                        </button>
+
+                      
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -76,6 +128,7 @@ export default function AdminLayout() {
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
             <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+            
           </div>
 
           <div class="flex flex-col justify-between flex-1 mt-3">

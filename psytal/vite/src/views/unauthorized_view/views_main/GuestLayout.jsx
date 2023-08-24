@@ -8,7 +8,7 @@ import logo from "@assets/PsychLogo.png";
 
 const navigation = [
   { name: 'Landing Page', to: 'landingpage'},
- { name: 'About us', to: 'aboutus'} ,
+  { name: 'About us', to: 'aboutus'} ,
   { name: 'Login', to: 'login'}
 ]
 
@@ -17,8 +17,7 @@ function classNames(...classes) {
 }
 
 export default function GuestLayout() {
-  const {userToken} = useStateContext();
-
+  const {userToken, userRole} = useStateContext();
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
 
   useEffect(() => {
@@ -38,9 +37,14 @@ export default function GuestLayout() {
   }, []);
 
 
-  if (userToken) {
-    return <Navigate to='/home' />
+
+  if (userToken && userRole === 1) {
+    return <Navigate to='/admin' />
+  }else if (userToken && userRole === 4) {
+    return <Navigate to='' />
   }
+
+
 
   return (
     <>

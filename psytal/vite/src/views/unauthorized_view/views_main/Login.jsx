@@ -4,10 +4,11 @@ import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychLogo.png';
 
 export default function Login() {
-  const {setCurrentUser, setUserToken} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole} = useStateContext();
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({__html: ""});
+  const [userRole, currentUser, userToken] = useState('');
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -21,6 +22,7 @@ export default function Login() {
     .then(({ data }) => {
       setCurrentUser(data.user)
       setUserToken(data.token)
+      setUserRole(data.role)
     })
     .catch(( error ) => {
       if (error.response) {
@@ -29,6 +31,8 @@ export default function Login() {
       }
         console.error(error)
     });
+
+    
   };
 
   return (
@@ -44,6 +48,7 @@ export default function Login() {
 {/*box*/}
 
         <div className="box-border md:box-content bg-white p-9 shadow-2xl">
+          
           <img
             className="mx-auto h-20 w-auto"
             src={PsychLogo}
@@ -60,7 +65,7 @@ export default function Login() {
               </label>
               <div className="mt-2"> 
                 <input
-                 placeholder='JuanCruz'
+                 placeholder={userToken}
                   id="fullName"
                   name="fullName"
                   type="text"

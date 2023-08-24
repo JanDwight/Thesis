@@ -41,10 +41,12 @@ class AuthController extends Controller
         }
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
+        $role = $user->role;
 
         return response([
             'user' => $user,
-            'token' =>$token
+            'token' =>$token,
+            'role' =>$role
         ]);
     }
 
@@ -61,7 +63,25 @@ class AuthController extends Controller
         return response([
             'succes' => true
         ]);
+    }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $role
+     * @return \Illuminate\Http\Response
+     */
+    public function GETRole($role){
+        $userRole = User::find($role);
 
+        if(!empty($userRole)) {
+            return response()->json($userRole);
+        }
+        else
+        {
+            return response()->json([
+                "message" => "Role Not Found."
+            ], 404);
+        }
     }
 }

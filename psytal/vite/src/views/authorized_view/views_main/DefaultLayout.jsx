@@ -30,7 +30,7 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
-  const {currentUser, userToken, setCurrentUser, setUserToken} = useStateContext();
+  const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
 
   if (!userToken) {
     return <Navigate to='/landingpage' />
@@ -42,6 +42,7 @@ export default function DefaultLayout() {
       .then(res => {
         setCurrentUser({});
         setUserToken(null)
+        setUserRole(null)
       })
   }
 
