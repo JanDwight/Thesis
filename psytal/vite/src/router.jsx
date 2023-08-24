@@ -12,7 +12,7 @@ import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
 import Dashboard from "./views/authorized_view/views_main/Dashboard";
 import ManageUsers from "./views/authorized_view/views_main/ManageUsers";
 import StudentList from "./views/authorized_view/views_components/StudentList";
-import EmployeeList from "./views/authorized_view/views_components/StudentList";
+import EmployeeList from "./views/authorized_view/views_components/EmployeeList";
 import PreEnrollment from "./views/authorized_view/views_main/PreEnrollment"
 
 const router = createBrowserRouter([
@@ -54,6 +54,7 @@ const router = createBrowserRouter([
                         path: '',
                         element: <StudentList />
                     },
+
                     {
                         path: '',
                         element: <EmployeeList />
