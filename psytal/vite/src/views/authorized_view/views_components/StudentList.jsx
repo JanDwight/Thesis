@@ -45,10 +45,10 @@ class StudentList extends Component {
           <tbody>
             {filteredData.map((student, index) => (
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-highlightGreen' : ''}>
-                <td className="text-left">{student.id}</td>
-                <td className="text-left">{student.name}</td>
-                <td className="text-left">{student.yrsection}</td>
-                <td className="text-left">{/* Add action buttons here */}</td>
+                <td className="text-left p-2">{student.id}</td>
+                <td className="text-left p-2">{student.name}</td>
+                <td className="text-left p-2">{student.yrsection}</td>
+                <td className="text-left p-2">{/* Add action buttons here */}</td>
               </tr>
             ))}
           </tbody>
