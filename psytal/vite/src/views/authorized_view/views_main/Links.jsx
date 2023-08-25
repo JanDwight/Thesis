@@ -29,7 +29,7 @@ export default function Links() {
     setError({ __html: '' });
 
     try {
-      const response = await axiosClient.post('/addlink', { code, description, instructor });
+      const response = await axiosClient.post('/addlink', { code, link, description, instructor });
       fetchLinks();
       setShowLinks(false);
     } catch (error) {
@@ -46,8 +46,8 @@ export default function Links() {
 
   // Sample data 
   const sampleLinks = [
-    { id: 1, code: 'CS101', description: 'Introduction to Computer Science', instructor: 'John Sturgis' },
-    { id: 2, code: 'MATH202', description: 'Advanced Mathematics', instructor: 'Sheldon Cooper' },
+    { id: 1, code: 'CS101', url: 'https://google.com', description: 'Introduction to Computer Science', instructor: 'John Sturgis' },
+    { id: 2, code: 'MATH202', url: 'https://wikipedia.com', description: 'Advanced Mathematics', instructor: 'Sheldon Cooper' },
    
   ];
 
@@ -66,10 +66,11 @@ export default function Links() {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <table className="table w-full table-striped text-gray-700 m-3 bg-white">
+        <table className="table w-full table-striped text-gray-700  font-sm mx-3 bg-white">
           <thead>
             <tr>
             <th className="text-left bg-gray-200 ">Code</th>
+            <th className="text-left bg-gray-200 ">Link</th>
             <th className="text-left bg-gray-200 ">Description</th>
             <th className="text-left bg-gray-200 ">Instructor</th>
             <th className="text-left bg-gray-200 ">Action</th>
@@ -81,6 +82,11 @@ export default function Links() {
               ? links.map((link) => (
                   <tr key={link.id}>
                     <td className="text-left">{link.code}</td>
+                    <td className="text-left">
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    {link.url}
+                  </a>
+                </td>
                     <td className="text-left">{link.description}</td>
                     <td className="text-left">{link.instructor}</td>
                   </tr>
@@ -88,6 +94,11 @@ export default function Links() {
               : sampleLinks.map((link) => ( //Delete after connecting to database
                   <tr key={link.id}>
                     <td className="text-left">{link.code}</td>
+                    <td className="text-left">
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    {link.url}
+                  </a>
+                </td>
                     <td className="text-left">{link.description}</td>
                     <td className="text-left">{link.instructor}</td>
                   </tr>
