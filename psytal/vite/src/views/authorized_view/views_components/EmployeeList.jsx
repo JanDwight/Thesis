@@ -43,7 +43,7 @@ class EmployeeList extends Component {
           </thead>
           <tbody>
             {filteredData.map((employee, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'odd:bg-highlightGreen' : ''}>
+              <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
                 <td className="text-left p-2">{employee.name}</td>
                 <td className="text-left p-2">{employee.role}</td>
                 {/* Add more cells as needed */}
