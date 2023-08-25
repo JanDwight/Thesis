@@ -29,7 +29,7 @@ export default function Links() {
     setError({ __html: '' });
 
     try {
-      const response = await axiosClient.post('/addlink', { code, link, description, instructor });
+      const response = await axiosClient.post('/addlink', { code, url, description, instructor });
       fetchLinks();
       setShowLinks(false);
     } catch (error) {
