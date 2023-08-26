@@ -14,7 +14,7 @@ import PsychLogo from '../../../assets/PsychLogo.png'
 // }
 
 const navigation = [
-  { name: 'Home', to: '/home'},
+  { name: 'Home', to: '/'},
   { name: 'Accounts', to: '/accounts'},
   { name: 'PreRegistration', to: '/preregistration'}  
 ]
