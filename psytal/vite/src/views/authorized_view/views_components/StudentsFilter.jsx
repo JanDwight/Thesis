@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function StudentsFilter({ showModal, onClose, fullName, setFullName, onSubmit }) {
+export default function StudentsFilter({ showModal, onClose, onSubmit }) {
     if (!showModal) {
       return null;
     }

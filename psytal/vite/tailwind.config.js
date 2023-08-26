@@ -15,6 +15,10 @@ export default {
               'neonGreen' : '#35B736',
               'highlightGreen' : '#B5E3B4',
               'grayGreen' : '#DBEADC',
+              'dash1' : '#1F9563',
+              'dash2' : '#1F9586',
+              'dash3' : '#20951F',
+              'dash4' : '#6B951F',
       }
     },
   },

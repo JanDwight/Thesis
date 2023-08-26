@@ -65,23 +65,4 @@ class AuthController extends Controller
         ]);
     }
 
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function GETRole($role){
-        $userRole = User::find($role);
-
-        if(!empty($userRole)) {
-            return response()->json($userRole);
-        }
-        else
-        {
-            return response()->json([
-                "message" => "Role Not Found."
-            ], 404);
-        }
-    }
 }
