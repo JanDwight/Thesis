@@ -1,6 +1,5 @@
 import { Fragment } from 'react'
 import logo from "@assets/PsychLogo.png";
-import notif from "@assets/iconbell.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
 import students from "@assets/icons8student.png";
@@ -15,7 +14,7 @@ const navigation = [
   { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
   { img: students, name: 'Manage Users', to: 'manageusers'},
-  { img: home, name: 'Add User', to: 'adduser'}
+  { name: 'Links', to: 'links'}
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -107,8 +106,6 @@ export default function AdminLayout() {
                           <span className="sr-only">View notifications</span>
                           <BellIcon className="h-7 w-7" aria-hidden="true" />
                         </button>
-
-
                     </div>
                   </div>
               </div>
@@ -118,7 +115,7 @@ export default function AdminLayout() {
     
     
       {/*sidebar*/}
-      <div className="flex justify-center items-center pt-6">
+      <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
         <aside class="flex flex-col w-60 h-50 px-5 py-10 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
@@ -144,40 +141,7 @@ export default function AdminLayout() {
                             {item.name}
                           </NavLink>
                         ))}
-            
-            
-            {/*<nav>
-              <a class="flex items-center px-4 py-2 text-gray-800 bg-gray-100 rounded-full dark:bg-lime-200 dark:text-gray-800" href="/home">
-                <img src= {home}
-                  className="block btn- h-5 w-auto" alt="Home" />
-                  <span class="mx-4 font-medium">Home</span>
-              </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="/admin/dashboard">
-                <img src= {dashboard}
-                  className="block btn- h-5 w-auto" alt="school" />
-                  <span class="mx-4 font-medium">Dashboard</span>
-              </a> 
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
-                <img src= {school}
-                  className="block btn- h-5 w-auto" alt="school" />
-                  <span class="mx-4 font-medium">School Setup</span>
-              </a> 
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-full dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
-                <img src= {students}
-                  className="block btn- h-5 w-auto" alt="students" />
-                  <span class="mx-4 font-medium">Students</span>
-              </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-lg dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
-                <img src= {users}
-                  className="block btn- h-5 w-auto" alt="users" />
-                  <span class="mx-4 font-medium">Users</span>
-              </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-gray-800 transition-colors duration-300 transform rounded-lg dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-lime-200 dark:hover:text-gray-800 hover:text-gray-700" href="#">
-                <img src= {settings}
-                  className="block btn- h-5 w-auto" alt="users" />
-                  <span class="mx-4 font-medium">Settings</span>
-              </a>
-            </nav>*/}
+       
           </div>
         </aside>
             <div className="flex flex-col justify-center items-center w-3/5 ml-10 ">
