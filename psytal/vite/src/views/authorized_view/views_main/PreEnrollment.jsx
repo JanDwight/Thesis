@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/icons8calendar.png";
 
 export default function PreEnrollment() {
-  {/**const [rows, setRows] = useState([{ id: 0 }]); */}
+  const [rows, setRows] = useState([{ id: 0 }]);
   const addRow = () => {
     const newRow = { id: rows.length };
     setRows([...rows, newRow]);
@@ -495,7 +495,7 @@ export default function PreEnrollment() {
                     <div className="flex flex-wrap -mx-3 my-5 m-2">
                       <div className="flex flex-wrap -mx-3 my-5 m-2">
                       <Row id={0} />
-                      {/**{rows.slice(1).map(row => (<Row key={row.id} id={row.id} /> ))} */}
+                      {rows.slice(1).map(row => (<Row key={row.id} id={row.id} /> ))} 
                         {/**ADD */}
                         <div className="flex items-center justify-center mx-4 my-4 ml-14">
                             <button
