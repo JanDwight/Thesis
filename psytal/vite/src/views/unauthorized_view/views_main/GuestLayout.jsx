@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
 import { useState, useEffect } from 'react';
-import logo from "@assets/PsychLogo.png";
+import logo from "@assets/PsychCircle.png";
 
 const navigation = [
   { name: 'Landing Page', to: 'landingpage'},
@@ -55,7 +55,7 @@ export default function GuestLayout() {
              <div className="flex justify-between items-center px-10 py-3">
                     <div className="flex items-center">
                       <img
-                        className="h-10 w-10"
+                        className="h-20 w-20"
                         src={logo}
                         alt="Department of Psychology"/>
                          <div className="flex flex-col px-2 ">
@@ -71,8 +71,8 @@ export default function GuestLayout() {
                             to={item.to}
                             className={({ isActive }) => classNames(
                               isActive
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                ? 'bg-black text-white'
+                                : 'text-gray-300 hover:bg-gray-500 hover:text-white',
                               'rounded-md px-3 py-2 text-sm font-medium'
                             )}
                           >

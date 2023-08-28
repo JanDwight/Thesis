@@ -54,7 +54,7 @@ export default function Links() {
 
   return (
     <>
-      <div className="w-full px-4 mx-auto pt-0">
+      <div className="w-full px-4 mx-auto mt-0">
         <div className="rounded-t bg-white h-10 px-6 pt-5 pb-12">
           <div className="flex justify-between">
             <h6 className="block uppercase tracking-wide text-green-700 text-base font-semibold">academic links</h6>

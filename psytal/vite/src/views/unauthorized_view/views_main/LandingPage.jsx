@@ -1,6 +1,6 @@
 import React from 'react'
 import coverVid from "@assets/chess.mp4";
-import schoolLogo from "@assets/BSUlogo.png";
+import schoolLogo from "@assets/BSUCircle.png";
 export default function LandingPage() {
   return (
     <div className='w-full h-screen relative'>

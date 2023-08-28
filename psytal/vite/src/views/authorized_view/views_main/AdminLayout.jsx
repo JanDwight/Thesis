@@ -144,7 +144,7 @@ export default function AdminLayout() {
        
           </div>
         </aside>
-            <div className="flex flex-col justify-center items-center w-3/5 ml-10 ">
+            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
             <Outlet />
             </div>
         
