@@ -22,8 +22,8 @@ export default function LandingPage() {
                         alt="BSUlogo"/>
        <h1 className='font-franklin font-extrabold text-2xl my-2'>BENGUET STATE UNIVERSITY</h1>                  
       </div>
-     
       <h1 className='font-franklin font-extrabold text-5xl'>DEPARTMENT OF PSYCHOLOGY</h1>
+      <h2 className='font-franklin font-extrabold text-2xl my-2'>Exploring Indegenous Psychology towards a Decolonized Psychology</h2>
     </div>
     <main>
         {/**1st SECTION Vision to Goals*/}        
