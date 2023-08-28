@@ -30,6 +30,8 @@ export default function Dashboard() {
       { role: 'Student', createdAt: 1678920600000 }, 
       { role: 'Employee', createdAt: 1678921800000 }, 
       { role: 'Student', createdAt: 1678930200000 },
+      { type: 'Announcement', postAt: 1678930200000},
+      { type: 'Class Suspension', postAt: 1678930200000}
      
     ];
 
@@ -49,50 +51,82 @@ export default function Dashboard() {
   };
   
   return (
-   <div className="bg-gray-100 w-full rounded-lg shadow-md">
-    <div className="rounded-t h-10 mb-0 px-6 pt-5 pb-10">
-    <div className="flex justify-between">
-    <h6 className="block uppercase tracking-wide text-green-600 text-lg font-semibold pb-5">dashboard</h6>
-    </div>
-    <hr className="border-gray-400" />
-    </div>
-    <div className="grid grid-cols-4 gap-4 mx-6 my-5">
-  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
-    <span className="bg-dash1 w-40 h-10 px-4 py-2 rounded-xl text-white">
-      Total Students
-    </span>
-    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalStudents}</span>
-  </div>
-  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
-    <span className="bg-dash2 w-40 h-10 px-4 py-2 rounded-xl text-white">
-      Total Employees
-    </span>
-    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalEmployees}</span>
-  </div>
-  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
-    <span className="bg-dash3 w-40 h-10 px-4 py-2 rounded-xl text-white">
-      Total Posts
-    </span>
-    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalPosts}</span>
-  </div>
-  <div className="flex flex-col items-center bg-white border border-gray-300 pb-5">
-    <span className="bg-dash4 w-40 h-10 px-4 py-2 rounded-xl text-white">
-      Total Logins
-    </span>
-    <span className="text-xl font-semibold text-green-700 mt-2">{data.totalLogins}</span>
-  </div>
-</div>
+   <section className='w-full lg:w-11/12 px-4 mx-auto mt-6 '>
+    <h className='text-4xl font-semibold mb-10 text-green-600'>DASHBOARD</h>
+    <hr className="border-gray-400 mt-5 mb-5"/>
+    {/**COL TOTAL S-L */}
+    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
 
-        <h2 className="text-base mx-5 mt-10">Logs: </h2>
-        <div className="mx-5">
-          {tableData.map((item, index) => (
-            <div key={index} className="border p-2">
+      {/**Total Student */}
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+        {/**----Head----- */}
+        <div className='flex flex-col rounded-t-3xl items-center bg-dash1 border border-gray-300 pb-5 pt-5'>
+          <span className='text-white font-semibold'>Total Students</span>
+        </div>
+        {/**----Body----- */}
+        <div className='p-7'>
+          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalStudents}</span>
+        </div>
+      </div>
+
+      {/**Total Employees */}
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+        {/**----Head---- */}
+        <div className='flex flex-col rounded-t-3xl items-center bg-dash2 border border-gray-300 pb-5 pt-5'>
+          <span className='text-white font-semibold'>Total Employees</span>
+        </div>
+        {/**----Body---- */}
+        <div className='p-7'>
+          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalEmployees}</span>
+        </div>
+      </div>
+
+      {/**Total Post */}
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+        {/**----Head---- */}
+        <div className='flex flex-col rounded-t-3xl items-center bg-dash3 border border-gray-300 pb-5 pt-5'>
+          <span className='text-white font-semibold'>Total Posts</span>
+        </div>
+        {/**----Body---- */}
+        <div className='p-7'>
+          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalPosts}</span>
+        </div>
+      </div>
+
+      {/**Total Logins */}
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+        {/**----Head---- */}
+        <div className='flex flex-col rounded-t-3xl items-center bg-dash4 border border-gray-300 pb-5 pt-5'>
+          <span className='text-white font-semibold'>Total Logins</span>
+        </div>
+        {/**----Body---- */}
+        <div className='p-7'>
+          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalLogins}</span>
+        </div>
+      </div>
+    </div> 
+    <hr className="border-gray-400 mt-5 mb-5"/>
+    
+    {/**Archive: */}
+    <h2 className="text-base font-semibold mt-5 mb-2">Archive: </h2>
+    <div>
+      {tableData.map((item, index) => (
+          <div key={index} className="border p-2">
+              <div className="text-sm ">posted {item.type} at {formatTimestamp(item.postAt)}</div>
+          </div>
+            ))}
+    </div>
+    {/**LOGS */}
+    <h2 className="text-base font-semibold mt-5 mb-2">Logs: </h2>
+    <div>
+        {tableData.map((item, index) => (
+          <div key={index} className="border p-2">
               <div className="text-sm ">created {item.role} at {formatTimestamp(item.createdAt)}</div>
-            </div>
+          </div>
             ))}
          
-      </div>
     </div>
+   </section>
  
     
   );
