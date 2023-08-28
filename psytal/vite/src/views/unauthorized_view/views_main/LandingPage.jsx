@@ -1,9 +1,30 @@
 import React from 'react'
-
+import coverVid from "@assets/chess.mp4";
+import schoolLogo from "@assets/BSUlogo.png";
 export default function LandingPage() {
   return (
-    <div>
-      {/*MAIN*/}
+    <div className='w-full h-screen relative'>
+    <video
+      className='w-full h-full object-cover z-0'
+      src={coverVid}
+      autoPlay
+      loop
+      muted
+    />
+    <div className='absolute w-full h-full top-0 left-0 bg-gray-900/80'></div>
+    <div className='absolute top-0 w-full h-full flex flex-col justify-center text-center text-white p-4'>
+   
+      <h1 className='font-franklin font-extrabold text-5xl'>WELCOME TO</h1>
+      <div className="flex justify-center mr-10 mb-5">
+      <img
+                        className="h-10 w-10 mx-2 my-1"
+                        src={schoolLogo}
+                        alt="BSUlogo"/>
+       <h1 className='font-franklin font-extrabold text-2xl my-2'>BENGUET STATE UNIVERSITY</h1>                  
+      </div>
+     
+      <h1 className='font-franklin font-extrabold text-5xl'>DEPARTMENT OF PSYCHOLOGY</h1>
+    </div>
     <main>
         {/**1st SECTION Vision to Goals*/}        
         <section className="pb-20 bg-gray-300 ">

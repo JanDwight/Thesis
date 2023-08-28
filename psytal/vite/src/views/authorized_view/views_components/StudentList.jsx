@@ -12,8 +12,8 @@ class StudentList extends Component {
     // Fetch student data from the database here
     // sample data 
     const sampleData = [
-      { id: 190132, name: 'John Doe', yrsection: 'BsPsych 4A' },
-      { id: 200167, name: 'Jane Smith', yrsection: 'BsPsych 3B' },
+      { id: 190132, name: 'Juan Garcia', yrsection: 'BsPsych 4A' },
+      { id: 200167, name: 'Jan Dwight', yrsection: 'BsPsych 3B' },
     ];
 
     this.setState({ data: sampleData }); // Update the state with fetched data

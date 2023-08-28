@@ -49,7 +49,7 @@ export default function GuestLayout() {
   return (
     <>
       <div className="relative">
-      <Disclosure as="nav" className={`fixed w-full ${isNavbarTransparent ? 'bg-transparent' : 'bg-gray-800'}`}>
+      <Disclosure as="nav" className={`fixed w-full z-10 ${isNavbarTransparent ? 'bg-transparent' : 'bg-gray-800'}`}>
           {({ open }) => (
             <>
              <div className="flex justify-between items-center px-10 py-3">
