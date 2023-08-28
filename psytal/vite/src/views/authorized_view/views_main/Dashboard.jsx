@@ -51,9 +51,9 @@ export default function Dashboard() {
   };
   
   return (
-   <section className='w-full lg:w-11/12 px-4 mx-auto mt-6 '>
-    <h className='text-4xl font-semibold mb-10 text-green-600'>DASHBOARD</h>
-    <hr className="border-gray-400 mt-5 mb-5"/>
+    <div className="w-full px-4 mx-auto mt-0">
+    <h1 className='text-4xl font-semibold mb-10 text-green-500'>DASHBOARD</h1>
+    <hr className="border-gray-400 mt-5 mb-5" />
     {/**COL TOTAL S-L */}
     <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
 
@@ -65,7 +65,7 @@ export default function Dashboard() {
         </div>
         {/**----Body----- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalStudents}</span>
+          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalStudents}</span>
         </div>
       </div>
 
@@ -77,7 +77,7 @@ export default function Dashboard() {
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalEmployees}</span>
+          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalEmployees}</span>
         </div>
       </div>
 
@@ -89,7 +89,7 @@ export default function Dashboard() {
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalPosts}</span>
+          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalPosts}</span>
         </div>
       </div>
 
@@ -101,7 +101,7 @@ export default function Dashboard() {
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-700 mt-2">{data.totalLogins}</span>
+          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalLogins}</span>
         </div>
       </div>
     </div> 
@@ -126,7 +126,7 @@ export default function Dashboard() {
             ))}
          
     </div>
-   </section>
+   </div>
  
     
   );

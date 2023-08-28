@@ -12,8 +12,10 @@ class EmployeeList extends Component {
     // Fetch employee data from the database here
     // sample data
     const sampleData = [
-      { name: 'John Doe', role: 'Staff' },
-      { name: 'Jane Smith', role: 'Instructor' },
+      { id: 1803580, name: 'John Doe', role: 'Admin' },
+      { id: 2159381, name: 'Sam Wilson', role: 'Instructor' },
+      { id: 9423492, name: 'John Smith', role: 'Staff' },
+      
     ];
 
     this.setState({ data: sampleData }); // Update the state with fetched data
@@ -26,6 +28,7 @@ class EmployeeList extends Component {
     // Apply filtering
     const filteredData = data.filter(
       (employee) =>
+        employee.id.toString().includes(filterText) || // Filter by ID
         employee.name.toLowerCase().includes(filterText.toLowerCase()) ||
         employee.role.toLowerCase().includes(filterText.toLowerCase())
     );
@@ -35,6 +38,7 @@ class EmployeeList extends Component {
         <table className="table w-full table-striped text-gray-700">
           <thead>
             <tr>
+              <th className="text-left bg-gray-200 p-2">School ID</th>
               <th className="bg-gray-200 text-left p-2">Name</th>
               <th className="bg-gray-200 text-left p-2">Role</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
@@ -44,6 +48,7 @@ class EmployeeList extends Component {
           <tbody>
             {filteredData.map((employee, index) => (
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
+                <td className="text-left p-2">{employee.id}</td>
                 <td className="text-left p-2">{employee.name}</td>
                 <td className="text-left p-2">{employee.role}</td>
                 {/* Add more cells as needed */}

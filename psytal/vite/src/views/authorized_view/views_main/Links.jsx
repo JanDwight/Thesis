@@ -46,14 +46,15 @@ export default function Links() {
 
   // Sample data 
   const sampleLinks = [
-    { id: 1, code: 'CS101', url: 'https://google.com', description: 'Introduction to Computer Science', instructor: 'John Sturgis' },
-    { id: 2, code: 'MATH202', url: 'https://wikipedia.com', description: 'Advanced Mathematics', instructor: 'Sheldon Cooper' },
+    { id: 1, code: 'C580', description: 'Psych1', instructor: 'John Doe' },
+    { id: 2, code: 'A381', description: 'Psych2', instructor: 'Sam Wilson' },
+    { id: 3, code: 'B492', description: 'Psych3', instructor: 'John Smith' },
    
   ];
 
   return (
     <>
-      <div className="w-full px-4 mx-auto pt-0">
+      <div className="w-full px-4 mx-auto mt-0">
         <div className="rounded-t bg-white h-10 px-6 pt-5 pb-12">
           <div className="flex justify-between">
             <h6 className="block uppercase tracking-wide text-green-700 text-base font-semibold">academic links</h6>
@@ -66,11 +67,10 @@ export default function Links() {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <table className="table w-full table-striped text-gray-700  font-sm mx-3 bg-white">
+        <table className="table w-full table-striped text-gray-700  font-sm  bg-white">
           <thead>
             <tr>
-            <th className="text-left bg-gray-200 ">Code</th>
-            <th className="text-left bg-gray-200 ">Link</th>
+            <th className="text-left bg-gray-200 ">Class Code</th>
             <th className="text-left bg-gray-200 ">Description</th>
             <th className="text-left bg-gray-200 ">Instructor</th>
             <th className="text-left bg-gray-200 ">Action</th>
@@ -82,11 +82,6 @@ export default function Links() {
               ? links.map((link) => (
                   <tr key={link.id}>
                     <td className="text-left">{link.code}</td>
-                    <td className="text-left">
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.url}
-                  </a>
-                </td>
                     <td className="text-left">{link.description}</td>
                     <td className="text-left">{link.instructor}</td>
                   </tr>
@@ -94,11 +89,6 @@ export default function Links() {
               : sampleLinks.map((link) => ( //Delete after connecting to database
                   <tr key={link.id}>
                     <td className="text-left">{link.code}</td>
-                    <td className="text-left">
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.url}
-                  </a>
-                </td>
                     <td className="text-left">{link.description}</td>
                     <td className="text-left">{link.instructor}</td>
                   </tr>
