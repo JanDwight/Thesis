@@ -132,6 +132,7 @@ export default function AdminLayout() {
 
           <div class="flex flex-col justify-between mt-2">
             {navigation.map((item) => (
+                          
                           <NavLink
                             key={item.name}
                             to={item.to}
