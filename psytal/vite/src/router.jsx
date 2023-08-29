@@ -16,6 +16,8 @@ import EmployeeList from "./views/authorized_view/views_components/EmployeeList"
 import PreEnrollment from "./views/authorized_view/views_main/PreEnrollment"
 import Classes from "./views/authorized_view/views_main/Classes"
 import Curriculum from "./views/authorized_view/views_main/Curriculum"
+import StaffLayout from "./views/authorized_view/views_main/StaffLayout";
+import InstructorLayout from "./views/authorized_view/views_main/InstructorLayout";
 
 const router = createBrowserRouter([
     {
@@ -66,7 +68,27 @@ const router = createBrowserRouter([
         ]
     },
     
-    
+    {
+        path: '/staff',
+        element: <StaffLayout />,
+        children: [
+            {
+                path: '',
+                element: <Home />
+            }
+        ]
+    },
+
+    {
+        path: '/instructor',
+        element: <InstructorLayout />,
+        children: [
+            {
+                path: '',
+                element: <Home />
+            }
+        ]  
+    },
     
     {
         path: '/',
