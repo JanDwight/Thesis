@@ -34,41 +34,18 @@ export default function ManageUsers() {
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
   const [password, setPassword] = useState('');
-  const [length] = useState(9);
-  const [includeNumbers] = useState(true);
-  const [includeSymbols] = useState(true);
-  const [selectedRole, setSelectedRole] = useState('1');
-  const [parsedRole, setParsedRole] = useState(1);
+  const [selectedRole, setSelectedRole] = useState();
   const [email, setEmail] = useState(null);
-
+  const tmpPass = "P@55word";
+  
   const onSubmit = (ev) => {
     ev.preventDefault();
     setError({ __html: '' });
 
-    //password generator
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+{}[]~-';
-
-    let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (includeNumbers) characters += numbers;
-    if (includeSymbols) characters += symbols;
-
-    let newPassword = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters.charAt(randomIndex);
-    }
-
-    setPassword(newPassword);
-    //---------------------------------------------------------------------------
-
-    //string "selectedRole" to int "parsedRole"
-    const parsedValue = parseInt(selectedRole, 10); // Base 10
-    setParsedRole(parsedValue);
-    //---------------------------------------------------------------------------
+    
 
     axiosClient
-      .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: tmpPass, role: selectedRole, email}) // Back end, needs edit
       .then(({ data }) => {
         setCurrentUser(data.user);
         setShowModal(false); // Close the popup after successful submission
@@ -152,9 +129,10 @@ export default function ManageUsers() {
         onClose={() => setShowModal(false)}
         setFullName={setFullName} // Edit din dito
         onSubmit={onSubmit}
-        selectedAccountType={selectedRole}
-        setSelectedAccountType={setSelectedRole}
+        parsedRole={selectedRole}
+        setParsedRole={setSelectedRole}
         email={email}
+        setPassword={setPassword}
         setEmail={setEmail}
       />
     </div>
