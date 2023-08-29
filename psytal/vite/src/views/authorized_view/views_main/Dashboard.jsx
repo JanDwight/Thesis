@@ -52,63 +52,63 @@ export default function Dashboard() {
   
   return (
     <div className="w-full px-4 mx-auto mt-0">
-    <h1 className='text-4xl font-semibold mb-10 text-green-500'>DASHBOARD</h1>
-    <hr className="border-gray-400 mt-5 mb-5" />
+    <h1 className='text-3xl font-semibold my-5 text-green-700'>DASHBOARD</h1>
+    <hr className="border-gray-400 mt-2 mb-5" />
     {/**COL TOTAL S-L */}
     <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
 
       {/**Total Student */}
-      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
         {/**----Head----- */}
         <div className='flex flex-col rounded-t-3xl items-center bg-dash1 border border-gray-300 pb-5 pt-5'>
           <span className='text-white font-semibold'>Total Students</span>
         </div>
         {/**----Body----- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalStudents}</span>
+          <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalStudents}</span>
         </div>
       </div>
 
       {/**Total Employees */}
-      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl '>
         {/**----Head---- */}
         <div className='flex flex-col rounded-t-3xl items-center bg-dash2 border border-gray-300 pb-5 pt-5'>
           <span className='text-white font-semibold'>Total Employees</span>
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalEmployees}</span>
+          <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalEmployees}</span>
         </div>
       </div>
 
       {/**Total Post */}
-      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
         {/**----Head---- */}
         <div className='flex flex-col rounded-t-3xl items-center bg-dash3 border border-gray-300 pb-5 pt-5'>
           <span className='text-white font-semibold'>Total Posts</span>
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalPosts}</span>
+          <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalPosts}</span>
         </div>
       </div>
 
       {/**Total Logins */}
-      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-2xl dark:bg-neutral-700'>
+      <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
         {/**----Head---- */}
         <div className='flex flex-col rounded-t-3xl items-center bg-dash4 border border-gray-300 pb-5 pt-5'>
           <span className='text-white font-semibold'>Total Logins</span>
         </div>
         {/**----Body---- */}
         <div className='p-7'>
-          <span className="text-4xl font-semibold text-green-500 mt-2">{data.totalLogins}</span>
+          <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalLogins}</span>
         </div>
       </div>
     </div> 
-    <hr className="border-gray-400 mt-5 mb-5"/>
+  
     
     {/**Archive: */}
-    <h2 className="text-base font-semibold mt-5 mb-2">Archive: </h2>
+    <h2 className="text-base font-semibold mt-8 mb-2">Archive: </h2>
     <div>
       {tableData.map((item, index) => (
           <div key={index} className="border p-2">

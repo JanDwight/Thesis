@@ -2,8 +2,12 @@ import { Fragment } from 'react'
 import logo from "@assets/PsychLogo.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
-import students from "@assets/icons8student.png";
+import file from "@assets/icons8file.png";
+import users from "@assets/icons8adduser.png";
 import avatar from "@assets/icons8avatar.png";
+import link from "@assets/icons8link.png";
+import curriculum from "@assets/icons8curriculum.png";
+import classicon from "@assets/icons8book.png";
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon } from '@heroicons/react/24/solid'
@@ -13,8 +17,11 @@ import axiosClient from '../../../axios';
 const navigation = [
   { img: home, name: 'Home', to: ''},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: students, name: 'Manage Users', to: 'manageusers'},
-  { name: 'Links', to: 'links'}
+  { img: users, name: 'Manage Accounts', to: 'manageusers'},
+  { img: classicon, name: 'Classes', to: 'classes'},
+  { img: file, name: 'Pre-enrollment', to: 'preenrollment'},
+  { img: link, name: 'Links', to: 'links'},
+  { img: curriculum, name: 'Curriculum', to: 'curriculum'}
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -116,28 +123,26 @@ export default function AdminLayout() {
     
       {/*sidebar*/}
       <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
-        <aside class="flex flex-col w-60 h-50 px-5 py-10 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+        <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
             <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
-
           </div>
 
-          <div class="flex flex-col justify-between flex-1 mt-3">
-            
+          <div class="flex flex-col justify-between mt-2">
             {navigation.map((item) => (
                           <NavLink
                             key={item.name}
                             to={item.to}
-                            className={({ isActive }) => classNames(
+                            className={({label, isActive, onClick }) => classNames(
                               isActive
-                                ? 'bg-green-500  text-gray-700'
-                                : 'text-gray-800 hover:bg-green-100 hover:text-gray-700',
-                              'rounded-full px-3 py-2 text-sm font-medium flex items-center mt-5'
+                                ? 'bg-lime-300  text-black'
+                                : 'text-gray-600 hover:bg-gray-200 hover:text-black',
+                              'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
                             )}
                           >
-                            <img src={item.img} className='w-12  pr-5'/>
+                            <img src={item.img} className='w-10  pr-5'/>
                             {item.name}
                           </NavLink>
                         ))}

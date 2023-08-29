@@ -67,7 +67,7 @@ export default function Links() {
           </div>
         </div>
         <hr className="border-gray-300" />
-        <table className="table w-full table-striped text-gray-700  font-sm  bg-white">
+        <table className="table w-full table-striped text-gray-700 font-sm bg-white">
           <thead>
             <tr>
             <th className="text-left bg-gray-200 ">Class Code</th>

@@ -14,6 +14,8 @@ import ManageUsers from "./views/authorized_view/views_main/ManageUsers";
 import StudentList from "./views/authorized_view/views_components/StudentList";
 import EmployeeList from "./views/authorized_view/views_components/EmployeeList";
 import PreEnrollment from "./views/authorized_view/views_main/PreEnrollment"
+import Classes from "./views/authorized_view/views_main/Classes"
+import Curriculum from "./views/authorized_view/views_main/Curriculum"
 
 const router = createBrowserRouter([
     {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: 'dashboard',
                 element: <Dashboard />
+            },
+            {
+                path: 'classes',
+                element: <Classes />
             },
             {
                 path: 'preenrollment',
@@ -52,7 +58,11 @@ const router = createBrowserRouter([
                         element: <EmployeeList />
                     }
                 ]
-            }
+            },
+            {
+                path: 'curriculum',
+                element: <Curriculum />
+            },
         ]
     },
     
