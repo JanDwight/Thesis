@@ -1,7 +1,14 @@
 import React from 'react';
+import { useState } from 'react';
+
+export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit, selectedAccountType, setSelectedAccountType,
+                                   email, setEmail}) {
+
+  const handleAccountTypeChange = (event) => {
+    setSelectedAccountType(event.target.value);
+  };
 
 
-export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit }) {
   if (!showModal) {
     return null;
   }
@@ -35,15 +42,24 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
             <div className="flex mb-4">
           <div className="w-3/4 pr-3">
             <label className=" text-gray-700 text-sm mb-2" htmlFor="emailadd">Email Address</label>
-            <input className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text"/>
+            <input 
+                  id="email"
+                  name="email"
+                  type="text"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={ev => setEmail(ev.target.value)}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text"/>
           </div>
           <div className="w-1/3">
-            <label className=" text-gray-700 text-sm mb-2" htmlFor="accounttype">Account Type</label>
-            <select className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6" id="accounttype">
-                          <option>Admin</option>
-                          <option>Instructor</option>
-                          <option>Staff</option>
-                          <option>Student</option>
+            <label className=" text-gray-700 text-sm mb-2" htmlFor="accounttype">{selectedAccountType}Account Type</label>
+            <select className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6" 
+              id="accounttype" value={selectedAccountType} onChange={handleAccountTypeChange}>
+                          <option value="1">Admin</option>
+                          <option value="2">Instructor</option>
+                          <option value="3">Staff</option>
+                          <option value="4">Student</option>
                         </select>
           </div>
             <div>
