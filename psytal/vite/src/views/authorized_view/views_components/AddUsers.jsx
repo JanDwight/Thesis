@@ -1,7 +1,39 @@
 import React from 'react';
+import { useState } from 'react';
 
+export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit, parsedRole, setParsedRole,
+                                   setPassword, email, setEmail}) {
+  const [selectedAccountType, setSelectedAccountType] = useState(1);
+  const [length] = useState(9);  
 
-export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit }) {
+  const handleAccountTypeChange = (event) => {
+    setSelectedAccountType(event.target.value);
+  };
+
+  //string "selectedRole" to int "parsedRole"
+  parsedRole = parseInt(selectedAccountType, 10); // Base 10
+  setParsedRole(parsedRole);
+  //---------------------------------------------------------------------------
+
+  const generatePassword = () => {
+    //password generator
+  const numbers = '0123456789';
+  const symbols = '!@#$%^&*()_+{}[]~-';
+
+  let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  characters += numbers;
+  characters += symbols;
+
+  let newPassword = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    newPassword += characters.charAt(randomIndex);
+  }
+
+  setPassword(newPassword);
+  //---------------------------------------------------------------------------
+  }
+
   if (!showModal) {
     return null;
   }
@@ -35,15 +67,24 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
             <div className="flex mb-4">
           <div className="w-3/4 pr-3">
             <label className=" text-gray-700 text-sm mb-2" htmlFor="emailadd">Email Address</label>
-            <input className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text"/>
+            <input 
+                  id="email"
+                  name="email"
+                  type="text"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={ev => setEmail(ev.target.value)}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text"/>
           </div>
           <div className="w-1/3">
-            <label className=" text-gray-700 text-sm mb-2" htmlFor="accounttype">Account Type</label>
-            <select className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6" id="accounttype">
-                          <option>Admin</option>
-                          <option>Instructor</option>
-                          <option>Staff</option>
-                          <option>Student</option>
+            <label className=" text-gray-700 text-sm mb-2" htmlFor="accounttype">{selectedAccountType}Account Type</label>
+            <select className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6" 
+              id="accounttype" value={selectedAccountType} onChange={handleAccountTypeChange}>
+                          <option value="1">Admin</option>
+                          <option value="2">Staff</option>
+                          <option value="3">Instructor</option>
+                          <option value="4">Student</option>
                         </select>
           </div>
             <div>
@@ -53,7 +94,7 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
           <button onClick={onClose} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
             Cancel
           </button>
-          <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+          <button type="submit" onClick={generatePassword} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
             Save
           </button>
             </div>

@@ -15,19 +15,13 @@ import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
 const navigation = [
-  { img: home, name: 'Home', to: ''},
-  { img: dashboard, name: 'Dashboard', to: 'dashboard'},
-  { img: users, name: 'Manage Accounts', to: 'manageusers'},
-  { img: classicon, name: 'Classes', to: 'classes'},
-  { img: file, name: 'Pre-enrollment', to: 'preenrollment'},
-  { img: link, name: 'Links', to: 'links'},
-  { img: curriculum, name: 'Curriculum', to: 'curriculum'}
+  { img: home, name: 'Home', to: ''}
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function AdminLayout() {
+export default function StaffLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
   if (!userToken) {
@@ -122,7 +116,6 @@ export default function AdminLayout() {
     
     
       {/*sidebar*/}
-      <div className='fixed'>
       <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
         <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
@@ -141,7 +134,7 @@ export default function AdminLayout() {
                               isActive
                                 ? 'bg-lime-300  text-black'
                                 : 'text-gray-600 hover:bg-gray-200 hover:text-black',
-                              'rounded-lg px-3 py-1 text-sm font-medium flex items-center mt-5'
+                              'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
                             )}
                           >
                             <img src={item.img} className='w-10  pr-5'/>
@@ -150,15 +143,12 @@ export default function AdminLayout() {
                         ))}
        
           </div>
-          
         </aside>
-        </div>
-            <div className="flex w-3/4 pd-10 ml-10 ">
+            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
             <Outlet />
             </div>
         
         
-    
       </div>
     </>
   );

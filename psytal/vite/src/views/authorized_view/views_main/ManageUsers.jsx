@@ -33,16 +33,21 @@ export default function ManageUsers() {
   const [error, setError] = useState({ __html: '' });
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
-
+  const [password, setPassword] = useState('');
+  const [selectedRole, setSelectedRole] = useState();
+  const [email, setEmail] = useState(null);
+  const tmpPass = "P@55word";
+  
   const onSubmit = (ev) => {
     ev.preventDefault();
     setError({ __html: '' });
 
+    
+
     axiosClient
-      .post('/adduser', { name: fullName, password }) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: tmpPass, role: selectedRole, email}) // Back end, needs edit
       .then(({ data }) => {
         setCurrentUser(data.user);
-        setUserToken(data.token);
         setShowModal(false); // Close the popup after successful submission
       })
       .catch((error) => {
@@ -122,9 +127,13 @@ export default function ManageUsers() {
       <AddUsers //AddUser Modal
         showModal={showModal}
         onClose={() => setShowModal(false)}
-        fullName={fullName}
         setFullName={setFullName} // Edit din dito
         onSubmit={onSubmit}
+        parsedRole={selectedRole}
+        setParsedRole={setSelectedRole}
+        email={email}
+        setPassword={setPassword}
+        setEmail={setEmail}
       />
     </div>
 

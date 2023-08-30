@@ -40,6 +40,10 @@ export default function GuestLayout() {
 
   if (userToken && userRole === 1) {
     return <Navigate to='/admin' />
+  }else if (userToken && userRole === 2){
+    return <Navigate to='/staff' />
+  }else if (userToken && userRole === 3){
+    return <Navigate to='/instructor' />
   }else if (userToken && userRole === 4) {
     return <Navigate to='' />
   }
