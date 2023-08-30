@@ -1,27 +1,58 @@
 import React from 'react'
+import { useState } from 'react';
+import axiosClient from '../../../axios.js';
+import AddingPost from './AddingPost.jsx';
 import image from "@assets/icons8image.png";
 import create from "@assets/icons8createpost.png";
 
 export default function AddPost() {
+  const [showPosts, setShowPosts]=useState(false);
+  const [error, setError] = useState({ __html: '' });
+  const [title, setTitle] = useState('');
+  const [postmsg, setPostmsg] = useState('');
+
+  const onSubmit = async (ev) => {
+    ev.preventDefault();
+    setError({ __html: '' });
+
+    try {
+      const response = await axiosClient.post('/addpost', { title, postmsg});
+      fetchLinks();
+      setShowLinks(false);
+    } catch (error) {
+      if (error.response) {
+        const finalErrors = Object.values(error.response.data.errors).reduce(
+          (accum, next) => [...accum, ...next],
+          []
+        );
+        setError({ __html: finalErrors.join('<br>') });
+      }
+      console.error(error);
+    }
+  };
+
   return (
     <>
-        {/*Create Post*/}
+  {/*Create Post*/}
   <div className="bg-gray-200 w-full h-34 rounded-lg shadow-md">
-    <div className="w-full h-10 flex justify-between px-3 md:px-10 lg:px-24 xl:px-5">
-      <div className="flex h-full items-center">
-        <img src={create} className="h-4 w-auto ml-2 mt-5"/>
-        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-5">Create Announcement </span>
-        <img src={image} className="h-5 w-auto mt-5"/>
-        <span className="text-xs lg:text-md mx-2 font-semibold text-gray-500 mt-5"> Attach Photo / File</span>
-      </div>
+
+    <div className="w-full h-16 flex items-center justify-between px-5">
+      <input onClick={() => setShowPosts(true)} type="text" className="w-full rounded-full h-8 bg-white px-6 py-0 border-none focus:ring-green-700 text-xs m-5" placeholder="Create Post . . ." />
+      
     </div>
-      <div className="w-full h-16 flex items-center justify-between px-5">
-        <input type="text" className="w-full rounded-full h-8 bg-white px-6 py-0 border-none focus:ring-green-700 text-xs m-5" placeholder="Type Post . . ." />
-      </div>
-      <div className="flex items-center justify-end md:px-10 pb-2">
-          <button className="bg-neonGreen hover:bg-lime-500 h-6 text-white font-bold px-3 rounded-full">Post</button>
-      </div>
-    </div>  
+  </div>  
+
+  <AddingPost 
+    showPosts={showPosts}
+    onClose={() => setShowPosts(false)}
+    onSubmit={onSubmit}
+    title={title}
+    setTitle={setTitle}
+    postmsg={postmsg}
+    setPostmsg={setPostmsg}
+  />
+
     </>
+
   )
 }
