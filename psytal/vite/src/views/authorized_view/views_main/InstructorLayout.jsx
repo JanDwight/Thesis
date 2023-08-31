@@ -15,10 +15,8 @@ import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
 const navigation = [
-  { img: home, name: 'Home', to: ''},
-  { img: users, name: 'Manage Accounts', to: 'manageusers'},
+  { img: home, name: 'Home', to: 'home'},
   { img: classicon, name: 'Classes', to: 'classes'},
-  { img: file, name: 'Pre-enrollment', to: 'preenrollment'},
   { img: link, name: 'Links', to: 'links'}
 ]
 function classNames(...classes) {
