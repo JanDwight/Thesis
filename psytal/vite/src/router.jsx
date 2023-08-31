@@ -67,6 +67,54 @@ const router = createBrowserRouter([
             },
         ]
     },
+
+    {
+        path: '/staff',
+        element: <StaffLayout />,
+        children: [
+            {
+                path: 'home',
+                element: <Home />
+            },
+
+            {
+                path: 'dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: 'classes',
+                element: <Classes />
+            },
+            {
+                path: 'preenrollment',
+                element: <PreEnrollment />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
+
+            {
+                path: 'manageusers',
+                element: <ManageUsers />,
+                children:[
+                    {
+                        path: '',
+                        element: <StudentList />
+                    },
+
+                    {
+                        path: '',
+                        element: <EmployeeList />
+                    }
+                ]
+            },
+            {
+                path: 'curriculum',
+                element: <Curriculum />
+            },
+        ]
+    },
     
     {
         path: '/instructor',
@@ -87,17 +135,6 @@ const router = createBrowserRouter([
         ]  
     },
 
-    {
-        path: '/staff',
-        element: <StaffLayout />,
-        children: [
-            {
-                path: '',
-                element: <Home />
-            }
-        ]
-    },
-    
     {
         path: '/',
         element: <DefaultLayout />,
