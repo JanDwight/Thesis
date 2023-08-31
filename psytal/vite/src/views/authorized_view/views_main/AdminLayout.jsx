@@ -15,7 +15,7 @@ import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
 const navigation = [
-  { img: home, name: 'Home', to: ''},
+  { img: home, name: 'Home', to: 'home'},
   { img: dashboard, name: 'Dashboard', to: 'dashboard'},
   { img: users, name: 'Manage Accounts', to: 'manageusers'},
   { img: classicon, name: 'Classes', to: 'classes'},
@@ -132,11 +132,10 @@ export default function AdminLayout() {
 
           <div class="flex flex-col justify-between mt-2">
             {navigation.map((item) => (
-                          
                           <NavLink
                             key={item.name}
                             to={item.to}
-                            className={({label, isActive, onClick }) => classNames(
+                            className={({isActive}) => classNames(
                               isActive
                                 ? 'bg-lime-300  text-black'
                                 : 'text-gray-600 hover:bg-gray-200 hover:text-black',
