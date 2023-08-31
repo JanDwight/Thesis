@@ -69,7 +69,7 @@ export default function Classes(){
             </div>
 
             <div className="m-5">
-                <div className="flex flex-col-4 space-x-[150px] justify-center">
+                <div className="mx-7 flex flex-col-4 justify-between">
                     <div>Course Code</div>
                     <div>Description</div>
                     <div>Year/Section</div>
@@ -79,21 +79,21 @@ export default function Classes(){
                 <div className="mt-2">
                     <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"
                        className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-                        <div>Course Code</div>
+                            <div>Course Code</div>
                             <div>Description</div>
                             <div>Year/Section</div>
                             <div>Instructor</div>
                     </a>
                     <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"
                        className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-                        <div>Course Code</div>
+                            <div>Course Code</div>
                             <div>Description</div>
                             <div>Year/Section</div>
                             <div>Instructor</div>
                     </a>
                     <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"
                        className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-                        <div>Course Code</div>
+                            <div>Course Code</div>
                             <div>Description</div>
                             <div>Year/Section</div>
                             <div>Instructor</div>
