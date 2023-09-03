@@ -119,15 +119,46 @@ export default function AdminLayout() {
                   </div>
                 </div>
 
-                <Menu>
-                  <Menu.Button>
-                    <Bars3Icon className='w-10 h-10'/>
-                  </Menu.Button>
-                  <Menu.Items>
-                    <Menu.Item>
-                      <a href="home">Home</a>
-                    </Menu.Item>
-                  </Menu.Items>
+                {/*Mobile Menu*/}
+                <Menu as='div' className='relative'>
+                  <div className=''>
+                    <Menu.Button>
+                      <Bars3Icon className='w-10 h-10'/>
+                    </Menu.Button>
+                  </div>
+                  
+                  <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                    <Menu.Items className='absolute right-0 w-fit origin-bottom-right py-5  bg-[#D9D9D9] rounded-3xl'>
+                      {navigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({active}) => (
+                            <NavLink
+                              key={item.name}
+                              to={item.to}
+                              className={({isActive}) => classNames(
+                                isActive
+                                ? 'bg-[#CCEFCC]  text-[#757575]'
+                                : 'text-[#757575] hover:bg-gray-200 hover:text-black',
+                                'rounded-full px-3 py-1 text-lg font-medium flex items-center mt-5'
+                              )}
+                            >
+                              <img src={item.img} className='w-10  pr-5'/>
+                              {item.name}
+                            </NavLink>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    
+                    </Menu.Items>
+                  </Transition>
                 </Menu>
               </div>
             </div>
