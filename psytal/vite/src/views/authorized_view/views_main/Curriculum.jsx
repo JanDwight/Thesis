@@ -75,7 +75,7 @@ export default function Curriculum(){
                     <div>Lec</div>
                     <div>Lab</div>
                     <div>Grade</div>
-                    <div>Action</div> {/*Archive or Delete */}
+                    <div>Action</div> {/*Archive or Delete c*/}
                 </div>
 
                 <div className="mt-2">
