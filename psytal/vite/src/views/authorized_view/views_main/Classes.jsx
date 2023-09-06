@@ -2,9 +2,11 @@ import {React, Fragment, useState} from "react";
 import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddClass from "../views_components/AddClass";
+import ClassPopUp from "../views_components/ClassPopUp";
 
 export default function Classes(){
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isClassModalOpen, setIsClassModalOpen] = useState(false);
 
     return(
     <>
@@ -125,13 +127,13 @@ export default function Classes(){
                 </div>
 
                 <div className="mt-2">
-                    <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"
+                    <div onClick={() => setIsClassModalOpen(true)}
                        className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
                             <div className="hidden md:hidden lg:contents">Course Code</div>
                             <div>Description</div>
                             <div>Year/Section</div>
                             <div className="hidden md:hidden lg:contents">Instructor</div>
-                    </a>
+                    </div>
                     <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer"
                        className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
                             <div className="hidden md:hidden lg:contents">Course Code</div>
@@ -153,12 +155,21 @@ export default function Classes(){
         <ReactModal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
-            className="w-[20%] h-[50%] bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+            className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
         >
             <div>
                 <AddClass closeModal={() => setIsModalOpen(false)}/>
             </div>
         </ReactModal>
         
+        <ReactModal
+            isOpen={isClassModalOpen}
+            onRequestClose={() => setIsClassModalOpen(false)}
+            className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+        >
+            <div>
+                <ClassPopUp closeModal={() => setIsClassModalOpen(false)}/>
+            </div>
+        </ReactModal>
     </>
 )}
