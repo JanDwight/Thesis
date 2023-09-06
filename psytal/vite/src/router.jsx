@@ -25,7 +25,55 @@ const router = createBrowserRouter([
         element: <AdminLayout />,
         children:[
             {
-                path: '',
+                path: 'home',
+                element: <Home />
+            },
+
+            {
+                path: 'dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: 'classes',
+                element: <Classes />
+            },
+            {
+                path: 'preenrollment',
+                element: <PreEnrollment />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
+
+            {
+                path: 'manageusers',
+                element: <ManageUsers />,
+                children:[
+                    {
+                        path: '',
+                        element: <StudentList />
+                    },
+
+                    {
+                        path: '',
+                        element: <EmployeeList />
+                    }
+                ]
+            },
+            {
+                path: 'curriculum',
+                element: <Curriculum />
+            },
+        ]
+    },
+
+    {
+        path: '/staff',
+        element: <StaffLayout />,
+        children: [
+            {
+                path: 'home',
                 element: <Home />
             },
 
@@ -69,27 +117,24 @@ const router = createBrowserRouter([
     },
     
     {
-        path: '/staff',
-        element: <StaffLayout />,
-        children: [
-            {
-                path: '',
-                element: <Home />
-            }
-        ]
-    },
-
-    {
         path: '/instructor',
         element: <InstructorLayout />,
         children: [
             {
-                path: '',
+                path: 'home',
                 element: <Home />
-            }
+            },
+            {
+                path: 'classes',
+                element: <Classes />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
         ]  
     },
-    
+
     {
         path: '/',
         element: <DefaultLayout />,

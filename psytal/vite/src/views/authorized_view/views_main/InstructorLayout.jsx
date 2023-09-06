@@ -15,8 +15,9 @@ import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
 const navigation = [
-  { img: home, name: 'Home', to: ''}
-  
+  { img: home, name: 'Home', to: 'home'},
+  { img: classicon, name: 'Classes', to: 'classes'},
+  { img: link, name: 'Links', to: 'links'}
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
