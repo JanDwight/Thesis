@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
-import logo from "@assets/PsychLogo.png";
+import { Fragment, useState } from 'react'
+import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
 import file from "@assets/icons8file.png";
@@ -10,7 +10,7 @@ import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
-import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
+import { EllipsisHorizontalIcon ,MagnifyingGlassIcon, UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
@@ -29,6 +29,7 @@ function classNames(...classes) {
 
 export default function AdminLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const [isSearchToggled, setIsSearchToggled] = useState(false);
 
   if (!userToken) {
     return <Navigate to='/landingpage' />
@@ -46,20 +47,57 @@ export default function AdminLayout() {
 
   return (
     <>
-      {/*NavBar*/}
       <div className="bg-white">
+      {/*NavBar*/}
         <div className="flex-col flex">
           <div className="bg-viridian w-full border-b-2 border-gray-200">
             <div className=" h-16 justify-between items-center mx-auto px-10 flex">
               <div>
                 <img src= {logo}
-                  className="block btn- h-11 w-auto" alt="Department of Psychology" />
+                  className="block h-11 w-auto" alt="Department of Psychology" />
               </div>
 
-              <div className="flex flex-col">
+              <div className="hidden md:flex md:flex-col">
                 <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
                 <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
               </div>
+
+              {/*Search*/}
+                <div className='px-[20%] md:hidden '>
+                  {!isSearchToggled && (
+                    <button onClick={() => {setIsSearchToggled(!isSearchToggled)}}>
+                      <MagnifyingGlassIcon className='w-10 h-10 text-[white]'/>
+                    </button>
+                  )}
+
+                  <Transition className='flex flex-row'
+                    show={isSearchToggled}
+                    enter="transition-transform transition-opacity ease-out duration-300"
+                    enterFrom="opacity-0 transform translate-x-0"
+                    enterTo="opacity-100 transform -translate-x-[50%]"
+                    leave="transition-transform transition-opacity ease-in duration-300"
+                    leaveFrom="opacity-100 transform translate-x-0"
+                    leaveTo="opacity-0 transform translate-x-0"
+                  >
+                    {isSearchToggled && (
+                      <button onClick={() => {setIsSearchToggled(!isSearchToggled)}}>
+                        <MagnifyingGlassIcon className='w-10 h-10 text-[white]'/>
+                      </button>
+                    )}
+
+                    <Transition
+                    show={isSearchToggled}
+                    enter="transition-transform transition-opacity ease-out duration-300"
+                    enterFrom="opacity-0 transform translate-x-0"
+                    enterTo="opacity-100 transform -translate-x-[100%]"
+                    leave="transition-transform transition-opacity ease-in duration-900"
+                    leaveFrom="opacity-100 transform translate-x-[100%]"
+                    leaveTo="opacity-0 transform translate-x-[50%]"
+                    >
+                      <input type="text" className='bg-white w-10'/>
+                    </Transition>
+                  </Transition>
+                </div>
 
               <div className="lg:block mr-auto ml-40 hidden relative max-w-">
                 <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
@@ -123,7 +161,7 @@ export default function AdminLayout() {
                 <Menu as='div' className='relative'>
                   <div className=''>
                     <Menu.Button>
-                      <Bars3Icon className='w-10 h-10'/>
+                      <Bars3Icon className='w-10 h-10 text-white'/>
                     </Menu.Button>
                   </div>
                   
@@ -136,7 +174,7 @@ export default function AdminLayout() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                    <Menu.Items className='absolute right-0 w-fit origin-bottom-right py-5  bg-[#D9D9D9] rounded-3xl'>
+                    <Menu.Items className='absolute -right-10 w-[450%] origin-bottom-left py-5  bg-[#D9D9D9] rounded-3xl'>
                       {navigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({active}) => (
@@ -147,7 +185,7 @@ export default function AdminLayout() {
                                 isActive
                                 ? 'bg-[#CCEFCC]  text-[#757575]'
                                 : 'text-[#757575] hover:bg-gray-200 hover:text-black',
-                                'rounded-full px-3 py-1 text-lg font-medium flex items-center mt-5'
+                                'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
                               )}
                             >
                               <img src={item.img} className='w-10  pr-5'/>
@@ -165,7 +203,7 @@ export default function AdminLayout() {
           </div>
         </div>
     
-      <div className='md:flex md:justify-center mx-auto'>
+      <div className='flex flex-col items-center mx-auto md:flex md:justify-center lg:flex lg:flex-row'>
         {/*sidebar*/}
         <div className="pr-[5%] pt-5 "> {/*Main container */}
           <aside class="hidden md:flex flex-col w-72 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-3xl shadow-lg md:shadow-2xl  " >
@@ -196,7 +234,7 @@ export default function AdminLayout() {
           </aside>
         </div>
 
-        <div className="w-[90%] md:w-3/5 mt-5 ">
+        <div className="w-[90%] md:w-3/5 md:mt-5">
           <Outlet />
         </div>
 

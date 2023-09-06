@@ -24,7 +24,7 @@ export default function AddingPost({showPosts, title, setTitle, postmsg, setPost
                             id="title"
                             name="title"
                             type="text"
-                            required
+                            
                             value={title}
                             onChange={ev => setTitle(ev.target.value)}
                             className="block w-1/2 rounded-3xl border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text" 
@@ -44,7 +44,7 @@ export default function AddingPost({showPosts, title, setTitle, postmsg, setPost
                     <textarea
                         id="postmsg"
                         name="postmsg"
-                        required
+                        
                         value={postmsg}
                         onChange={ev => setPostmsg(ev.target.value)}
                         className="block w-full rounded-3xl border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6"
