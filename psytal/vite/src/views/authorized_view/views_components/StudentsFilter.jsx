@@ -1,18 +1,53 @@
 import React from 'react'
+import { Menu, Transition } from '@headlessui/react';
 
-export default function StudentsFilter({ showModal, onClose, onSubmit }) {
-    if (!showModal) {
-      return null;
-    }
+export default function StudentsFilter() {
+    
   return (
     <div className="w-1/3">
-   <label className=" text-gray-700 text-sm mb-2" htmlFor="Year">Year Level</label>
-            <select className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6" id="accounttype">
-                          <option>1st</option>
-                          <option>2nd</option>
-                          <option>3rd</option>
-                          <option>4th</option>
-                        </select>
+      <Menu>
+                            <Menu.Button className="relative mr-5 py-1 px-5 border-2 border-black">Filter</Menu.Button>
+                            <Menu.Items className="absolute px-[7px] border-2 border-black bg-white">
+                                <div className="flex flex-col">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a
+                                            className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
+                                        >
+                                          1st Year
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <a
+                                      className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
+                                    >
+                                      2nd Year
+                                    </a>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <a
+                                      className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
+                                    >
+                                      3rd Year
+                                    </a>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <a
+                                      className={`${active && 'bg-[#CCEFCC]'}`}
+                                    >
+                                      4th Year
+                                    </a>
+                                  )}
+                                </Menu.Item>
+                                </div>
+                            </Menu.Items>
+                        </Menu>
     </div>
   )
 }
