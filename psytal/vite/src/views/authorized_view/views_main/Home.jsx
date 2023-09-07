@@ -13,8 +13,7 @@ export default function Home() {
           </div>
 
           <div className='pt-10'>
-            <PostArticles />
-            <SampleArticle />
+            <PostArticles />         
           </div>
         </div>
     </div>
