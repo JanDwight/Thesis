@@ -32,19 +32,19 @@ export default function AddLinks({ showLinks, subject, setSubject, link, setLink
               </div>
             </div>
             <div className="mt-2">
-            <label className=" text-gray-700 text-sm mb-2" htmlFor="link">Link: </label>
-            <input id="link"
-                  name="link"
-                  type="text"
-                  required
-                  value={link}
-                  onChange={ev => setLink(ev.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text" placeholder="Paste URL"/>
-            <div>
+              <label className=" text-gray-700 text-sm mb-2" htmlFor="link">Link: </label>
+              <input id="link"
+                    name="link"
+                    type="text"
+                    required
+                    value={link}
+                    onChange={ev => setLink(ev.target.value)}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6 type=text" placeholder="Paste URL"/>
+              <div>
               </div>
-              </div>
+            </div>
 
-             <div className="mt-2">
+            <div className="mt-2">
               <label className="text-gray-700 text-sm mb-2" htmlFor="description">
                 Description:
               </label>
