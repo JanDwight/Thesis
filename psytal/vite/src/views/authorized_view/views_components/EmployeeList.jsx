@@ -107,6 +107,7 @@ class EmployeeList extends Component {
                 <td className="text-left p-2">{employee.role}</td>
                 {/* Add more cells as needed */}
                 <td className="text-left p-2">
+                <div className="flex items-center">
                   <img
                     src={edit} // Replace 'editImage' with the path to your edit image
                     alt='edit'
@@ -119,6 +120,7 @@ class EmployeeList extends Component {
                     className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
                     onClick={() => this.handleArchiveClick(employee)}
                   />
+                </div>
               </td>
               </tr>
             ))}
