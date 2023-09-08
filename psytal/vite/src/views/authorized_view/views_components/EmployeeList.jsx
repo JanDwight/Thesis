@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import edit from "@assets/icons8createpost.png";
 import arhive from "@assets/delete.png"
-import ArchiveAccount from './ArchiveAccount';
 
 class EmployeeList extends Component {
   constructor(props) {
