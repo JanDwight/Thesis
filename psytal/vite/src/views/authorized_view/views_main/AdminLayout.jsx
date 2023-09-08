@@ -166,7 +166,7 @@ export default function AdminLayout() {
                 </div>
 
                 {/*Mobile Menu*/}
-                <Menu as='div' className='relative z-50'>
+                <Menu as='div' className='relative z-50 lg:hidden'>
                   <div className=''>
                     <Menu.Button>
                       <Bars3Icon className='w-10 h-10 text-white'/>
