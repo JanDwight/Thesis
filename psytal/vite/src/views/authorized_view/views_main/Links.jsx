@@ -2,14 +2,38 @@ import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios.js';
 import { useStateContext } from '../../../context/ContextProvider.jsx';
 import AddLinks from '../views_components/AddLinks.jsx';
+import ReactModal from 'react-modal';
+import arhive from "@assets/delete.png"
+import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
+
 
 export default function Links() {
-  const [showLinks, setShowLinks] = useState(false);
-  const [error, setError] = useState({ __html: '' });
-  const [links, setLinks] = useState([]);
-  const [code, setCode] = useState('');
-  const [description, setDescription] = useState('');
-  const [instructor, setInstructor] = useState('');
+  //Calling the Archivelinks
+  const [showArchivelink, setShowArchivelink]= useState(false);
+  const [errors, setErrors] = useState({ __html: '' });
+  const onSubmitarchivelink = async (ev) => {
+    ev.preventDefault();
+    setError({ __html: '' });
+
+    try {
+    const response = await axiosClient.post('/archivelink', { });
+    fetchLinks();
+    setShowLinks(false);
+    } catch (error) {
+    if (error.response) {
+        const finalErrors = Object.values(error.response.data.errors).reduce(
+        (accum, next) => [...accum, ...next],
+        []
+        );
+        setError({ __html: finalErrors.join('<br>') });
+    }
+    console.error(error);
+    }
+};
+
+  // Calling the Addlink
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [links, setLinks] = useState([]);  
 
   useEffect(() => {
     fetchLinks();
@@ -24,25 +48,7 @@ export default function Links() {
     }
   };
 
-  const onSubmit = async (ev) => {
-    ev.preventDefault();
-    setError({ __html: '' });
-
-    try {
-      const response = await axiosClient.post('/addlink', { code, url, description, instructor });
-      fetchLinks();
-      setShowLinks(false);
-    } catch (error) {
-      if (error.response) {
-        const finalErrors = Object.values(error.response.data.errors).reduce(
-          (accum, next) => [...accum, ...next],
-          []
-        );
-        setError({ __html: finalErrors.join('<br>') });
-      }
-      console.error(error);
-    }
-  };
+  
 
   // Sample data 
   const sampleLinks = [
@@ -54,59 +60,75 @@ export default function Links() {
 
   return (
     <>
-      <div className="w-full px-4 mx-auto mt-0">
-        <div className="rounded-t bg-white h-10 px-6 pt-5 pb-12">
-          <div className="flex justify-between">
-            <h6 className="block uppercase tracking-wide text-green-700 text-base font-semibold">academic links</h6>
-            <button
-              onClick={() => setShowLinks(true)}
-              className="bg-lime-600 hover:bg-lime-700 text-white text-sm font-semibold py-1 px-4"
-            >
-              Add Links
-            </button>
-          </div>
+    <div className="w-full h-[500px] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
+      <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
+        <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Links</div>
+        <div>
+          <button onClick={() =>  setIsModalOpen(true)}
+            className="bg-[#0FE810] rounded-2xl  px-7 py-1 text-white font-size"
+          >
+            Add Links
+          </button>
         </div>
-        <hr className="border-gray-300" />
-        <table className="table w-full table-striped text-gray-700 font-sm bg-white">
-          <thead>
-            <tr>
-            <th className="text-left bg-gray-200 ">Class Code</th>
-            <th className="text-left bg-gray-200 ">Description</th>
-            <th className="text-left bg-gray-200 ">Instructor</th>
-            <th className="text-left bg-gray-200 ">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Render sampleLinks or fetched links */}
-            {links.length > 0
-              ? links.map((link) => (
-                  <tr key={link.id}>
-                    <td className="text-left">{link.code}</td>
-                    <td className="text-left">{link.description}</td>
-                    <td className="text-left">{link.instructor}</td>
-                  </tr>
-                ))
-              : sampleLinks.map((link) => ( //Delete after connecting to database
-                  <tr key={link.id}>
-                    <td className="text-left">{link.code}</td>
-                    <td className="text-left">{link.description}</td>
-                    <td className="text-left">{link.instructor}</td>
-                  </tr>
-                ))}
-          </tbody>
-        </table>
       </div>
-      <AddLinks
-        showLinks={showLinks}
-        onClose={() => setShowLinks(false)}
-        onSubmit={onSubmit}
-        code={code}
-        setCode={setCode}
-        description={description}
-        setDescription={setDescription}
-        instructor={instructor}
-        setInstructor={setInstructor}
+
+
+      <div className="mx-7 flex flex-col-4 mt-3 justify-between">
+        <div className='text-lg font-serif'>Class Code</div>
+        <div className="text-lg font-serif hidden md:hidden lg:contents">Description</div>
+        <div className='text-lg font-serif'>Instructor</div>
+        <div className="text-lg font-serif hidden md:hidden lg:contents">Action</div>
+      </div>
+
+      <div className="mt-2">
+        <>
+        {links.length > 0
+                ? links.map((link) => (
+                    <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
+                      <div className="text-left">{link.code}</div>
+                      <div className="text-left hidden md:hidden lg:contents">{link.description}</div>
+                      <div className="text-left">{link.instructor}</div>
+                      <div>
+                        <button >
+                          <img src={arhive} alt='archive' class='h-7 w-7 '/>
+                        </button>
+                      </div>
+                    </a>
+                  ))
+                : sampleLinks.map((link) => ( //Delete after connecting to database
+                    <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
+                      <div className="text-left">{link.code}</div>
+                      <div className="text-left hidden md:hidden lg:contents">{link.description}</div>
+                      <div className="text-left">{link.instructor}</div>
+                      <div>
+                        <button onClick={() => setShowArchivelink(true)}  >
+                          <img src={arhive} alt='archive' class='h-7 w-7 '/>
+                        </button> 
+                      </div>
+                    </a>
+                  ))}
+        </>
+
+      </div>
+
+    </div>
+      
+      <ReactModal
+      isOpen={isModalOpen}
+      onRequestClose={() => setIsModalOpen(false)}
+      className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+      >
+        <div>
+          <AddLinks closeModal={() => setIsModalOpen(false)}/>
+        </div>
+      </ReactModal>
+
+      <ArchiveLinks 
+        showArchivelink={showArchivelink}
+        onclose={() => setShowArchivelink(false)}
+        onSubmitarchivelink={onSubmitarchivelink}
       />
+      
     </>
   );
 }
