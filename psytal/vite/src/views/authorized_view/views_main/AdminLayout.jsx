@@ -124,7 +124,7 @@ export default function AdminLayout() {
       {/*sidebar*/}
       <div className='fixed'>
       <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
-        <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+        <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-2xl shadow-lg md:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
@@ -141,7 +141,7 @@ export default function AdminLayout() {
                               isActive
                                 ? 'bg-lime-300  text-black'
                                 : 'text-gray-600 hover:bg-gray-200 hover:text-black',
-                              'rounded-lg px-3 py-1 text-sm font-medium flex items-center mt-5'
+                              'rounded-2xl px-3 py-2 text-sm font-medium flex items-center mt-5'
                             )}
                           >
                             <img src={item.img} className='w-10  pr-5'/>
