@@ -2,9 +2,12 @@ import {React, Fragment, useState} from "react";
 import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
+import arhive from "@assets/delete.png"
+import ArchiveCourse from "../views_components/ArchiveCourse";
 
 export default function Curriculum(){
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showArchivecourse, setShowArchivecourse]= useState(false);
 
     return(
     <>
@@ -75,7 +78,7 @@ export default function Curriculum(){
                     <div>Lec</div>
                     <div>Lab</div>
                     <div>Grade</div>
-                    <div>Action</div> {/*Archive or Delete c*/}
+                    <div>Action</div>
                 </div>
 
                 <div className="mt-2">
@@ -89,7 +92,11 @@ export default function Curriculum(){
                             <div>Lec</div>
                             <div>Lab</div>
                             <div>Grade</div>
-                            <div>Action</div>
+                            <div>
+                            <button onClick={() => setShowArchivecourse(true)}  >
+                              <img src={arhive} alt='archive' class='h-7 w-7 '/>
+                            </button> 
+                            </div>
                         </div>
 
                         <div className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
@@ -102,7 +109,11 @@ export default function Curriculum(){
                             <div>Lec</div>
                             <div>Lab</div>
                             <div>Grade</div>
-                            <div>Action</div>
+                            <div>
+                            <button onClick={() => setShowArchivecourse(true)}  >
+                            <img src={arhive} alt='archive' class='h-7 w-7 '/>
+                            </button> 
+                            </div>
                         </div>
                 </div>
             </div>
@@ -117,6 +128,11 @@ export default function Curriculum(){
                 <AddCourse closeModal={() => setIsModalOpen(false)}/>
             </div>
         </ReactModal>
+
+        <ArchiveCourse
+        showArchivecourse={showArchivecourse}
+        onclose={() => setShowArchivecourse(false)}
+      />
         
     </>
 )}

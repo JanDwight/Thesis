@@ -74,9 +74,9 @@ export default function Links() {
 
 
       <div className="mx-7 flex flex-col-4 mt-3 justify-between">
-        <div className='text-lg font-serif'>Class Code</div>
+        <div className='text-lg font-serif'>Title</div>
         <div className="text-lg font-serif hidden md:hidden lg:contents">Description</div>
-        <div className='text-lg font-serif'>Instructor</div>
+        <div className='text-lg font-serif'>Author</div>
         <div className="text-lg font-serif hidden md:hidden lg:contents">Action</div>
       </div>
 

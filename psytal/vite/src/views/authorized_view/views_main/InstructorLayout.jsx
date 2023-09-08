@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import logo from "@assets/PsychLogo.png";
+import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
 import file from "@assets/icons8file.png";
