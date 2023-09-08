@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/so
 import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
 import axiosClient from '../../../axios'
-import PsychLogo from '../../../assets/PsychLogo.png'
+import PsychLogo from '../../../assets/PsychCircle.png'
 
 // const user = {
 //   name: 'Tom Cook',
