@@ -203,41 +203,41 @@ export default function AdminLayout() {
           </div>
         </div>
     
-      <div className='flex flex-col items-center mx-auto md:flex md:justify-center lg:flex lg:flex-row'>
-        {/*sidebar*/}
-        <div className="pr-[5%] pt-5 "> {/*Main container */}
-          <aside class="hidden md:flex flex-col w-72 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-3xl shadow-lg md:shadow-2xl  " >
-            <div class="flex flex-col items-center mt-6 -mx-2">
-              <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
-              <h4 class="mx-2 mt-2 text-md font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-              <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+    
+      {/*sidebar*/}
+      <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
+        <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+          <div class="flex flex-col items-center mt-6 -mx-2">
+            <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
+            <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
+            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+          </div>
+
+          <div class="flex flex-col justify-between mt-2">
+            {navigation.map((item) => (
+                          
+                          <NavLink
+                            key={item.name}
+                            to={item.to}
+                            className={({label, isActive, onClick }) => classNames(
+                              isActive
+                                ? 'bg-lime-300  text-black'
+                                : 'text-gray-600 hover:bg-gray-200 hover:text-black',
+                              'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
+                            )}
+                          >
+                            <img src={item.img} className='w-10  pr-5'/>
+                            {item.name}
+                          </NavLink>
+                        ))}
+       
+          </div>
+        </aside>
+            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
+            <Outlet />
             </div>
-
-            <div class="flex flex-col justify-between mt-2">
-              {navigation.map((item) => (
-                  <NavLink
-                    key={item.name}
-                    to={item.to}
-                    className={({isActive}) => classNames(
-                      isActive
-                        ? 'bg-[#CCEFCC]  text-[#757575]'
-                        : 'text-[#757575] hover:bg-gray-200 hover:text-black',
-                      'rounded-full px-3 py-1 text-lg font-medium flex items-center mt-5'
-                    )}
-                  >
-                    <img src={item.img} className='w-10  pr-5'/>
-                    {item.name}
-                  </NavLink>
-                ))}
-
-            </div>
-          </aside>
-        </div>
-
-        <div className="w-[90%] md:w-3/5 md:mt-5">
-          <Outlet />
-        </div>
-
+        
+        
       </div>
 
       {/**<!--Footer--> */}
