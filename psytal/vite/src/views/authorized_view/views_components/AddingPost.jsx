@@ -10,13 +10,17 @@ export default function AddingPost({showPosts, title, setTitle, postmsg, setPost
   return (
     <>
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-        <div className="bg-gray-200 w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-3xl">
+        <div className=" lg:w-1/2 px-4 py-1 shadow-lg  w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black  mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6"> 
                 <form onSubmit={onSubmit}>
-                    <div className="flex h-full items-center">                       
+                    <div className="rounded-md bg-transparent p-3 w-30 h-30">
+                      <label htmlFor="upload" class="flex flex-row items-center gap-2 cursor-pointer">
                         <img src={image} className="h-5 w-auto mt-5"/>
-                        <span onClick={''} className="text-md lg:text-md mx-2 font-semibold text-gray-500 mt-5"> Attach Photo / File</span>
+                        <span className="text-md lg:text-md mx-2 font-semibold text-gray-500 mt-5">Attach Photo / File</span>
+                      </label>
+                      <input id="upload" type="file" class="hidden" />                    
                     </div>
+                    
                     <div>
                         {/**TITLE */}
                         <div className="flex items-center justify-between">
