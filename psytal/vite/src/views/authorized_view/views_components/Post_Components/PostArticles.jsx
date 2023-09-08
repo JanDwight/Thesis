@@ -2,10 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { Menu } from '@headlessui/react';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
-import image from "@assets/icons8image.png";
 import announcement from "@assets/Announcement.jpg"
-import axiosClient from '../../../axios.js';
-import AddingPost from './AddingPost.jsx';
+import axiosClient from '../../../../axios.js';
+import AddingPost from '../AddingPost.jsx';
 import ArchivePost from './ArchivePost.jsx';
 
 

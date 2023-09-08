@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import edit from "@assets/icons8createpost.png";
+import arhive from "@assets/delete.png"
+
 
 class EmployeeList extends Component {
   constructor(props) {
@@ -33,7 +36,11 @@ class EmployeeList extends Component {
         employee.role.toLowerCase().includes(filterText.toLowerCase())
     );
 
+
+  
+
     return (
+      <>
       <div>
         <table className="table w-full table-striped text-gray-700">
           <thead>
@@ -52,12 +59,22 @@ class EmployeeList extends Component {
                 <td className="text-left p-2">{employee.name}</td>
                 <td className="text-left p-2">{employee.role}</td>
                 {/* Add more cells as needed */}
-                <td className="text-left">{/* Add action buttons here */}</td>
+                <td className="text-left">{/* Add action buttons here */}
+                  <button>
+                      <img src={edit} alt='edit' class='h-5 w-5' />
+                    </button>
+                    <button >
+                      <img src={arhive} alt='archive' class='h-7 w-7 '/>
+                    </button> 
+                  </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      
+      </>
     );
   }
 }
