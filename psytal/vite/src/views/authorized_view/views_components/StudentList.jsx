@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import edit from "@assets/icons8createpost.png";
+import arhive from "@assets/delete.png"
 
 class StudentList extends Component {
   constructor(props) {
@@ -48,7 +50,14 @@ class StudentList extends Component {
                 <td className="text-left p-2">{student.id}</td>
                 <td className="text-left p-2">{student.name}</td>
                 <td className="text-left p-2">{student.yrsection}</td>
-                <td className="text-left p-2">{/* Add action buttons here */}</td>
+                <td className="text-left p-2">
+                  <td>
+                    <img src={edit} alt='edit' class='h-5 w-5' />
+                  </td>
+                  <td>
+                    <img src={arhive} alt='archive' class='h-7 w-7'/>
+                  </td>                
+                </td>
               </tr>
             ))}
           </tbody>

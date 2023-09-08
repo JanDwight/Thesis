@@ -13,7 +13,7 @@ import Dashboard from "./views/authorized_view/views_main/Dashboard";
 import ManageUsers from "./views/authorized_view/views_main/ManageUsers";
 import StudentList from "./views/authorized_view/views_components/StudentList";
 import EmployeeList from "./views/authorized_view/views_components/EmployeeList";
-import PreEnrollment from "./views/authorized_view/views_main/PreEnrollment"
+import PreEnrollment from "./views/Tmp views/PreEnrollment"
 import Classes from "./views/authorized_view/views_main/Classes"
 import Curriculum from "./views/authorized_view/views_main/Curriculum"
 import StaffLayout from "./views/authorized_view/views_main/StaffLayout";
@@ -25,7 +25,55 @@ const router = createBrowserRouter([
         element: <AdminLayout />,
         children:[
             {
-                path: '',
+                path: 'home',
+                element: <Home />
+            },
+
+            {
+                path: 'dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: 'classes',
+                element: <Classes />
+            },
+            {
+                path: 'preregistration',
+                element: <PreRegistration />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
+
+            {
+                path: 'manageusers',
+                element: <ManageUsers />,
+                children:[
+                    {
+                        path: '',
+                        element: <StudentList />
+                    },
+
+                    {
+                        path: '',
+                        element: <EmployeeList />
+                    }
+                ]
+            },
+            {
+                path: 'curriculum',
+                element: <Curriculum />
+            },
+        ]
+    },
+
+    {
+        path: '/staff',
+        element: <StaffLayout />,
+        children: [
+            {
+                path: 'home',
                 element: <Home />
             },
 
@@ -69,27 +117,24 @@ const router = createBrowserRouter([
     },
     
     {
-        path: '/staff',
-        element: <StaffLayout />,
-        children: [
-            {
-                path: '',
-                element: <Home />
-            }
-        ]
-    },
-
-    {
         path: '/instructor',
         element: <InstructorLayout />,
         children: [
             {
-                path: '',
+                path: 'home',
                 element: <Home />
-            }
+            },
+            {
+                path: 'classes',
+                element: <Classes />
+            },
+            {
+                path: 'links',
+                element: <Links />
+            },
         ]  
     },
-    
+
     {
         path: '/',
         element: <DefaultLayout />,
