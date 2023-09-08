@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import edit from "@assets/icons8createpost.png";
-import arhive from "@assets/delete.png"
+import archive from "@assets/delete.png"
+import EditUsers from '../views_components/EditUsers.jsx'; //<-- Import EditUsers component
+import ArchiveUsers from '../views_components/ArchiveUsers.jsx';
 
 class StudentList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [], // Initialize with an empty array
+      isArchiveUsersOpen: false, // Initially, the custom modal for archiving users is closed
+      isEditUsersOpen: false, // Initially, the custom modal for editing users is closed
+      selectedStudent: null, // Store the selected student for the modals
     };
   }
 
@@ -21,8 +26,50 @@ class StudentList extends Component {
     this.setState({ data: sampleData }); // Update the state with fetched data
   }
 
+  //<><><> Open ArchiveUsers modal
+  handleArchiveClick = (student) => {
+    console.log('Archive Window Open');
+    this.setState({
+      selectedStudent: student,
+      isArchiveUsersOpen: true,
+    });
+  };
+
+  //<><><> Open EditUsers modal
+  handleEditUsersClick = (student) => {
+    console.log('Edit Window Open');
+    this.setState({
+      selectedStudent: student,
+      isEditUsersOpen: true,
+    });
+  };
+
+  //<><><> Close ArchiveUsers modal
+  handleCloseArchiveUsers = () => {
+    console.log('Archive Cancel Pressed');
+    this.setState({
+      isArchiveUsersOpen: false,
+    });
+  };
+
+  //<><><> Close EditUsers modal
+  handleCloseEditUsers = () => {
+    console.log('Edit Cancel Pressed');
+    this.setState({
+      isEditUsersOpen: false,
+    });
+  };
+
+  //<><><> Handle saving user changes from EditUsers modal
+  handleSaveUserChanges = (updatedUser) => {
+    // saving
+    console.log('User Changes Saved:', updatedUser);
+    //
+    this.handleCloseEditUsers();
+  };
+
   render() {
-    const { data } = this.state;
+    const { data, selectedStudent } = this.state;
     const { filterText } = this.props;
 
     // Apply filtering 
@@ -51,17 +98,41 @@ class StudentList extends Component {
                 <td className="text-left p-2">{student.name}</td>
                 <td className="text-left p-2">{student.yrsection}</td>
                 <td className="text-left p-2">
-                  <td>
-                    <img src={edit} alt='edit' class='h-5 w-5' />
-                  </td>
-                  <td>
-                    <img src={arhive} alt='archive' class='h-7 w-7'/>
-                  </td>                
-                </td>
+                  <img
+                    src={edit} // Replace 'editImage' with the path to your edit image
+                    alt='edit'
+                    className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    onClick={() => this.handleEditUsersClick(student)}
+                  />
+                  <img
+                    src={archive} // Replace 'archiveImage' with the path to your archive image
+                    alt='archive'
+                    className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    onClick={() => this.handleArchiveClick(student)}
+                  />
+              </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        {this.state.isArchiveUsersOpen && (
+          <ArchiveUsers
+            showModal={this.state.isArchiveUsersOpen}
+            onClose={this.handleCloseArchiveUsers}
+            // Add other props/functions as needed for archiving
+          />
+        )}
+
+        {this.state.isEditUsersOpen && (
+          <EditUsers
+            showModal={this.state.isEditUsersOpen}
+            onClose={this.handleCloseEditUsers}
+            user={selectedStudent} // Pass the selected student to EditUsers
+            onSave={this.handleSaveUserChanges} // Pass the save function
+          />
+        )}
+        
       </div>
     );
   }

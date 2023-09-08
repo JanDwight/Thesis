@@ -12,7 +12,7 @@ export default function ArchiveUsers({ showModal, onClose }) {
           <p className="block uppercase tracking-wide font-bold text-green-800 my-3 text-center">Archive User?</p>
           <form class="text-center">
             {/* Archive user form/prompt/warning? content goes here */}
-            <p>Archiving a user will make it uneditable and hidden from low level users? 
+            <p>Archiving a user will make it uneditable and hidden from low level users. 
                 Are you sure you want to proceeed?</p>
           </form>
           <div className="flex items-center justify-center my-7 space-x-4">
