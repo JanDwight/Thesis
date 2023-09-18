@@ -118,8 +118,9 @@ export default function InstructorLayout() {
     
     
       {/*sidebar*/}
-      <div className="flex justify-start items-center px-10 pt-5"> {/*Main container */}
-        <aside class="flex flex-col w-60 h-50 px-5 py-5 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-1 rounded-lg shadow-lg md:shadow-2xl  " >
+      <div className="flex justify-start px-10 pt-5"> {/*Main container */}
+
+        <aside class="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl  " >
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
