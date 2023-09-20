@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('term');
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');
-            $table->integer('year_level');
+            $table->string('year_level');
             $table->integer('student_school_id');
             $table->integer('learners_reference_number');
             $table->string('degree');
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->integer('contact_person_number');
             $table->string('contact_person_address');
             $table->string('contact_person_relationship');
-            $table->integer('section')->nullable();
+            $table->string('section')->nullable();
             $table->string('image');
             $table->integer('class_year');
             $table->string('last_school_attended');

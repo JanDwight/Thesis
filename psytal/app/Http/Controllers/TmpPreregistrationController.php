@@ -2,11 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TmpPreRegistrationRequest;
 use App\Models\tmp_preregistration;
 use Illuminate\Http\Request;
 
 class TmpPreregistrationController extends Controller
 {
+
+    public function createTmpPreReg(TmpPreRegistrationRequest $request)
+    {
+        $data = $request->validated();
+
+        /** @var \App\Models\User $user */
+
+        $tmpPreReg = tmp_preregistration::create([
+            'family_name' => $data['family_name']
+        ]);
+
+        return response([
+            'family_name' => $tmpPreReg,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
