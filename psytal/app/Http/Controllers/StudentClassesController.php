@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
+use App\Models\student_classes;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class StudentClassesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(post $post)
+    public function show(student_classes $student_classes)
     {
         //
     }
@@ -42,7 +42,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(post $post)
+    public function edit(student_classes $student_classes)
     {
         //
     }
@@ -50,7 +50,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, post $post)
+    public function update(Request $request, student_classes $student_classes)
     {
         //
     }
@@ -58,7 +58,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(post $post)
+    public function destroy(student_classes $student_classes)
     {
         //
     }

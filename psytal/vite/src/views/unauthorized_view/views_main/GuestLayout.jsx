@@ -9,6 +9,7 @@ import logo from "@assets/PsychCircle.png";
 const navigation = [
   { name: 'Landing Page', to: 'landingpage'},
   { name: 'About us', to: 'aboutus'} ,
+  { name: 'Pre-Registration', to: 'preregistration'} ,
   { name: 'Login', to: 'login'}
 ]
 
