@@ -34,7 +34,7 @@ export default function AddPost() {
   return (
     <>
   {/*Create Post*/}
-  <div className="bg-gray-200 w-full h-34 rounded-full shadow-xl" onClick={() => setShowPosts(true)}>
+  <div className="bg-gray-200 w-full h-34 rounded-2xl shadow-xl" onClick={() => setShowPosts(true)}>
 
     <div className="w-full h-24 flex items-center justify-between px-5">
       <input onClick={() => setShowPosts(true)} type="text" className="w-full rounded-full h-8 bg-white px-6 py-0 border-none focus:ring-green-700 text-xs m-5" placeholder="Create Post . . ." />
