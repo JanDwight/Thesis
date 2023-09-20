@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
-import date from "@assets/icons8calendar.png";
+import date from "@assets/calendar.png";
 
 export default function PreEnrollment() {
   const [rows, setRows] = useState([{ id: 0 }]);
@@ -270,7 +270,7 @@ export default function PreEnrollment() {
                         <div className="flex items-center mt-2">
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                              <img src={date}/>
+                              <img src={date} class='h-5 w-5'/>
                             </div>
                             <input
                               name="start"
@@ -285,7 +285,7 @@ export default function PreEnrollment() {
                           <span className="mx-4 text-gray-500">to</span>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                              <img src={date}/>
+                              <img src={date} class='h-5 w-5'/>
                             </div>
                             <input
                               name="end"
