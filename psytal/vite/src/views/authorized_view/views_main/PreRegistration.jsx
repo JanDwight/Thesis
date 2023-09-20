@@ -40,7 +40,8 @@ export default function PreRegistration() {
       <div className="w-full lg:w-8/12 px-4 container mx-auto">
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0 mt-1">
-            <form> 
+            <form>
+              {/**=========================== Shoolyear - Date ==========================*/}  
               <div class="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
@@ -84,6 +85,7 @@ export default function PreRegistration() {
                 </div>                 
               </div> <hr />
 
+              {/**=========================== Student ID - LRN ==========================*/} 
               <div class="flex flex-wrap flex-row -mx-3 mb-2">
                     {/*column1*/}
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
@@ -101,6 +103,7 @@ export default function PreRegistration() {
                     </div>
               </div> 
 
+              {/**=========================== Last Name - Madain Name ==========================*/} 
               <div class="flex flex-wrap flex-row -mx-3 mb-2">
                 {/**column1 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
@@ -132,6 +135,7 @@ export default function PreRegistration() {
                 </div>
               </div> <hr />
               
+              {/**=========================== Academic Classification: Radio Buttons ==========================*/} 
               <div class="flex flex-wrap flex-row -mx-3 mb-2">
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
@@ -181,6 +185,7 @@ export default function PreRegistration() {
                 </div>
               </div> <hr />
 
+              {/**=========================== Last School Attended - Degree Program ==========================*/} 
               <div class="flex flex-wrap flex-row -mx-3 mb-2">
                 <div className="w-full px-3 mb-6 md:mb-0 mt-4">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
@@ -202,18 +207,19 @@ export default function PreRegistration() {
                 </div>
               </div> <hr />
 
+              {/**=========================== Citizenship - Email Address ==========================*/} 
               <div className="flex flex-wrap -mx-3 mb-2">
                 {/*column1*/}
                 <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-birthdate">Date of Birth :</label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthdate" type="text" placeholder=""/>
 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="nationality">
-                    Citizenship/Nationality :
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="citizenship">
+                    Citizenship :
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-nationality" type="text" placeholder=""/>
 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="nationality">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="ethnicity">
                     Ethnicity/Tribal Affilation :
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-ethnicity" type="text" placeholder=""/>
@@ -224,17 +230,17 @@ export default function PreRegistration() {
 
                 {/*column2*/}
                 <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">                 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="nationality">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="placeofbirth">
                     Place of Birth :
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-placeofbirth" type="text" placeholder=""/>
                     
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="nationality">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
                     Sex at Birth :
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-sexatbirth" type="text" placeholder=""/>
 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
                     Special Need/s :
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-studyaddress" type="text" placeholder=""/>
@@ -246,6 +252,7 @@ export default function PreRegistration() {
                 </div>
               </div> <hr />
 
+              {/**=========================== Filling the Adresses ==========================*/} 
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-homeaddress">Home Address :</label>
@@ -257,35 +264,49 @@ export default function PreRegistration() {
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-studyaddress" type="text" placeholder=""/>
                 </div>
-              </div>
+              </div> <hr />
 
-              <div className="flex flex-wrap -mx-3 mb-2"> <hr />
-                <p className="text-normal mx-5">EMERGENCY CONTACT (Person to be contacted in case of emergency)</p> <hr />
-                  {/*column1*/}
-                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                        <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Name :</label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactname" type="text" placeholder=""/>
-                    
-                        <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-address" type="text" placeholder=""/>
-                  </div>
-                      {/*column2*/}
-                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                        <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
-                          Contact Number :
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
+              {/**=========================== Emergy Contact ==========================*/} 
+              <div className="flex flex-wrap -mx-3 mb-2"> 
+                <p className="text-normal font-medium mx-5 mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</p>
+                {/*column1*/}
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Complete Name :</label>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactname" type="text" placeholder=""/>
+                  
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-address" type="text" placeholder=""/>
+                </div>
+
+                {/*column2*/}
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
+                    Contact Number :
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
                       
-                        <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
-                          Relationship :
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-relationship" type="text" placeholder=""/>
-                      </div>
+                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
+                    Relationship :
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-relationship" type="text" placeholder=""/>
+                </div>
+              </div> <hr />
 
+              {/**=========================== Insurance Coverage ==========================*/} 
+              <div className="flex flex-wrap -mx-3 mb-2">
+                <div className="text-normal font-medium mx-5 mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div>
+                <div>
+                  <label>Are you registed as </label>
+                </div>
               </div>
               
             </form>
           </div>
+        </div>
+
+        <div className="text-center flex justify-end my-8">
+          <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">Cancel</button>
+          <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">Submit</button>
         </div>
       </div>
 
