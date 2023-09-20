@@ -45,13 +45,30 @@ export default function ManageUsers() {
     {/**______________________1st Container from Manage - Btn Add________________________________*/}
     <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
       <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Manage Accounts</div>
-      <div>
-        {/**Add Users */}
-        <button onClick={() => setIsModalOpen(true)}
-                className="bg-[#0FE810] rounded-2xl py-1 px-6 text-white font-size">
-                  Add User
-        </button>
+      <div className="flex">
+      {/**Filter */}
+        <div className="flex flex-row">
+                  <div>
+                    <button>
+                      {activeTab  === 1 && (
+                        <StudentsFilter filterText={filterText} />
+                      )}
+                      {activeTab === 2 && (
+                        <EmployeesFilter filterText={filterText} />
+                      )}
+                    </button>
+                    
+                  </div>
+                </div>
+        <div>
+          {/**Add Users */}
+          <button onClick={() => setIsModalOpen(true)}
+                  className="bg-[#0FE810] rounded-2xl py-1 px-6 text-white font-size">
+                    Add User
+          </button>
+        </div>
       </div>
+      
           
     </div>
 
@@ -88,20 +105,6 @@ export default function ManageUsers() {
                     onChange={(event) => setFilterText(event.target.value)}
                     className="h-10 px-6 py-4 border border-gray-300 focus:ring-viridianHue focus:border-viridianHue  rounded-lg"
                   ></input>
-              </div>
-              {/**Filter */}
-              <div className="flex flex-row">
-                <div>
-                  <button>
-                    {activeTab  === 1 && (
-                      <StudentsFilter filterText={filterText} />
-                    )}
-                    {activeTab === 2 && (
-                      <EmployeesFilter filterText={filterText} />
-                    )}
-                  </button>
-                  
-                </div>
               </div>
             </ul>
           </div>

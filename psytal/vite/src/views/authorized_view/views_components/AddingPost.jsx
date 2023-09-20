@@ -10,7 +10,7 @@ export default function AddingPost({showPosts, title, setTitle, postmsg, setPost
   return (
     <>
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-        <div className=" lg:w-1/2 px-4 py-1 shadow-lg  w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black  mt-[10%] mx-auto p-5">
+        <div className="lg:w-1/2 min-w-[400px] max-w-[800px] px-4 py-1 shadow-lg h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6"> 
                 <form onSubmit={onSubmit}>
                     <div className="rounded-md bg-transparent p-3 w-30 h-30">

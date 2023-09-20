@@ -98,6 +98,7 @@ class StudentList extends Component {
                 <td className="text-left p-2">{student.name}</td>
                 <td className="text-left p-2">{student.yrsection}</td>
                 <td className="text-left p-2">
+                <div className="flex items-center">
                   <img
                     src={edit} // Replace 'editImage' with the path to your edit image
                     alt='edit'
@@ -110,6 +111,7 @@ class StudentList extends Component {
                     className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
                     onClick={() => this.handleArchiveClick(student)}
                   />
+                </div>
               </td>
               </tr>
             ))}
