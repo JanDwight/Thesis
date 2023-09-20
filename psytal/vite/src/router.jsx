@@ -170,6 +170,13 @@ const router = createBrowserRouter([
             },
 
             {
+        
+                path: 'preregistration',
+                element: <PreRegistration />
+                
+            },
+            
+            {
                 path: '/landingpage',
                 element: <LandingPage />
             },
