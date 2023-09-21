@@ -1,11 +1,96 @@
 import React, {useState} from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
+import axiosClient from '../../../axios';
 
 export default function PreRegistration() {
+  const [error, setError] = useState({__html: ""});
 
+  //variables for the user inputs
+  const [startOfSchoolYear, setStartOfSchoolYear] = useState('');
+  const [endOfSchoolYear, setEndOfSchoolYear] = useState('');   
+  const [studentSchoolId, setStudentSchoolId] = useState(''); 
+  const [learnersReferenceNumber, setLearnersReferenceNumber] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [maidenName, setMaidenName] = useState('');
+  const [academicClassification, setAcademicClassification] = useState('');
+  const [lastSchoolAttended, setLastSchoolAttended] = useState('');
+  const [addressOfSchoolAttended, setAddressOfSchoolAttended] = useState('');
+  const [degree, setDegree] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [citizenship, setCitizenship] = useState('');
+  const [ethnicity, setEthnicity] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [placeOfBirth, setPlaceOfBirth] = useState('');
+  const [sexAtBirth, setSexAtBirth] = useState('');
+  const [specialNeeds, setSpecialNeeds] = useState('');
+  const [email, setEmail] = useState('');
+  const [homeAddress, setHomeAddress] = useState('');
+  const [addressWhileStudyingAtBsu, setAddressWhileStudyingAtBsu] = useState('');
+  const [emergencyContactName, setEmergencyContactName] = useState('');
+  const [emergencyContactAddress, setEmergencyContactAddress] = useState('');
+  const [emergencyContactNumber, setEmergencyContactNumber] = useState('');
+  const [relationship, setRelationship] = useState('');
+  const preRegStatus = 'pending';
+  const typeOfStudent = 'Incoming';
+
+  //the onSubmit function
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    setError({ __html: "" });
+
+    axiosClient
+    .post('/preregincommingtmp', {
+      start_of_school_year: parseInt(startOfSchoolYear, 10),
+      end_of_school_year: parseInt(endOfSchoolYear, 10),
+      student_school_id: parseInt(studentSchoolId, 10),
+      learners_reference_number: parseInt(learnersReferenceNumber, 10),
+      last_name: lastName,
+      first_name: firstName,
+      middle_name: middleName,
+      maiden_name: maidenName,
+      academic_classification: academicClassification,
+      last_school_attended: lastSchoolAttended,
+      address_of_school_attended: addressOfSchoolAttended,
+      degree: degree,
+      date_of_birth: dateOfBirth,
+      place_of_birth: placeOfBirth,
+      citizenship: citizenship,
+      sex_at_birth: sexAtBirth,
+      ethnicity: ethnicity,
+      special_needs: specialNeeds,
+      contact_number: parseInt(contactNumber, 10),
+      email_address: email,
+      home_address: homeAddress,
+      address_while_studying: addressWhileStudyingAtBsu,
+      contact_person_name: emergencyContactName,
+      contact_person_number: emergencyContactNumber,
+      contact_person_address: emergencyContactAddress,
+      contact_person_relationship: relationship,
+      pre_reg_status: preRegStatus,
+      type_of_student: typeOfStudent,
+    })
+    .then(({ data }) => {
+      setFamilyName(data.family_name)
+    })
+    .catch(( error ) => {
+      if (error.response) {
+        const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
+        setError({__html: finalErrors.join('<br>')})
+      }
+        console.error(error)
+    });
+  };
+  
   return (
     <>
+        {error.__html && (
+        <div className='bg-red-500 rounded py-2 px-2 text-white'
+          dangerouslySetInnerHTML={error}>
+        </div>)}
+        
     <main>
       <div className="w-full lg:w-8/12 px-4 container mx-auto">          
         <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
@@ -40,7 +125,7 @@ export default function PreRegistration() {
       <div className="w-full lg:w-8/12 px-4 container mx-auto">
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0 mt-1">
-            <form>
+            <form onSubmit={onSubmit} action="#" method="POST">
               {/**=========================== Shoolyear - Date ==========================*/}  
               <div class="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
@@ -56,7 +141,8 @@ export default function PreRegistration() {
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <img src={date} class='h-5 w-5'/>
                       </div>
-                      <input
+                      
+                      <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
                         name="start"
                         type="number" 
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
@@ -64,6 +150,8 @@ export default function PreRegistration() {
                         min="2000" // Minimum year
                         max="2099" // Maximum year
                         step="1" // Year step
+                        value={startOfSchoolYear}
+                        onChange={ev => setStartOfSchoolYear(ev.target.value)}
                       />
                     </div>
                     <span className="mx-4 text-gray-500">to</span>
@@ -79,6 +167,8 @@ export default function PreRegistration() {
                         min="2000" 
                         max="2099" 
                         step="1" 
+                        value={endOfSchoolYear}
+                        onChange={ev => setEndOfSchoolYear(ev.target.value)}
                       />
                     </div>
                   </div>
@@ -92,14 +182,26 @@ export default function PreRegistration() {
                       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                         student id no :
                       </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-studentID" type="number" placeholder=""/>                                           
+                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                       id="grid-studentID"
+                       type="number"
+                       placeholder=""
+                       value={studentSchoolId}
+                       onChange={ev => setStudentSchoolId(ev.target.value)}
+                       />                          
                     </div>
                     {/*column2*/}
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lrn">
                         learner's reference number (lrn) :
                       </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-lrn" type="number" placeholder=""/>                      
+                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                       id="grid-lrn"
+                       type="number"
+                       placeholder=""
+                       value={learnersReferenceNumber}
+                       onChange={ev => setLearnersReferenceNumber(ev.target.value)}
+                       />        
                     </div>
               </div> 
 
@@ -110,32 +212,53 @@ export default function PreRegistration() {
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Last Name :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-studentLastname" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-studentLastname"
+                   type="text"
+                   placeholder=""
+                   value={lastName}
+                   onChange={ev => setLastName(ev.target.value)}/>  
                 </div>
                 {/**column2 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     First Name :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-studentFirstname" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-studentFirstname" 
+                   type="text" 
+                   placeholder=""
+                   value={firstName}
+                   onChange={ev => setFirstName(ev.target.value)}/>  
                 </div>
                 {/**column3 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Middle Name :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-studentMiddlename" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-studentMiddlename" 
+                   type="text" 
+                   placeholder=""
+                   value={middleName}
+                   onChange={ev => setMiddleName(ev.target.value)}/>  
                 </div>
                 {/** */}
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Maiden Name :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-studentMaidenname" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-studentMaidenname" 
+                   type="text" 
+                   placeholder=""
+                   value={maidenName}
+                   onChange={ev => setMaidenName(ev.target.value)}/>  
                 </div>
               </div> <hr />
               
-              {/**=========================== Academic Classification: Radio Buttons ==========================*/} 
+              {/**=========================== Academic Classification: Radio Buttons ==========================*/}
+              {/**re-do the implementation of the radio button */} 
               <div class="flex flex-wrap flex-row -mx-3 mb-2">
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
@@ -148,7 +271,9 @@ export default function PreRegistration() {
                       type="radio"
                       name="typeofacadclass"
                       id="shsgraduate"
-                      value="option1" />
+                      value="SHS graduate" 
+                      onChange={ev => setAcademicClassification(ev.target.value)}
+                      />
                       <label
                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                         htmlFor="continuing">SHS graduate
@@ -162,7 +287,9 @@ export default function PreRegistration() {
                       type="radio"
                       name="typeofacadclass"
                       id="hsgraduate"
-                      value="option2"/>
+                      value="HS graduate"
+                      onChange={ev => setAcademicClassification(ev.target.value)}
+                      />
                     <label
                       className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                       htmlFor="secondsem">HS graduate
@@ -176,7 +303,9 @@ export default function PreRegistration() {
                       type="radio"
                       name="typeofacadclass"
                       id="alscompleter"
-                      value="option3"/>
+                      value="ALS completer"
+                      onChange={ev => setAcademicClassification(ev.target.value)}
+                      />
                     <label
                       className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                       htmlFor="secondsem">ALS completer
@@ -191,19 +320,35 @@ export default function PreRegistration() {
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Last School Attended :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-lastschoolattended" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-lastschoolattended" 
+                   type="text" 
+                   placeholder=""
+                   value={lastSchoolAttended}
+                   onChange={ev => setLastSchoolAttended(ev.target.value)}/>  
                 </div>
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Address of School Attended :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-addresslastschoolattended" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-addresslastschoolattended" 
+                   type="text" 
+                   placeholder=""
+                   value={addressOfSchoolAttended}
+                   onChange={ev => setAddressOfSchoolAttended(ev.target.value)}/>  
                 </div>
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                     Degree/Program :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-degreeprogram" type="text" placeholder=""/>  
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                   id="grid-degreeprogram" 
+                   type="text" 
+                   placeholder=""
+                   value={degree}
+                   onChange={ev => setDegree(ev.target.value)}
+                   />  
                 </div>
               </div> <hr />
 
@@ -212,20 +357,42 @@ export default function PreRegistration() {
                 {/*column1*/}
                 <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-birthdate">Date of Birth :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-birthdate" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-birthdate" 
+                    type="date" 
+                    placeholder=""
+                    value={dateOfBirth}
+                    onChange={ev => setDateOfBirth(ev.target.value)}
+                    />
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="citizenship">
                     Citizenship :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-nationality" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-nationality" 
+                   type="text" 
+                   placeholder=""
+                   value={citizenship}
+                   onChange={ev => setCitizenship(ev.target.value)}
+                   />
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="ethnicity">
                     Ethnicity/Tribal Affilation :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-ethnicity" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-ethnicity" 
+                   type="text" 
+                   placeholder=""
+                   value={ethnicity}
+                   onChange={ev => setEthnicity(ev.target.value)}/>
                                         
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnumber" type="number" placeholder=""/>                    
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-contactnumber" 
+                   type="number" 
+                   placeholder=""
+                   value={contactNumber}
+                   onChange={ev => setContactNumber(ev.target.value)}/>                    
                 </div>
 
                 {/*column2*/}
@@ -233,22 +400,42 @@ export default function PreRegistration() {
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="placeofbirth">
                     Place of Birth :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-placeofbirth" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-placeofbirth" 
+                   type="text" 
+                   placeholder=""
+                   value={placeOfBirth}
+                   onChange={ev => setPlaceOfBirth(ev.target.value)}/>
                     
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
                     Sex at Birth :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-sexatbirth" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-sexatbirth" 
+                    type="text" 
+                    placeholder=""
+                    value={sexAtBirth}
+                    onChange={ev => setSexAtBirth(ev.target.value)}/>
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
                     Special Need/s :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-studyaddress" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-studyaddress" 
+                   type="text" 
+                   placeholder=""
+                   value={specialNeeds}
+                   onChange={ev => setSpecialNeeds(ev.target.value)}/>
                     
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="emailaddress">
                     Email Address :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-emailaddress" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-emailaddress" 
+                   type="text" 
+                   placeholder=""
+                   value={email}
+                   onChange={ev => setEmail(ev.target.value)}/>
                 </div>
               </div> <hr />
 
@@ -256,13 +443,23 @@ export default function PreRegistration() {
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-homeaddress">Home Address :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-homeaddress" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-homeaddress" 
+                   type="text" 
+                   placeholder=""
+                   value={homeAddress}
+                   onChange={ev => setHomeAddress(ev.target.value)}/>
                 </div>
                 <div className="w-full px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
                     Address while studying at BSU :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-studyaddress" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-studyaddress" 
+                   type="text" 
+                   placeholder=""
+                   value={addressWhileStudyingAtBsu}
+                   onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
                 </div>
               </div> <hr />
 
@@ -272,10 +469,20 @@ export default function PreRegistration() {
                 {/*column1*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Complete Name :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactname" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-contactname" 
+                   type="text" 
+                   placeholder=""
+                   value={emergencyContactName}
+                   onChange={ev => setEmergencyContactName(ev.target.value)}/>
                   
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-address" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-address" 
+                    type="text" 
+                    placeholder=""
+                    value={emergencyContactAddress}
+                    onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
                 </div>
 
                 {/*column2*/}
@@ -283,12 +490,23 @@ export default function PreRegistration() {
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
                     Contact Number :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-contactnum" 
+                   type="number" 
+                   placeholder=""
+                   value={emergencyContactNumber}
+                   onChange={ev => setEmergencyContactNumber(ev.target.value)}
+                   />
                       
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
                     Relationship :
                   </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-relationship" type="text" placeholder=""/>
+                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-relationship" 
+                   type="text" 
+                   placeholder=""
+                   value={relationship}
+                   onChange={ev => setRelationship(ev.target.value)}/>
                 </div>
               </div> <hr />
 
@@ -299,17 +517,21 @@ export default function PreRegistration() {
                   <label>Are you registed as </label>
                 </div>
               </div>
-              
+              <div className="text-center flex justify-end my-8">
+                <button 
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>
-
-        <div className="text-center flex justify-end my-8">
-          <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">Cancel</button>
-          <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">Submit</button>
-        </div>
       </div>
-
     </main>
     </>
     
