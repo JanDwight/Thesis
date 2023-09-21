@@ -126,10 +126,12 @@ export default function PreRegistration() {
       </div>
       {/**=========================== 2 ==========================*/}      
       {/**Start of Filling the FORM */}
+      
       <div className="w-full lg:w-8/12 px-4 container mx-auto">
+        <form onSubmit={onSubmit} action="#" method="POST">
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-            <form onSubmit={onSubmit} action="#" method="POST">
+            
               {/**=========================== Shoolyear - Date ==========================*/}  
               <div class="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
@@ -570,18 +572,6 @@ export default function PreRegistration() {
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
                 </div>
               </div> <hr />
-              <div className="text-center flex justify-end my-8">
-                <button 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
-                  Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
-                  Submit
-                </button>
-              </div>
-            </form>
           </div>
         </div>
         
@@ -590,7 +580,6 @@ export default function PreRegistration() {
         <div className="w-full container mx-auto">
           <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
             <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-              <form>
                 <div className="text-normal font-medium text-center mt-2">
                   DIGITAL COMMUNICATION AND LITERACY:
                   <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
@@ -612,7 +601,6 @@ export default function PreRegistration() {
                       <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-lodl" type="number" placeholder=""/>                      
                   </div>
                 </div> <hr />
-              </form>
             </div>
           </div>
         </div>
@@ -622,7 +610,6 @@ export default function PreRegistration() {
         <div className="w-full container mx-auto">
           <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
             <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-              <form>
                 <div className="text-normal font-medium text-center mt-2">
                   AVAILMENT OF FREE HIGHER EDUCATION :
                 </div> <hr class='mt-2'/>
@@ -709,16 +696,22 @@ export default function PreRegistration() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-amtcontibute" type="number" placeholder=""/>
                   </div>
                 </div>
-              </form>
             </div>
           </div>
         </div>
-
         {/**===========SUMBIT Button============= */}
         <div className="text-center flex justify-end my-8">
-          <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">Cancel</button>
-          <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">Submit</button>
-        </div>
+                <button 
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+                  Submit
+                </button>
+              </div>
+        </form>
       </div>
     </main>
     </>
