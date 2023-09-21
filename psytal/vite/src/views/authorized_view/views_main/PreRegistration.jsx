@@ -70,7 +70,7 @@ export default function PreRegistration() {
       home_address: homeAddress,
       address_while_studying: addressWhileStudyingAtBsu,
       contact_person_name: emergencyContactName,
-      contact_person_number: emergencyContactNumber,
+      contact_person_number: emergencyContactNumber, //theres an error here--doesnt accept multiple numbers
       contact_person_address: emergencyContactAddress,
       contact_person_relationship: relationship,
       pre_reg_status: preRegStatus,
