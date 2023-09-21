@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PreregistrationIncomingTmpController;
+use App\Http\Controllers\TmpPreregistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +25,4 @@ Route::middleware('auth:sanctum')->group(function() {
 
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);

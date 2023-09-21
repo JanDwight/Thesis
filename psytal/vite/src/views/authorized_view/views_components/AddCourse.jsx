@@ -66,26 +66,33 @@ export default function AddCourse({closeModal}) {
                       type="text"
                       placeholder='Hours/Week'
                       //value={hoursperWeek}
-                      className="block w-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 t" 
                     />
-
-                    <input
-                      id="lec"
-                      name="lec"
-                      type="text" //change to radio
-                      placeholder='Lec'
-                      //value={lec}
-                      className="block w-[20%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
-                    />
-
-                    <input
-                      id="lab"
-                      name="lab"
-                      type="text" //change to radio
-                      placeholder='Lab'
-                      //value={lab}
-                      className="block w-[20%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
-                    />
+                   
+                </div>
+                <div className="flex justify-between mt-2">
+                  <div>
+                      <label>Lecture</label>
+                      <input
+                        id="lec"
+                        name="lec"
+                        type="radio" //change to radio
+                        placeholder='Lec'
+                        value='lec'
+                        className="block rounded-md border-2 border-solid border-neutral-300" 
+                      />
+                    </div>
+                    <div>
+                      <label>Laboratory</label>
+                      <input
+                        id="lab"
+                        name="lab"
+                        type="radio" //change to radio
+                        placeholder='Lab'
+                        value='lab'
+                        className="block rounded-md border-2 border-solid border-neutral-300" 
+                      />
+                  </div>
                 </div>
 
                 <div className='mt-2 flex flex-col-2 justify-between'>

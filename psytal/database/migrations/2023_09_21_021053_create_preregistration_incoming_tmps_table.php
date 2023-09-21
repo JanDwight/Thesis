@@ -11,40 +11,39 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tmp_preregistrations', function (Blueprint $table) {
+        Schema::create('preregistration_incoming_tmps', function (Blueprint $table) {
             $table->id('student_profile_id');
-            $table->string('type_of_student');
-            $table->boolean('candidate_for_graduation');
-            $table->string('end_of_term_to_finnish_degree')->nullable();
-            $table->string('term');
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');
-            $table->string('year_level');
-            $table->integer('student_school_id');
+            $table->integer('student_school_id')->nullable();
             $table->integer('learners_reference_number');
-            $table->string('degree');
-            $table->string('major');
-            $table->string('status');
-            $table->string('family_name');
-            $table->string('given_name');
+            $table->string('last_name');
+            $table->string('first_name');
             $table->string('middle_name');
             $table->string('maiden_name')->nullable();
+            $table->string('academic_classification');
+            $table->string('last_school_attended');
+            $table->string('address_of_school_attended');
+            $table->string('degree');
             $table->date('date_of_birth');
-            $table->string('nationality');
+            $table->string('place_of_birth');
+            $table->string('citizenship');
+            $table->string('sex_at_birth');
+            $table->string('ethnicity');
+            $table->string('special_needs')->nullable();
+            $table->string('contact_number');
+            $table->string('email_address');
             $table->string('home_address');
             $table->string('address_while_studying');
-            $table->integer('contact_number');
-            $table->string('email_address');
             $table->string('contact_person_name');
             $table->integer('contact_person_number');
             $table->string('contact_person_address');
             $table->string('contact_person_relationship');
             $table->string('section')->nullable();
-            $table->string('image');
-            $table->integer('class_year');
-            $table->string('last_school_attended');
+            $table->integer('class_year')->nullable();
             $table->timestamps();
-            $table->string('pre_reg_status');
+            $table->string('pre_reg_status')->nullable();
+            $table->string('type_of_student')->nullable();
         });
     }
 
@@ -53,6 +52,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tmp_preregistrations');
+        Schema::dropIfExists('preregistration_incoming_tmps');
     }
 };
