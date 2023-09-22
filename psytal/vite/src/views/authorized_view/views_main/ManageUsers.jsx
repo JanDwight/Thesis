@@ -8,7 +8,8 @@ import EmployeeList from '../views_components/EmployeeList.jsx';
 import StudentsFilter from '../views_components/studentsfilter.jsx';
 import EmployeesFilter from '../views_components/EmployeesFilter.jsx';
 import edit from "@assets/icons8createpost.png";
-import ReactModal from 'react-modal';
+
+
 
 {/*Tab Highlight */}
 const Tab = ({ label, isActive, onClick }) => {
@@ -32,12 +33,72 @@ const Tab = ({ label, isActive, onClick }) => {
 
 export default function ManageUsers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState('');
 
   
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
+
+  //for addusers modal
+  const [fullName, setFullName] = useState(''); // Required by AddUsers
+  const [showModal, setShowModal] = useState(false); // Required by AddUsers
+  const [password, setPassword] = useState(''); // Required by AddUsers
+  const [length] = useState(9); // Required by AddUsers
+  const [includeNumbers] = useState(true); // Required by AddUsers
+  const [includeSymbols] = useState(true); // Required by AddUsers
+  const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
+  const [parsedRole, setParsedRole] = useState(1); // Required by AddUsers
+  const [email, setEmail] = useState(null); // Required by AddUsers
   
-  
+  //add users onsubmit
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    setError({ __html: 'Error Detected' });
+
+    //password generator
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+{}[]~-';
+
+    let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (includeNumbers) characters += numbers;
+    if (includeSymbols) characters += symbols;
+
+    let newPassword = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      newPassword += characters.charAt(randomIndex);
+    }
+
+    setPassword(newPassword);
+    //---------------------------------------------------------------------------
+
+    //string "selectedRole" to int "parsedRole"
+    const parsedValue = parseInt(selectedRole, 10); // Base 10
+    setParsedRole(parsedValue);
+    //---------------------------------------------------------------------------
+
+    axiosClient
+      .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
+      .then(({ data }) => {
+        setCurrentUser(data.user);
+        setShowModal(false); // Close the popup after successful submission
+      })
+      .catch((error) => {
+        if (error.response) {
+          const finalErrors = Object.values(error.response.data.errors).reduce(
+            (accum, next) => [...accum, ...next],
+            []
+          );
+          setError({ __html: finalErrors.join('<br>') });
+        }
+        console.error(error);
+      });
+  };  
+
+  const handleAddUserClick = () => {
+    console.log('Add user button clicked!');
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -62,7 +123,7 @@ export default function ManageUsers() {
                 </div>
         <div>
           {/**Add Users */}
-          <button onClick={() => setIsModalOpen(true)}
+          <button onClick={handleAddUserClick}
                   className="bg-[#0FE810] rounded-2xl py-1 px-6 text-white font-size">
                     Add User
           </button>
@@ -123,18 +184,17 @@ export default function ManageUsers() {
           
         </div>
       </div>
-
-      <ReactModal
-      isOpen={isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
-      className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
-      >
-        <div>
-          <AddUsers closeModal={() => setIsModalOpen(false)}/>
-        </div>
-      </ReactModal>
+        <AddUsers
+          showModal={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          setFullName={setFullName}
+          onSubmit={onSubmit}
+          selectedAccountType={selectedRole}
+          setSelectedAccountType={setSelectedRole}
+          email={email}
+          setEmail={setEmail}
+        />
   </div>
-
     </>
   );
 }
