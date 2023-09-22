@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../axios';
+import "../../../../src/styles.css";
 
 export default function PreRegistration() {
   const handleChange = (event) => {
@@ -70,14 +71,14 @@ export default function PreRegistration() {
       home_address: homeAddress,
       address_while_studying: addressWhileStudyingAtBsu,
       contact_person_name: emergencyContactName,
-      contact_person_number: emergencyContactNumber, //theres an error here--doesnt accept multiple numbers
+      contact_person_number: parseInt(emergencyContactNumber, 10), //theres an error here--doesnt accept multiple numbers
       contact_person_address: emergencyContactAddress,
       contact_person_relationship: relationship,
       pre_reg_status: preRegStatus,
       type_of_student: typeOfStudent,
     })
     .then(({ data }) => {
-      setFamilyName(data.family_name)
+      //setFamilyName(data.family_name)
     })
     .catch(( error ) => {
       if (error.response) {
@@ -99,7 +100,7 @@ export default function PreRegistration() {
       <div className="w-full lg:w-8/12 px-4 container mx-auto">          
         <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
           <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div className="">
+            <div >
               <img src={schoolLogo}
                 className="object-cover btn- h-20 w-20 rounded-full bg-gray-300" alt="BSU Logo" />
             </div>
@@ -499,7 +500,8 @@ export default function PreRegistration() {
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                    id="grid-contactnum" 
-                   type="number" 
+                   type="number"
+                   onUpM
                    placeholder=""
                    value={emergencyContactNumber}
                    onChange={ev => setEmergencyContactNumber(ev.target.value)}
