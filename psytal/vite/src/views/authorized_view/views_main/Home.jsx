@@ -1,5 +1,5 @@
 import React from 'react'
-import AddPost from '../views_components/AddPost';
+import AddingPost from '../views_components/AddingPost';
 import PostArticles from '../views_components/Post_Components/PostArticles';
 import PostDescription from '../views_components/Post_Components/PostDescription';
 import SamplePost from '../views_components/Post_Components/SamplePost';
@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <div className="flex flex-col justify-center items-center ml-10">
           <div className="w-full">
-            <AddPost />
+            <AddingPost />
           </div>
 
           <div className='pt-10'>

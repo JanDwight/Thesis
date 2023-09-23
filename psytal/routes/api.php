@@ -22,9 +22,9 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/adduser', [AuthController::class, 'adduser']);
+    Route::post('/createposts', [PostController::class, 'createPost']);
 });
 
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
-Route::post('/createposts', [PostController::class, 'createPost']);
