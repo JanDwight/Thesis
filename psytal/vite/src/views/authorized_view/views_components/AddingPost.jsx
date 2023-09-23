@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosClient from '../../../axios';
 import image from "@assets/icons8image.png";
 
 export default function AddingPost({ showPosts, onClose }) {
-  // Initialize state variables
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const initialState = {
+    title: '',
+    description: '',
+    imagePreviews: [],
+    selectedImages: [],
+    loading: false,
+    error: '',
+  };
 
-  const handleImageChange = (event) => {
-    const files = event.target.files;
+  const [formData, setFormData] = useState(initialState);
+
+  const handleImageChange = (ev) => {
+    const files = ev.target.files;
     const previews = [];
     const selected = [];
 
@@ -23,8 +27,11 @@ export default function AddingPost({ showPosts, onClose }) {
         previews.push(e.target.result);
         selected.push(file);
         if (previews.length === files.length) {
-          setImagePreviews(previews);
-          setSelectedImages(selected);
+          setFormData({
+            ...formData,
+            imagePreviews: previews,
+            selectedImages: selected,
+          });
         }
       };
 
@@ -34,32 +41,25 @@ export default function AddingPost({ showPosts, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setFormData({ ...formData, loading: true, error: '' });
 
     try {
-      // Send the post data using axios (you need to implement this)
       const postData = {
-        title,
-        description,
-        images: selectedImages,
+        title: formData.title,
+        description: formData.description,
+        images: formData.selectedImages,
       };
 
-      // Example axios post request, replace with your actual API endpoint
-      await axios.post('/api/post', postData);
+      // Replace '/api/posts' with your actual backend API endpoint
+      await axiosClient.post('/api/posts', postData);
 
-      // Reset form fields and previews
-      setTitle('');
-      setDescription('');
-      setImagePreviews([]);
-      setSelectedImages([]);
-      setLoading(false);
+      setFormData(initialState); // Reset form fields and previews
     } catch (error) {
       console.error('Error creating post:', error);
-      setLoading(false);
+      setFormData({ ...formData, loading: false, error: 'An error occurred while submitting the form.' });
     }
   };
 
-  
   if (!showPosts) {
     return null;
   }
@@ -85,17 +85,17 @@ export default function AddingPost({ showPosts, onClose }) {
                   id="title"
                   name="title"
                   type="text"
-                  value={title}
-                  onChange={(ev) => setTitle(ev.target.value)}
+                  value={formData.title}
+                  onChange={(ev) => setFormData({ ...formData, title: ev.target.value })}
                   className="block w-1/2 rounded-xl border-1 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6"
                   placeholder="Title"
                 />
               </div>
 
               {/* Image Previews */}
-              {imagePreviews.length > 0 && (
+              {formData.images.length > 0 && (
                 <div className="mt-4 grid grid-cols-2 gap-2">
-                  {imagePreviews.map((preview, index) => (
+                  {formData.images.map((preview, index) => (
                     <div key={index} className="max-w-full">
                       <img src={preview} alt={`Preview ${index}`} className="max-w-full h-auto rounded-lg" />
                     </div>
@@ -108,8 +108,8 @@ export default function AddingPost({ showPosts, onClose }) {
                 <textarea
                   id="description"
                   name="description"
-                  value={description}
-                  onChange={(ev) => setDescription(ev.target.value)}
+                  value={formData.description}
+                  onChange={(ev) => setFormData({ ...formData, description: ev.target.value })}
                   className="block w-full rounded-xl border-1 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6"
                   rows="4"
                   placeholder="Write post ..."

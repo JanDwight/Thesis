@@ -4,63 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\post;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreatePostRequest; // Import the custom request
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(CreatePostRequest $request)
     {
-        //
-    }
+        $data = $request->validated();
+        // Handle image uploads if needed
+        $imagePaths = [];
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Customize the image upload logic based on your requirements
+                // For example, you can store images in a specific directory and save their paths in the database
+                $path = $image->store('public/images');
+                $imagePaths[] = $path;
+            }
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Create a new post
+        $post = posts::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'images' => $imagePaths, // Save image paths to the 'images' column
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(post $post)
-    {
-        //
-    }
+        // Save the post to the database
+        $post->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(post $post)
-    {
-        //
+        return response()->json(['message' => 'Post created successfully'], 201);
     }
 }
