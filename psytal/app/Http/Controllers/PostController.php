@@ -2,38 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
+use App\Models\posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest; // Import the custom request
 
 class PostController extends Controller
 {
-    public function create(CreatePostRequest $request)
+    public function createPost(CreatePostRequest $request)
     {
-        $data = $request->validated();
-        // Handle image uploads if needed
-        $imagePaths = [];
+       // Temporarily disable authentication for testing
+    //auth()->loginUsingId(1);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                // Customize the image upload logic based on your requirements
-                // For example, you can store images in a specific directory and save their paths in the database
-                $path = $image->store('public/images');
-                $imagePaths[] = $path;
-            }
-        }
+    $data = $request->validated();
 
-        // Create a new post
-        $post = posts::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'images' => $imagePaths, // Save image paths to the 'images' column
-        ]);
+     // Get the ID of the authenticated user
+     $user_id = auth()->id();
 
-        // Save the post to the database
-        $post->save();
+    // Create a new post
+    $post = posts::create([
+        'title' => $data['title'],
+        'description' => $data['description'],
+        'user_id' => $user_id, // Set the user ID to the authenticated user's ID
+    ]);
 
-        return response()->json(['message' => 'Post created successfully'], 201);
+    return response(['post' => $post]);
     }
 }

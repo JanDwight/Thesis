@@ -9,7 +9,7 @@ class CreatePostRequest extends FormRequest
     
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,6 @@ class CreatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ];
     }
 }
