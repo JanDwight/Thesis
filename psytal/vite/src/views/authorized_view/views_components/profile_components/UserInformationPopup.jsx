@@ -18,30 +18,28 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
   return (
     <div class="flex-col mx-2 mb-2"> 
         <div className='text-lg font-serif'>
-            <i>User Informatiom <strong>Admin</strong></i>
+            <i>User Informatiom -<strong> Admin</strong></i>
         </div> <hr class="mt-2" />
 
-        <div className='mt-5'>
-            <table>
+        
+            <table class="table-auto mt-5" style={{border:1}}>
                 <tr className='bg-gray-200 '>
-                    <th>Name</th>
+                    <th class='px-5'>Name</th>
                     <td>
-                        <input 
+                        <input class="bg-gray-200 "
                             type="text"
                             name="name"
                             value={userinformation.displayname}
                             onChange={handleUserInformationChange}
                             placeholder="Full name"
                             style={{
-                                border: 1,
-                                outline: "none",
                                 fontSize: 16,
                                 }}
                         />
                     </td>
                 </tr>
                 <tr>
-                    <th>Email</th>
+                    <th class='px-5'>Email</th>
                     <td>
                         <input 
                             type="email"
@@ -50,32 +48,28 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
                             onChange={handleUserInformationChange}
                             placeholder="Email"
                             style={{
-                                border: "none",
-                                outline: "none",
                                 fontSize: 16,
                                 }}
                         />
                     </td>
                 </tr>
                 <tr className='bg-gray-200 '>
-                    <th>Position</th>
+                    <th class='px-5'>Position</th>
                     <td>
-                        <input 
+                        <input class="bg-gray-200 "
                         type='text'
                         name="position"
                         value={userinformation.position}
                         onChange={handleUserInformationChange}
                         placeholder='Position'
                         style={{
-                            border: "none",
-                            outline: "none",
                             fontSize: 16,
                             }}
                         />
                     </td>
                 </tr>
             </table>
-        </div>
+        
 
         <div className='mt-5 flex felx-row-2 justify-center'>
             <button onClick={handleSubmit} 

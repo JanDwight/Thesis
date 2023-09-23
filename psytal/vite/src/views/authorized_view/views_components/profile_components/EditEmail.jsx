@@ -17,7 +17,7 @@ export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
     <div className="popup">
       <div className="popup-content">
                 <div class="flex flex-wrap flex-col mx-2 mb-2">
-                    <labe className=" text-lg font-serif font-semibold">Email:</labe>
+                    <labe className="text-lg font-franklin">Email:</labe>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="oldemail"
@@ -31,7 +31,7 @@ export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
                                 }}
                         ></input>
                         
-                    <label className="mt-3 text-lg font-serif font-semibold">New Email</label>
+                    <label className="mt-3 text-lg font-franklin">New Email</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="newemail"

@@ -24,7 +24,7 @@ export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChang
     <div className="popup">
       <div className="popup-content">
                 <div class="flex flex-wrap flex-col mx-2 mb-2">
-                    <labe className=" text-lg font-serif font-semibold">Password:</labe>
+                    <labe className="text-lg font-franklin">Password:</labe>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}
                             name="password"
@@ -38,7 +38,7 @@ export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChang
                                 }}
                         ></input>
                         
-                    <label className="mt-3 text-lg font-serif font-semibold">New Password</label>
+                    <label className="mt-3 text-lg font-franklin">New Password</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}
                             name="newpassword"
