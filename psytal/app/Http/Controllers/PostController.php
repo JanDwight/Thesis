@@ -21,7 +21,6 @@ class PostController extends Controller
     ]);
 
     return response(['post' => $post]);
-    // Flash a success message to the session
-    session()->flash('success', 'Post created successfully!');
+    
     }
 }

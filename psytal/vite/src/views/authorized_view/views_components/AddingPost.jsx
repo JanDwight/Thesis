@@ -8,6 +8,7 @@ export default function AddingPost() {
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -15,12 +16,14 @@ export default function AddingPost() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSuccessMessage(null);
   };
 
   const resetFormAndOpenModal = () => {
     setError({ __html: "" });
     setTitle('');
     setDescription('');
+    setSuccessMessage(null);
     openModal();
   };
 
@@ -37,9 +40,21 @@ export default function AddingPost() {
 
       console.log(response.data);
 
-      setIsModalOpen(false);
       setTitle('');
       setDescription('');
+      closeModal(); 
+     
+      setSuccessMessage({
+        message: 'Post was successful!',
+      });
+
+       // Automatically close the success message after 2 seconds
+       setTimeout(() => {
+        setSuccessMessage(null);
+        closeModal();
+      }, 2000);
+  
+
     } catch (error) {
       console.error(error.response.data);
       setError('An error occurred while posting.');
@@ -68,6 +83,7 @@ export default function AddingPost() {
          <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
            <div className="w-full px-4 mx-auto mt-6">
+            
            <form onSubmit={onSubmit} action="#" method="POST">
                {/* Attach Photo / File */}
                <div className="rounded-md bg-transparent p-3 w-30 h-30">
@@ -123,6 +139,17 @@ export default function AddingPost() {
           </div>
         </div>
       )}
+       {successMessage && ( // Display the success message if isPostSuccessful is true
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+       )}
     </>
   );
 }
