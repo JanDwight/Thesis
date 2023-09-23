@@ -3,7 +3,6 @@ import axiosClient from '../../../axios';
 import image from "@assets/icons8image.png";
 
 export default function AddingPost() {
-  const [showPosts, setShowPosts] = useState(false);
   const [error, setError] = useState({ __html: "" });
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -87,7 +86,7 @@ export default function AddingPost() {
                    type="text"
                    value={title}
                    onChange={(ev) => setTitle(ev.target.value )}
-                   className="block w-1/2 rounded-xl border-1 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6"
+                   className="block w-1/2 rounded-xl border-1 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-6"
                    placeholder="Title"
                  />
                </div>
