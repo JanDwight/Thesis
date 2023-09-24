@@ -3,6 +3,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditUsers from '../views_components/EditUsers.jsx';
 import ArchiveUsers from '../views_components/ArchiveUsers.jsx';
+import axiosClient from '../../../axios.js';
 
 class EmployeeList extends Component {
   constructor(props) {
@@ -16,16 +17,20 @@ class EmployeeList extends Component {
   }
 
   componentDidMount() {
-    // Fetch employee data from the database here
-    // sample data
-    const sampleData = [
-      { id: 1803580, name: 'John Doe', role: 'Admin' },
-      { id: 2159381, name: 'Sam Wilson', role: 'Instructor' },
-      { id: 9423492, name: 'John Smith', role: 'Staff' },
-      
-    ];
+    //<><><>
+    axiosClient.get('/users')
+      .then((response) => {
+        const data = response.data;
 
-    this.setState({ data: sampleData }); // Update the state with fetched data
+        // Filter the data to only include roles 1, 2, and 3 (admin, staff and instructor)
+        const filteredData = data.filter(user => [1, 2, 3].includes(user.role));
+
+        this.setState({ data: filteredData });
+
+      })
+      .catch((error) => {
+        console.error('Error fetching data from the database:', error);
+      });
   }
 
   //<><><> Open ArchiveUsers modal
@@ -71,11 +76,13 @@ class EmployeeList extends Component {
     this.handleCloseEditUsers();
   };
 
+  //filter using dropdown box
   render() {
     const { data, selectedEmployee } = this.state;
     const { filterText } = this.props; // Receive filterText from parent component
 
-    // Apply filtering
+    // Apply filtering for searchbar
+    // has error fix later
     const filteredData = data.filter(
       (employee) =>
         employee.id.toString().includes(filterText) || // Filter by ID

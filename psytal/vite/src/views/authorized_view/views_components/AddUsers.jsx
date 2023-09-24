@@ -65,8 +65,8 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
               onChange={handleAccountTypeChange}
             >
               <option value="1">Admin</option>
-              <option value="2">Instructor</option>
-              <option value="3">Staff</option>
+              <option value="2">Staff</option>
+              <option value="3">Instructor</option>
               <option value="4">Student</option>
             </select>
             <div className="grid grid-row-2 justify-center">

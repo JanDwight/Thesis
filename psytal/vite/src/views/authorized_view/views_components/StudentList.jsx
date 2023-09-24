@@ -3,6 +3,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditUsers from '../views_components/EditUsers.jsx'; //<-- Import EditUsers component
 import ArchiveUsers from '../views_components/ArchiveUsers.jsx';
+import axiosClient from '../../../axios.js';
 
 class StudentList extends Component {
   constructor(props) {
@@ -16,14 +17,23 @@ class StudentList extends Component {
   }
 
   componentDidMount() {
-    // Fetch student data from the database here
-    // sample data 
-    const sampleData = [
-      { id: 190132, name: 'Juan Garcia', yrsection: 'BsPsych 4A' },
-      { id: 200167, name: 'Jan Dwight', yrsection: 'BsPsych 3B' },
-    ];
+    //<><><>
+    axiosClient.get('/users')
+      .then((response) => {
+        const data = response.data;
 
-    this.setState({ data: sampleData }); // Update the state with fetched data
+        // Filter the data to only include role 4 (student)
+        const filteredData = data.filter(user => [4].includes(user.role));
+
+        this.setState({ data: filteredData });
+
+
+
+        //this.setState({ data });
+      })
+      .catch((error) => {
+        console.error('Error fetching data from the database:', error);
+      });
   }
 
   //<><><> Open ArchiveUsers modal
@@ -68,6 +78,7 @@ class StudentList extends Component {
     this.handleCloseEditUsers();
   };
 
+  //filter using dropdown box
   render() {
     const { data, selectedStudent } = this.state;
     const { filterText } = this.props;

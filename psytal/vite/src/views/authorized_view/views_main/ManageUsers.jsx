@@ -41,7 +41,6 @@ export default function ManageUsers() {
 
   //for addusers modal
   const [fullName, setFullName] = useState(''); // Required by AddUsers
-  const [showModal, setShowModal] = useState(false); // Required by AddUsers
   const [password, setPassword] = useState(''); // Required by AddUsers
   const [length] = useState(9); // Required by AddUsers
   const [includeNumbers] = useState(true); // Required by AddUsers
@@ -70,6 +69,7 @@ export default function ManageUsers() {
     }
 
     setPassword(newPassword);
+
     //---------------------------------------------------------------------------
 
     //string "selectedRole" to int "parsedRole"
@@ -79,9 +79,13 @@ export default function ManageUsers() {
 
     axiosClient
       .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
-      .then(({ data }) => {
-        setCurrentUser(data.user);
-        setShowModal(false); // Close the popup after successful submission
+      .then((response) => {
+        // Handle the success case here
+        // You can access the response data if needed
+        console.log('Success:', response.data);
+  
+        // Close the modal
+        setIsModalOpen(false);
       })
       .catch((error) => {
         if (error.response) {
@@ -96,7 +100,7 @@ export default function ManageUsers() {
   };  
 
   const handleAddUserClick = () => {
-    console.log('Add user button clicked!');
+    console.log('ModalShowing');
     setIsModalOpen(true);
   };
 
