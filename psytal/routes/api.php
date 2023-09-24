@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\TmpPreregistrationController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserIndexController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::post('/createposts', [PostController::class, 'createPost']);
+    Route::get('/users', [UserIndexController::class, 'index']); //<><><>
+    //update
+    //delete
 });
 
 
