@@ -27,9 +27,6 @@ class StudentList extends Component {
 
         this.setState({ data: filteredData });
 
-
-
-        //this.setState({ data });
       })
       .catch((error) => {
         console.error('Error fetching data from the database:', error);
@@ -87,8 +84,10 @@ class StudentList extends Component {
     const filteredData = data.filter(
       (student) =>
         student.id.toString().includes(filterText) || // Filter by ID
-        student.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        student.yrsection.toLowerCase().includes(filterText.toLowerCase())
+        student.name.toLowerCase().includes(filterText.toLowerCase()) 
+        //||
+        //student.yrsection.toLowerCase().includes(filterText.toLowerCase())
+        //filtering using roles is disabled because roles are int not string so they cannot be set to lowercase
     );
 
     return (
