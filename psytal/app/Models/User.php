@@ -22,7 +22,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'email',
         'archived', // Add the 'archived' field to the fillable array <><><>
     ];
 
