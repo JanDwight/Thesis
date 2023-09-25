@@ -6,6 +6,7 @@ use App\Http\Controllers\TmpPreregistrationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\ArchiveUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/createposts', [PostController::class, 'createPost']);
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update
-    //delete
+    Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive
+    //delete, next time na to
     
 });
 
