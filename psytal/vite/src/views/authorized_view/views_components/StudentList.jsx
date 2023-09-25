@@ -148,6 +148,7 @@ class StudentList extends Component {
           <ArchiveUsers
             showModal={this.state.isArchiveUsersOpen}
             onClose={this.handleCloseArchiveUsers}
+            user={selectedStudent} // Pass the selected student to EditUsers
             // Add other props/functions as needed for archiving
           />
         )}

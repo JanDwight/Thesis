@@ -148,6 +148,7 @@ class EmployeeList extends Component {
           <ArchiveUsers
             showModal={this.state.isArchiveUsersOpen}
             onClose={this.handleCloseArchiveUsers}
+            user={selectedEmployee} // Pass the selected employee to EditUsers
             // Add other props/functions as needed for archiving
           />
         )}
