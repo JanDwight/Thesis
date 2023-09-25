@@ -3,11 +3,20 @@ import axiosClient from '../../../axios.js';
 
 export default function ArchiveUsers({ showModal, onClose, user }) {
 
-  const [userName, setUsername] = useState(user.name);
-
   const handleSave = async() => {
 
-    console.log('Archiving ', userName);
+    try {
+      // send selected user to archive controller
+      const response = await axiosClient.put(`/archiveuser/${user.id}`);
+
+      console.log('User archived successfully.');
+
+      // Close the modal
+      onClose();
+    } catch (error) {
+      // Handle errors here, e.g., display an error message
+      console.error('Error archiving user:', error);
+    }
   }
 
   if (!showModal) {
@@ -27,9 +36,9 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
                 id="user"
                 type="text"
                 name="user"
-                value={userName}
+                value={user.name}
                 disabled // makes field uneditable
-                onChange={(e) => setUsername(e.target.value)}
+                //onChange={(e) => setUsername(e.target.value)}
                 className="block w-1/3 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />
             </div>
