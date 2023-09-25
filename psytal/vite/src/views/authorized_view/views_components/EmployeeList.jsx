@@ -109,7 +109,7 @@ class EmployeeList extends Component {
         <table className="table w-full table-striped text-gray-700">
           <thead>
             <tr>
-              <th className="text-left bg-gray-200 p-2">School ID</th>
+              <th className="text-left bg-gray-200 p-2">Employee ID</th>
               <th className="bg-gray-200 text-left p-2">Name</th>
               <th className="bg-gray-200 text-left p-2">Role</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
