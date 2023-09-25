@@ -271,7 +271,7 @@ export default function AdminLayout() {
                 </svg>
               </a>
               {/**Twitter */}
-              <a href="#!" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://twitter.com/BenguetStateU" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
                     fill="currentColor"
@@ -336,7 +336,7 @@ export default function AdminLayout() {
                 </a>
               </h6>
               <p>
-                <a href="http://www.bsu.edu.ph/" target="_blank" class=" text-black-200">Benguet state university website</a>
+                <a href="http://www.bsu.edu.ph/" target="_blank" class=" text-black-200">BSU website</a>
               </p>
             </div>
 
