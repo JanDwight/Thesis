@@ -25,7 +25,23 @@ class StudentList extends Component {
         // Filter the data to only include role 4 (student)
         const filteredData = data.filter(user => [4].includes(user.role));
 
-        this.setState({ data: filteredData });
+        // Define a mapping object to map numeric roles to strings
+        const roleMapping = {
+          1: 'Admin',
+          2: 'Staff',
+          3: 'Instructor',
+          4: 'Student',
+        };
+
+        // Map the roles to strings
+        const mappedData = filteredData.map(user => ({
+          ...user,
+          role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
+        }));
+
+        this.setState({ data: mappedData });
+
+        //this.setState({ data: filteredData });
 
       })
       .catch((error) => {

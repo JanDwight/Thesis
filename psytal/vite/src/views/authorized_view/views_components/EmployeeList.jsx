@@ -13,6 +13,7 @@ class EmployeeList extends Component {
       isArchiveUsersOpen: false, // the custom modal for archiving users is closed
       isEditUsersOpen: false, // the custom modal for editing users is closed
       selectedEmployee: null, // store the selected employee for the modals
+      selectedEmployeeRole: null, // store selected employee's role for modals
     };
   }
 

@@ -68,6 +68,7 @@ export default function ManageUsers() {
       newPassword += characters.charAt(randomIndex);
     }
 
+    //const newPassword = 'P@55word'; //just for preventing errors
     setPassword(newPassword);
 
     //---------------------------------------------------------------------------
@@ -80,10 +81,7 @@ export default function ManageUsers() {
     axiosClient
       .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
       .then((response) => {
-        // Handle the success case here
-        // You can access the response data if needed
         console.log('Success:', response.data);
-  
         // Close the modal
         setIsModalOpen(false);
       })
