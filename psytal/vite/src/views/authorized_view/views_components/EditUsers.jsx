@@ -30,7 +30,6 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
     };
 
     try {
-      // Send a PUT request to update the user data
       const response = await axiosClient.put(`/updateuser/${user.id}`, updatedUser);
   
       if (response.status === 200) {
