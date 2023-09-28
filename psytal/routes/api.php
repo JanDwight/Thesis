@@ -25,8 +25,8 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/adduser', [AuthController::class, 'adduser']);
-    Route::post('/createposts', [PostController::class, 'createPost']);
-    //manage users tab
+    Route::post('/createposts', [PostController::class, 'createPosts']);
+    Route::get('/posts', [PostController::class, 'getPosts']); 
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive
