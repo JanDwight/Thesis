@@ -7,6 +7,7 @@ import users from "@assets/icons8adduser.png";
 import avatar from "@assets/icons8avatar.png";
 import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
+import archive from "@assets/icons8archive60.png"
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
@@ -23,7 +24,9 @@ const navigation = [
   { img: classicon, name: 'Classes', to: 'classes'},
   { img: file, name: 'Pre-registration', to: 'preregistration'},
   { img: link, name: 'Links', to: 'links'},
-  { img: curriculum, name: 'Curriculum', to: 'curriculum'}
+  { img: curriculum, name: 'Curriculum', to: 'curriculum'},
+  //{ img: archive, name: 'Archives', to: 'links'}
+  //add view archives
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
