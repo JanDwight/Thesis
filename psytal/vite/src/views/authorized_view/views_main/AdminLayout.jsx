@@ -40,7 +40,7 @@ export default function AdminLayout() {
   const [isSearchToggled, setIsSearchToggled] = useState(false);
 
   if (!userToken) {
-    return <Navigate to='/landingpage' />
+    return <Navigate to='/guest/landingpage' />
   }
 
   const logout = (ev) => {
@@ -49,7 +49,7 @@ export default function AdminLayout() {
       .then(res => {
         setCurrentUser({});
         setUserToken(null);
-        setUserRole(null)
+        setUserRole(null);
       })
   }
 

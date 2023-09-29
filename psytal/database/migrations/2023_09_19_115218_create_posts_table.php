@@ -22,7 +22,7 @@ return new class extends Migration
         // Create a new table for storing post images
         Schema::create('post_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained('posts');
+            $table->foreignId('post_id')->constrained();
             $table->string('image_path');
             $table->timestamps();
         });
