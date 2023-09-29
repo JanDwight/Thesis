@@ -15,7 +15,6 @@ class classes extends Model
 
     // Define the fillable fields that can be mass-assigned
     protected $fillable = [
-        'App\Models\curriculum', //for debugging only remove after curriculum is done
         'class_year',
         'semester',
         'course_code',
