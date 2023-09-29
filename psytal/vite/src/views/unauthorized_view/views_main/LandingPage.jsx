@@ -6,12 +6,13 @@ import "slick-carousel/slick/slick-theme.css";
 import Carousel from '../../unauthorized_view/views_main/Carousel';
 import Carousel2 from '../../unauthorized_view/views_main/Carousel2';
 import temp1 from "@assets/TemplateWBG.png";
-
+import temp2 from "@assets/Template3.png";
+import bgbuilding from "@assets/bgbuilding.jpg";
 
 export default function LandingPage() {
 
                 const items = [
-                  <div >
+                  <div>
                     <div className='absolute text-white text-3xl px-[2%] py-[0%]'>
                     <div >
                               {/* Admission Requirements */}
@@ -37,12 +38,12 @@ export default function LandingPage() {
                               </div>
                     </div>
                     <div >
-                      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="Image 1" />
+                      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000"alt="Image 1" />
                     </div>
                   </div>,
 
                   <div className="relative">
-                  <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="Your Image" className="w-full" />
+                  <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="carousel" className="absolute h-50 w-300 object-cover" />
                   <div className="absolute top-0 left-0 md:p-6 text-white text-3xl max-w-full">
                     {/* Your content */}
                     <div>
@@ -171,8 +172,8 @@ export default function LandingPage() {
 
      {/* Carousel Slide cards */}
         <>
-            <div className=' h-1/3 relative' id='about'>
-              <div  className='bg-slate-200 flex items-center justify-center h-full' >
+            <div  className=' h-1/3 relative' >
+              <div  className='bg-slate-300 flex items-center justify-center h-full' >
                 <div className="container w-25 py-10  ">
                   <Carousel items={items} />
                 </div>

@@ -19,17 +19,17 @@ class LinksController extends Controller
             'class_code' => 'required|string',
             'class_description' => 'required|max:255',
             'instructor_name' => 'required|string',
-            'url'=>'required|url'
+            'url' => 'required|url',
         ]);
 
-        // Create a new link using the Link model
-        $link = new links();
-        $link->url = $validatedData['url'];
-        $link->description = $validatedData['class_description'];
-        $link->name = $validatedData['instructor_name'];
-        $link->save();
+         // Create a new link using the Link model
+         $link = new Links();
+         $link->url = $validatedData['url'];
+         $link->class_description = $validatedData['class_description'];
+         $link->instructor_name = $validatedData['instructor_name'];
+         $link->save();
 
-        return redirect()->route('links.addlink')->with('success', 'Link added successfully');
+        return response()->json(['message' => 'Link added successfully'], 200);
     }
 
     public function getLinks()
@@ -41,23 +41,22 @@ class LinksController extends Controller
             return response()->json(['error' => 'Unable to retrieve links'], 500);
         }
     }
-    public function archiveLink(Request $request)
+        public function archiveLink(Request $request)
     {
-        try {
-            $linkId = $request->input('link_id'); //change this
-            $link = Links::find($linkId);
-
-            if (!$link) {
-                return response()->json(['error' => 'Link not found'], 404);
-            }
-
-            // Implement your logic to archive the link here (e.g., update its status) //to be updated
+        // Your archiving logic goes here
+        // You can access data from the request using $request->input('key')
+        // For example, if you want to archive a link by its ID
+        $linkId = $request->input('linkId');
+        $link = Links::find($linkId);
+        if ($link) {
+            // Archive the link (you need to define an 'archived' column in your database)
+            $link->archived = true;
+            $link->save();
 
             return response()->json(['message' => 'Link archived successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Unable to archive link'], 500);
+        } else {
+            return response()->json(['error' => 'Link not found'], 404);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-    
     }
-    
 }

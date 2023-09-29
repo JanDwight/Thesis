@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('links', function (Blueprint $table) {
-            $table->string('class_code');
+            $table->id();
+            $table->string('class_code')->index(); 
             $table->string('class_description');
             $table->string('instructor_name')->nullable();
             $table->string('url');
             $table->timestamps();
+            $table->softDeletes(); // Add soft deletes
         });
     }
 

@@ -7,29 +7,32 @@ import arhive from "@assets/delete.png"
 import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 
 
+
 export default function Links() {
   //Calling the Archivelinks
   const [showArchivelink, setShowArchivelink]= useState(false);
   const [errors, setErrors] = useState({ __html: '' });
-  const onSubmitarchivelink = async (ev) => {
-    ev.preventDefault();
-    setError({ __html: '' });
-
-    try {
-    const response = await axiosClient.post('/archivelink', { });
-    fetchLinks();
-    setShowLinks(false);
+ 
+    const addLink = async (linkData) => {
+      try {
+        const response = await axios.post('/addlink', linkData);
+        // Handle the response (e.g., show success message)
+      } catch (error) {
+        // Handle errors (e.g., display validation errors)
+        console.error(error);
+      }
+    };
+    const onSubmitarchivelink = async (linkId) => {
+      try {
+        const response = await axiosClient.post('/archivelink', { linkId });
+        fetchLinks();
+        setShowLinks(false);
     } catch (error) {
-    if (error.response) {
-        const finalErrors = Object.values(error.response.data.errors).reduce(
-        (accum, next) => [...accum, ...next],
-        []
-        );
-        setError({ __html: finalErrors.join('<br>') });
-    }
-    console.error(error);
+        // Handle errors
+        console.error(error);
     }
 };
+    
 
   // Calling the Addlink
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,9 +55,9 @@ export default function Links() {
 
   // Sample data 
   const sampleLinks = [
-    { id: 1, code: 'C580', description: 'Psych1', instructor: 'John Doe' },
-    { id: 2, code: 'A381', description: 'Psych2', instructor: 'Sam Wilson' },
-    { id: 3, code: 'B492', description: 'Psych3', instructor: 'John Smith' },
+    { id: 1, class_code: 'C580', class_description: 'Psych1', instructor_name: 'John Doe' },
+    { id: 2, class_code: 'A381', class_description: 'Psych2', instructor_name: 'Sam Wilson' },
+    { id: 3, class_code: 'B492', class_description: 'Psych3', instructor_name: 'John Smith' },
    
   ];
 
@@ -71,7 +74,7 @@ export default function Links() {
           </button>
         </div>
       </div>
-
+    
 
       <div className="mx-7 flex flex-col-4 mt-3 justify-between">
         <div className='text-lg font-serif'>Title</div>
@@ -82,31 +85,37 @@ export default function Links() {
 
       <div className="mt-2">
         <>
-        {links.length > 0
-                ? links.map((link) => (
-                    <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-                      <div className="text-left">{link.code}</div>
-                      <div className="text-left hidden md:hidden lg:contents">{link.description}</div>
-                      <div className="text-left">{link.instructor}</div>
-                      <div>
-                        <button >
-                          <img src={arhive} alt='archive' class='h-7 w-7 '/>
-                        </button>
-                      </div>
-                    </a>
-                  ))
-                : sampleLinks.map((link) => ( //Delete after connecting to database
-                    <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-                      <div className="text-left">{link.code}</div>
-                      <div className="text-left hidden md:hidden lg:contents">{link.description}</div>
-                      <div className="text-left">{link.instructor}</div>
-                      <div>
-                        <button onClick={() => setShowArchivelink(true)}  >
-                          <img src={arhive} alt='archive' class='h-7 w-7 '/>
-                        </button> 
-                      </div>
-                    </a>
-                  ))}
+            {links.length > 0
+      ? links.map((link) => (
+        <form>
+          <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl" onSubmit={handleSubmit}>
+            <div className="text-left">{link.class_code}</div>
+            <div className="text-left hidden md:hidden lg:contents">{link.class_description}</div>
+            <div className="text-left">{link.instructor_name}</div>
+          
+            <div>
+              <button onClick={() => onSubmitarchivelink(link.id)}>
+                <img src={arhive} alt='archive' className='h-7 w-7' />
+              </button>
+            </div>
+          </a>
+          </form>
+          
+        ))
+      : sampleLinks.map((link) => (
+          
+          <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
+            <div className="text-left">{link.class_code}</div>
+            <div className="text-left hidden md:hidden lg:contents">{link.class_description}</div>
+            <div className="text-left">{link.instructor_name}</div>
+            <div>
+              <button onClick={() => setShowArchivelink(true)}>
+                <img src={arhive} alt='archive' className='h-7 w-7' />
+              </button>
+            </div>
+          </a>
+          
+        ))}
         </>
 
       </div>

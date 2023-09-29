@@ -5,6 +5,7 @@ use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\TmpPreregistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/adduser', [AuthController::class, 'adduser']);
 });
 
+Route::post('/addlink', [LinksController::class, 'store']);
+Route::get('/getlinks', [LinksController::class, 'getLinks']);
+Route::post('/archivelink', [LinksController::class, 'archiveLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
