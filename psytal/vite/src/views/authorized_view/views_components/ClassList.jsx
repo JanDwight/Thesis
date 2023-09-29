@@ -17,15 +17,22 @@ class ClassList extends Component {
   }
 
   componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = () =>{
+
     // Fetch data from the Laravel API endpoint
     axiosClient.get('/classes') // Replace with your actual API endpoint
         .then((response) => {
           // Set the retrieved data in the component state
           this.setState({ data: response.data });
+          //this.fetchData(); this line will update the page real-time but will start in infinite loop of fetch
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         }); // Empty dependency array to fetch data only once on component mount
+
   }
 
   //<><><> Open ArchiveClasses modal
@@ -39,21 +46,20 @@ class ClassList extends Component {
 
    //<><><> Close ArchiveClasses modal
    handleCloseArchiveClasses = () => {
-    console.log('Archive Cancel Pressed');
     this.setState({
       isArchiveClassesOpen: false,
     });
   };
 
-//<><><> Open EditClasses modal
-handleEditClassesClick = (subject) => {
-  console.log('Edit Window Open', subject);
-  this.setState({
-    selectedClass: subject,
-    isEditClassesOpen: true,
-    
-  });
-};
+  //<><><> Open EditClasses modal
+  handleEditClassesClick = (subject) => {
+    console.log('Edit Window Open', subject);
+    this.setState({
+      selectedClass: subject,
+      isEditClassesOpen: true,
+      
+    });
+  };
 
 //<><><> Close EditClasse modal
 handleCloseEditClasses = () => {
