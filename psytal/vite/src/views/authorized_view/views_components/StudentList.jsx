@@ -17,36 +17,39 @@ class StudentList extends Component {
   }
 
   componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = () =>{
     //<><><> try function componentDidMount the use useEffect for axios
     axiosClient.get('/users')
-      .then((response) => {
-        const data = response.data;
+    .then((response) => {
+      const data = response.data;
 
-        // Filter the data to only include role 4 (student)
-        const filteredData = data.filter(user => [4].includes(user.role));
+      // Filter the data to only include role 4 (student)
+      const filteredData = data.filter(user => [4].includes(user.role));
 
-        // Define a mapping object to map numeric roles to strings
-        const roleMapping = {
-          1: 'Admin',
-          2: 'Staff',
-          3: 'Instructor',
-          4: 'Student',
-        };
+      // Define a mapping object to map numeric roles to strings
+      const roleMapping = {
+        1: 'Admin',
+        2: 'Staff',
+        3: 'Instructor',
+        4: 'Student',
+      };
 
-        // Map the roles to strings
-        const mappedData = filteredData.map(user => ({
-          ...user,
-          role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
-        }));
+      // Map the roles to strings
+      const mappedData = filteredData.map(user => ({
+        ...user,
+        role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
+      }));
 
-        this.setState({ data: mappedData });
+      this.setState({ data: mappedData });
+      //this.fetchData();
 
-        //this.setState({ data: filteredData });
-
-      })
-      .catch((error) => {
-        console.error('Error fetching data from the database:', error);
-      });
+    })
+    .catch((error) => {
+      console.error('Error fetching data from the database:', error);
+    });
   }
 
   //<><><> Open ArchiveUsers modal
