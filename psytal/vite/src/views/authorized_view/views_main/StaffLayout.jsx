@@ -127,7 +127,7 @@ export default function StaffLayout() {
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Staff</p>
           </div>
 
           <div class="flex flex-col justify-between mt-2">

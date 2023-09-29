@@ -3,6 +3,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditUsers from '../views_components/EditUsers.jsx'; //<-- Import EditUsers component
 import ArchiveUsers from '../views_components/ArchiveUsers.jsx';
+import axiosClient from '../../../axios.js';
 
 class StudentList extends Component {
   constructor(props) {
@@ -16,14 +17,39 @@ class StudentList extends Component {
   }
 
   componentDidMount() {
-    // Fetch student data from the database here
-    // sample data 
-    const sampleData = [
-      { id: 190132, name: 'Juan Garcia', yrsection: 'BsPsych 4A' },
-      { id: 200167, name: 'Jan Dwight', yrsection: 'BsPsych 3B' },
-    ];
+    this.fetchData()
+  }
 
-    this.setState({ data: sampleData }); // Update the state with fetched data
+  fetchData = () =>{
+    //<><><> try function componentDidMount the use useEffect for axios
+    axiosClient.get('/users')
+    .then((response) => {
+      const data = response.data;
+
+      // Filter the data to only include role 4 (student)
+      const filteredData = data.filter(user => [4].includes(user.role));
+
+      // Define a mapping object to map numeric roles to strings
+      const roleMapping = {
+        1: 'Admin',
+        2: 'Staff',
+        3: 'Instructor',
+        4: 'Student',
+      };
+
+      // Map the roles to strings
+      const mappedData = filteredData.map(user => ({
+        ...user,
+        role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
+      }));
+
+      this.setState({ data: mappedData });
+      //this.fetchData();
+
+    })
+    .catch((error) => {
+      console.error('Error fetching data from the database:', error);
+    });
   }
 
   //<><><> Open ArchiveUsers modal
@@ -46,7 +72,7 @@ class StudentList extends Component {
 
   //<><><> Close ArchiveUsers modal
   handleCloseArchiveUsers = () => {
-    console.log('Archive Cancel Pressed');
+    console.log('Archive User Closed');
     this.setState({
       isArchiveUsersOpen: false,
     });
@@ -54,7 +80,7 @@ class StudentList extends Component {
 
   //<><><> Close EditUsers modal
   handleCloseEditUsers = () => {
-    console.log('Edit Cancel Pressed');
+    console.log('Edit User Closed');
     this.setState({
       isEditUsersOpen: false,
     });
@@ -64,20 +90,18 @@ class StudentList extends Component {
   handleSaveUserChanges = (updatedUser) => {
     // saving
     console.log('User Changes Saved:', updatedUser);
-    //
-    this.handleCloseEditUsers();
   };
 
   render() {
     const { data, selectedStudent } = this.state;
     const { filterText } = this.props;
 
-    // Apply filtering 
+    // Apply filtering for search bar
     const filteredData = data.filter(
       (student) =>
         student.id.toString().includes(filterText) || // Filter by ID
-        student.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        student.yrsection.toLowerCase().includes(filterText.toLowerCase())
+        student.name.toLowerCase().includes(filterText.toLowerCase()) 
+        //filtering using roles is disabled because roles are int not string so they cannot be set to lowercase
     );
 
     return (
@@ -122,6 +146,7 @@ class StudentList extends Component {
           <ArchiveUsers
             showModal={this.state.isArchiveUsersOpen}
             onClose={this.handleCloseArchiveUsers}
+            user={selectedStudent} // Pass the selected student to EditUsers
             // Add other props/functions as needed for archiving
           />
         )}

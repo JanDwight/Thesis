@@ -1,10 +1,12 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import ReactModal from 'react-modal';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
 import axiosClient from '../../../axios'
 import PsychLogo from '../../../assets/PsychCircle.png'
+import StudentProfile from '../views_components/profile_components/StudentProfile'
 
 // const user = {
 //   name: 'Tom Cook',
@@ -15,8 +17,8 @@ import PsychLogo from '../../../assets/PsychCircle.png'
 
 const navigation = [
   { name: 'Home', to: '/'},
-  { name: 'Accounts', to: '/accounts'},
-  { name: 'PreRegistration', to: '/preregistration'}  
+  { name: 'Pre-Registration', to: '/preregistrationforcontinuing'},  
+  { name: 'Links', to: '/linksforstudent'}  
 ]
 
 const userNavigation = [
@@ -30,6 +32,9 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
+  // Calling the ProfilePopupSample
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  
   const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
 
   if (!userToken) {
@@ -102,6 +107,14 @@ export default function DefaultLayout() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Item>
+                              <button onClick={() => setIsProfileOpen(true)}
+                                className={'block px-4 py-2 text-sm text-gray-700'}
+                              >
+                                Profile
+                              </button>
+                             
+                            </Menu.Item>
                               <Menu.Item>
                                   <button
                                     onClick={(ev) => logout(ev)}
@@ -219,6 +232,14 @@ export default function DefaultLayout() {
           </div>
         </main>
       </div>
+     {/**Setting the Profile Popup */}
+     <ReactModal 
+                                isOpen={isProfileOpen}
+                                onRequestClose={() => setIsProfileOpen(false)}
+                                className="w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+                                >
+                                  <div><StudentProfile closeModal={() => setIsProfileOpen(false)}/></div>
+                                </ReactModal>
     </>
   )
 }

@@ -41,6 +41,15 @@ class preregistration_incoming_tmp extends Model
             'contact_person_number',
             'contact_person_address',
             'contact_person_relationship',
+            'pre_reg_status',
+            
             
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 }
