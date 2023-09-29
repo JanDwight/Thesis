@@ -3,25 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\classes;
+use App\Http\Requests\AddClassRequest;
 
 class AddClassController extends Controller
 {
-    public function adduser(AddUserRequest $request)
+    public function addClass(AddClassRequest $request)
     {
         $data = $request->validated();
 
-        /** @var \App\Models\User $user */
+        /** @var \App\Models\classes $class */
 
-        $user = User::create([
-            'name' => $data['name'],
-            'password' => bcrypt($data['password']),
-            'role' => $data['role'],
-            'email' => $data['email']
+        $class = classes::create([
+             //variable from data = > database
+             'course_title' => $data['course_title'],
+             'year' => $data['year'],
+             'semester' => $data['semester'],
+             'courseCode' => $data['courseCode'],
+             'units' => $data['units'],
+             'type' => $data['coursetype'],
+             'section' => $data['section']
         ]);
-        $token = $user->createToken('main')->plainTextToken;
+        $token = $class->createToken('main')->plainTextToken;
 
         return response([
-            'user' => $user,
+            'class' => $class,
             'token' => $token,
         ]);
     }
