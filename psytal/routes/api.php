@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ArchiveUserController;
+use App\Http\Controllers\ClassIndexController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive
     //classes tab
-    Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index users
+    Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
     
 });
 

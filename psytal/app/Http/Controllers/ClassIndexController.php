@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\classes;
 use Illuminate\Http\Request;
+use App\Models\classes;
 
 class ClassIndexController extends Controller
 {
