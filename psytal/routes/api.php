@@ -11,6 +11,7 @@ use App\Http\Controllers\ArchiveUserController;
 use App\Http\Controllers\ClassIndexController;
 use App\Http\Controllers\UpdateClassesController;
 use App\Http\Controllers\ArchiveClassesController;
+use App\Http\Controllers\AddClassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinksController;
@@ -29,15 +30,16 @@ use App\Http\Controllers\LinksController;
 Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
 
     //manage users tab
+    Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
     //classes tab
+    Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
     //Route::put('/updateclasses/{classId}', [UpdateClassesController::class],'updateclasses'); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
