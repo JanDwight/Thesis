@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('sex_at_birth');
             $table->string('ethnicity');
             $table->string('special_needs')->nullable();
-            $table->string('contact_number');
+            $table->bigInteger('contact_number');
             $table->string('email_address');
             $table->string('home_address');
             $table->string('address_while_studying');

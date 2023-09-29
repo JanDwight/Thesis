@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/adduser', [AuthController::class, 'adduser']);
+    Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
+    Route::get('/preregincommingtmpviewonly', [PreregistrationIncomingTmpController::class, 'show']);
 });
 
 

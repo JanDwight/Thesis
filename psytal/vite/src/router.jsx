@@ -18,6 +18,7 @@ import Classes from "./views/authorized_view/views_main/Classes"
 import Curriculum from "./views/authorized_view/views_main/Curriculum"
 import StaffLayout from "./views/authorized_view/views_main/StaffLayout";
 import InstructorLayout from "./views/authorized_view/views_main/InstructorLayout";
+import PreRegistrationForm from "./views/authorized_view/views_components/PreRegistrationForm";
 
 const router = createBrowserRouter([
     {
@@ -161,28 +162,28 @@ const router = createBrowserRouter([
     },
     
     {
-        path: '/',
+        path: '/guest',
         element: <GuestLayout />,
         children: [
             {
-                path: '/aboutus',
+                path: 'aboutus',
                 element: <AboutUs />
             },
 
             {
         
                 path: 'preregistration',
-                element: <PreRegistration />
+                element: <PreRegistrationForm />
                 
             },
             
             {
-                path: '/landingpage',
+                path: 'landingpage',
                 element: <LandingPage />
             },
 
             {
-                path: '/login',
+                path: 'login',
                 element: <Login />
             }
         ]
