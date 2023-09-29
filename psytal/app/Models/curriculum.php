@@ -17,6 +17,5 @@ class curriculum extends Model
         'hoursperWeek',
         'course_type',
         'preReq',
-        'grade',
     ];
 }
