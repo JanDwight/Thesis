@@ -17,7 +17,7 @@ class StudentList extends Component {
   }
 
   componentDidMount() {
-    //<><><>
+    //<><><> try function componentDidMount the use useEffect for axios
     axiosClient.get('/users')
       .then((response) => {
         const data = response.data;
@@ -69,7 +69,7 @@ class StudentList extends Component {
 
   //<><><> Close ArchiveUsers modal
   handleCloseArchiveUsers = () => {
-    console.log('Archive Cancel Pressed');
+    console.log('Archive User Closed');
     this.setState({
       isArchiveUsersOpen: false,
     });
@@ -77,7 +77,7 @@ class StudentList extends Component {
 
   //<><><> Close EditUsers modal
   handleCloseEditUsers = () => {
-    console.log('Edit Cancel Pressed');
+    console.log('Edit User Closed');
     this.setState({
       isEditUsersOpen: false,
     });
@@ -87,22 +87,17 @@ class StudentList extends Component {
   handleSaveUserChanges = (updatedUser) => {
     // saving
     console.log('User Changes Saved:', updatedUser);
-    //
-    this.handleCloseEditUsers();
   };
 
-  //filter using dropdown box
   render() {
     const { data, selectedStudent } = this.state;
     const { filterText } = this.props;
 
-    // Apply filtering 
+    // Apply filtering for search bar
     const filteredData = data.filter(
       (student) =>
         student.id.toString().includes(filterText) || // Filter by ID
         student.name.toLowerCase().includes(filterText.toLowerCase()) 
-        //||
-        //student.yrsection.toLowerCase().includes(filterText.toLowerCase())
         //filtering using roles is disabled because roles are int not string so they cannot be set to lowercase
     );
 

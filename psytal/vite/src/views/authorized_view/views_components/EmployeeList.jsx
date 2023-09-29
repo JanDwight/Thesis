@@ -87,8 +87,6 @@ class EmployeeList extends Component {
     // Handle saving the changes to the user data
     console.log('User Changes Saved:', updatedUser);
     // You can update your data or perform other actions here
-    // Close the EditUsers modal
-    this.handleCloseEditUsers();
   };
 
   render() {

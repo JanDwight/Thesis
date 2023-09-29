@@ -7,6 +7,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ArchiveUserController;
+use App\Http\Controllers\ClassIndexController;
+use App\Http\Controllers\UpdateClassesController;
+use App\Http\Controllers\ArchiveClassesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,11 +30,18 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
+
+    //manage users tab
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
-    Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update
-    Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive
-    //delete, next time na to
+    Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
+    Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
+    //classes tab
+    Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
+    //Route::put('/updateclasses/{classId}', [UpdateClassesController::class],'updateclasses'); //<><><> update user
+    Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     
+    Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
+    Route::get('/preregincommingtmpviewonly', [PreregistrationIncomingTmpController::class, 'show']);
 });
 
 

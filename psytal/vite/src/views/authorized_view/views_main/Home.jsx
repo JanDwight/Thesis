@@ -1,6 +1,9 @@
 import React from 'react'
 import AddingPost from '../views_components/AddingPost';
 import PostArticles from '../views_components/Post_Components/PostArticles';
+import PostDescription from '../views_components/Post_Components/PostDescription';
+import SamplePost from '../views_components/Post_Components/SamplePost';
+
 
 export default function Home() {
   return (
@@ -12,7 +15,7 @@ export default function Home() {
 
           <div className='pt-10'>
             <PostArticles />  
-                
+            <SamplePost />       
           </div>
         </div>
     </div>
