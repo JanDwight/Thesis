@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CurriculumController extends Controller
 {
-    public function addCurriculum(AddCurriculumRequest $request)
+    public function addCurriculum(LinksRequest $request)
     {
         $data = $request->validated();
 

@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurriculumController;
+use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\TmpPreregistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LinksController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function() {
     
 });
 
-Route::post('/addlink', [LinksController::class, 'store']);
+Route::post('/addlink', [LinksController::class, 'addLink']);
 Route::get('/getlinks', [LinksController::class, 'getLinks']);
 Route::post('/archivelink', [LinksController::class, 'archiveLink']);
 

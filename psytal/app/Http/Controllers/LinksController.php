@@ -3,33 +3,30 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Links; // Import the Link model
+use App\Http\Requests\addLinkRequest;
 
 
 class LinksController extends Controller
 {
-     public function addlink()
+     public function addLink(addLinkRequest $request)
     {
-        return view('links.addlink'); // Display the form to add links
-    }
-    public function store(Request $request)
-    {
-        // Validate the form input (e.g., URL and description)
-        $validatedData = $request->validate([
-            'class_code' => 'required|string',
-            'class_description' => 'required|max:255',
-            'instructor_name' => 'required|string',
-            'url' => 'required|url',
+        $data = $request->validated();
+
+         /** @var \App\Models\curriculum $curriculum */
+
+         $links = links::create([
+            'class_year' => $data['class_year'],
+            'semester' => $data['semester'],
+            'course_code' => $data['course_code'],
+            'units' => $data['units'],
+            'course_title' => $data['course_title'],
+            'hoursperWeek' => $data['hoursperWeek'],
+            'course_type' => $data['course_type'],
+            'preReq' => $data['preReq']
         ]);
-
-         // Create a new link using the Link model
-         $link = new Links();
-         $link->url = $validatedData['url'];
-         $link->class_description = $validatedData['class_description'];
-         $link->instructor_name = $validatedData['instructor_name'];
-         $link->save();
-
-        return response()->json(['message' => 'Link added successfully'], 200);
+        return response([
+            'links' => $links,
+        ]);
     }
 
     public function getLinks()
@@ -41,6 +38,8 @@ class LinksController extends Controller
             return response()->json(['error' => 'Unable to retrieve links'], 500);
         }
     }
+
+
         public function archiveLink(Request $request)
     {
         // Your archiving logic goes here

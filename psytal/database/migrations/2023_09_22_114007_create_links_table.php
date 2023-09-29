@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('instructor_name')->nullable();
             $table->string('url');
             $table->timestamps();
-            $table->softDeletes(); // Add soft deletes
         });
     }
 
