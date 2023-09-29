@@ -5,9 +5,9 @@ export default function AddCourse({closeModal}) {
   const [formData, setFormData] = useState({
     class_year: '',
     semester: '',
-    courseCode: '',
+    course_code: '',
     units: '',
-    courseTitle: '',
+    course_title: '',
     hoursperWeek: '',
     course_type: '',
     preReq: '',
@@ -75,8 +75,8 @@ export default function AddCourse({closeModal}) {
 
                 <div className='mt-2 flex flex-col-2 justify-between'>
                     <input
-                      id="courseCode"
-                      name="courseCode"
+                      id="course_code"
+                      name="course_code"
                       type="text"
                       placeholder='Course Code'
                       value={formData.courseCode}
@@ -97,8 +97,8 @@ export default function AddCourse({closeModal}) {
 
                 <div className='mt-2 flex flex-col-1 justify-between'>
                     <textarea
-                      id="courseTitle"
-                      name="courseTitle"
+                      id="course_title"
+                      name="course_title"
                       type="text"
                       placeholder='Course Title'
                       value={formData.courseTitle}
