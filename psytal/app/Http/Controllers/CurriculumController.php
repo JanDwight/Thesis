@@ -22,7 +22,8 @@ class CurriculumController extends Controller
             'course_title' => $data['course_title'],
             'hoursperWeek' => $data['hoursperWeek'],
             'course_type' => $data['course_type'],
-            'preReq' => $data['preReq']
+            'preReq' => $data['preReq'],
+            'archived' => $data['archived']
         ]);
 
         return response([
@@ -39,24 +40,22 @@ class CurriculumController extends Controller
             return response()->json(['error' => 'Unable to retrieve course'], 500);
         }
     }
-        public function archiveCurriculum(Request $request)
-    {
-        // Your archiving logic goes here
-        // You can access data from the request using $request->input('key')
-        // For example, if you want to archive a link by its ID
-        $curriculumId = $request->input('curriculumId');
-        $curriculum = Curriculum::find($curriculumId);
-        if ($curriculum) {
-            // Archive the curriculum (you need to define an 'archived' column in your database)
-            $curriculum->archived = true;
-            $curriculum->save();
-
-            return response()->json(['message' => 'Course archived successfully'], 200);
-        } else {
-            return response()->json(['error' => 'Course not found'], 404);
-            return response()->json(['errors' => $validator->errors()], 422);
+        public function archiveCurriculum(Request $request, $curriculum_id)
+        {
+            try {
+                //usused fix tables again
+                // Find the course by ID or fail with a 404 response if not found
+                $curriculum_id = classes::findOrFail($curriculum_id);
+        
+                // Update the course archived status to 1
+                $curriculum_id->update(['archived' => 1]);
+        
+                return response()->json(['message' => 'Course archived successfully']);
+            } catch (\Exception $e) {
+                // Handle exceptions, e.g., log the error
+                return response()->json(['message' => 'Error archiving course'], 500);
+            }
         }
-    }
 
    
 

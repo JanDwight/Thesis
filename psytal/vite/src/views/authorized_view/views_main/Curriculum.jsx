@@ -22,9 +22,9 @@ export default function Curriculum(){
           }
         };
       
-        const onSubmitarchivecourse = async (curriculumId) => {
+        const onSubmitarchivecourse = async (curricula_id) => {
           try {
-            const response = await axiosClient.post('/archivecurriculum', { curriculumId });
+            const response = await axiosClient.post('/archivecurriculum', { curricula_id });
             fetchCurriculum();
             setShowCurriculum(false);
         } catch (error) {
@@ -116,8 +116,8 @@ export default function Curriculum(){
                     <th className="text-center">Class Year</th>
                     <th className="text-center">Semester</th>
                     <th className="text-center">Course Code</th>
-                    <th className="text-center">Course Title</th>
                     <th className="text-center">Units</th>
+                    <th className="text-center">Course Title</th>
                     <th className="text-center">Hours/Week</th>
                     <th className="text-center">Lec/Lab</th>
                     <th className="text-center">Pre-Requisite</th>

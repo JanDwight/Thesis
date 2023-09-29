@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class curriculum extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'curricula_id'; // Specify the primary key column name (if it's not 'id')
+
     protected $fillable = [
         'class_year',
         'semester',
@@ -17,5 +20,6 @@ class curriculum extends Model
         'hoursperWeek',
         'course_type',
         'preReq',
+        'archived',
     ];
 }
