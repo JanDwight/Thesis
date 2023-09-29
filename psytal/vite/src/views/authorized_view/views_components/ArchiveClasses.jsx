@@ -4,11 +4,11 @@ import axiosClient from '../../../axios.js';
 export default function ArchiveClasses({ showModal, onClose, subject }) {
 
   const handleSave = async() => {
-    (onClose);
+    //(onClose);
     //Create new migration w/ the archivde field
-    /*try {
+    try {
       // send selected subject to archive controller
-      const response = await axiosClient.put(`/archiveclasses/${classes.id}`);
+      const response = await axiosClient.put(`/archiveclasses/${subject.class_id}`);
 
       console.log('Class archived successfully.');
 
@@ -17,7 +17,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving class:', error);
-    }*/
+    }
   }
 
   if (!showModal) {

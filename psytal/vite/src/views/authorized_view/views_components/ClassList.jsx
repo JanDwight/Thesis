@@ -39,21 +39,20 @@ class ClassList extends Component {
 
    //<><><> Close ArchiveClasses modal
    handleCloseArchiveClasses = () => {
-    console.log('Archive Cancel Pressed');
     this.setState({
       isArchiveClassesOpen: false,
     });
   };
 
-//<><><> Open EditClasses modal
-handleEditClassesClick = (subject) => {
-  console.log('Edit Window Open', subject);
-  this.setState({
-    selectedClass: subject,
-    isEditClassesOpen: true,
-    
-  });
-};
+  //<><><> Open EditClasses modal
+  handleEditClassesClick = (subject) => {
+    console.log('Edit Window Open', subject);
+    this.setState({
+      selectedClass: subject,
+      isEditClassesOpen: true,
+      
+    });
+  };
 
 //<><><> Close EditClasse modal
 handleCloseEditClasses = () => {
