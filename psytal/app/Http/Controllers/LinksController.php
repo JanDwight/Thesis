@@ -15,14 +15,11 @@ class LinksController extends Controller
          /** @var \App\Models\curriculum $curriculum */
 
          $links = links::create([
-            'class_year' => $data['class_year'],
-            'semester' => $data['semester'],
-            'course_code' => $data['course_code'],
-            'units' => $data['units'],
-            'course_title' => $data['course_title'],
-            'hoursperWeek' => $data['hoursperWeek'],
-            'course_type' => $data['course_type'],
-            'preReq' => $data['preReq']
+            'class_code' => $data['class_code'],
+            'class_description' => $data['class_description'],
+            'instructor_name' => $data['instructor_name'],
+            'url' => $data['url'],
+
         ]);
         return response([
             'links' => $links,
