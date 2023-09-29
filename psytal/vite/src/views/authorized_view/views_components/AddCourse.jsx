@@ -9,8 +9,7 @@ export default function AddCourse({closeModal}) {
     units: '',
     courseTitle: '',
     hoursperWeek: '',
-    lec: '',
-    lab: '',
+    course_type: '',
     preReq: '',
     grade: '',
   });
@@ -127,8 +126,7 @@ export default function AddCourse({closeModal}) {
                         id="lec"
                         name="lec"
                         type="radio" //change to radio
-                        placeholder='Lec'
-                        value={formData.lec}
+                        value={"Lec"}
                         onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
@@ -139,8 +137,7 @@ export default function AddCourse({closeModal}) {
                         id="lab"
                         name="lab"
                         type="radio" //change to radio
-                        placeholder='Lab'
-                        value={formData.lab}
+                        value={"Lab"}
                         onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />

@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('curricula', function (Blueprint $table) {
+        Schema::create('curriculum', function (Blueprint $table) {
             $table->id();
             $table->string('class_year');
             $table->string('semester');
             $table->string('course_code');
             $table->string('course_title');
             $table->smallInteger('units');
+            $table->integer('hoursperWeek');
             $table->string('course_type');
+            $table->string('preReq');
             $table->timestamps();
         });
     }

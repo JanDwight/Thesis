@@ -15,8 +15,7 @@ class curriculum extends Model
         'units',
         'courseTitle',
         'hoursperWeek',
-        'lec',
-        'lab',
+        'course_type',
         'preReq',
         'grade',
     ];

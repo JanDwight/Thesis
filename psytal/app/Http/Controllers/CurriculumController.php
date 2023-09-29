@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddCurriculum;
+use App\Http\Requests\AddCurriculumRequest;
 use App\Models\curriculum;
 use Illuminate\Http\Request;
 
@@ -21,10 +21,8 @@ class CurriculumController extends Controller
             'units' => $data['units'],
             'courseTitle' => $data['courseTitle'],
             'hoursperWeek' => $data['hoursperWeek'],
-            'lec' => $data['lec'],
-            'lab' => $data['lab'],
-            'preReq' => $data['preReq'],
-            'grade' => $data['grade']
+            'course_type' => $data['course_type'],
+            'preReq' => $data['preReq']
         ]);
 
         return response([

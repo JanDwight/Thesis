@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\TmpPreregistrationController;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/adduser', [AuthController::class, 'adduser']);
+    Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
 });
 
 Route::post('/addlink', [LinksController::class, 'store']);
@@ -31,6 +33,6 @@ Route::post('/archivelink', [LinksController::class, 'archiveLink']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
 
-Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
+
 Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
 Route::post('/archivecurriculum', [CurriculumController::class, 'archiveCurriculum']);
