@@ -51,6 +51,7 @@ export default function Dashboard() {
   };
   
   return (
+    <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
     <div className="w-full px-4 mx-auto mt-0">
     <h1 className='text-3xl font-semibold my-5 text-green-700'>DASHBOARD</h1>
     <hr className="border-gray-400 mt-2 mb-5" />
@@ -127,7 +128,7 @@ export default function Dashboard() {
          
     </div>
    </div>
- 
+   </div>
     
   );
 }

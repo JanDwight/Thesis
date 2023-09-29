@@ -5,11 +5,11 @@ import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
 import { useState, useEffect } from 'react';
 import logo from "@assets/PsychCircle.png";
+import {link} from 'react-scroll'
 
 const navigation = [
-  { name: 'Landing Page', to: 'landingpage'},
-  { name: 'About us', to: 'aboutus'} ,
-  { name: 'Pre-Registration', to: 'preregistration'} ,
+  { name: 'Pre-Registration', to: 'preregistration'},
+  { name: 'Home', to: 'landingpage'},
   { name: 'Login', to: 'login'}
 ]
 
@@ -70,20 +70,23 @@ export default function GuestLayout() {
                     </div>
                     <div className="hidden md:flex space-x-4">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <NavLink
-                            key={item.name}
-                            to={item.to}
-                            className={({ isActive }) => classNames(
-                              isActive
-                                ? 'bg-black text-white'
-                                : 'text-gray-300 hover:bg-gray-500 hover:text-white',
-                              'rounded-md px-3 py-2 text-sm font-medium'
-                            )}
-                          >
-                            {item.name}
-                          </NavLink>
-                        ))}
+
+                      {navigation.map((item) => {
+                      return (
+                        <NavLink
+                        key={item.name}
+                        to={item.to}
+                        className={({ isActive }) => classNames(    isActive
+                          ? 'bg-black text-white'
+                          : 'text-gray-300 hover:bg-gray-500 hover:text-white',
+                        'rounded-md px-3 py-2 text-sm font-medium'
+                      )}
+                    >
+                          {item.name}
+                        </NavLink>
+                      );
+                    })}
+                       
                       </div>
                     </div>
                  
@@ -109,6 +112,7 @@ export default function GuestLayout() {
                     <NavLink
                       key={item.name}
                       to={item.to}
+                    
                       className={({ isActive }) => classNames(
                         isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
