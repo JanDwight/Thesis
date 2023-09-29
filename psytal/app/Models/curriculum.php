@@ -11,9 +11,9 @@ class curriculum extends Model
     protected $fillable = [
         'class_year',
         'semester',
-        'courseCode',
+        'course_code',
         'units',
-        'courseTitle',
+        'course_title',
         'hoursperWeek',
         'course_type',
         'preReq',

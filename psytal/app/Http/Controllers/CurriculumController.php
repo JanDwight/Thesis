@@ -17,9 +17,9 @@ class CurriculumController extends Controller
         $curriculum = curriculum::create([
             'class_year' => $data['class_year'],
             'semester' => $data['semester'],
-            'courseCode' => $data['courseCode'],
+            'course_code' => $data['course_code'],
             'units' => $data['units'],
-            'courseTitle' => $data['courseTitle'],
+            'course_title' => $data['course_title'],
             'hoursperWeek' => $data['hoursperWeek'],
             'course_type' => $data['course_type'],
             'preReq' => $data['preReq']
