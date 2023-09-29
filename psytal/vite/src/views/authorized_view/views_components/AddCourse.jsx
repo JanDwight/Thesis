@@ -11,7 +11,6 @@ export default function AddCourse({closeModal}) {
     hoursperWeek: '',
     course_type: '',
     preReq: '',
-    grade: '',
   });
 
   const handleChange = (e) => {
@@ -144,7 +143,7 @@ export default function AddCourse({closeModal}) {
                   </div>
                 </div>
 
-                <div className='mt-2 flex flex-col-2 justify-between'>
+                <div className='flex justify-between mt-2'>
                     <input
                       id="preReq"
                       name="preReq"
@@ -152,17 +151,7 @@ export default function AddCourse({closeModal}) {
                       placeholder='Pre Requisite'
                       value={formData.preReq}
                       onChange={handleChange}
-                      className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
-                    />
-
-                    <input
-                      id="grade"
-                      name="grade"
-                      type="text"
-                      placeholder='Grade'
-                      value={formData.grade}
-                      onChange={handleChange}
-                      className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
 

@@ -118,7 +118,6 @@ export default function Curriculum(){
                     <div>Units</div>
                     <div>Hours/Week</div>
                     <div>Lec/Lab</div>
-                    <div>Grade</div>
                     <div>Action</div>
                 </div>
             </div>
@@ -136,7 +135,6 @@ export default function Curriculum(){
                       <div className="text-left">{curriculum.hoursperWeek}</div>
                       <div className="text-left">{curriculum.course_type}</div>
                       <div className="text-left">{curriculum.preReq}</div>
-                      <div className="text-left">{curriculum.grade}</div>
                       <div>
                         <button onClick={() => onSubmitarchivecourse(curriculum.id)}>
                           <img src={arhive} alt='archive' className='h-7 w-7' />
