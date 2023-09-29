@@ -77,25 +77,23 @@ export default function Links() {
       </div>
 
       <div className="mt-2">
-      <>
-                  <form>
-                    <a key={links.id} className="mx-7 font-bold flex flex-col-10 flex justify-between" onSubmit={addLinks}>
-                      <div className="text-left">{links.class_code}</div>
-                      <div className="text-left">{links.class_description}</div>
-                      <div className="text-left">{links.instructor_name}</div>
-                      <div className="text-left">{links.url}</div>
-                      <div>
-                        <button onClick={() => onSubmitarchivelink(links.id)}>
-                          <img src={arhive} alt='archive' className='h-7 w-7' />
-                        </button>
-                      </div>
-                    </a>
-                  </form>
-              </>
-
+          {links.map((link) => (
+            <form key={link.id} onSubmit={(e) => e.preventDefault()}>
+              <a className="mx-7 font-bold flex flex-col-10 flex justify-between">
+                <div className="text-left">{link.class_code}</div>
+                <div className="text-left">{link.class_description}</div>
+                <div className="text-left">{link.instructor_name}</div>
+                <div className="text-left">{link.url}</div>
+                <div>
+                  <button onClick={() => onSubmitarchivelink(link.id)}>
+                    <img src={arhive} alt='archive' className='h-7 w-7' />
+                  </button>
+                </div>
+              </a>
+            </form>
+          ))}
+        </div>
       </div>
-
-    </div>
       
       <ReactModal
       isOpen={isModalOpen}
