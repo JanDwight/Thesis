@@ -59,7 +59,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   type="text"
                   value={classId}
                   disabled //makes field uneditable
-                  onChange={(e) => setClassId(e.target.value)}
+                  //onChange={(e) => setClassId(e.target.value)}
                   className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -72,7 +72,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="title"
                   type="text"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  //onChange={(e) => setTitle(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -85,7 +85,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="code"
                   type="text"
                   value={code}
-                  onChange={(e) => setCode(e.target.value)}
+                  //onChange={(e) => setCode(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -98,7 +98,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="instructor"
                   type="text"
                   value={instructor}
-                  onChange={(e) => setInstructor(e.target.value)}
+                  //onChange={(e) => setInstructor(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
