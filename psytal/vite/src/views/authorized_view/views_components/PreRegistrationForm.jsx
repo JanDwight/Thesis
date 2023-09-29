@@ -159,6 +159,7 @@ export default function PreRegistrationForm() {
                         max="2099" // Maximum year
                         step="1" // Year step
                         value={startOfSchoolYear}
+                        onChange={ev => setStartOfSchoolYear(ev.target.value)}
 
                       />
                     </div>
@@ -176,6 +177,7 @@ export default function PreRegistrationForm() {
                         max="2099" 
                         step="1" 
                         value={endOfSchoolYear}
+                        onChange={ev => setEndOfSchoolYear(ev.target.value)}
                       />
                     </div>
                   </div>
@@ -193,6 +195,7 @@ export default function PreRegistrationForm() {
                        id="grid-studentID"
                        type="number"
                        value={studentSchoolId}
+                       onChange={ev => setStudentSchoolId(ev.target.value)}
                        />                          
                     </div>
                     {/*column2*/}
@@ -205,6 +208,7 @@ export default function PreRegistrationForm() {
                        type="number"
                        placeholder=""
                        value={learnersReferenceNumber}
+                       onChange={ev => setLearnersReferenceNumber(ev.target.value)}
                        />        
                     </div>
               </div> 
@@ -220,7 +224,9 @@ export default function PreRegistrationForm() {
                    id="grid-studentLastname"
                    type="text"
                    placeholder=""
-                   value={lastName}/>  
+                   value={lastName}
+                   onChange={ev => setLastName(ev.target.value)}
+                   />  
                 </div>
                 {/**column2 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
@@ -231,7 +237,9 @@ export default function PreRegistrationForm() {
                    id="grid-studentFirstname" 
                    type="text" 
                    placeholder=""
-                   value={firstName}/>  
+                   value={firstName}
+                   onChange={ev => setFirstName(ev.target.value)}
+                   />  
                 </div>
                 {/**column3 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
@@ -242,7 +250,9 @@ export default function PreRegistrationForm() {
                    id="grid-studentMiddlename" 
                    type="text" 
                    placeholder=""
-                   value={middleName}/>  
+                   value={middleName}
+                   onChange={ev => setMiddleName(ev.target.value)}
+                   />  
                 </div>
                 {/** */}
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
@@ -253,7 +263,9 @@ export default function PreRegistrationForm() {
                    id="grid-studentMaidenname" 
                    type="text" 
                    placeholder=""
-                   value={maidenName}/>  
+                   value={maidenName}
+                   onChange={ev => setMaidenName(ev.target.value)}
+                   />  
                 </div>
               </div> <hr />
               
@@ -272,6 +284,7 @@ export default function PreRegistrationForm() {
                       name="typeofacadclass"
                       id="shsgraduate"
                       value="SHS graduate" 
+                      onChange={ev => setAcademicClassification(ev.target.value)}
                       />
                       <label
                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -287,6 +300,7 @@ export default function PreRegistrationForm() {
                       name="typeofacadclass"
                       id="hsgraduate"
                       value="HS graduate"
+                      onChange={ev => setAcademicClassification(ev.target.value)}
                       />
                     <label
                       className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -302,6 +316,7 @@ export default function PreRegistrationForm() {
                       name="typeofacadclass"
                       id="alscompleter"
                       value="ALS completer"
+                      onChange={ev => setAcademicClassification(ev.target.value)}
                       />
                     <label
                       className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -321,7 +336,9 @@ export default function PreRegistrationForm() {
                    id="grid-lastschoolattended" 
                    type="text" 
                    placeholder=""
-                   value={lastSchoolAttended}/>  
+                   value={lastSchoolAttended}
+                   onChange={ev => setLastSchoolAttended(ev.target.value)}
+                   />  
                 </div>
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-addresslastschoolattended">
@@ -331,7 +348,9 @@ export default function PreRegistrationForm() {
                    id="grid-addresslastschoolattended" 
                    type="text" 
                    placeholder=""
-                   value={addressOfSchoolAttended}/>  
+                   value={addressOfSchoolAttended}
+                   onChange={ev => setAddressOfSchoolAttended(ev.target.value)}
+                   />  
                 </div>
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-degreeprogram">
@@ -342,6 +361,7 @@ export default function PreRegistrationForm() {
                    type="text" 
                    placeholder=""
                    value={degree}
+                   onChange={ev => setDegree(ev.target.value)}
                    />  
                 </div>
               </div> <hr />
@@ -356,6 +376,7 @@ export default function PreRegistrationForm() {
                     type="date" 
                     placeholder=""
                     value={dateOfBirth}
+                    onChange={ev => setDateOfBirth(ev.target.value)}
                     />
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="citizenship">
@@ -366,6 +387,7 @@ export default function PreRegistrationForm() {
                    type="text" 
                    placeholder=""
                    value={citizenship}
+                   onChange={ev => setCitizenship(ev.target.value)}
                    />
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="ethnicity">
@@ -375,14 +397,18 @@ export default function PreRegistrationForm() {
                    id="grid-ethnicity" 
                    type="text" 
                    placeholder=""
-                   value={ethnicity}/>
+                   value={ethnicity}
+                   onChange={ev => setEthnicity(ev.target.value)}
+                   />
                                         
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                    id="grid-contactnumber" 
                    type="number" 
                    placeholder=""
-                   value={contactNumber}/>                    
+                   value={contactNumber}
+                   onChange={ev => setContactNumber(ev.target.value)}
+                   />                    
                 </div>
 
                 {/*column2*/}
@@ -394,7 +420,9 @@ export default function PreRegistrationForm() {
                    id="grid-placeofbirth" 
                    type="text" 
                    placeholder=""
-                   value={placeOfBirth}/>
+                   value={placeOfBirth}
+                   onChange={ev => setPlaceOfBirth(ev.target.value)}
+                   />
                     
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
                     Sex at Birth :
@@ -403,7 +431,8 @@ export default function PreRegistrationForm() {
                     id="grid-sexatbirth" 
                     type="text" 
                     placeholder=""
-                    value={sexAtBirth}/>
+                    value={sexAtBirth}
+                    onChange={ev => setSexAtBirth(ev.target.value)}/>
 
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
                     Special Need/s :
@@ -412,7 +441,9 @@ export default function PreRegistrationForm() {
                    id="grid-studyaddress" 
                    type="text" 
                    placeholder=""
-                   value={specialNeeds}/>
+                   value={specialNeeds}
+                   onChange={ev => setSpecialNeeds(ev.target.value)}
+                   />
                     
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="emailaddress">
                     Email Address :
@@ -421,7 +452,9 @@ export default function PreRegistrationForm() {
                    id="grid-emailaddress" 
                    type="text" 
                    placeholder=""
-                   value={email}/>
+                   value={email}
+                   onChange={ev => setEmail(ev.target.value)}
+                   />
                 </div>
               </div> <hr />
 
@@ -433,7 +466,9 @@ export default function PreRegistrationForm() {
                    id="grid-homeaddress" 
                    type="text" 
                    placeholder=""
-                   value={homeAddress}/>
+                   value={homeAddress}
+                   onChange={ev => setHomeAddress(ev.target.value)}
+                   />
                 </div>
                 <div className="w-full px-3 mb-3 md:mb-0 mt-2">
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
@@ -443,7 +478,9 @@ export default function PreRegistrationForm() {
                    id="grid-studyaddress" 
                    type="text" 
                    placeholder=""
-                   value={addressWhileStudyingAtBsu}/>
+                   value={addressWhileStudyingAtBsu}
+                   onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}
+                   />
                 </div>
               </div> <hr />
 
@@ -458,14 +495,18 @@ export default function PreRegistrationForm() {
                    id="grid-contactname" 
                    type="text" 
                    placeholder=""
-                   value={emergencyContactName}/>
+                   value={emergencyContactName}
+                   onChange={ev => setEmergencyContactName(ev.target.value)}
+                   />
                   
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-address" 
                     type="text" 
                     placeholder=""
-                    value={emergencyContactAddress}/>
+                    value={emergencyContactAddress}
+                    onChange={ev => setEmergencyContactAddress(ev.target.value)}
+                    />
                 </div>
 
                 {/*column2*/}
@@ -479,6 +520,7 @@ export default function PreRegistrationForm() {
                    onUpM
                    placeholder=""
                    value={emergencyContactNumber}
+                   onChange={ev => setEmergencyContactNumber(ev.target.value)}
                    />
                       
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
@@ -488,7 +530,8 @@ export default function PreRegistrationForm() {
                    id="grid-relationship" 
                    type="text" 
                    placeholder=""
-                   value={relationship}/>
+                   value={relationship}
+                   onChange={ev => setRelationship(ev.target.value)}/>
                 </div>
               </div> <hr />
 
@@ -693,3 +736,7 @@ export default function PreRegistrationForm() {
     
   )
 }
+
+
+
+

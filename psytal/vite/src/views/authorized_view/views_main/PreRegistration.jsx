@@ -1,8 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axiosClient from '../../../axios';
-import ReactModal from 'react-modal';
-import PreRegistrationForm from '../views_components/PreRegistrationForm';
+import ReactModal from 'react-modal';import PreRegisatrationPDF from '../views_components/Pre_Registration_Components/PreRegisatrationPDF';
 
 export default function PreRegistration() {
   const [loading, setLoading] = useState(true);
@@ -72,7 +71,7 @@ export default function PreRegistration() {
             className="w-fit h-[98%] bg-[#FFFFFF] rounded-3xl shadow-2xl mt-[1%] mx-auto p-5 overflow-y-scroll"
         >
             <div>
-                <PreRegistrationForm closeModal={() => setIsPreRegFormModalOpen(false)}/>
+                <PreRegisatrationPDF closeModal={() => setIsPreRegFormModalOpen(false)}/>
             </div>
         </ReactModal>
     </div>
