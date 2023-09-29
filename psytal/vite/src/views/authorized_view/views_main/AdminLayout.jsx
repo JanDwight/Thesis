@@ -268,18 +268,18 @@ export default function AdminLayout() {
         <div><ProfilePopupSample closeModal={() => setIsProfileOpen(false)}/></div>
       </ReactModal>
 
-      {/**<!--Footer--> */}
-    <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
+       {/**<!--Footer--> */}
+       <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
       {/**<!-- Social icons --> */}
       <div className='border-b-2 border-neutral-200 p-3 dark:border-neutral-500'>
         <div className='container mx-auto px-10'>
           <div className='flex items-center justify-center lg:justify-between'>
             <div className='mr-12 hidden lg:block'>
-              <span>Get connected with us on social networks:</span>
+              <span>Get connected with us on social networks: BSU-CSS-Department of Psychology</span>
             </div>
             <div className='flex justify-center'>
               {/**FB */}
-              <a href="#!" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://www.facebook.com/psychologybsu" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
                     fill="currentColor"
@@ -288,7 +288,7 @@ export default function AdminLayout() {
                 </svg>
               </a>
               {/**Twitter */}
-              <a href="#!" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://twitter.com/BenguetStateU" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
                     fill="currentColor"
@@ -297,7 +297,8 @@ export default function AdminLayout() {
                 </svg>
               </a>
 
-              <a a href="#!" className="mr-6 text-gray-500 dark:text-gray-200">
+                  {/**Instagram */}
+              <a href="https://www.instagram.com/benguetstateuniversityofficial/" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5"
                     fill="currentColor"
@@ -308,7 +309,8 @@ export default function AdminLayout() {
             </div>
           </div>
         </div>
-      </div> {/**End of Social Icons */}
+      </div> 
+         {/**End of Social Icons */}
 
       {/**<!-- Main footer content --> */}
       <div className='container mx-auto px-4'>
@@ -325,10 +327,8 @@ export default function AdminLayout() {
                 </svg>
                 Psychology Department
               </h6>
-              <p>Here you can use rows and columns to organize your footer
-                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit.
-              </p>
+              <p>REPUBLIC OF THE PHILIPPINES </p>
+              <p>All content is in the public domain unless otherwise stated.</p>
             </div>
             {/**----------------COL2------------- */}
             <div>
@@ -346,12 +346,14 @@ export default function AdminLayout() {
               </p>
             </div>
             {/**---------------COL3------------- */}
-            <div>
-              <h6 className='mb-4 flex justify-center font-semibold uppercase md:justify-start'>
-                Useful Links
+            <div className='mb-4 mx-10 flex flex-col justify-center font-semibold uppercase md:justify-start'>
+              <h6 >
+                <a href="https://www.google.com/maps/@16.4529815,120.5897683,3a,75y,62.24h,81.21t/data=!3m6!1e1!3m4!1s3g6UBbP1ms4hzPLFCynOug!2e0!7i16384!8i8192?entry=ttu" target="_blank">
+                Site Map
+                </a>
               </h6>
-              <p className='mb-4'>
-                <a href="#!" class="text-gray-500 dark:text-neutral-200">Help</a>
+              <p>
+                <a href="http://www.bsu.edu.ph/" target="_blank" class=" text-black-200">BSU website</a>
               </p>
             </div>
 
@@ -368,7 +370,9 @@ export default function AdminLayout() {
                   <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"/>
                   <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"/>
                 </svg>
+                <a href="https://www.google.com/maps/dir//Benguet+State+University,+La+Trinidad,+Benguet/@16.4544374,120.5894334,528m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3391a3bb4279be9b:0xbf6e126a84be4efc!2m2!1d120.5902746!2d16.4543609?entry=ttu" target="_blank" class=" text-black-200">
                 Km.5 La Trinidad, Benguet
+                </a>
                 </p>
                 <p className='mb-4 flex items-center justify-center md:justify-start'>
                   <svg xmlns="http://www.w3.org/2000/svg"
@@ -394,7 +398,8 @@ export default function AdminLayout() {
             </div>
           </div>
         </div>
-      </div> {/** Enf of the Main Foter Content */}
+      </div> 
+      {/** End of the Main Footer Content */}
 
       {/**<!-- Copyrights --> */}
       <div className='bg-neutral-200 p-3 text-center dark:bg-neutral-700'>

@@ -1,20 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axiosClient from '../../../axios.js';
 
 export default function AddCourse({closeModal}) {
+  const [formData, setFormData] = useState({
+    class_year: '',
+    semester: '',
+    courseCode: '',
+    units: '',
+    courseTitle: '',
+    hoursperWeek: '',
+    course_type: '',
+    preReq: '',
+    grade: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted!');  // Add this line
+    // Make a POST request to your backend endpoint (/addlink)
+    axiosClient.post('/addcurriculum', formData)
+      .then(response => {
+        // Handle success, e.g., show a success message
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle errors, including validation errors
+        if (error.response.status === 422) {
+          console.log(error.response.data.errors);
+        } else {
+          console.error(error.response.data);
+        }
+      });
+
+    // Close the modal
+    closeModal();
+  };
+
   return (
     <> 
         <div className='flex justify-center font-bold text-4xl text-[#525252]'>
         Add Course
         </div>
         <div>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div className='mt-2 flex flex-col-2 justify-between'>
                     <input
-                      id="classYear"
-                      name="classYear"
+                      id="class_year"
+                      name="class_year"
                       type="text"
                       placeholder='Year'
-                      //value={classYear}
+                      value={formData.classYear}
+                      onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
 
@@ -23,7 +67,8 @@ export default function AddCourse({closeModal}) {
                       name="semester"
                       type="text"
                       placeholder='Semester'
-                      //value={semester}
+                      value={formData.semester}
+                      onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
@@ -34,7 +79,8 @@ export default function AddCourse({closeModal}) {
                       name="courseCode"
                       type="text"
                       placeholder='Course Code'
-                      //value={courseCode}
+                      value={formData.courseCode}
+                      onChange={handleChange}
                       className="block w-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
 
@@ -43,7 +89,8 @@ export default function AddCourse({closeModal}) {
                       name="units"
                       type="text"
                       placeholder='Units'
-                      //value={units}
+                      value={formData.units}
+                      onChange={handleChange}
                       className="block w-[40%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
@@ -54,7 +101,8 @@ export default function AddCourse({closeModal}) {
                       name="courseTitle"
                       type="text"
                       placeholder='Course Title'
-                      //value={courseTitle}
+                      value={formData.courseTitle}
+                      onChange={handleChange}
                       className="block w-full h-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
@@ -65,31 +113,32 @@ export default function AddCourse({closeModal}) {
                       name="hoursperWeek"
                       type="text"
                       placeholder='Hours/Week'
-                      //value={hoursperWeek}
+                      value={formData.hoursperWeek}
+                      onChange={handleChange}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 t" 
                     />
                    
                 </div>
                 <div className="flex justify-between mt-2">
                   <div>
-                      <label>Lecture</label>
+                      <label for= "lec">Lecture</label>
                       <input
-                        id="lec"
-                        name="lec"
+                        id="course_type"
+                        name="course_type"
                         type="radio" //change to radio
-                        placeholder='Lec'
-                        value='lec'
+                        value={"Lec"}
+                        onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
                     </div>
                     <div>
-                      <label>Laboratory</label>
+                      <label for= "lab">Laboratory</label>
                       <input
-                        id="lab"
-                        name="lab"
+                        id="course_type"
+                        name="course_type"
                         type="radio" //change to radio
-                        placeholder='Lab'
-                        value='lab'
+                        value={"Lab"}
+                        onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
                   </div>
@@ -101,7 +150,8 @@ export default function AddCourse({closeModal}) {
                       name="preReq"
                       type="text"
                       placeholder='Pre Requisite'
-                      //value={preReq}
+                      value={formData.preReq}
+                      onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
 
@@ -110,13 +160,14 @@ export default function AddCourse({closeModal}) {
                       name="grade"
                       type="text"
                       placeholder='Grade'
-                      //value={grade}
+                      value={formData.grade}
+                      onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
 
                 <div className='grid grid-row-2 justify-center'>
-                    <button className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white font-size">
+                    <button type="submit" className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white font-size">
                          Add Course
                     </button>
 

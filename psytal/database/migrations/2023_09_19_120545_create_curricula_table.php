@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('course_code');
             $table->string('course_title');
             $table->smallInteger('units');
+            $table->integer('hoursperWeek');
             $table->string('course_type');
+            $table->string('preReq');
             $table->timestamps();
         });
     }
