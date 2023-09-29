@@ -2,34 +2,30 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\links;
 use Illuminate\Http\Request;
-use App\Models\Links; // Import the Link model
+
+use App\Http\Requests\LinksRequest;
 
 
 class LinksController extends Controller
 {
-     public function addlink()
+     public function addLink(LinksRequest $request)
     {
-        return view('links.addlink'); // Display the form to add links
-    }
-    public function store(Request $request)
-    {
-        // Validate the form input (e.g., URL and description)
-        $validatedData = $request->validate([
-            'class_code' => 'required|string',
-            'class_description' => 'required|max:255',
-            'instructor_name' => 'required|string',
-            'url' => 'required|url',
+        $data = $request->validated();
+
+         /** @var \App\Models\links $links */
+
+         $links = links::create([
+            'class_code' => $data['class_code'],
+            'class_description' => $data['class_description'],
+            'instructor_name' => $data['instructor_name'],
+            'url' => $data['url'],
+
         ]);
-
-         // Create a new link using the Link model
-         $link = new Links();
-         $link->url = $validatedData['url'];
-         $link->class_description = $validatedData['class_description'];
-         $link->instructor_name = $validatedData['instructor_name'];
-         $link->save();
-
-        return response()->json(['message' => 'Link added successfully'], 200);
+        return response([
+            'links' => $links,
+        ]);
     }
 
     public function getLinks()
@@ -41,6 +37,8 @@ class LinksController extends Controller
             return response()->json(['error' => 'Unable to retrieve links'], 500);
         }
     }
+
+
         public function archiveLink(Request $request)
     {
         // Your archiving logic goes here

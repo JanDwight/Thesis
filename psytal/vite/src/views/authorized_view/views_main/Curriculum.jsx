@@ -110,34 +110,31 @@ export default function Curriculum(){
             </div>
             
             <div className="m-5">
-                <div className="mx-7 font-bold flex flex-col-10 flex justify-between">
+                <div className="mx-7 font-bold flex flex-col-9 flex justify-between">
                     <div>Class Year</div>
                     <div>Semester</div>
                     <div>Course Code</div>
                     <div>Course Title</div>
                     <div>Units</div>
                     <div>Hours/Week</div>
-                    <div>Lec</div>
-                    <div>Lab</div>
-                    <div>Grade</div>
+                    <div>Lec/Lab</div>
                     <div>Action</div>
                 </div>
             </div>
 
             <div className="m-2">
               <>
-                  <form>
-                    <a key={curriculum.id} className="mx-7 font-bold flex flex-col-10 flex justify-between" onSubmit={addCourse}>
-                      <div className="text-left">{curriculum.classYear}</div>
+              {curriculum.map((curriculum) => (
+                  <form key={curriculum.id} onSubmit={(e) => e.preventDefault()}>
+                    <a key={curriculum.id} className="mx-7 font-bold flex flex-col-9 flex justify-between" onSubmit={addCourse}>
+                      <div className="text-left">{curriculum.class_year}</div>
                       <div className="text-left">{curriculum.semester}</div>
-                      <div className="text-left">{curriculum.courseCode}</div>
+                      <div className="text-left">{curriculum.course_code}</div>
                       <div className="text-left">{curriculum.units}</div>
-                      <div className="text-left">{curriculum.courseTitle}</div>
+                      <div className="text-left">{curriculum.course_title}</div>
                       <div className="text-left">{curriculum.hoursperWeek}</div>
-                      <div className="text-left">{curriculum.lec}</div>
-                      <div className="text-left">{curriculum.lab}</div>
+                      <div className="text-left">{curriculum.course_type}</div>
                       <div className="text-left">{curriculum.preReq}</div>
-                      <div className="text-left">{curriculum.grade}</div>
                       <div>
                         <button onClick={() => onSubmitarchivecourse(curriculum.id)}>
                           <img src={arhive} alt='archive' className='h-7 w-7' />
@@ -145,6 +142,7 @@ export default function Curriculum(){
                       </div>
                     </a>
                   </form>
+                  ))}
               </>
             </div>
           </div>
@@ -167,4 +165,3 @@ export default function Curriculum(){
         </>
 );
 }
-    

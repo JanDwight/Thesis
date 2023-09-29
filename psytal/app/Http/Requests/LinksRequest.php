@@ -11,7 +11,7 @@ class LinksRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,9 @@ class LinksRequest extends FormRequest
     {
         return [
             'class_code' => 'required|string',
-            'class_description' => 'required|max:255',
+            'class_description' => 'required|string',
             'instructor_name' => 'required|string',
-            'url'=>'required|url'
+            'url'=>'required|string'
 
         ];
     }
