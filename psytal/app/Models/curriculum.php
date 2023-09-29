@@ -9,7 +9,7 @@ class curriculum extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'classYear',
+        'class_year',
         'semester',
         'courseCode',
         'units',

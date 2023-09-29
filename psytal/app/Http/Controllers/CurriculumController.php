@@ -15,7 +15,7 @@ class CurriculumController extends Controller
         /** @var \App\Models\curriculum $curriculum */
 
         $curriculum = curriculum::create([
-            'classYear' => $data['classYear'],
+            'class_year' => $data['class_year'],
             'semester' => $data['semester'],
             'courseCode' => $data['courseCode'],
             'units' => $data['units'],

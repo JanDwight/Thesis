@@ -3,7 +3,7 @@ import axiosClient from '../../../axios.js';
 
 export default function AddCourse({closeModal}) {
   const [formData, setFormData] = useState({
-    classYear: '',
+    class_year: '',
     semester: '',
     courseCode: '',
     units: '',
@@ -53,8 +53,8 @@ export default function AddCourse({closeModal}) {
             <form onSubmit={handleSubmit}>
                 <div className='mt-2 flex flex-col-2 justify-between'>
                     <input
-                      id="classYear"
-                      name="classYear"
+                      id="class_year"
+                      name="class_year"
                       type="text"
                       placeholder='Year'
                       value={formData.classYear}
@@ -123,8 +123,8 @@ export default function AddCourse({closeModal}) {
                   <div>
                       <label for= "lec">Lecture</label>
                       <input
-                        id="lec"
-                        name="lec"
+                        id="course_type"
+                        name="course_type"
                         type="radio" //change to radio
                         value={"Lec"}
                         onChange={handleChange}
@@ -134,8 +134,8 @@ export default function AddCourse({closeModal}) {
                     <div>
                       <label for= "lab">Laboratory</label>
                       <input
-                        id="lab"
-                        name="lab"
+                        id="course_type"
+                        name="course_type"
                         type="radio" //change to radio
                         value={"Lab"}
                         onChange={handleChange}

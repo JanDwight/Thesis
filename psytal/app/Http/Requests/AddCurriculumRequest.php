@@ -22,7 +22,7 @@ class AddCurriculumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'classYear' => 'required|string',
+            'class_year' => 'required|string',
             'semester' => 'required|string',
             'courseCode' => 'required|string',
             'courseTitle' => 'required|string',
