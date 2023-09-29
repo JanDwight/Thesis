@@ -78,3 +78,4 @@ export default function PreRegistration() {
     </div>
   )
 }
+
