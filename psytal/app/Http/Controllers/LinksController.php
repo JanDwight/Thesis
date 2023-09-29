@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\links;
 use Illuminate\Http\Request;
-use App\Http\Requests\addLinkRequest;
+
+use App\Http\Requests\LinksRequest;
 
 
 class LinksController extends Controller
@@ -12,7 +14,7 @@ class LinksController extends Controller
     {
         $data = $request->validated();
 
-         /** @var \App\Models\curriculum $curriculum */
+         /** @var \App\Models\links $links */
 
          $links = links::create([
             'class_code' => $data['class_code'],
