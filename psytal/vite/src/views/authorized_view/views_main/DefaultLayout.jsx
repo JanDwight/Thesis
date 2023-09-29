@@ -17,8 +17,7 @@ import StudentProfile from '../views_components/profile_components/StudentProfil
 
 const navigation = [
   { name: 'Home', to: '/'},
-  { name: 'Accounts', to: '/accounts'},
-  { name: 'Pre-Registration', to: '/preregistration'},  
+  { name: 'Pre-Registration', to: '/preregistrationforcontinuing'},  
   { name: 'Links', to: '/linksforstudent'}  
 ]
 
