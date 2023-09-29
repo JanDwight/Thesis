@@ -8,7 +8,7 @@ use App\Http\Requests\addLinkRequest;
 
 class LinksController extends Controller
 {
-     public function addLink(addLinkRequest $request)
+     public function addLink(LinksRequest $request)
     {
         $data = $request->validated();
 
