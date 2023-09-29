@@ -12,7 +12,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
       console.log('User archived successfully.');
 
       // Close the modal
-      onClose();
+      (onClose);
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving user:', error);
@@ -38,7 +38,6 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
                 name="user"
                 value={user.name}
                 disabled // makes field uneditable
-                //onChange={(e) => setUsername(e.target.value)}
                 className="block w-1/3 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />
             </div>

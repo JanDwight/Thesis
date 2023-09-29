@@ -3,8 +3,6 @@ import ReactModal from 'react-modal';
 import { useState } from 'react';
 //good for now
 
-console.log('AddUsers.jsx component is rendering');
-
 export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit, selectedAccountType, setSelectedAccountType,
                                    email, setEmail}) {
 
