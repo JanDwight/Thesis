@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PreRegistrationIncomingTmpRequest;
 use App\Models\preregistration_incoming_tmp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PreregistrationIncomingTmpController extends Controller
 {
@@ -41,21 +43,37 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_number' => $data['contact_person_number'],
             'contact_person_address' => $data['contact_person_address'],
             'contact_person_relationship' => $data['contact_person_relationship'],
-            'pre_reg_status' => $data['pre_reg_status'],
+            'pre_reg_status' => 'PENDING',
             'type_of_student' => $data['type_of_student'],
         ]);
 
         return response([
-            'user' => $preRegTmpincoming,
+            'prereg' => $preRegTmpincoming,
         ]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $PreReg = DB::table('preregistration_incoming_tmps')
+         ->select('last_name', 'first_name', 'middle_name', 'created_at', 'pre_reg_status', 'student_profile_id')
+         ->get();
+
+         
+         $PreReg = $PreReg->map(function ($item) {
+            // Extract the first character of the middle_name
+            $middleInitial = strtoupper(substr($item->middle_name, 0, 1));
+            // Convert created_at to a Carbon instance and format it to display only the date
+            $item->created_at = Carbon::parse($item->created_at)->toDateString();
+            //Combine the last, first and middle name into a fullname
+            $item->full_name = $item->last_name . ', ' . $item->first_name . ' ' . $middleInitial .'.';
+            return $item;
+        });
+
+            return $PreReg->toArray();
     }
 
     /**
@@ -79,7 +97,11 @@ class PreregistrationIncomingTmpController extends Controller
      */
     public function show(preregistration_incoming_tmp $preregistration_incoming_tmp)
     {
-        //
+        
+        // $PreReg = DB::table('preregistration_incoming_tmps')
+        // ->get();
+
+        // return $PreReg->toArray();
     }
 
     /**

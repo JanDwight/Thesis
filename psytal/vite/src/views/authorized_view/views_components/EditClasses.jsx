@@ -1,42 +1,34 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function EditUsers({ showModal, onClose, user, onSave }) {
-  const [id, setid] = useState(user.id);
-  const [name, setName] = useState(user.name);
-  const [role, setRole] = useState(user.role);
-  const [email, setEmail] = useState(user.email);
-  const [lastedit, setLastedit] = useState(user.updated_at);
+export default function EditClasses({ showModal, onClose, subject, onSave }) {
+  const [classId, setClassId] = useState(subject.class_id);
+  const [title, setTitle] = useState(subject.course_title);
+  const [code, setCode] = useState(subject.course_code);
+  const [instructor, setInstructor] = useState(subject.instructor_name);
+  const [lastedit, setLastedit] = useState(subject.updated_at);
 
-  const handleSave = async() => {
-
-    console.log('role: ', role);
-
-    const roleLowerCase = role.toLowerCase(); //lowercase to avoid errors
-
-    const roleMapping = {
-      'admin': 1,
-      'staff': 2,
-      'instructor': 3,
-      'student': 4,
-    };
-    
-    const updatedUser = {
-      id,
-      name,
-      role: roleMapping[roleLowerCase],
-      email,
+  const handleSave = async () => {
+    // Create an object with the updated class data
+    const updatedClass = {
+      classId, // Assuming classId is still the same
+      title,
+      code,
+      instructor,
       lastedit,
     };
-
+  
     try {
-      const response = await axiosClient.put(`/updateuser/${user.id}`, updatedUser);
+      // Send a PUT request to update the class data
+      console.log('Sending', classId);
+      const response = await axiosClient.put(`/updateclasses/${classId}`, updatedClass);
   
       if (response.status === 200) {
         // Update was successful
-        onSave(updatedUser); // Pass the updated user data to the onSave function
-        //onClose(); uncomment this line if frontend errors are fixed
-      } else {
+        onSave(updatedClass); // Pass the updated class data to the onSave function
+        // You can optionally close the modal or perform UI updates here
+        console.log('Class Updated Successfully');
+    } else {
         // Handle errors or display feedback to the user
         console.error('Update failed');
       }
@@ -58,59 +50,55 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
           <div>
             <form>
             <div className="mb-4">
-                <label htmlFor="id" className="block text-sm text-gray-700">
-                  ID:
+                <label htmlFor="classId" className="block text-sm text-gray-700">
+                  Class ID:
                 </label>
                 <input
-                  id="id"
-                  name="id"
+                  id="classId"
+                  name="classId"
                   type="text"
-                  value={id}
+                  value={classId}
                   disabled //makes field uneditable
-                  onChange={(e) => setid(e.target.value)}
+                  onChange={(e) => setClassId(e.target.value)}
                   className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-sm text-gray-700">
-                  Name:
+                <label htmlFor="title" className="block text-sm text-gray-700">
+                  Title:
                 </label>
                 <input
-                  id="name"
-                  name="name"
+                  id="title"
+                  name="title"
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="role" className="block text-sm text-gray-700">
-                  Role:
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  defaultValue={role.toLowerCase()}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                >
-                  <option value="admin">Admin</option>
-                  <option value="staff">Staff</option>
-                  <option value="instructor">Instructor</option>
-                  <option value="student">Student</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm text-gray-700">
-                  Email:
+                <label htmlFor="code" className="block text-sm text-gray-700">
+                  Course Code:
                 </label>
                 <input
-                  id="email"
-                  name="email"
+                  id="code"
+                  name="code"
                   type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="instructor" className="block text-sm text-gray-700">
+                  Instructor:
+                </label>
+                <input
+                  id="instructor"
+                  name="instructor"
+                  type="text"
+                  value={instructor}
+                  onChange={(e) => setInstructor(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -130,7 +118,7 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
                 />
               </div>
               <div className="text-center flex justify-end my-7">
-              <button onClick={handleSave} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                <button onClick={handleSave} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Save Changes
                 </button>
                 <button onClick={onClose} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">

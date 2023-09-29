@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('student_profile_id');
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');
-            $table->integer('student_school_id')->nullable();
-            $table->integer('learners_reference_number');
+            $table->bigInteger('student_school_id')->nullable();
+            $table->bigInteger('learners_reference_number');
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name');
@@ -31,12 +31,12 @@ return new class extends Migration
             $table->string('sex_at_birth');
             $table->string('ethnicity');
             $table->string('special_needs')->nullable();
-            $table->string('contact_number');
+            $table->bigInteger('contact_number');
             $table->string('email_address');
             $table->string('home_address');
             $table->string('address_while_studying');
             $table->string('contact_person_name');
-            $table->integer('contact_person_number');
+            $table->bigInteger('contact_person_number');
             $table->string('contact_person_address');
             $table->string('contact_person_relationship');
             $table->string('section')->nullable();
