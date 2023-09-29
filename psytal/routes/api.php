@@ -30,3 +30,7 @@ Route::post('/archivelink', [LinksController::class, 'archiveLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
+
+Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
+Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+Route::post('/archivecurriculum', [CurriculumController::class, 'archiveCurriculum']);
