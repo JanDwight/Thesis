@@ -59,4 +59,5 @@ Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class,
 
 
 Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']);
 Route::post('/archivecurriculum', [CurriculumController::class, 'archiveCurriculum']);

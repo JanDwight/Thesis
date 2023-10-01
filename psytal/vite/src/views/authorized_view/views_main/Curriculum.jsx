@@ -4,7 +4,7 @@ import { useStateContext } from '../../../context/ContextProvider.jsx';
 import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
-import arhive from "@assets/delete.png"
+import archive from "@assets/delete.png"
 import ArchiveCourse from "../views_components/ArchiveCourse";
 
 export default function Curriculum(){
@@ -21,17 +21,6 @@ export default function Curriculum(){
             console.error(error);
           }
         };
-      
-        const onSubmitarchivecourse = async (curricula_id) => {
-          try {
-            const response = await axiosClient.post('/archivecurriculum', { curricula_id });
-            fetchCurriculum();
-            setShowCurriculum(false);
-        } catch (error) {
-            // Handle errors
-            console.error(error);
-        }
-        };
         
     
       // Calling the AddCourse
@@ -41,7 +30,7 @@ export default function Curriculum(){
             fetchCurriculum();
           }, []);
         
-          const fetchCurriculum = async () => {
+        const fetchCurriculum = async () => {
             try {
               const response = await axiosClient.get('/getcurriculum');
               setCurriculum(response.data.curriculum);
@@ -140,8 +129,8 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.course_type}</td>
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
-                            <button onClick={() => onSubmitarchivecourse(curriculum.id)}>
-                              <img src={arhive} alt='archive' className='h-7 w-7' />
+                            <button onClick={() => setShowArchivecourse(true)}>
+                              <img src={archive} alt='archive' className='h-7 w-7' />
                             </button>
                           </td>
                         </tr>

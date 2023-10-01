@@ -30,7 +30,6 @@ class AddCurriculumRequest extends FormRequest
             'hoursperWeek' => 'required|integer',
             'course_type' => 'string',
             'preReq' => 'string',
-
         ];
     }
 }

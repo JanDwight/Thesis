@@ -22,8 +22,7 @@ class CurriculumController extends Controller
             'course_title' => $data['course_title'],
             'hoursperWeek' => $data['hoursperWeek'],
             'course_type' => $data['course_type'],
-            'preReq' => $data['preReq'],
-            'archived' => $data['archived']
+            'preReq' => $data['preReq']
         ]);
 
         return response([
@@ -34,28 +33,29 @@ class CurriculumController extends Controller
     public function getCurriculum()
     {
         try {
-            $curriculum = Curriculum::all(); // Retrieve all curriculum from the database
+            $curriculum = curriculum::where('archived', 0)->get(); // Retrieve unarchived curriculum from the database
             return response()->json(['curriculum' => $curriculum], 200);
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unable to retrieve course'], 500);
         }
     }
-        public function archiveCurriculum(Request $request, $curriculum_id)
-        {
-            try {
-                //usused fix tables again
-                // Find the course by ID or fail with a 404 response if not found
-                $curriculum_id = classes::findOrFail($curriculum_id);
-        
-                // Update the course archived status to 1
-                $curriculum_id->update(['archived' => 1]);
-        
-                return response()->json(['message' => 'Course archived successfully']);
-            } catch (\Exception $e) {
-                // Handle exceptions, e.g., log the error
-                return response()->json(['message' => 'Error archiving course'], 500);
-            }
+    
+    public function archiveCurriculum(Request $request,$curriculum_id)
+    {
+        try {
+            // Find the curriculum record based on the provided $id
+            $curriculum = curriculum::findOrFail($curriculum_id);
+    
+            // Update the curriculum archived status to 1
+            $curriculum->update(['archived' => 1]);
+    
+            return response()->json(['message' => 'Course archived successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error archiving course'], 500);
         }
+    }
 
    
 

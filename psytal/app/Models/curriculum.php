@@ -9,7 +9,11 @@ class curriculum extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'curricula_id'; // Specify the primary key column name (if it's not 'id')
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
 
     protected $fillable = [
         'class_year',
