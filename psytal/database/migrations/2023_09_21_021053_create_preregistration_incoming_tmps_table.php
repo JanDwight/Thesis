@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('preregistration_incoming_tmps', function (Blueprint $table) {
-            $table->id('student_profile_id');
+            $table->id();
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');
             $table->bigInteger('student_school_id')->nullable();

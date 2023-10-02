@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
-    Route::get('/preregincommingtmpviewonly', [PreregistrationIncomingTmpController::class, 'show']);
+    Route::put('/preregview/{student_profile_id}', [PreregistrationIncomingTmpController::class, 'update']);
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
 });
 
@@ -56,7 +56,6 @@ Route::post('/archivelink', [LinksController::class, 'archiveLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
-
 
 Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
 Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']);

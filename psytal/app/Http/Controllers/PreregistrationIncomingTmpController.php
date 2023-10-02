@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PreRegistrationIncomingTmpRequest;
 use App\Models\preregistration_incoming_tmp;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +45,6 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_address' => $data['contact_person_address'],
             'contact_person_relationship' => $data['contact_person_relationship'],
             'pre_reg_status' => 'PENDING',
-            'type_of_student' => $data['type_of_student'],
         ]);
 
         return response([
@@ -59,7 +59,6 @@ class PreregistrationIncomingTmpController extends Controller
     {
 
         $PreReg = DB::table('preregistration_incoming_tmps')
-         ->select('last_name', 'first_name', 'middle_name', 'created_at', 'pre_reg_status', 'student_profile_id')
          ->get();
 
          
@@ -95,29 +94,29 @@ class PreregistrationIncomingTmpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(preregistration_incoming_tmp $preregistration_incoming_tmp)
-    {
-        
-        // $PreReg = DB::table('preregistration_incoming_tmps')
-        // ->get();
-
-        // return $PreReg->toArray();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(preregistration_incoming_tmp $preregistration_incoming_tmp)
-    {
-        //
-    }
+    public function show(Request $request, $student_profile_id)
+{
+    
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, preregistration_incoming_tmp $preregistration_incoming_tmp)
     {
-        //
+        $preregID = preregistration_incoming_tmp::find($preregistration_incoming_tmp);
+
+    if (!$preregID) {
+        // Handle the case where the preregID with the provided ID is not found
+        return response()->json(['message' => 'Pre-Registration Form Not Found'], 404);
+    }
+
+    try {
+        // Return the specific PreregistrationIncomingTmpController
+        return response()->json(['prereg' => $preregID], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Unable to retrieve course'], 500);
+    }
     }
 
     /**
