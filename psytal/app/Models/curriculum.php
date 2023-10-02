@@ -8,15 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class curriculum extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+
     protected $fillable = [
         'class_year',
         'semester',
-        'courseCode',
+        'course_code',
         'units',
-        'courseTitle',
+        'course_title',
         'hoursperWeek',
         'course_type',
         'preReq',
-        'grade',
+        'archived',
     ];
 }

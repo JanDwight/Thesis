@@ -13,7 +13,7 @@ export default function Links() {
   const [showArchivelink, setShowArchivelink]= useState(false);
   const [errors, setErrors] = useState({ __html: '' });
  
-    const addLink = async (linkData) => {
+    const addLinks = async (linkData) => {
       try {
         const response = await axios.post('/addlink', linkData);
         // Handle the response (e.g., show success message)
@@ -53,13 +53,6 @@ export default function Links() {
 
   
 
-  // Sample data 
-  const sampleLinks = [
-    { id: 1, class_code: 'C580', class_description: 'Psych1', instructor_name: 'John Doe' },
-    { id: 2, class_code: 'A381', class_description: 'Psych2', instructor_name: 'Sam Wilson' },
-    { id: 3, class_code: 'B492', class_description: 'Psych3', instructor_name: 'John Smith' },
-   
-  ];
 
   return (
     <>
@@ -84,43 +77,23 @@ export default function Links() {
       </div>
 
       <div className="mt-2">
-        <>
-            {links.length > 0
-      ? links.map((link) => (
-        <form>
-          <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl" onSubmit={handleSubmit}>
-            <div className="text-left">{link.class_code}</div>
-            <div className="text-left hidden md:hidden lg:contents">{link.class_description}</div>
-            <div className="text-left">{link.instructor_name}</div>
-          
-            <div>
-              <button onClick={() => onSubmitarchivelink(link.id)}>
-                <img src={arhive} alt='archive' className='h-7 w-7' />
-              </button>
-            </div>
-          </a>
-          </form>
-          
-        ))
-      : sampleLinks.map((link) => (
-          
-          <a key={link.id} className="bg-[#7EBA7E] rounded-full flex justify-between py-2 px-5 m-2 shadow-2xl">
-            <div className="text-left">{link.class_code}</div>
-            <div className="text-left hidden md:hidden lg:contents">{link.class_description}</div>
-            <div className="text-left">{link.instructor_name}</div>
-            <div>
-              <button onClick={() => setShowArchivelink(true)}>
-                <img src={arhive} alt='archive' className='h-7 w-7' />
-              </button>
-            </div>
-          </a>
-          
-        ))}
-        </>
-
+          {links.map((link) => (
+            <form key={link.id} onSubmit={(e) => e.preventDefault()}>
+              <a className="mx-7 font-bold flex flex-col-10 flex justify-between">
+                <div className="text-left">{link.class_code}</div>
+                <div className="text-left">{link.class_description}</div>
+                <div className="text-left">{link.instructor_name}</div>
+                <div className="text-left">{link.url}</div>
+                <div>
+                  <button onClick={() => onSubmitarchivelink(link.id)}>
+                    <img src={arhive} alt='archive' className='h-7 w-7' />
+                  </button>
+                </div>
+              </a>
+            </form>
+          ))}
+        </div>
       </div>
-
-    </div>
       
       <ReactModal
       isOpen={isModalOpen}
@@ -135,7 +108,6 @@ export default function Links() {
       <ArchiveLinks 
         showArchivelink={showArchivelink}
         onclose={() => setShowArchivelink(false)}
-        onSubmitarchivelink={onSubmitarchivelink}
       />
       
     </>

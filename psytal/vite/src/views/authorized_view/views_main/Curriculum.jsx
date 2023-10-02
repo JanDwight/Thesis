@@ -4,7 +4,7 @@ import { useStateContext } from '../../../context/ContextProvider.jsx';
 import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
-import arhive from "@assets/delete.png"
+import archive from "@assets/delete.png"
 import ArchiveCourse from "../views_components/ArchiveCourse";
 
 export default function Curriculum(){
@@ -21,17 +21,6 @@ export default function Curriculum(){
             console.error(error);
           }
         };
-      
-        const onSubmitarchivecourse = async (curriculumId) => {
-          try {
-            const response = await axiosClient.post('/archivecurriculum', { curriculumId });
-            fetchCurriculum();
-            setShowCurriculum(false);
-        } catch (error) {
-            // Handle errors
-            console.error(error);
-        }
-        };
         
     
       // Calling the AddCourse
@@ -41,7 +30,7 @@ export default function Curriculum(){
             fetchCurriculum();
           }, []);
         
-          const fetchCurriculum = async () => {
+        const fetchCurriculum = async () => {
             try {
               const response = await axiosClient.get('/getcurriculum');
               setCurriculum(response.data.curriculum);
@@ -109,43 +98,45 @@ export default function Curriculum(){
                     </div>
             </div>
             
-            <div className="m-5">
-                <div className="mx-7 font-bold flex flex-col-10 flex justify-between">
-                    <div>Class Year</div>
-                    <div>Semester</div>
-                    <div>Course Code</div>
-                    <div>Course Title</div>
-                    <div>Units</div>
-                    <div>Hours/Week</div>
-                    <div>Lec</div>
-                    <div>Lab</div>
-                    <div>Grade</div>
-                    <div>Action</div>
-                </div>
-            </div>
+            <div>
+            <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
+		            <thead>
+		              <tr>
+                    <th className="text-center">Class Year</th>
+                    <th className="text-center">Semester</th>
+                    <th className="text-center">Course Code</th>
+                    <th className="text-center">Units</th>
+                    <th className="text-center">Course Title</th>
+                    <th className="text-center">Hours/Week</th>
+                    <th className="text-center">Lec/Lab</th>
+                    <th className="text-center">Pre-Requisite</th>
+                    <th className="text-center">Action</th>
+		              </tr>
+                </thead>
 
-            <div className="m-2">
-              <>
-                  <form>
-                    <a key={curriculum.id} className="mx-7 font-bold flex flex-col-10 flex justify-between" onSubmit={addCourse}>
-                      <div className="text-left">{curriculum.classYear}</div>
-                      <div className="text-left">{curriculum.semester}</div>
-                      <div className="text-left">{curriculum.courseCode}</div>
-                      <div className="text-left">{curriculum.units}</div>
-                      <div className="text-left">{curriculum.courseTitle}</div>
-                      <div className="text-left">{curriculum.hoursperWeek}</div>
-                      <div className="text-left">{curriculum.lec}</div>
-                      <div className="text-left">{curriculum.lab}</div>
-                      <div className="text-left">{curriculum.preReq}</div>
-                      <div className="text-left">{curriculum.grade}</div>
-                      <div>
-                        <button onClick={() => onSubmitarchivecourse(curriculum.id)}>
-                          <img src={arhive} alt='archive' className='h-7 w-7' />
-                        </button>
-                      </div>
-                    </a>
-                  </form>
-              </>
+                <tbody>
+                    {curriculum.map((curriculum) => (
+                      <tr 
+                        key={curriculum.id} 
+                        className="bg-[#7EBA7E] p-5"
+                        onSubmit={addCourse}>
+                          <td className="text-center rounded-l-full p-2">{curriculum.class_year}</td>
+                          <td className="text-center p-2">{curriculum.semester}</td>
+                          <td className="text-center p-2">{curriculum.course_code}</td>
+                          <td className="text-center p-2">{curriculum.units}</td>
+                          <td className="text-center p-2">{curriculum.course_title}</td>
+                          <td className="text-center p-2">{curriculum.hoursperWeek}</td>
+                          <td className="text-center p-2">{curriculum.course_type}</td>
+                          <td className="text-center p-2">{curriculum.preReq}</td>
+                          <td className= "text-center rounded-r-full">
+                            <button onClick={() => setShowArchivecourse(true)}>
+                              <img src={archive} alt='archive' className='h-7 w-7' />
+                            </button>
+                          </td>
+                        </tr>
+                        ))}
+                </tbody>
+	          </table>
             </div>
           </div>
       
@@ -167,4 +158,3 @@ export default function Curriculum(){
         </>
 );
 }
-    

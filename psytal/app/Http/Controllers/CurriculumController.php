@@ -17,9 +17,9 @@ class CurriculumController extends Controller
         $curriculum = curriculum::create([
             'class_year' => $data['class_year'],
             'semester' => $data['semester'],
-            'courseCode' => $data['courseCode'],
+            'course_code' => $data['course_code'],
             'units' => $data['units'],
-            'courseTitle' => $data['courseTitle'],
+            'course_title' => $data['course_title'],
             'hoursperWeek' => $data['hoursperWeek'],
             'course_type' => $data['course_type'],
             'preReq' => $data['preReq']
@@ -33,29 +33,82 @@ class CurriculumController extends Controller
     public function getCurriculum()
     {
         try {
-            $curriculum = Curriculum::all(); // Retrieve all curriculum from the database
+            $curriculum = curriculum::where('archived', 0)->get(); // Retrieve unarchived curriculum from the database
             return response()->json(['curriculum' => $curriculum], 200);
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unable to retrieve course'], 500);
         }
     }
-        public function archiveCurriculum(Request $request)
+    
+    public function archiveCurriculum(Request $request,$curriculum_id)
     {
-        // Your archiving logic goes here
-        // You can access data from the request using $request->input('key')
-        // For example, if you want to archive a link by its ID
-        $curriculumId = $request->input('curriculumId');
-        $curriculum = Curriculum::find($curriculumId);
-        if ($curriculum) {
-            // Archive the curriculum (you need to define an 'archived' column in your database)
-            $curriculum->archived = true;
-            $curriculum->save();
-
-            return response()->json(['message' => 'Course archived successfully'], 200);
-        } else {
-            return response()->json(['error' => 'Course not found'], 404);
-            return response()->json(['errors' => $validator->errors()], 422);
+        try {
+            // Find the curriculum record based on the provided $id
+            $curriculum = curriculum::findOrFail($curriculum_id);
+    
+            // Update the curriculum archived status to 1
+            $curriculum->update(['archived' => 1]);
+    
+            return response()->json(['message' => 'Course archived successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error archiving course'], 500);
         }
+    }
+
+   
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(curricula $curricula)
+    {
+        
+        // $Curriculum = DB::table('curricula')
+        // ->get();
+
+        // return $Curriculum->toArray();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(curricula $curricula)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, curricula $curricula)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(curricula $curricula)
+    {
+        //
     }
 
 }

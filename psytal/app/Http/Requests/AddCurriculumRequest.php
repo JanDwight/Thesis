@@ -24,13 +24,12 @@ class AddCurriculumRequest extends FormRequest
         return [
             'class_year' => 'required|string',
             'semester' => 'required|string',
-            'courseCode' => 'required|string',
-            'courseTitle' => 'required|string',
+            'course_code' => 'required|string',
+            'course_title' => 'required|string',
             'units' => 'required|integer',
             'hoursperWeek' => 'required|integer',
             'course_type' => 'string',
             'preReq' => 'string',
-
         ];
     }
 }
