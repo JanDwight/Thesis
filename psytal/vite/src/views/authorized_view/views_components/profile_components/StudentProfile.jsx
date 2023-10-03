@@ -15,7 +15,7 @@ export default function StudentProfile({closeModal}) {
         sem_enrolled: "1st Semester, SY:2023-2024",
         email: "john.doe@example.com",
         contact_num:"09123456789",
-        date_of_birth: "09/22/200",
+        date_of_birth: "2000-09-22",
         address: "123, St., ABC",
         emergency_contact_name: "Muhamad",
         emergency_contact_num: "09123456789",
