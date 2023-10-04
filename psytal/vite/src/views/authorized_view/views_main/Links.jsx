@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import axiosClient from '../../../axios.js';
 import { useStateContext } from '../../../context/ContextProvider.jsx';
 import AddLinks from '../views_components/AddLinks.jsx';
 import ReactModal from 'react-modal';
 import arhive from "@assets/delete.png"
 import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
+import edit from "@assets/icons8createpost.png";
 
 
 
@@ -32,8 +33,7 @@ export default function Links() {
         console.error(error);
     }
 };
-    
-
+  
   // Calling the Addlink
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [links, setLinks] = useState([]);  
@@ -51,7 +51,80 @@ export default function Links() {
     }
   };
 
+  class LinksList extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        data: [], // Initialize with an empty array
+        isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
+        isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
+        selectedLink: null, // Store the selected Link for the modals
+      };
+    }
   
+    componentDidMount() {
+      this.fetchData();
+    }
+  
+    fetchData = () => {
+      axiosClient.get('/getlinks')
+        .then((response) => {
+          const data = response.data;
+  
+          // Map the roles to strings
+          const mappedData = data.map(link => ({
+            ...link,
+            // You can modify the fields as needed
+          }));
+  
+        })
+        .catch((error) => {
+          console.error('Error fetching data from the database:', error);
+        });
+    }
+  
+    handleArchiveClick = (link) => {
+      console.log('Archive Window Open');
+      this.setState({
+        selectedLink: link,
+        isArchiveLinksOpen: true,
+      });
+    };
+  
+    handleEditLinksClick = (link) => {
+      console.log('Edit Window Open');
+      this.setState({
+        selectedLink: link,
+        isEditLinksOpen: true,
+      });
+    };
+  
+    handleCloseArchiveLinks = () => {
+      console.log('Archive Links Closed');
+      this.setState({
+        isArchiveLinksOpen: false,
+      });
+    };
+  
+    handleCloseEditLinks = () => {
+      console.log('Edit Links Closed');
+      this.setState({
+        isEditLinksOpen: false,
+      });
+    };
+  
+    handleSaveLinkChanges = (updatedLink) => {
+      // saving
+      console.log('Link Changes Saved:', updatedLink);
+    };
+  
+    render() {
+      const { data, selectedLink } = this.state;
+    }
+  
+
+  }
+
 
 
   return (
@@ -79,11 +152,19 @@ export default function Links() {
       <div className="mt-2">
           {links.map((link) => (
             <form key={link.id} onSubmit={(e) => e.preventDefault()}>
-              <a className="mx-7 font-bold flex flex-col-10 flex justify-between">
+              <a className="mx-7 font-bold  flex-col-10 flex justify-between">
                 <div className="text-left">{link.class_code}</div>
                 <div className="text-left">{link.class_description}</div>
                 <div className="text-left">{link.instructor_name}</div>
                 <div className="text-left">{link.url}</div>
+                <div className="text-left">
+                <img
+                src={edit} // Replace 'editImage' with the path to your edit image
+                alt='edit'
+                className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                onClick={() => this.handleEditUsersClick(student)}
+                  />
+                  </div>
                 <div>
                   <button onClick={() => onSubmitarchivelink(link.id)}>
                     <img src={arhive} alt='archive' className='h-7 w-7' />
@@ -109,7 +190,17 @@ export default function Links() {
         showArchivelink={showArchivelink}
         onclose={() => setShowArchivelink(false)}
       />
-      
+
+    {this.state.isEditUsersOpen && (
+      <EditUsers
+        showModal={this.state.isEditUsersOpen}
+        onClose={this.handleCloseEditUsers}
+        user={selectedStudent} // Pass the selected student to EditUsers
+        onSave={this.handleSaveUserChanges} // Pass the save function
+      />
+    )}  
+
     </>
+    
   );
 }
