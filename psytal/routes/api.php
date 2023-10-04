@@ -10,7 +10,7 @@ use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ArchiveUserController;
 use App\Http\Controllers\ClassIndexController;
-use App\Http\Controllers\UpdateClassesController;
+use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
 use Illuminate\Http\Request;
@@ -42,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function() {
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
-    //Route::put('/updateclasses/{classId}', [UpdateClassesController::class],'updateclasses'); //<><><> update user
+    Route::put('/updateclasses/{id}', [UpdateClassController::class],'updateClasses'); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
