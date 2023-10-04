@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import axiosClient from '../../../axios.js';
+import EditLinks from '../views_components/EditLinks.jsx'; //<-- Import EditLinks component
 
 export default function AddLinks({closeModal}) { 
   const [formData, setFormData] = useState({
@@ -39,6 +40,7 @@ export default function AddLinks({closeModal}) {
     closeModal();
   };
 
+  
   return (
     <>
       {/* ... your JSX ... */}
@@ -87,7 +89,27 @@ export default function AddLinks({closeModal}) {
             onChange={handleChange}
             className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
           />
+           
         </div>
+        {/* ... your Archive form inputs ... */}
+        <>
+        {/* ... your JSX ... */}
+        <div className='flex justify-center font-bold text-4xl text-[#525252] mt-5'>Add Link</div>
+        <form>
+        <div>
+          {/* ... your form inputs ... */}
+          <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
+            Add Link
+          </button>
+          <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+            Cancel
+          </button>
+          
+        </div>
+        </form>
+      </>
+        
+     
         {/* ... your form inputs ... */}
         <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
           Add Link
@@ -102,7 +124,7 @@ export default function AddLinks({closeModal}) {
     
   );
 }
-    
+  
     
     
   

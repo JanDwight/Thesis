@@ -8,6 +8,7 @@ use App\Http\Controllers\TmpPreregistrationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\UpdateLinksController;
 use App\Http\Controllers\ArchiveUserController;
 use App\Http\Controllers\ClassIndexController;
 use App\Http\Controllers\UpdateClassesController;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
+   
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
@@ -50,9 +52,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
 });
 
-Route::post('/addlink', [LinksController::class, 'addLink']);
-Route::get('/getlinks', [LinksController::class, 'getLinks']);
-Route::post('/archivelink', [LinksController::class, 'archiveLink']);
+    Route::post('/addlink', [LinksController::class, 'addLink']);
+    Route::get('/getlinks', [LinksController::class, 'getLinks']);
+    Route::post('/archivelink', [LinksController::class, 'archiveLink']);
+    Route::put('/updatelink/{id}', [UpdateLinksController::class, 'updateLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
