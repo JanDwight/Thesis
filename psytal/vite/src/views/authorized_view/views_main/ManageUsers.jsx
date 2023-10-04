@@ -57,19 +57,30 @@ export default function ManageUsers() {
     //password generator
     const numbers = '0123456789';
     const symbols = '!@#$%^&*()_+{}[]~-';
-
+    const length = 12;
+    
+    const getRandomChar = (charSet) => {
+      const randomIndex = Math.floor(Math.random() * charSet.length);
+      return charSet.charAt(randomIndex);
+    };
+    
     let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
     if (includeNumbers) characters += numbers;
     if (includeSymbols) characters += symbols;
-
-    let newPassword = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters.charAt(randomIndex);
+    
+    let password = '';
+    
+    // Ensure at least one of each character type
+    password += getRandomChar('abcdefghijklmnopqrstuvwxyz');
+    password += getRandomChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    password += getRandomChar('0123456789');
+    password += getRandomChar('!@#$%^&*()_+{}[]~-');
+    
+    // Generate the rest of the password
+    for (let i = 4; i < length; i++) {
+      password += getRandomChar(characters);
     }
-
-    //const newPassword = 'P@55word'; //just for preventing errors
-    setPassword(newPassword);
 
     //---------------------------------------------------------------------------
 
@@ -79,7 +90,7 @@ export default function ManageUsers() {
     //---------------------------------------------------------------------------
 
     axiosClient
-      .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: password, role: parsedRole, email}) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
         // Close the modal
