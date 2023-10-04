@@ -59,7 +59,7 @@ export default function InstructorLayout() {
               <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
               <span className="justify-center items-center flex">
                     <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                       </span>
                 </p>
@@ -124,7 +124,7 @@ export default function InstructorLayout() {
           <div class="flex flex-col items-center mt-6 -mx-2">
             <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Instructor</p>
           </div>
 
           <div class="flex flex-col justify-between mt-2">
