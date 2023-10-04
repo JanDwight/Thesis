@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
-import axiosClient from '../../../axios.js';
-import "../../../../src/styles.css";
+import axiosClient from '../../../../axios';
+import "../../../../../src/styles.css";
 
 export default function PreRegistrationForm() {
   const handleChange = (event) => {

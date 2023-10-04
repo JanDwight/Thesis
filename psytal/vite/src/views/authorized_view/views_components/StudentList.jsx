@@ -149,8 +149,7 @@ class StudentList extends Component {
             user={selectedStudent} // Pass the selected student to EditUsers
             // Add other props/functions as needed for archiving
           />
-        )}
-
+        )} 
         {this.state.isEditUsersOpen && (
           <EditUsers
             showModal={this.state.isEditUsersOpen}

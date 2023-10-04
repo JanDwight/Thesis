@@ -42,6 +42,7 @@ class preregistration_incoming_tmp extends Model
             'contact_person_address',
             'contact_person_relationship',
             'pre_reg_status',
+            'type_of_student',
             
             
     ];

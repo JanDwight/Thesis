@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PreRegistrationIncomingTmpRequest;
 use App\Models\preregistration_incoming_tmp;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +43,8 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_number' => $data['contact_person_number'],
             'contact_person_address' => $data['contact_person_address'],
             'contact_person_relationship' => $data['contact_person_relationship'],
-            'pre_reg_status' => 'PENDING',
+            'pre_reg_status' => $data['pre_reg_status'],
+            'type_of_student' => $data['type_of_student']
         ]);
 
         return response([
@@ -102,27 +102,27 @@ class PreregistrationIncomingTmpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, preregistration_incoming_tmp $preregistration_incoming_tmp)
+    public function update(Request $request, $id)
     {
-        $preregID = preregistration_incoming_tmp::find($preregistration_incoming_tmp);
-
-    if (!$preregID) {
+        
+        $preregData = preregistration_incoming_tmp::find($id);
+        
+    if (!$preregData) {
         // Handle the case where the preregID with the provided ID is not found
-        return response()->json(['message' => 'Pre-Registration Form Not Found'], 404);
+        return response()->json(['message' => 'Form not found'], 404);
     }
 
-    try {
-        // Return the specific PreregistrationIncomingTmpController
-        return response()->json(['prereg' => $preregID], 200);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Unable to retrieve course'], 500);
-    }
+    // Extract the attributes from the request
+    $attributes = $request->all();
+    
+    $preregData->update($attributes); 
+    return response()->json(['message' => 'User updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(preregistration_incoming_tmp $preregistration_incoming_tmp)
+    public function destroy(preregistration_incoming_tmp $validatedData)
     {
         //
     }
