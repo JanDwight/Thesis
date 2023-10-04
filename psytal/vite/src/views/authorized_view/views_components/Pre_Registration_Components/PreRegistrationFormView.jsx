@@ -4,9 +4,8 @@ import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 
 export default function PreRegistrationFormView({prereg}, onClose) {
-  const [password, setPassword] = useState('');
-  const [includeNumbers] = useState(true); // Required by AddUsers
-  const [includeSymbols] = useState(true); // Required by AddUsers
+  const includeNumbers = true;  // Include numbers in the password
+  const includeSymbols = true;  // Include symbols in the password
   const role = "4";
 
   const [preregData, setPreregData] = useState(prereg, {
@@ -36,14 +35,18 @@ export default function PreRegistrationFormView({prereg}, onClose) {
     contact_person_number: '',
     contact_person_address: '',
     contact_person_relationship: '',
-    pre_reg_status: '',
-    type_of_student: '',});
+    pre_reg_status: 'Accepted',
+    type_of_student: 'Regular',
+  });
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   }
   
   const [error, setError] = useState({__html: ""});
+  const id = preregData.id;
+
+  console.log('id' + id);
 
   const onClickAccept = (ev) => {
     console.log(preregData)
@@ -55,57 +58,76 @@ export default function PreRegistrationFormView({prereg}, onClose) {
     //password generator
     const numbers = '0123456789';
     const symbols = '!@#$%^&*()_+{}[]~-';
-
+    const length = 12;
+    
+    const getRandomChar = (charSet) => {
+      const randomIndex = Math.floor(Math.random() * charSet.length);
+      return charSet.charAt(randomIndex);
+    };
+    
     let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
     if (includeNumbers) characters += numbers;
     if (includeSymbols) characters += symbols;
-
-    let newPassword = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters.charAt(randomIndex);
+    
+    let password = '';
+    
+    // Ensure at least one of each character type
+    password += getRandomChar('abcdefghijklmnopqrstuvwxyz');
+    password += getRandomChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    password += getRandomChar('0123456789');
+    password += getRandomChar('!@#$%^&*()_+{}[]~-');
+    
+    // Generate the rest of the password
+    for (let i = 4; i < length; i++) {
+      password += getRandomChar(characters);
     }
 
-    //const newPassword = 'P@55word'; //just for preventing errors
-    setPassword(newPassword);
+ 
+    console.log('includeNumbers:', includeNumbers);
+console.log('includeSymbols:', includeSymbols);
+console.log('length:', length);
+console.log('characters:', characters);
+
+    axiosClient.post('/adduser', {
+      name:fullName,
+      role: parseInt(role),
+      password: password,
+      email: preregData.email_address
+     })
 
     axiosClient
-       .post('/adduser', {
-        name:fullName,
-        role: parseInt(role),
-        password,
-        email: preregData.email_address
-       })
-    // .post('/preregincommingtmp', {
-    //   start_of_school_year: parseInt(preregData.start_of_school_year),
-    //   end_of_school_year: parseInt(preregData.end_of_school_year),
-    //   student_school_id: parseInt(preregData.student_school_id),
-    //   learners_reference_number: parseInt(preregData.learners_reference_number),
-    //   last_name: preregData.last_name,
-    //   first_name: preregData.first_name,
-    //   middle_name: preregData.middle_name,
-    //   maiden_name: preregData.maiden_name,
-    //   academic_classification: preregData.academic_classification,
-    //   last_school_attended: preregData.last_school_attended,
-    //   address_of_school_attended: preregData.address_of_school_attended,
-    //   degree: preregData.degree,
-    //   date_of_birth: preregData.date_of_birth,
-    //   place_of_birth: preregData.place_of_birth,
-    //   citizenship: preregData.citizenship,
-    //   sex_at_birth: preregData.sex_at_birth,
-    //   ethnicity: preregData.ethnicity,
-    //   special_needs: preregData.special_needs,
-    //   contact_number: parseInt(preregData.contact_number),
-    //   email_address: preregData.email_address,
-    //   home_address: preregData.home_address,
-    //   address_while_studying: preregData.address_while_studying,
-    //   contact_person_name: preregData.contact_person_name,
-    //   contact_person_number: parseInt(preregData.contact_person_number), 
-    //   contact_person_address: preregData.contact_person_address,
-    //   contact_person_relationship: preregData.contact_person_relationship,
-    //   pre_reg_status: preregData.pre_reg_status,
-    //   type_of_student: preregData.type_of_student,
-    // })
+    // create Update function for preregincommingtmp
+    .put(`/preregcheck/${id}`, {
+      start_of_school_year: parseInt(preregData.start_of_school_year),
+      end_of_school_year: parseInt(preregData.end_of_school_year),
+      student_school_id: parseInt(preregData.student_school_id),
+      learners_reference_number: parseInt(preregData.learners_reference_number),
+      last_name: preregData.last_name,
+      first_name: preregData.first_name,
+      middle_name: preregData.middle_name,
+      maiden_name: preregData.maiden_name,
+      academic_classification: preregData.academic_classification,
+      last_school_attended: preregData.last_school_attended,
+      address_of_school_attended: preregData.address_of_school_attended,
+      degree: preregData.degree,
+      date_of_birth: preregData.date_of_birth,
+      place_of_birth: preregData.place_of_birth,
+      citizenship: preregData.citizenship,
+      sex_at_birth: preregData.sex_at_birth,
+      ethnicity: preregData.ethnicity,
+      special_needs: preregData.special_needs,
+      contact_number: parseInt(preregData.contact_number),
+      email_address: preregData.email_address,
+      home_address: preregData.home_address,
+      address_while_studying: preregData.address_while_studying,
+      contact_person_name: preregData.contact_person_name,
+      contact_person_number: parseInt(preregData.contact_person_number), 
+      contact_person_address: preregData.contact_person_address,
+      contact_person_relationship: preregData.contact_person_relationship,
+      pre_reg_status: 'Accepted',
+      type_of_student: 'Regular',
+    })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
     })

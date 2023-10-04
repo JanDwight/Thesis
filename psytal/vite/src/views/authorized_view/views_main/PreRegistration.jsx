@@ -10,7 +10,6 @@ export default function PreRegistration() {
   const [data, setData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
 
- 
 const handleRowClick = (items) => {
   setIsPreRegFormModalOpen(true);
   setSelectedData(items);
@@ -53,7 +52,7 @@ const handleRowClick = (items) => {
               <tr 
                 onClick={() => handleRowClick(item)}
                 key={index} 
-                className={`${index % 2 === 0 ? 'bg-[#D0DDE1]' : 'bg-white'}`}
+                className={`${index % 2 === 0 ? 'bg-green-100' : 'bg-white'}`}
               >
               <td className="text-left p-2">
                 <div className="m-2">{item.full_name}</div>
@@ -61,8 +60,10 @@ const handleRowClick = (items) => {
               <td className="text-left p-2">
                 <div className="m-2">{item.created_at}</div>
               </td>
-              <td className="text-left p-2">
-                <div className="bg-blue-600 w-fit py-3 px-3 rounded-xl">{item.pre_reg_status}</div>
+              <td className="text-left p-1">
+                <div className={`bg-${item.pre_reg_status === 'Accepted' ? 'green' : 'blue'}-600 w-fit py-2 px-2 rounded-xl`}>
+                  {item.pre_reg_status}
+                </div>
               </td>
             </tr>
           ))}

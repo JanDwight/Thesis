@@ -44,9 +44,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
     //Route::put('/updateclasses/{classId}', [UpdateClassesController::class],'updateclasses'); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
-    
+    //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
-    Route::put('/preregview/{student_profile_id}', [PreregistrationIncomingTmpController::class, 'update']);
+    Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
+    
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
 });
 
