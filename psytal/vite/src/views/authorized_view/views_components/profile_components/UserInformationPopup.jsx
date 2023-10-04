@@ -16,17 +16,17 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
       };
 
   return (
-    <div class="flex-col mx-2 mb-2"> 
+    <div className="flex-col mx-2 mb-2"> 
         <div className='text-lg font-serif'>
             <i>User Informatiom -<strong> Admin</strong></i>
-        </div> <hr class="mt-2" />
+        </div> <hr className="mt-2" />
 
         
-            <table class="table-auto mt-5" style={{border:1}}>
+            <table className="table-auto mt-5" style={{border:1}}>
                 <tr className='bg-gray-200 '>
-                    <th class='px-5'>Name</th>
+                    <th className='px-5'>Name</th>
                     <td>
-                        <input class="bg-gray-200 "
+                        <input className="bg-gray-200 "
                             type="text"
                             name="name"
                             value={userinformation.displayname}
@@ -39,7 +39,7 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
                     </td>
                 </tr>
                 <tr>
-                    <th class='px-5'>Email</th>
+                    <th className='px-5'>Email</th>
                     <td>
                         <input 
                             type="email"
@@ -54,9 +54,9 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
                     </td>
                 </tr>
                 <tr className='bg-gray-200 '>
-                    <th class='px-5'>Position</th>
+                    <th className='px-5'>Position</th>
                     <td>
-                        <input class="bg-gray-200 "
+                        <input className="bg-gray-200 "
                         type='text'
                         name="position"
                         value={userinformation.position}

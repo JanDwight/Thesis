@@ -23,7 +23,7 @@ export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChang
   return (
     <div className="popup">
       <div className="popup-content">
-                <div class="flex flex-wrap flex-col mx-2 mb-2">
+                <div className="flex flex-wrap flex-col mx-2 mb-2">
                     <labe className="text-lg font-franklin">Password:</labe>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}

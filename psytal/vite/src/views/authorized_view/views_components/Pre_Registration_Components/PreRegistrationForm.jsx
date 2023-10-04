@@ -130,7 +130,7 @@ export default function PreRegistrationForm() {
           <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
             
               {/**=========================== Shoolyear - Date ==========================*/}  
-              <div class="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
+              <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
                     School year :
@@ -142,7 +142,7 @@ export default function PreRegistrationForm() {
                   <div className="flex items-center mt-2 pl-3">
                     <div className="relative w-fit">
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <img src={date} class='h-5 w-5'/>
+                        <img src={date} className='h-5 w-5'/>
                       </div>
                       
                       <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
@@ -160,7 +160,7 @@ export default function PreRegistrationForm() {
                     <span className="mx-4 text-gray-500">to</span>
                     <div className="relative w-fit">
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <img src={date} class='h-5 w-5'/>
+                        <img src={date} className='h-5 w-5'/>
                       </div>
                       <input
                         name="end"
@@ -179,7 +179,7 @@ export default function PreRegistrationForm() {
               </div> <hr />
 
               {/**=========================== Student ID - LRN ==========================*/} 
-              <div class="flex flex-wrap flex-row -mx-3 mb-2">
+              <div className="flex flex-wrap flex-row -mx-3 mb-2">
                     {/*column1*/}
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
@@ -209,7 +209,7 @@ export default function PreRegistrationForm() {
               </div> 
 
               {/**=========================== Last Name - Madain Name ==========================*/} 
-              <div class="flex flex-wrap flex-row -mx-3 mb-2">
+              <div className="flex flex-wrap flex-row -mx-3 mb-2">
                 {/**column1 */}
                 <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
@@ -262,7 +262,7 @@ export default function PreRegistrationForm() {
               
               {/**=========================== Academic Classification: Radio Buttons ==========================*/}
               {/**re-do the implementation of the radio button */} 
-              <div class="flex flex-wrap flex-row -mx-3 mb-2">
+              <div className="flex flex-wrap flex-row -mx-3 mb-2">
                 <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                   <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
                 </div>
@@ -318,7 +318,7 @@ export default function PreRegistrationForm() {
               </div> <hr />
 
               {/**=========================== Last School Attended - Degree Program ==========================*/} 
-              <div class="flex flex-wrap flex-row -mx-3 mb-2">
+              <div className="flex flex-wrap flex-row -mx-3 mb-2">
                 <div className="w-full px-3 mb-6 md:mb-0 mt-4">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lastschoolattended">
                     Last School Attended :
@@ -467,7 +467,7 @@ export default function PreRegistrationForm() {
               </div> <hr />
 
               {/**=========================== Emergy Contact ==========================*/} 
-              <div className="text-normal font-medium text-center mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</div> <hr class='mt-2'/>
+              <div className="text-normal font-medium text-center mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</div> <hr className='mt-2'/>
               <div className="flex flex-wrap -mx-3 mb-2"> 
                 
                 {/*column1*/}
@@ -516,7 +516,7 @@ export default function PreRegistrationForm() {
               </div> <hr />
 
               {/**=========================== Insurance Coverage ==========================*/} 
-              <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr class='mt-2'/>
+              <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
               <div className="flex flex-wrap -mx-3 mb-2">
                 {/*column1*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
@@ -554,7 +554,7 @@ export default function PreRegistrationForm() {
                 {/*column2*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                  <select  onChange={handleChange} class='ml-5'>
+                  <select  onChange={handleChange} className='ml-5'>
                     <option value="notvaccinated">Not Vaccinated</option>
                     <option value="notvaccinated">1st Dose</option>
                     <option value="notvaccinated">2nd Dose</option>
@@ -581,9 +581,9 @@ export default function PreRegistrationForm() {
                 <div className="text-normal font-medium text-center mt-2">
                   DIGITAL COMMUNICATION AND LITERACY:
                   <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
-                </div> <hr class='mt-2'/>
+                </div> <hr className='mt-2'/>
 
-                <div class="flex flex-wrap flex-row -mx-3 mb-2">
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   {/*column1*/}
                   <div className="w-full px-3 mb-6 md:mb-0 mt-5">
                       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
@@ -610,9 +610,9 @@ export default function PreRegistrationForm() {
             <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                 <div className="text-normal font-medium text-center mt-2">
                   AVAILMENT OF FREE HIGHER EDUCATION :
-                </div> <hr class='mt-2'/>
+                </div> <hr className='mt-2'/>
 
-                <div class="flex flex-wrap flex-row -mx-3 mb-2">
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   {/*column1*/}
                   <div className="w-full md:w-[15%] px-3  py-5 mb-6 md:mb-0 mt-2">
                     <label className=" text-gray-700 text-sm font-bold mb-2">
