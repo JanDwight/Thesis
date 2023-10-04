@@ -28,7 +28,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
         <div className="w-full px-4 mx-auto mt-6">
           <p className="block uppercase tracking-wide font-bold text-green-800 my-3 text-center">Archive User?</p>
-          <form class="text-center">
+          <form className="text-center">
             <br></br>
             <div className="flex items-center justify-center flex-row"> 
               <label htmlFor="user" className="px-6 font-bold">Selected User:</label>

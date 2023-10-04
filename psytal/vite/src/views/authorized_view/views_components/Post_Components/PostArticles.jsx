@@ -65,14 +65,14 @@ export default function PostArticles() {
   return (
     <>
     {/*Post article */}
-    <div class="px-10 my-4 py-6 bg-gray-200 rounded-2xl shadow-2xl">
-        <div class="flex justify-between items-center">
+    <div className="px-10 my-4 py-6 bg-gray-200 rounded-2xl shadow-2xl">
+        <div className="flex justify-between items-center">
             <div>
-                <a class="flex items-center" href="#">
-                    <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar"/>
+                <a className="flex items-center" href="#">
+                    <img className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar"/>
                     <div>
-                    <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
-                    <p class="font-light text-gray-600">mar 10, 2019</p>
+                    <h1 className="text-gray-700 font-bold">Khatab wedaa</h1>
+                    <p className="font-light text-gray-600">mar 10, 2019</p>
                     </div>
                     
                 </a>
@@ -81,7 +81,7 @@ export default function PostArticles() {
             
             <Menu>
                 <Menu.Button>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                     </svg>
                     <Menu.Items>
@@ -116,9 +116,9 @@ export default function PostArticles() {
             
         </div>
         
-        <div class="mt-2" onClick={toggleReadMoreLess}>
+        <div className="mt-2" onClick={toggleReadMoreLess}>
             {/**Title of the post */}
-            <a class="text-2xl text-gray-700 font-bold hover:text-gray-600">Announcement: No Classess</a>
+            <a className="text-2xl text-gray-700 font-bold hover:text-gray-600">Announcement: No Classess</a>
             {/**Attached a photo here */}
             <div className='flex justify-center items-center py-5'>
                 <img src={announcement} alt='announcement' height={150} width={150} ></img>
@@ -140,8 +140,8 @@ export default function PostArticles() {
             </p>
             
         </div>
-        <div class="flex justify-between items-center mt-4">
-            <a class="text-blue-600 hover:underline" onClick={toggleReadMoreLess}>{isShowMore ? "Read Less" : "Read More"}</a>
+        <div className="flex justify-between items-center mt-4">
+            <a className="text-blue-600 hover:underline" onClick={toggleReadMoreLess}>{isShowMore ? "Read Less" : "Read More"}</a>
         </div>
     </div>
 

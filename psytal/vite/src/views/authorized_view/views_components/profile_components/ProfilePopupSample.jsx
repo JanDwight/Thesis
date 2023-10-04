@@ -41,8 +41,8 @@ export default function ProfilePopupSample({closeModal}) {
     <div>
       <form action="">
         <div className='flex flex-row-3 w-full'>
-            <img class="object-cover w-20 h-20 mx-2 rounded-full" src={avatar} alt="avatar"/>
-            <div class="flex flex-row justify-between mx-2 mb-2">
+            <img className="object-cover w-20 h-20 mx-2 rounded-full" src={avatar} alt="avatar"/>
+            <div className="flex flex-row justify-between mx-2 mb-2">
                 <input
                     className="block w-full rounded-md py-1.5 text-gray-700 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" 
                     type="text"
@@ -74,7 +74,7 @@ export default function ProfilePopupSample({closeModal}) {
             </div>                        
         </div>
 
-        <div class="flex flex-wrap flex-col px-3 mx-16 mt-5 mb-2">
+        <div className="flex flex-wrap flex-col px-3 mx-16 mt-5 mb-2">
             <div className="w-full px-3 md:mb-0 mt-2">
                 <label className=" text-gray-700 text-lg font-bold mb-2  p-2 rounded-md bg-green-600">Account Informations: </label> 
             </div>
@@ -96,7 +96,7 @@ export default function ProfilePopupSample({closeModal}) {
                     fontSize: 16,
                     }}
                 />
-                <div class='p-2 bg-gray-200 rounded-md mx-2'>
+                <div className='p-2 bg-gray-200 rounded-md mx-2'>
                     <img onClick={()=> setIsEditEmailOpen(true)}
                         src={edit} // Replace 'editImage' with the path to your edit image
                         alt='edit'
@@ -122,7 +122,7 @@ export default function ProfilePopupSample({closeModal}) {
                     fontSize: 16,
                     }}
                 />
-                <div class='p-2 bg-gray-200 rounded-md mx-2'>
+                <div className='p-2 bg-gray-200 rounded-md mx-2'>
                     <img onClick={()=> setIsEditPasswordOpen(true)}
                         src={edit} // Replace 'editImage' with the path to your edit image
                         alt='edit'
