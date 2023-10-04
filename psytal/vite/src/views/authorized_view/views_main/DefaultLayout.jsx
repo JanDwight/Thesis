@@ -174,7 +174,7 @@ export default function DefaultLayout() {
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                    <UserIcon className=' w-8 h-8 rounded-full text-white bg-black' />
+                    <UserIcon className=' w-8 h-8 rounded-full text-white bg-black' onClick={() => setIsProfileOpen(true)} />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
