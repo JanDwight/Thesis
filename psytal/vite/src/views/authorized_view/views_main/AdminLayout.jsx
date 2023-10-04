@@ -56,7 +56,7 @@ export default function AdminLayout() {
   return (
     <>
       <div className="bg-white">
-      {/*NavBar*/}
+        {/*NavBar*/}
         <div className="flex-col flex">
           <div className="bg-viridian w-full border-b-2 border-gray-200">
             <div className=" h-16 justify-between items-center mx-auto px-10 flex">
@@ -223,38 +223,38 @@ export default function AdminLayout() {
       {/*sidebar*/}
       <div className="flex justify-start px-10 pt-5"> {/*Main container */}
       
-          <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl  " >
-            <div className="flex flex-col items-center mt-6 -mx-2">
-              <img className="object-cover w-15 h-15 mx-2 rounded-full cursor-pointer" src={avatar} alt="avatar" onClick={() => setIsProfileOpen(true)}/>
-              <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-              <p className="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
-            </div>
+        <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl  " >
+          <div className="flex flex-col items-center mt-6 -mx-2">
+            <img className="object-cover w-15 h-15 mx-2 rounded-full cursor-pointer" src={avatar} alt="avatar" onClick={() => setIsProfileOpen(true)}/>
+            <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
+            <p className="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
+          </div>
 
-            <div className="flex flex-col justify-between mt-2">
-              {navigation.map((item) => (
+          <div className="flex flex-col justify-between mt-2">
+            {navigation.map((item) => (
                             
-                            <NavLink
-                              key={item.name}
-                              to={item.to}
-                              className={({label, isActive, onClick }) => classNames(
-                                isActive
-                                  ? 'bg-lime-300  text-black'
-                                  : 'text-gray-600 hover:bg-gray-200 hover:text-black',
-                                'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
-                              )}
-                            >
-                              <img src={item.img} className='w-10  pr-5'/>
-                              {item.name}
-                            </NavLink>
-                          ))}
+              <NavLink
+                key={item.name}
+                to={item.to}
+                className={({label, isActive, onClick }) => classNames(
+                isActive
+                  ? 'bg-lime-300  text-black'
+                  : 'text-gray-600 hover:bg-gray-200 hover:text-black',
+                  'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
+                )}
+              >
+                <img src={item.img} className='w-10  pr-5'/>
+                  {item.name}
+              </NavLink>
+            ))}
         
-            </div>
-            </aside>
+          </div>
+        </aside>
                  
 
-            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
-            <Outlet />
-            </div>
+        <div className="flex flex-col w-3/4 pd-10 ml-10 ">
+          <Outlet />
+        </div>
         
         
       </div>
@@ -268,8 +268,8 @@ export default function AdminLayout() {
         <div><ProfilePopupSample closeModal={() => setIsProfileOpen(false)}/></div>
       </ReactModal>
 
-       {/**<!--Footer--> */}
-       <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
+      {/**<!--Footer--> */}
+      <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
       {/**<!-- Social icons --> */}
       <div className='border-b-2 border-neutral-200 p-3 dark:border-neutral-500'>
         <div className='container mx-auto px-10'>
@@ -407,6 +407,6 @@ export default function AdminLayout() {
         <a font-semibold="true" text-neutral-600="true" dark:text-neutral-400="true">Psychology Department</a>
       </div> {/**End of copyrights */}
     </footer>{/**End Footer */}
-    </>
+  </>
   );
 }
