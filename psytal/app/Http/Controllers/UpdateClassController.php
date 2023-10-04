@@ -12,14 +12,14 @@ class UpdateClassController extends Controller
         // Validate the incoming data
         //delete everythin make GPT do all of it
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'code' => 'required|integer|min:1|max:4',
-            'instructor' => 'required|email|max:255',
+            'course_title' => 'required|string|max:255',
+            'course_code' => 'required|string|max:255',
+            'instructor_name' => 'required|string|max:255',
             'lastedit' => 'required|date', // Modify this validation rule as needed
         ]);
 
         // Retrieve the user based on the provided ID
-        $subject = classes::find($id);
+        $subject = classes::where('class_id', $id)->first();
 
         if (!$subject) {
             // Handle the case where the user with the provided ID is not found

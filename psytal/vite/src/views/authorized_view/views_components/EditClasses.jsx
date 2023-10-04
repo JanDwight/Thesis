@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function EditClasses({ showModal, onClose, subject}) {
+export default function EditClasses({ showModal, onClose, subject, onSave}) {
   const [class_id, setClassId] = useState(subject.class_id);
-  const [title, setTitle] = useState(subject.course_title);
-  const [code, setCode] = useState(subject.course_code);
-  const [instructor, setInstructor] = useState(subject.instructor_name);
+  const [course_title, setTitle] = useState(subject.course_title);
+  const [course_code, setCode] = useState(subject.course_code);
+  const [instructor_name, setInstructor] = useState(subject.instructor_name);
   const [lastedit, setLastedit] = useState(subject.updated_at);
 
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
     // Create an object with the updated class data
+    console.log('Submitting', subject.class_id);
     const updatedClass = {
       // Assuming classId is still the same
-      title,
-      code,
-      instructor,
+      course_title,
+      course_code,
+      instructor_name,
       lastedit,
     };
   
@@ -22,6 +24,7 @@ export default function EditClasses({ showModal, onClose, subject}) {
       .put(`/updateclasses/${subject.class_id}`, updatedClass)
       .then((response) => {
         console.log('Class Updated Successfully');
+        onSave();
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -36,9 +39,9 @@ export default function EditClasses({ showModal, onClose, subject}) {
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
         <div className="w-full px-4 mx-auto mt-6">
-          <p className="block uppercase tracking-wide font-semibold text-green-800 my-3">Update Account Information</p>
+          <p className="block uppercase tracking-wide font-semibold text-green-800 my-3">Update Class Information</p>
           <div>
-            <form onSubmit={handleSubmit}>
+            <form>
             <div className="mb-4">
                 <label htmlFor="class_id" className="block text-sm text-gray-700">
                   Class ID:
@@ -61,7 +64,7 @@ export default function EditClasses({ showModal, onClose, subject}) {
                   id="title"
                   name="title"
                   type="text"
-                  value={title}
+                  value={course_title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
@@ -74,7 +77,7 @@ export default function EditClasses({ showModal, onClose, subject}) {
                   id="code"
                   name="code"
                   type="text"
-                  value={code}
+                  value={course_code}
                   onChange={(e) => setCode(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
@@ -87,7 +90,7 @@ export default function EditClasses({ showModal, onClose, subject}) {
                   id="instructor"
                   name="instructor"
                   type="text"
-                  value={instructor}
+                  value={instructor_name}
                   onChange={(e) => setInstructor(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
@@ -108,7 +111,7 @@ export default function EditClasses({ showModal, onClose, subject}) {
                 />
               </div>
               <div className="text-center flex justify-end my-7">
-                <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                <button onClick={handleSubmit} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Save Changes
                 </button>
                 <button onClick={onClose} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">

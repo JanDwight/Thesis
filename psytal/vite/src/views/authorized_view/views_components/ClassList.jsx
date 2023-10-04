@@ -61,12 +61,19 @@ class ClassList extends Component {
     });
   };
 
-//<><><> Close EditClasse modal
+//<><><> Close EditClasses modal
 handleCloseEditClasses = () => {
-  console.log('Edit Cancel Pressed');
   this.setState({
-    isEditClassessOpen: false,
+    isEditClassesOpen: false,
   });
+};
+
+handleSaveClassChanges = () => {
+  // saving
+  this.setState({
+    isEditClassesOpen: false,
+  });
+  console.log('Class Changes Saved:');
 };
 
   //for search
@@ -138,7 +145,8 @@ handleCloseEditClasses = () => {
           <EditClasses
             showModal={this.state.isEditClassesOpen}
             onClose={this.handleCloseEditClasses}
-            subject={selectedClass} // Pass the selected subject to EditClasses
+            subject={selectedClass} 
+            onSave={this.handleSaveClassChanges}
           />
         )}
 
