@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axiosClient from '../../../axios.js';
 
 export default function Dashboard() {
   const [data, setData] = useState({
@@ -11,33 +12,62 @@ export default function Dashboard() {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    //Paki Replace nalang
-    // fetch('/api/dashboard')
-    //   .then(response => response.json())
-    //   .then(data => setData(data));
     
-    // Sample data (Delete nalang after maconnect sa database)
-    const simulatedData = {
-      totalStudents: 45,
-      totalEmployees: 7,
-      totalPosts: 50,
-      totalLogins: 34
-    };
-    
-    setData(simulatedData);
-    // Sample table data
-    const simulatedTableData = [
-      { role: 'Student', createdAt: 1678920600000 }, 
-      { role: 'Employee', createdAt: 1678921800000 }, 
-      { role: 'Student', createdAt: 1678930200000 },
-      { type: 'Announcement', postAt: 1678930200000},
-      { type: 'Class Suspension', postAt: 1678930200000}
-     
-    ];
+    async function fetchData() {
+      try {
+        // Call your fetchUserCount function and store the result in count
+        const count = await fetchUserCount();
+        //more const for fetch student
+        //fetch employee
+        //total posts
+        //total logins, idk how to count
+        console.log('Total: ', count);
+        const updatedData = {
+          totalStudents: count,
+          totalEmployees: 7,
+          totalPosts: 50,
+          totalLogins: 34
+        };
+        
+        setData(updatedData);
+        // Sample table data
+        const simulatedTableData = [
+          { role: 'Student', createdAt: 1678920600000 }, 
+          { role: 'Employee', createdAt: 1678921800000 }, 
+          { role: 'Student', createdAt: 1678930200000 },
+          { type: 'Announcement', postAt: 1678930200000},
+          { type: 'Class Suspension', postAt: 1678930200000}
+        
+        ];
 
-    setTableData(simulatedTableData);
-  
+        setTableData(simulatedTableData);
+      } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.error('Error in useEffect:', error);
+      }
+    }
+
+    // Sample data (Delete nalang after maconnect sa database)
+        
+        fetchData();
   }, []);
+
+  //fetch usercount
+  //set filter for students and employees
+  async function fetchUserCount() {
+    try {
+      const response = await axiosClient.get('/users');
+      const data = response.data;
+      const count = data.length;
+      console.log('count', count)
+      return count;
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      throw error; // Rethrow the error for handling in the component
+    }
+  }
+
+
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
