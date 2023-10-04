@@ -9,6 +9,7 @@ import {link} from 'react-scroll'
 
 const navigation = [
   { name: 'Pre-Registration', to: 'preregistration'},
+  { name: 'Pre-Registration Continuing', to: 'preregistrationforcontinuing'},
   { name: 'Home', to: 'landingpage'},
   { name: 'Login', to: 'login'}
 ]
