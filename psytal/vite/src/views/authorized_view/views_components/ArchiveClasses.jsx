@@ -4,7 +4,6 @@ import axiosClient from '../../../axios.js';
 export default function ArchiveClasses({ showModal, onClose, subject }) {
 
   const handleSave = async() => {
-    //(onClose);
     //Create new migration w/ the archivde field
     try {
       // send selected subject to archive controller

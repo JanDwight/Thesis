@@ -53,7 +53,7 @@ class ClassList extends Component {
 
   //<><><> Open EditClasses modal
   handleEditClassesClick = (subject) => {
-    console.log('Edit Window Open', subject);
+    console.log('Edit Window Open');
     this.setState({
       selectedClass: subject,
       isEditClassesOpen: true,
@@ -68,15 +68,6 @@ handleCloseEditClasses = () => {
     isEditClassessOpen: false,
   });
 };
-
-//<><><> Handle saving classes changes from EditClasses modal
-handleSaveClassesChanges = () => {
-  // Handle saving the changes to the classes data
-  console.log('Class Changes Saved.');
-  // You can update your data or perform other actions here
-};
-
-
 
   //for search
   render() {
@@ -148,7 +139,6 @@ handleSaveClassesChanges = () => {
             showModal={this.state.isEditClassesOpen}
             onClose={this.handleCloseEditClasses}
             subject={selectedClass} // Pass the selected subject to EditClasses
-            onSave={this.handleSaveClassesChanges} // Pass the save function
           />
         )}
 
