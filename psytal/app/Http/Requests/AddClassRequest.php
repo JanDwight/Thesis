@@ -23,7 +23,6 @@ class AddClassRequest extends FormRequest
     {
         return [
             //must match names with controller
-            'curriculum' => '102',//for debugging purposes
             'course_title' => 'required|string|max:255',
             'courseCode' => 'required|string|max:10',
             'coursetype' => 'required|in:Lecture,Laboratory',

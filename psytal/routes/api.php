@@ -11,7 +11,7 @@ use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\UpdateLinksController;
 use App\Http\Controllers\ArchiveUserController;
 use App\Http\Controllers\ClassIndexController;
-use App\Http\Controllers\UpdateClassesController;
+use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
 use Illuminate\Http\Request;
@@ -44,11 +44,12 @@ Route::middleware('auth:sanctum')->group(function() {
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
-    //Route::put('/updateclasses/{classId}', [UpdateClassesController::class],'updateclasses'); //<><><> update user
+    Route::put('/updateclasses/{id}', [UpdateClassController::class],'updateClasses'); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
-    
+    //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
-    Route::get('/preregincommingtmpviewonly', [PreregistrationIncomingTmpController::class, 'show']);
+    Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
+    
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
 });
 
@@ -60,6 +61,6 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
 
-
 Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']);
 Route::post('/archivecurriculum', [CurriculumController::class, 'archiveCurriculum']);

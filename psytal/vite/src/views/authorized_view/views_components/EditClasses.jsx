@@ -1,41 +1,31 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function EditClasses({ showModal, onClose, subject, onSave }) {
-  const [classId, setClassId] = useState(subject.class_id);
+export default function EditClasses({ showModal, onClose, subject}) {
+  const [class_id, setClassId] = useState(subject.class_id);
   const [title, setTitle] = useState(subject.course_title);
   const [code, setCode] = useState(subject.course_code);
   const [instructor, setInstructor] = useState(subject.instructor_name);
   const [lastedit, setLastedit] = useState(subject.updated_at);
 
-  const handleSave = async () => {
+  const handleSubmit = async() => {
     // Create an object with the updated class data
     const updatedClass = {
-      classId, // Assuming classId is still the same
+      // Assuming classId is still the same
       title,
       code,
       instructor,
       lastedit,
     };
   
-    try {
-      // Send a PUT request to update the class data
-      console.log('Sending', classId);
-      const response = await axiosClient.put(`/updateclasses/${classId}`, updatedClass);
-  
-      if (response.status === 200) {
-        // Update was successful
-        onSave(updatedClass); // Pass the updated class data to the onSave function
-        // You can optionally close the modal or perform UI updates here
+    axiosClient
+      .put(`/updateclasses/${subject.class_id}`, updatedClass)
+      .then((response) => {
         console.log('Class Updated Successfully');
-    } else {
-        // Handle errors or display feedback to the user
-        console.error('Update failed');
-      }
-    } catch (error) {
-      // Handle network errors or other exceptions
-      console.error('Error:', error);
-    }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   if (!showModal) {
@@ -48,18 +38,18 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
         <div className="w-full px-4 mx-auto mt-6">
           <p className="block uppercase tracking-wide font-semibold text-green-800 my-3">Update Account Information</p>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
             <div className="mb-4">
-                <label htmlFor="classId" className="block text-sm text-gray-700">
+                <label htmlFor="class_id" className="block text-sm text-gray-700">
                   Class ID:
                 </label>
                 <input
-                  id="classId"
-                  name="classId"
+                  id="class_id"
+                  name="class_id"
                   type="text"
-                  value={classId}
+                  value={class_id}
                   disabled //makes field uneditable
-                  //onChange={(e) => setClassId(e.target.value)}
+                  onChange={(e) => setClassId(e.target.value)}
                   className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -72,7 +62,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="title"
                   type="text"
                   value={title}
-                  //onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -85,7 +75,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="code"
                   type="text"
                   value={code}
-                  //onChange={(e) => setCode(e.target.value)}
+                  onChange={(e) => setCode(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -98,7 +88,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                   name="instructor"
                   type="text"
                   value={instructor}
-                  //onChange={(e) => setInstructor(e.target.value)}
+                  onChange={(e) => setInstructor(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -118,7 +108,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave }) {
                 />
               </div>
               <div className="text-center flex justify-end my-7">
-                <button onClick={handleSave} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Save Changes
                 </button>
                 <button onClick={onClose} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">

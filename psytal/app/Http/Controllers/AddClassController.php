@@ -16,7 +16,6 @@ class AddClassController extends Controller
 
         $class = classes::create([
              //variable from data = > database
-             'App\Models\curriculum' => '102', //hardcoded, for debugging purposes, remove when curriculum checklist is done
              'course_title' => $data['course_title'],
              'year' => $data['year'],
              'semester' => $data['semester'],
