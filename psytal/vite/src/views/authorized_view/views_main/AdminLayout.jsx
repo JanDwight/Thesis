@@ -210,8 +210,35 @@ export default function AdminLayout() {
                           )}
                         </Menu.Item>
                       ))}
+                      <div className="border-t border-gray-500 mt-5 pb-3 pt-4">
+                        <div className="flex items-center px-5">
+                          <div className="flex-shrink-0">
+                          <UserIcon className=' w-8 h-8 rounded-full text-white bg-black hover:cursor-pointer' onClick={() => setIsProfileOpen(true)} />
+                          </div>
+                          
+                          <button
+                            type="button"
+                            className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                          >
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">View notifications</span>
+                            <BellIcon className="h-6 w-6" aria-hidden="true" />
+                          </button>
+                        </div>
+                        <div className="mt-3 space-y-1 px-2">
+                            <button
+                              as="a"
+                              href="#"
+                              onClick={(ev) => logout(ev)}
+                              className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                            >
+                              Sign out
+                            </button>
+                        </div>
+                      </div>
                     
                     </Menu.Items>
+
                   </Transition>
                 </Menu>
               </div>
@@ -263,9 +290,9 @@ export default function AdminLayout() {
       <ReactModal 
       isOpen={isProfileOpen}
       onRequestClose={() => setIsProfileOpen(false)}
-      className="w-[50%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+      className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 "
       >
-        <div><ProfilePopupSample closeModal={() => setIsProfileOpen(false)}/></div>
+        <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><ProfilePopupSample closeModal={() => setIsProfileOpen(false)}/></div>
       </ReactModal>
 
       {/**<!--Footer--> */}
