@@ -43,8 +43,8 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_number' => $data['contact_person_number'],
             'contact_person_address' => $data['contact_person_address'],
             'contact_person_relationship' => $data['contact_person_relationship'],
-            'pre_reg_status' => 'PENDING',
-            'type_of_student' => $data['type_of_student'],
+            'pre_reg_status' => $data['pre_reg_status'],
+            'type_of_student' => $data['type_of_student']
         ]);
 
         return response([
@@ -59,7 +59,6 @@ class PreregistrationIncomingTmpController extends Controller
     {
 
         $PreReg = DB::table('preregistration_incoming_tmps')
-         ->select('last_name', 'first_name', 'middle_name', 'created_at', 'pre_reg_status', 'student_profile_id')
          ->get();
 
          
@@ -95,35 +94,35 @@ class PreregistrationIncomingTmpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(preregistration_incoming_tmp $preregistration_incoming_tmp)
-    {
-        
-        // $PreReg = DB::table('preregistration_incoming_tmps')
-        // ->get();
-
-        // return $PreReg->toArray();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(preregistration_incoming_tmp $preregistration_incoming_tmp)
-    {
-        //
-    }
+    public function show(Request $request, $student_profile_id)
+{
+    
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, preregistration_incoming_tmp $preregistration_incoming_tmp)
+    public function update(Request $request, $id)
     {
-        //
+        
+        $preregData = preregistration_incoming_tmp::find($id);
+        
+    if (!$preregData) {
+        // Handle the case where the preregID with the provided ID is not found
+        return response()->json(['message' => 'Form not found'], 404);
+    }
+
+    // Extract the attributes from the request
+    $attributes = $request->all();
+    
+    $preregData->update($attributes); 
+    return response()->json(['message' => 'User updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(preregistration_incoming_tmp $preregistration_incoming_tmp)
+    public function destroy(preregistration_incoming_tmp $validatedData)
     {
         //
     }

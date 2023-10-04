@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('hoursperWeek');
             $table->string('course_type');
             $table->string('preReq');
+            $table->tinyInteger('archived')->default(0); // Add the 'archived' column <><>><>
             $table->timestamps();
         });
     }

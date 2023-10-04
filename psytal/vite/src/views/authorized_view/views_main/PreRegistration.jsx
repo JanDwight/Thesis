@@ -1,13 +1,20 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axiosClient from '../../../axios';
-import ReactModal from 'react-modal';import PreRegisatrationPDF from '../views_components/Pre_Registration_Components/PreRegisatrationPDF';
+import ReactModal from 'react-modal';
+import PreRegistrationFormView from '../views_components/Pre_Registration_Components/PreRegistrationFormView';
 
 export default function PreRegistration() {
   const [loading, setLoading] = useState(true);
   const [isPreRegFormModalOpen, setIsPreRegFormModalOpen] = useState(false);
   const [data, setData] = useState([]);
-  
+  const [selectedData, setSelectedData] = useState([]);
+
+const handleRowClick = (items) => {
+  setIsPreRegFormModalOpen(true);
+  setSelectedData(items);
+}
+
   useEffect(() => {
     setLoading(true);
     axiosClient
@@ -43,9 +50,9 @@ export default function PreRegistration() {
         <tbody>
           {data.map((item, index) => (
               <tr 
-                onClick={() => setIsPreRegFormModalOpen(true)} 
-                key={item.full_name} 
-                className={`${index % 2 === 0 ? 'bg-[#D0DDE1]' : 'bg-white'} p-5`}
+                onClick={() => handleRowClick(item)}
+                key={index} 
+                className={`${index % 2 === 0 ? 'bg-green-100' : 'bg-white'}`}
               >
               <td className="text-left p-2">
                 <div className="m-2">{item.full_name}</div>
@@ -53,8 +60,10 @@ export default function PreRegistration() {
               <td className="text-left p-2">
                 <div className="m-2">{item.created_at}</div>
               </td>
-              <td className="text-left p-2 ">
-                <div className="bg-blue-600 w-fit py-3 px-3 rounded-xl">{item.pre_reg_status}</div>
+              <td className="text-left p-1">
+                <div className={`bg-${item.pre_reg_status === 'Accepted' ? 'green' : 'blue'}-600 w-fit py-2 px-2 rounded-xl`}>
+                  {item.pre_reg_status}
+                </div>
               </td>
             </tr>
           ))}
@@ -68,10 +77,14 @@ export default function PreRegistration() {
       <ReactModal
             isOpen={isPreRegFormModalOpen}
             onRequestClose={() => setIsPreRegFormModalOpen(false)}
+            
             className="w-fit h-[98%] bg-[#FFFFFF] rounded-3xl shadow-2xl mt-[1%] mx-auto p-5 overflow-y-scroll"
         >
             <div>
-                <PreRegisatrationPDF closeModal={() => setIsPreRegFormModalOpen(false)}/>
+                <PreRegistrationFormView 
+                  closeModal={() => setIsPreRegFormModalOpen(false)}
+                  prereg={selectedData}
+                />
             </div>
         </ReactModal>
     </div>
