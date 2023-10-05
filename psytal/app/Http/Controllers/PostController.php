@@ -23,4 +23,13 @@ class PostController extends Controller
     return response(['post' => $post]);
     
     }
+
+    public function index()
+    {
+       // Retrieve all logs
+        $posts = posts::all();
+
+        return response()->json($posts);
+       
+    }
 }

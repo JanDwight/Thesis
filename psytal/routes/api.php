@@ -49,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
     Route::get('/logs', [LogsController::class, 'index']); //<><><> index for logs
+    Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (used for counting)
 
     //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);

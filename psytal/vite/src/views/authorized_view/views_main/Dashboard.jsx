@@ -10,7 +10,7 @@ export default function Dashboard() {
   });
 
   const [tableData, setTableData] = useState([]); //delete later
-  const [Archive_Data, setArchiveData] = useState([]);
+  const [Archive_Data, setArchiveData] = useState([]); //connect later
   const [Logs_Data, setLogsData] = useState([]);
 
   useEffect(() => {
@@ -20,14 +20,14 @@ export default function Dashboard() {
         // Call your fetchUserCount function and store the result in count
         const count_student = await fetchStudentCount(); //count students
         const count_employee = await fetchEmployeeCount(); //count employees
+        const count_posts = await fetchPostCount();
         const show_logs = await fetchLogs();
-        //count total posts *use postcontroller index
         //count total logins, idk how to count
         const updatedData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
-          totalPosts: 50,
-          totalLogins: 34
+          totalPosts: count_posts,
+          totalLogins: 'IP'
         };
         
         setData(updatedData);
@@ -79,7 +79,7 @@ export default function Dashboard() {
       throw error; // Rethrow the error for handling in the component
     }
   }
-  //fetch employees
+  //fetch employee count
   async function fetchEmployeeCount() {
     try {
       const response = await axiosClient.get('/users');
@@ -96,20 +96,29 @@ export default function Dashboard() {
       throw error; // Rethrow the error for handling in the component
     }
   }
+  //fetch post counts
+  async function fetchPostCount() {
+    try {
+      const response = await axiosClient.get('/posts');
+      const data = response.data;
+      const postcount = data.length;
+      return postcount;
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      throw error; // Rethrow the error for handling in the component
+    }
+  }
   //fetch logs
   async function fetchLogs() {
     try {
       const response = await axiosClient.get('/logs');
       const data = response.data;
-      //const logcount = data.length;
-      //return logcount;
       return data;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
       throw error; // Rethrow the error for handling in the component
     }
   }
-
 
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
@@ -155,7 +164,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/**Total Logins */}
+          {/**Total Logins 
+           * marked as pending IGNORE
+           * 
+          */}
           <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
             {/**----Head---- */}
             <div className='flex flex-col rounded-t-3xl items-center bg-dash4 border border-gray-300 pb-5 pt-5'>
@@ -183,7 +195,7 @@ export default function Dashboard() {
         <div>
             {Logs_Data.map((logs_table, index) => (
               <div key={index} className="border p-2">
-                  <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location}</div>
+                  <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
               </div>
                 ))}
         </div>

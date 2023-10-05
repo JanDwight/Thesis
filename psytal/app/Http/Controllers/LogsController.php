@@ -9,6 +9,7 @@ class LogsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * rem was here
      */
     public function index()
     {
