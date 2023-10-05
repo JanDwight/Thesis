@@ -16,15 +16,13 @@ export default function Dashboard() {
     async function fetchData() {
       try {
         // Call your fetchUserCount function and store the result in count
-        const count = await fetchUserCount();
-        //more const for fetch student
-        //fetch employee
-        //total posts
-        //total logins, idk how to count
-        console.log('Total: ', count);
+        const count_student = await fetchStudentCount(); //count students
+        const count_employee = await fetchEmployeeCount(); //count employees
+        //count total posts *use postcontroller index
+        //count total logins, idk how to count
         const updatedData = {
-          totalStudents: count,
-          totalEmployees: 7,
+          totalStudents: count_student,
+          totalEmployees: count_employee,
           totalPosts: 50,
           totalLogins: 34
         };
@@ -54,19 +52,40 @@ export default function Dashboard() {
 
   //fetch usercount
   //set filter for students and employees
-  async function fetchUserCount() {
+  async function fetchStudentCount() {
     try {
       const response = await axiosClient.get('/users');
       const data = response.data;
-      const count = data.length;
-      console.log('count', count)
-      return count;
+      //const count = data.length;
+      const student_count = data.reduce((acc, user) => {
+        if (user.role === 4) {
+          return acc + 1;
+        }
+        return acc;
+      }, 0);
+      return student_count;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
       throw error; // Rethrow the error for handling in the component
     }
   }
 
+  async function fetchEmployeeCount() {
+    try {
+      const response = await axiosClient.get('/users');
+      const data = response.data;
+      const employee_count = data.reduce((acc, user) => {
+        if (user.role >= 1 && user.role <= 3) {
+          return acc + 1;
+        }
+        return acc;
+      }, 0);
+      return employee_count;
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      throw error; // Rethrow the error for handling in the component
+    }
+  }
 
 
   const formatTimestamp = (timestamp) => {
