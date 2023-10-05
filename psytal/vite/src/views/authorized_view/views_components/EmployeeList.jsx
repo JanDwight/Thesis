@@ -111,7 +111,6 @@ class EmployeeList extends Component {
               <th className="bg-gray-200 text-left p-2">Name</th>
               <th className="bg-gray-200 text-left p-2">Role</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
-              {/* Add more headers as needed */}
             </tr>
           </thead>
           <tbody>
@@ -120,19 +119,18 @@ class EmployeeList extends Component {
                 <td className="text-left p-2">{employee.id}</td>
                 <td className="text-left p-2">{employee.name}</td>
                 <td className="text-left p-2">{employee.role}</td>
-                {/* Add more cells as needed */}
                 <td className="text-left p-2">
                 <div className="flex items-center">
                   <img
-                    src={edit} // Replace 'editImage' with the path to your edit image
+                    src={edit} 
                     alt='edit'
-                    className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    className='h-5 w-5 cursor-pointer'
                     onClick={() => this.handleEditUsersClick(employee)}
                   />
                   <img
-                    src={archive} // Replace 'archiveImage' with the path to your archive image
+                    src={archive} 
                     alt='archive'
-                    className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    className='h-7 w-7 cursor-pointer'
                     onClick={() => this.handleArchiveClick(employee)}
                   />
                 </div>

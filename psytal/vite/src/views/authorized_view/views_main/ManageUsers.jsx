@@ -123,15 +123,14 @@ export default function ManageUsers() {
       {/**Filter */}
         <div className="flex flex-row">
                   <div>
-                    <button>
+                    <button> 
                       {activeTab  === 1 && (
-                        <StudentsFilter filterText={filterText} />
+                        <span><StudentsFilter filterText={filterText} /></span>
                       )}
                       {activeTab === 2 && (
-                        <EmployeesFilter filterText={filterText} />
-                      )}
-                    </button>
-                    
+                        <span><EmployeesFilter filterText={filterText} /></span>
+                      )} 
+                    </button>                    
                   </div>
                 </div>
         <div>
