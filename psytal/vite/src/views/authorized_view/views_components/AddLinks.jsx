@@ -40,6 +40,18 @@ export default function AddLinks({closeModal}) {
     closeModal();
   };
 
+const updateLink = async (updatedLink) => {
+    try {
+      const response = await axios.put(`/updatelink/${updatedLink.id}`, updatedLink);
+      console.log('Link updated successfully:', response.data);
+      fetchLinks();
+      handleCloseEditLinks(); // Close the edit modal
+    } catch (error) {
+      console.error('Error updating link:', error);
+    }
+  };
+
+
   
   return (
     <>
@@ -92,22 +104,7 @@ export default function AddLinks({closeModal}) {
            
         </div>
         {/* ... your Archive form inputs ... */}
-        <>
-        {/* ... your JSX ... */}
-        <div className='flex justify-center font-bold text-4xl text-[#525252] mt-5'>Add Link</div>
-        <form>
-        <div>
-          {/* ... your form inputs ... */}
-          <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
-            Add Link
-          </button>
-          <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
-            Cancel
-          </button>
-          
-        </div>
-        </form>
-      </>
+
         
      
         {/* ... your form inputs ... */}
