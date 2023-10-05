@@ -90,8 +90,8 @@ const router = createBrowserRouter([
                 element: <Classes />
             },
             {
-                path: 'preenrollment',
-                element: <PreEnrollment />
+                path: 'preregistration',
+                element: <PreRegistration />
             },
             {
                 path: 'links',

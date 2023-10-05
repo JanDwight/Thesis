@@ -115,7 +115,7 @@ export default function ManageUsers() {
 
   return (
     <>
-  <div className="w-full h-[500px] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/**WHole container */}
+  <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/**WHole container */}
     {/**______________________1st Container from Manage - Btn Add________________________________*/}
     <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
       <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Manage Accounts</div>
@@ -123,15 +123,14 @@ export default function ManageUsers() {
       {/**Filter */}
         <div className="flex flex-row">
                   <div>
-                    <button>
+                    <button> 
                       {activeTab  === 1 && (
-                        <StudentsFilter filterText={filterText} />
+                        <span><StudentsFilter filterText={filterText} /></span>
                       )}
                       {activeTab === 2 && (
-                        <EmployeesFilter filterText={filterText} />
-                      )}
-                    </button>
-                    
+                        <span><EmployeesFilter filterText={filterText} /></span>
+                      )} 
+                    </button>                    
                   </div>
                 </div>
         <div>
@@ -148,7 +147,7 @@ export default function ManageUsers() {
 
     {/**___________________________2nd Container from Student to Filter________________________________ */}
     <div className="m-5 md:col-span-2 lg:col-span-1">
-        <div className="mx-7 font-bold flex flex-col-10 flex justify-between">
+        <div className="mx-7 font-bold flex flex-col-10 justify-between">
           <div>
             <ul className="flex mb-0 list-none flex-wrap px-4 flex-row text-gray-700">
               <Tab

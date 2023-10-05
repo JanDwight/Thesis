@@ -41,7 +41,7 @@ export default function Curriculum(){
 
   return (
         <>
-        <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[auto] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-6xl text-[#525252]">Curriculum</div>
                 {/*Filter and Add Courses */}

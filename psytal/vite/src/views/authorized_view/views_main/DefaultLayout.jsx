@@ -235,7 +235,7 @@ export default function DefaultLayout() {
      <ReactModal 
                                 isOpen={isProfileOpen}
                                 onRequestClose={() => setIsProfileOpen(false)}
-                                className="w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+                                className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
                                 >
                                   <div><StudentProfile closeModal={() => setIsProfileOpen(false)}/></div>
                                 </ReactModal>
