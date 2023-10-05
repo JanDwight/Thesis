@@ -18,4 +18,17 @@ class UserIndexController extends Controller
         return response()->json($users);
 
     }
+
+    public function count_students()
+    {
+        $studentCount = (int)User::where('role', 4)->count();
+        return response()->json($studentCount);
+
+    }
+
+    public function count_employee()
+    {
+        $employeeCount = (int)User::whereIn('role', [1, 2, 3])->count();
+        return response()->json($employeeCount);
+    }
 }

@@ -40,7 +40,6 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/adduser', [AuthController::class, 'adduser']);
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
-   
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
@@ -48,8 +47,11 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
-    Route::get('/logs', [LogsController::class, 'index']); //<><><> index for logs
-    Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (used for counting)
+    Route::get('/show_logs', [LogsController::class, 'show']); //<><><> index for logs
+    //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
+    Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
+    Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
+    Route::get('/count_employee', [UserIndexController::class, 'count_employee']); //<><><> count employees from users table
 
     //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
