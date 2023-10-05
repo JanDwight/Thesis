@@ -41,11 +41,11 @@ class CurriculumController extends Controller
         }
     }
     
-    public function archiveCurriculum(Request $request,$curriculum_id)
+    public function archiveCurriculum(Request $request,$curriculumId)
     {
         try {
             // Find the curriculum record based on the provided $id
-            $curriculum = curriculum::findOrFail($curriculum_id);
+            $curriculum = curriculum::findOrFail($curriculumId);
     
             // Update the curriculum archived status to 1
             $curriculum->update(['archived' => 1]);
