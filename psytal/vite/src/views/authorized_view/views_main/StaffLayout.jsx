@@ -18,7 +18,7 @@ const navigation = [
   { img: home, name: 'Home', to: 'home'},
   { img: users, name: 'Manage Accounts', to: 'manageusers'},
   { img: classicon, name: 'Classes', to: 'classes'},
-  { img: file, name: 'Pre-enrollment', to: 'preenrollment'},
+  { img: file, name: 'Pre-Registration', to: 'preregistration'},
   { img: link, name: 'Links', to: 'links'},
   { img: curriculum, name: 'Curriculum', to: 'curriculum'}
 ]
