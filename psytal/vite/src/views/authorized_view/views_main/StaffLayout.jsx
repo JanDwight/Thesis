@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
@@ -8,11 +8,13 @@ import avatar from "@assets/icons8avatar.png";
 import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
+import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
+import { StaffProfile } from '../views_components/profile_components/StaffProfile';
 
 const navigation = [
   { img: home, name: 'Home', to: 'home'},
@@ -27,6 +29,9 @@ function classNames(...classes) {
 }
 
 export default function StaffLayout() {
+  // Calling the ProfilePopupSample
+  const [isStaffProfileOpen, setIsStaffProfileOpen] = useState(false);
+
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
   if (!userToken) {
@@ -86,7 +91,7 @@ export default function StaffLayout() {
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <Menu.Item>
-                              <button 
+                              <button onClick={()=>setIsStaffProfileOpen(true)}
                                 className={'block px-4 py-2 text-sm text-gray-700'}
                               >
                                 Profile
@@ -155,7 +160,7 @@ export default function StaffLayout() {
                         <div className="border-t border-gray-500 mt-5 pb-3 pt-4">
                           <div className="flex items-center px-5">
                             <div className="flex-shrink-0">
-                            <UserIcon className=' w-8 h-8 rounded-full text-white bg-black hover:cursor-pointer' onClick={() => setIsProfileOpen(true)} />
+                            <UserIcon className=' w-8 h-8 rounded-full text-white bg-black hover:cursor-pointer' onClick={()=>setIsStaffProfileOpen(true)}/>
                             </div>
                             
                             <button
@@ -194,7 +199,7 @@ export default function StaffLayout() {
       <div className="flex justify-start px-10 pt-5"> {/*Main container */}
       
         <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl" >
-          <div className="flex flex-col items-center mt-6 -mx-2">
+          <div className="flex flex-col items-center mt-6 -mx-2 cursor-pointer" onClick={()=>setIsStaffProfileOpen(true)}>
             <img className="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
             <p className="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Staff</p>
@@ -226,6 +231,14 @@ export default function StaffLayout() {
         
         
       </div>
+
+      {/**Setting up the Staff Profile */}
+      <ReactModal
+        isOpen={isStaffProfileOpen}
+        onRequestClose={()=> setIsStaffProfileOpen(false)}
+        className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 ">
+          <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><StaffProfile /></div>
+      </ReactModal>
     </>
   );
 }

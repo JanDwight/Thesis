@@ -16,12 +16,14 @@ export default function Dashboard() {
     
     async function fetchData() {
       try {
-        // Call your fetchUserCount function and store the result in count
-        const count_student = await fetchStudentCount(); //count students
-        const count_employee = await fetchEmployeeCount(); //count employees
-        const count_posts = await fetchPostCount();
-        const show_logs = await fetchLogs();
+        const count_student = await fetchDataCount('/count_students');
+        const count_employee = await fetchDataCount('/count_employee');
+        const count_posts = await fetchDataCount('/count_posts');
         //count total logins, idk how to count
+
+        const show_logs = await fetchLogs();
+        //const show_archives (how to)
+        
         const responseData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
@@ -46,62 +48,30 @@ export default function Dashboard() {
         console.error('Error in useEffect:', error);
       }
     }
+
+     //fetch all data counts
+      async function fetchDataCount(endpoint) {
+        try {
+          const response = await axiosClient.get(endpoint);
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching data from the database:', error);
+        }
+      }
+
+      //fetch logs
+      async function fetchLogs() {
+        try {
+          const response = await axiosClient.get('/show_logs');
+          const data = response.data;
+          return data;
+        } catch (error) {
+          console.error('Error fetching data from the database:', error);
+        }
+      }
+
     fetchData();
   }, []);
-
-  //fetch student count
-  async function fetchStudentCount() {
-    try {
-      const response = await axiosClient.get('/users');
-      const data = response.data;
-      const student_count = data.reduce((acc, user) => {
-        if (user.role === 4) {
-          return acc + 1;
-        }
-        return acc;
-      }, 0);
-      return student_count;
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-    }
-  }
-  //fetch employee count
-  async function fetchEmployeeCount() {
-    try {
-      const response = await axiosClient.get('/users');
-      const data = response.data;
-      const employee_count = data.reduce((acc, user) => {
-        if (user.role >= 1 && user.role <= 3) {
-          return acc + 1;
-        }
-        return acc;
-      }, 0);
-      return employee_count;
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-    }
-  }
-  //fetch post counts
-  async function fetchPostCount() {
-    try {
-      const response = await axiosClient.get('/posts');
-      const data = response.data;
-      const postcount = data.length;
-      return postcount;
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-    }
-  }
-  //fetch logs
-  async function fetchLogs() {
-    try {
-      const response = await axiosClient.get('/logs');
-      const data = response.data;
-      return data;
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-    }
-  }
 
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
@@ -164,35 +134,35 @@ export default function Dashboard() {
       
         
         {/**Archive: */}
-        <h2 className="text-base font-semibold mt-8 mb-2">Archive: </h2>
+        <h2 className="text-base font-semibold mt-8 mb-2">Recent Archives: </h2>
         <div>
-          {Logs_Data.length === 0 ? (
-              <p>No archives available</p> //default string
-              ) : (
-              Logs_Data.slice(0, 5).map((logs_table, index) => (
-                  <div key={index} className="border p-2">
-                      <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
-                  </div>
-                    ))
-          )}
+          {Logs_Data.map((logs_table, index) => (
+            <div key={index} className="border p-2">
+              <div className="text-sm ">
+                {logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table
+              </div>
+            </div>
+          ))}
           <div className="flex justify-between items-center">
-            <button className="text-sm p-2 rounded ml-auto">More Archives...</button>
+            <button className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
+              More Archives...
+            </button>
           </div>
         </div>
         {/**LOGS */}
-        <h2 className="text-base font-semibold mt-5 mb-2">Logs: </h2>
+        <h2 className="text-base font-semibold mt-5 mb-2">Recent Logs: </h2>
         <div>
-          {Logs_Data.length === 0 ? (
-            <p>No logs available</p> //default string
-            ) : (
-            Logs_Data.slice(0, 5).map((logs_table, index) => (
-                <div key={index} className="border p-2">
-                    <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
-                </div>
-            ))
-          )}
+          {Logs_Data.map((logs_table, index) => (
+            <div key={index} className="border p-2">
+              <div className="text-sm ">
+                {logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table
+              </div>
+            </div>
+          ))}
           <div className="flex justify-between items-center">
-            <button className="text-sm p-2 rounded ml-auto">More Logs...</button>
+            <button className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
+              More Logs...
+            </button>
           </div>
         </div>
     </div>

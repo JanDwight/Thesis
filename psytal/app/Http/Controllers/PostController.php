@@ -32,4 +32,10 @@ class PostController extends Controller
         return response()->json($posts);
        
     }
+
+    public function count_posts()
+    {
+        $postCount = (int)posts::count();
+        return response()->json($postCount);
+    }
 }
