@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\logs;
 use Illuminate\Http\Request;
+use App\Models\logs;
 
 class LogsController extends Controller
 {
@@ -12,7 +12,11 @@ class LogsController extends Controller
      */
     public function index()
     {
-        //
+       // Retrieve all logs
+        $logs = logs::all();
+
+        return response()->json($logs);
+       
     }
 
     /**

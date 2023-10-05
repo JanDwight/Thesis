@@ -14,6 +14,7 @@ use App\Http\Controllers\ClassIndexController;
 use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
+use App\Http\Controllers\LogsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
     Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
+    //dashboard tab
+    Route::get('/logs', [LogsController::class, 'index']); //<><><> index for logs
+
     //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
