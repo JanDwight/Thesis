@@ -163,7 +163,7 @@ export default function Curriculum(){
 
         <ArchiveCourse
           showArchivecourse={showArchivecourse}
-          onclose={() => setShowArchivecourse(false)}
+          // onclose={() => setShowArchivecourse(false)}
           curriculum={selectedcourse}
         />
           

@@ -4,18 +4,19 @@ import axiosClient from '../../../axios.js';
 export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) {
   
 
-  const handleSave = async() => {
+  const handleSave = async(e) => {
+    e.preventDefault();
     console.log("before");
     try {
       console.log("archiving");
       // send selected course to archive controller
       
-      const response= await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
+      const response = await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
       console.log(response.data);
-      console.log('Course archived successfully.');
+      
 
       // Close the modal
-      onClose();
+      //onClose();
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving course', error);

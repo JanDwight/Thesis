@@ -48,7 +48,7 @@ class CurriculumController extends Controller
             $curriculum = curriculum::find($curriculumId);
             
             // Update the curriculum archived status to 1
-            $curriculum->update(['archived' => 1]);
+            // $curriculum->update(['archived' => 1]);
             
             return response()->json(['message' => 'Archive course succesfully']);
 
@@ -60,13 +60,7 @@ class CurriculumController extends Controller
 
    
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
