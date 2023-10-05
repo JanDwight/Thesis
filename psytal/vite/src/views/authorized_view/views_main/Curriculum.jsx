@@ -6,20 +6,27 @@ import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
 import archive from "@assets/delete.png"
 import ArchiveCourse from "../views_components/ArchiveCourse";
+import { useAsyncValue } from 'react-router-dom';
 
 export default function Curriculum(){
       //Calling the ArchiveCourse
       const [showArchivecourse, setShowArchivecourse]= useState(false);
+      const [selectedcourse, setSelectedcourse] = useState([]);
       const [errors, setErrors] = useState({ __html: '' });
      
+      const handleArchiveClick = (curriculum) => {
+        setShowArchivecourse(true);
+        setSelectedcourse(curriculum);
+      }
+      
       const addCourse = async (CurriculumData) => {
-          try {
-            const response = await axios.post('/addcurriculum', CurriculumData);
+          //try {
+          //  const response = await axios.post('/addcurriculum', CurriculumData);
             // Handle the response (e.g., show success message)
-          } catch (error) {
+          //} catch (error) {
             // Handle errors (e.g., display validation errors)
-            console.error(error);
-          }
+          //  console.error(error);
+         // }
         };
         
     
@@ -38,10 +45,10 @@ export default function Curriculum(){
               console.error(error);
             }
           };
-
+          console.log(curriculum);
   return (
         <>
-        <div className="w-full h-[auto] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-6xl text-[#525252]">Curriculum</div>
                 {/*Filter and Add Courses */}
@@ -119,7 +126,7 @@ export default function Curriculum(){
                       <tr 
                         key={curriculum.id} 
                         className="bg-[#7EBA7E] p-5"
-                        onSubmit={addCourse}>
+                      >
                           <td className="text-center rounded-l-full p-2">{curriculum.class_year}</td>
                           <td className="text-center p-2">{curriculum.semester}</td>
                           <td className="text-center p-2">{curriculum.course_code}</td>
@@ -129,7 +136,7 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.course_type}</td>
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
-                            <button onClick={() => setShowArchivecourse(true)}>
+                            <button onClick={() => handleArchiveClick(curriculum)}>
                               <img src={archive} alt='archive' className='h-7 w-7' />
                             </button>
                           </td>
@@ -151,9 +158,11 @@ export default function Curriculum(){
         </ReactModal>
 
         <ArchiveCourse
-        showArchivecourse={showArchivecourse}
-        onclose={() => setShowArchivecourse(false)}
-      />
+
+          curriculum={selectedcourse}
+          showArchivecourse={showArchivecourse.showArchivecourse}
+          onclose={() => setShowArchivecourse(false)}
+        />
           
         </>
 );
