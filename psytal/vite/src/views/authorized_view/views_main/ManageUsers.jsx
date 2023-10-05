@@ -147,7 +147,7 @@ export default function ManageUsers() {
 
     {/**___________________________2nd Container from Student to Filter________________________________ */}
     <div className="m-5 md:col-span-2 lg:col-span-1">
-        <div className="mx-7 font-bold flex flex-col-10 flex justify-between">
+        <div className="mx-7 font-bold flex flex-col-10 justify-between">
           <div>
             <ul className="flex mb-0 list-none flex-wrap px-4 flex-row text-gray-700">
               <Tab
