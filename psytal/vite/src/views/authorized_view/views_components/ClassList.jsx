@@ -61,12 +61,19 @@ class ClassList extends Component {
     });
   };
 
-//<><><> Close EditClasse modal
+//<><><> Close EditClasses modal
 handleCloseEditClasses = () => {
-  console.log('Edit Cancel Pressed');
   this.setState({
-    isEditClassessOpen: false,
+    isEditClassesOpen: false,
   });
+};
+
+handleSaveClassChanges = () => {
+  // saving
+  this.setState({
+    isEditClassesOpen: false,
+  });
+  console.log('Class Changes Saved:');
 };
 
   //for search
@@ -90,41 +97,35 @@ handleCloseEditClasses = () => {
             <tr>
               <th className="text-left bg-gray-200 p-2">Course Code</th>
               <th className="bg-gray-200 text-left p-2">Description</th>
-              <th className="bg-gray-200 text-left p-2">Year/Section</th> {/*try concat*/}
+              <th className="bg-gray-200 text-left p-2">Year/Section</th> 
               <th className="bg-gray-200 text-left p-2">Instructor</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
-              {/* Add more table headers as needed */}
             </tr>
           </thead>
-          <tbody>
-            {filteredData.map((subject, index) => (
+          <tbody>{filteredData.map((subject, index) => (
               <tr key={index} className='odd:bg-green-100'>
                 <td className="text-left p-2">{subject.course_code}</td>
                 <td className="text-left p-2">{subject.course_title}</td>
-                <td className="text-left p-2">{subject.class_year}</td> {/*try concat with section*/}
+                <td className="text-left p-2">{subject.class_year}</td> 
                 <td className="text-left p-2">{subject.instructor_name}</td>
                 <td className="text-left p-2">
-                <div className="flex items-center">
-                  <img
-                    src={edit} // Replace 'editImage' with the path to your edit image
-                    alt='edit'
-                    className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
-                    onClick={() => this.handleEditClassesClick(subject)}
-                  />
-                  <img
-                    src={archive} // Replace 'archiveImage' with the path to your archive image
-                    alt='archive'
-                    className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
-                    onClick={() => this.handleArchiveClick(subject)}
-                  />
-                </div>
-              </td>
-                {/* Add more table cells for other columns */}
+                  <div className="flex items-center">
+                    <img
+                      src={edit}
+                      alt='edit'
+                      className='h-5 w-5 cursor-pointer'
+                      onClick={() => this.handleEditClassesClick(subject)}/>
+                    <img
+                      src={archive} 
+                      alt='archive'
+                      className='h-7 w-7 cursor-pointer' 
+                      onClick={() => this.handleArchiveClick(subject)}/>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-
         {this.state.isArchiveClassesOpen && (
           <ArchiveClasses
             showModal={this.state.isArchiveClassesOpen}
@@ -133,15 +134,14 @@ handleCloseEditClasses = () => {
             // Add other props/functions as needed for archiving
           />
         )}
-
         {this.state.isEditClassesOpen && (
           <EditClasses
             showModal={this.state.isEditClassesOpen}
             onClose={this.handleCloseEditClasses}
-            subject={selectedClass} // Pass the selected subject to EditClasses
+            subject={selectedClass} 
+            onSave={this.handleSaveClassChanges}
           />
         )}
-
       </div>
     );
   }

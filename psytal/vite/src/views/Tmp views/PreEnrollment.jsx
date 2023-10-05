@@ -69,7 +69,7 @@ export default function PreEnrollment() {
       <div className="w-full lg:w-8/12 px-4 container mx-auto  h-32">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0"> {/* Centered content */}
             <div className="rounded-t bg-grayGreen h-32 mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
-              <section class='flex items-center mx-20'>
+              <section className='flex items-center mx-20'>
                 <div className="flex items-center  ">
                   <img src={schoolLogo}
                    className="object-cover btn- h-14 w-14 rounded-full mr-2 bg-gray-300" alt="BSU Logo" />
@@ -106,7 +106,7 @@ export default function PreEnrollment() {
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0 mt-1">
             <form>
-              <div class="flex flex-wrap flex-row -mx-3 mb-6">
+              <div className="flex flex-wrap flex-row -mx-3 mb-6">
 {/** -------------------------COLUMN 1----------------------------------- */}
                 {/**Type of Student*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
@@ -270,7 +270,7 @@ export default function PreEnrollment() {
                         <div className="flex items-center mt-2">
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                              <img src={date} class='h-5 w-5'/>
+                              <img src={date} className='h-5 w-5'/>
                             </div>
                             <input
                               name="start"
@@ -285,7 +285,7 @@ export default function PreEnrollment() {
                           <span className="mx-4 text-gray-500">to</span>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                              <img src={date} class='h-5 w-5'/>
+                              <img src={date} className='h-5 w-5'/>
                             </div>
                             <input
                               name="end"
@@ -326,7 +326,7 @@ export default function PreEnrollment() {
 
   {/**------------------------------------------------------------------ */}
   <hr />
-              <div class="flex flex-wrap flex-row -mx-3 mb-6">
+              <div className="flex flex-wrap flex-row -mx-3 mb-6">
                 {/*column1*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
@@ -521,7 +521,7 @@ export default function PreEnrollment() {
                             </button>
                         </div>
                         {/**Total Unit */}
-                        <div class="w-full md:w-64 px-5 ml-56">
+                        <div className="w-full md:w-64 px-5 ml-56">
                               <label
                                 className="text-gray-700 text-xs font-bold mb-2 block"
                                 htmlFor="grid-totalunits"

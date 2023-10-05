@@ -33,7 +33,7 @@ export default function Classes(){
 
     return(
     <>
-        <div className="w-full h-[500px] rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[auto] rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Classes</div>
 
@@ -97,7 +97,7 @@ export default function Classes(){
                         
                         <div className="my-4 mx-4" id="magnifying_glass">
                           <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                           </svg>
                         </div>
               

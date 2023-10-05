@@ -65,7 +65,7 @@ export default function StudentProfile({closeModal}) {
                     className='cursor-pointer mx-3 px-2 py-1 bg-green-600 rounded-md'>User Information 
                 </label>
                 <label 
-                    className='cursor-pointer mx-3 px-2 py-1 bg-green-600 rounded-md'>Curriculum Checklist
+                    className='cursor-pointer mt-1 mx-3 px-2 py-1 bg-green-600 rounded-md'>Curriculum Checklist
                 </label>
             </div>                        
         </div>
@@ -144,7 +144,7 @@ export default function StudentProfile({closeModal}) {
     <ReactModal
     isOpen={isStudentEditEmailOpen}
     onRequestClose={() => setIsStudentEditEmailOpen(false)}
-    className="w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+    className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
         <div><StudentEditEmail displayData={displayData} onCloseStudentEditEmail={()=> setIsStudentEditEmailOpen (false)}/></div>
     </ReactModal>
@@ -153,7 +153,7 @@ export default function StudentProfile({closeModal}) {
     <ReactModal
     isOpen={isStudentEditPasswordOpen}
     onRequestClose={() => setIsStudentEditPasswordOpen(false)}
-    className="w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+    className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
         <div><StudentEditPassword displayData={displayData} onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)}/></div>
     </ReactModal>
@@ -162,7 +162,7 @@ export default function StudentProfile({closeModal}) {
     <ReactModal
     isOpen={isStudentUserInformationOpen}
     onRequestClose={()=> setIsStudentUserInformationOpen(false)}
-    className="w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+    className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
         <div><StudentUserInformationPopup displayData={displayData} onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)}/></div>
     </ReactModal>

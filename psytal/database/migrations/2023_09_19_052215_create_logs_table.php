@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('what_action');
-            $table->string('by_whom');
-            $table->integer('role');
-            $table->string('where');
-            $table->timestamp('when');
+            $table->string('action_taken');
+            $table->string('user');
+            $table->integer('user_role');
+            $table->string('location');
+            $table->timestamp('date');
         });
     }
 

@@ -18,16 +18,16 @@ export const EditDisplayName = ({ displayData, onCloseDisplayname }) => {
 
 
   return (
-    <div className="popup-container w-full">
-        <div className="popup-content relative flex flex-col min-w-0 break-words w-full rounded-t-lg px-4 py-5 bg-white border-0 mt-3">
+    <div className="">
+        <div className="relative flex flex-col min-w-0 break-words w-full rounded-t-lg px-4 py-5 bg-white border-0 mt-3">
             <form onSubmit={handleSubmit}>
-                <div class="flex flex-wrap flex-col mx-2 mb-2">
-                    <labe className="text-lg font-franklin">Display Name:</labe>
+                <div className="flex flex-wrap flex-col mx-2 mb-2">
+                    <label className="text-lg font-franklin">Display Name:</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="text"
                             name="displayname"
                             value={displayname.displayname}
-                            //onChange={handleChange}
+                            readOnly
                             placeholder="Displayname"
                             style={{
                                 border: 1,

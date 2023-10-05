@@ -18,7 +18,7 @@ const navigation = [
   { img: home, name: 'Home', to: 'home'},
   { img: users, name: 'Manage Accounts', to: 'manageusers'},
   { img: classicon, name: 'Classes', to: 'classes'},
-  { img: file, name: 'Pre-enrollment', to: 'preenrollment'},
+  { img: file, name: 'Pre-Registration', to: 'preregistration'},
   { img: link, name: 'Links', to: 'links'},
   { img: curriculum, name: 'Curriculum', to: 'curriculum'}
 ]
@@ -62,7 +62,7 @@ export default function StaffLayout() {
               <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
               <span className="justify-center items-center flex">
                     <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                       </span>
                 </p>
@@ -123,14 +123,14 @@ export default function StaffLayout() {
       {/*sidebar*/}
       <div className="flex justify-start px-10 pt-5"> {/*Main container */}
       
-        <aside class="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl" >
-          <div class="flex flex-col items-center mt-6 -mx-2">
-            <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
-            <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Staff</p>
+        <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl" >
+          <div className="flex flex-col items-center mt-6 -mx-2">
+            <img className="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
+            <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
+            <p className="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Staff</p>
           </div>
 
-          <div class="flex flex-col justify-between mt-2">
+          <div className="flex flex-col justify-between mt-2">
             {navigation.map((item) => (
                           
                           <NavLink
