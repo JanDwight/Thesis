@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../../../axios.js';
 
 export default function Dashboard() {
-  const [data, setData] = useState({
+  const [dash, setDash] = useState({
     totalStudents: 0,
     totalEmployees: 0,
     totalPosts: 0,
     totalLogins: 0
   });
 
-  const [tableData, setTableData] = useState([]); //delete later
   const [Archive_Data, setArchiveData] = useState([]); //connect later
   const [Logs_Data, setLogsData] = useState([]);
 
@@ -23,24 +22,14 @@ export default function Dashboard() {
         const count_posts = await fetchPostCount();
         const show_logs = await fetchLogs();
         //count total logins, idk how to count
-        const updatedData = {
+        const responseData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
           totalPosts: count_posts,
           totalLogins: 'IP'
         };
         
-        setData(updatedData);
-        // Sample table data
-        const tableData = [
-          { role: 'Student', createdAt: 1678920600000 }, 
-          { role: 'Employee', createdAt: 1678921800000 }, 
-          { role: 'Student', createdAt: 1678930200000 },
-          { type: 'Announcement', postAt: 1678930200000},
-          { type: 'Class Suspension', postAt: 1678930200000}
-          //# of items here influence the number of rows
-          //retrieve axios files here
-        ];
+        setDash(responseData);
 
         const Logs_Table = show_logs.map(log => ({
           action_taken: log.action_taken,
@@ -50,7 +39,6 @@ export default function Dashboard() {
           date: log.date,
         }));
 
-        setTableData(tableData);
         setLogsData(Logs_Table);
 
       } catch (error) {
@@ -66,7 +54,6 @@ export default function Dashboard() {
     try {
       const response = await axiosClient.get('/users');
       const data = response.data;
-      //const count = data.length;
       const student_count = data.reduce((acc, user) => {
         if (user.role === 4) {
           return acc + 1;
@@ -76,7 +63,6 @@ export default function Dashboard() {
       return student_count;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error for handling in the component
     }
   }
   //fetch employee count
@@ -93,7 +79,6 @@ export default function Dashboard() {
       return employee_count;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error for handling in the component
     }
   }
   //fetch post counts
@@ -105,7 +90,6 @@ export default function Dashboard() {
       return postcount;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error for handling in the component
     }
   }
   //fetch logs
@@ -116,7 +100,6 @@ export default function Dashboard() {
       return data;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error for handling in the component
     }
   }
 
@@ -136,7 +119,7 @@ export default function Dashboard() {
             </div>
             {/**----Body----- */}
             <div className='p-7'>
-              <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalStudents}</span>
+              <span className="text-4xl font-semibold text-green-600 mt-2">{dash.totalStudents}</span>
             </div>
           </div>
 
@@ -148,7 +131,7 @@ export default function Dashboard() {
             </div>
             {/**----Body---- */}
             <div className='p-7'>
-              <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalEmployees}</span>
+              <span className="text-4xl font-semibold text-green-600 mt-2">{dash.totalEmployees}</span>
             </div>
           </div>
 
@@ -160,13 +143,12 @@ export default function Dashboard() {
             </div>
             {/**----Body---- */}
             <div className='p-7'>
-              <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalPosts}</span>
+              <span className="text-4xl font-semibold text-green-600 mt-2">{dash.totalPosts}</span>
             </div>
           </div>
 
           {/**Total Logins 
            * marked as pending IGNORE
-           * 
           */}
           <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
             {/**----Head---- */}
@@ -175,7 +157,7 @@ export default function Dashboard() {
             </div>
             {/**----Body---- */}
             <div className='p-7'>
-              <span className="text-4xl font-semibold text-green-600 mt-2">{data.totalLogins}</span>
+              <span className="text-4xl font-semibold text-green-600 mt-2">{dash.totalLogins}</span>
             </div>
           </div>
         </div> 
@@ -184,20 +166,34 @@ export default function Dashboard() {
         {/**Archive: */}
         <h2 className="text-base font-semibold mt-8 mb-2">Archive: </h2>
         <div>
-          {tableData.map((item, index) => (
-              <div key={index} className="border p-2">
-                  <div className="text-sm ">posted {item.type} at {item.postAt}</div>
-              </div>
-                ))}
+          {Logs_Data.length === 0 ? (
+              <p>No archives available</p> //default string
+              ) : (
+              Logs_Data.slice(0, 5).map((logs_table, index) => (
+                  <div key={index} className="border p-2">
+                      <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
+                  </div>
+                    ))
+          )}
+          <div className="flex justify-between items-center">
+            <button className="text-sm p-2 rounded ml-auto">More Archives...</button>
+          </div>
         </div>
         {/**LOGS */}
         <h2 className="text-base font-semibold mt-5 mb-2">Logs: </h2>
         <div>
-            {Logs_Data.map((logs_table, index) => (
-              <div key={index} className="border p-2">
-                  <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
-              </div>
-                ))}
+          {Logs_Data.length === 0 ? (
+            <p>No logs available</p> //default string
+            ) : (
+            Logs_Data.slice(0, 5).map((logs_table, index) => (
+                <div key={index} className="border p-2">
+                    <div className="text-sm ">{logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table</div>
+                </div>
+            ))
+          )}
+          <div className="flex justify-between items-center">
+            <button className="text-sm p-2 rounded ml-auto">More Logs...</button>
+          </div>
         </div>
     </div>
    </div>

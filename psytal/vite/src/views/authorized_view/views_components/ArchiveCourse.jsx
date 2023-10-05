@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
 export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) {
+  
 
-  console.log(curriculum.id);
   const handleSave = async() => {
-
     try {
       // send selected course to archive controller
       const response= await axiosClient.put(`/archivecurriculum/${curriculum.id}`);

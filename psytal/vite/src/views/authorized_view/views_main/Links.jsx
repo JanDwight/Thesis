@@ -6,13 +6,16 @@ import ReactModal from 'react-modal';
 import arhive from "@assets/delete.png"
 import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 import edit from "@assets/icons8createpost.png";
-
+import archive from "@assets/delete.png"
 
 
 export default function Links() {
   //Calling the Archivelinks
   const [showArchivelink, setShowArchivelink]= useState(false);
   const [errors, setErrors] = useState({ __html: '' });
+  const [isEditLinksOpen, setIsEditLinksOpen] = useState(false);
+  const [selectedLink, setSelectedLink] = useState(null);
+
  
     const addLinks = async (linkData) => {
       try {
@@ -51,80 +54,48 @@ export default function Links() {
     }
   };
 
-  class LinksList extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        data: [], // Initialize with an empty array
-        isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
-        isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
-        selectedLink: null, // Store the selected Link for the modals
-      };
-    }
-  
-    componentDidMount() {
-      this.fetchData();
-    }
-  
-    fetchData = () => {
-      axiosClient.get('/getlinks')
-        .then((response) => {
-          const data = response.data;
-  
-          // Map the roles to strings
-          const mappedData = data.map(link => ({
-            ...link,
-            // You can modify the fields as needed
-          }));
-  
-        })
-        .catch((error) => {
-          console.error('Error fetching data from the database:', error);
-        });
-    }
-  
-    handleArchiveClick = (link) => {
-      console.log('Archive Window Open');
-      this.setState({
-        selectedLink: link,
-        isArchiveLinksOpen: true,
-      });
-    };
-  
-    handleEditLinksClick = (link) => {
-      console.log('Edit Window Open');
-      this.setState({
-        selectedLink: link,
-        isEditLinksOpen: true,
-      });
-    };
-  
-    handleCloseArchiveLinks = () => {
-      console.log('Archive Links Closed');
-      this.setState({
-        isArchiveLinksOpen: false,
-      });
-    };
-  
-    handleCloseEditLinks = () => {
-      console.log('Edit Links Closed');
-      this.setState({
-        isEditLinksOpen: false,
-      });
-    };
-  
-    handleSaveLinkChanges = (updatedLink) => {
-      // saving
-      console.log('Link Changes Saved:', updatedLink);
-    };
-  
-    render() {
-      const { data, selectedLink } = this.state;
-    }
-  
+      class LinksList extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            data: [], // Initialize with an empty array
+            isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
+            isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
+            selectedLink: null, // Store the selected Link for the modals
+          };
+        }
+      
+        componentDidMount() {
+          this.fetchData();
+        }
 
-  }
+      }
+        
+  //Update Axios
+  const updateLink = async (updatedLink) => {
+    try {
+      const response = await axios.put(`/updatelink/${updatedLink.id}`, updatedLink);
+      console.log('Link updated successfully:', response.data);
+      fetchLinks();
+      handleCloseEditLinks(); // Close the edit modal
+    } catch (error) {
+      console.error('Error updating link:', error);
+    }
+  };
 
+  const handleEditClick = (link) => {
+    setSelectedLink(link);
+    setIsEditLinksOpen(true);
+  };
+
+  const handleCloseEditLinks = () => {
+    setSelectedLink(null);
+    setIsEditLinksOpen(false);
+  };
+
+  useEffect(() => {
+    fetchLinks();
+  }, []);
 
 
   return (
@@ -141,41 +112,71 @@ export default function Links() {
         </div>
       </div>
     
+      <div>
+            <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
+		            <thead>
+		              <tr>
+                    <th className="text-center">Title</th>
+                    <th className="text-center">Description</th>
+                    <th className="text-center">Author</th>
+                    <th className="text-center">Action</th>
+		              </tr>
+                </thead>
+                 <tbody>
+                     {links.map((link) => (
+                      <tr 
+                        key={link.id} 
+                        className="bg-[#7EBA7E] p-5"
+                        onSubmit={addLinks}>
+                          <td className="text-center rounded-l-full p-2">{link.class_code}</td>
+                          <td className="text-center p-2">{link.class_description}</td>
+                          <td className="text-center p-2">{link.instructor_name}</td>
+                          <td className="text-center p-2">{link.url}</td>
+                          <td className= "text-center rounded-r-full">
+                            <button onClick={() => handleEditClick(link)}>
+                            <img src={edit} alt='edit' className='h-6 w-6' />
+                            </button>
+                            <button onClick={() => setShowArchivecourse(true)}>
+                              <img src={archive} alt='archive' className='h-7 w-7' />
+                            </button>
+                            
+                          </td>
+                        </tr>
+                        ))}
+                </tbody>
+	          </table>
+            </div>
+          </div>
 
-      <div className="mx-7 flex flex-col-4 mt-3 justify-between">
-        <div className='text-lg font-serif'>Title</div>
-        <div className="text-lg font-serif hidden md:hidden lg:contents">Description</div>
-        <div className='text-lg font-serif'>Author</div>
-        <div className="text-lg font-serif hidden md:hidden lg:contents">Action</div>
-      </div>
-
-      <div className="mt-2">
-          {links.map((link) => (
-            <form key={link.id} onSubmit={(e) => e.preventDefault()}>
-              <a className="mx-7 font-bold  flex-col-10 flex justify-between">
-                <div className="text-left">{link.class_code}</div>
-                <div className="text-left">{link.class_description}</div>
-                <div className="text-left">{link.instructor_name}</div>
-                <div className="text-left">{link.url}</div>
-                <div className="text-left">
-                <img
-                src={edit} // Replace 'editImage' with the path to your edit image
-                alt='edit'
-                className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
-                onClick={() => this.handleEditUsersClick(student)}
-                  />
-                  </div>
-                <div>
-                  <button onClick={() => onSubmitarchivelink(link.id)}>
-                    <img src={arhive} alt='archive' className='h-7 w-7' />
-                  </button>
-                </div>
-              </a>
-            </form>
-          ))}
-        </div>
-      </div>
+      {/* // <div className="mt-2">
+      //     {links.map((link) => ( */}
+      {/* //       <form key={link.id} onSubmit={(e) => e.preventDefault()}>
+      //         <a className="mx-7 font-bold  flex-col-10 flex justify-between">
+      //           <div className="text-left">{link.class_code}</div>
+      //           <div className="text-left">{link.class_description}</div>
+      //           <div className="text-left">{link.instructor_name}</div>
+      //           <div className="text-left">{link.url}</div>
+      //           <div className="text-left">
+      //           <img
+      //           src={edit} // Replace 'editImage' with the path to your edit image
+      //           alt='edit'
+      //           className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+      //           onClick={() => this.handleEditUsersClick(student)}
+      //             />
+      //             </div>
+      //           <div>
+      //             <button onClick={() => onSubmitarchivelink(link.id)}>
+      //               <img src={arhive} alt='archive' className='h-7 w-7' />
+      //             </button>
+      //           </div>
+      //         </a>
+      //       </form>
+      //     ))}
+      //   </div>
+      // </div> */}
+            
       
+
       <ReactModal
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
@@ -184,14 +185,16 @@ export default function Links() {
         <div>
           <AddLinks closeModal={() => setIsModalOpen(false)}/>
         </div>
+
+       {/* EditLinks modal */}
+      {isEditLinksOpen && (
+              <EditLinks
+                link={selectedLink}
+                onClose={handleCloseEditLinks}
+                onSave={updateLink}
+              />
+            )} 
       </ReactModal>
-
-      <ArchiveLinks 
-        showArchivelink={showArchivelink}
-        onclose={() => setShowArchivelink(false)}
-      />
-
-
 
     </>
     
