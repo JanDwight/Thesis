@@ -45,7 +45,7 @@ export default function Curriculum(){
               console.error(error);
             }
           };
-          console.log(curriculum);
+
   return (
         <>
         <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
@@ -147,7 +147,7 @@ export default function Curriculum(){
             </div>
           </div>
       
-          <ReactModal
+        <ReactModal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
             className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
@@ -158,10 +158,9 @@ export default function Curriculum(){
         </ReactModal>
 
         <ArchiveCourse
-
-          curriculum={selectedcourse}
-          showArchivecourse={showArchivecourse.showArchivecourse}
+          showArchivecourse={showArchivecourse}
           onclose={() => setShowArchivecourse(false)}
+          curriculum={selectedcourse}
         />
           
         </>
