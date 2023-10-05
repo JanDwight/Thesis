@@ -10,7 +10,7 @@ import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
-import { UserIcon, BellIcon } from '@heroicons/react/24/solid'
+import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 
@@ -89,6 +89,13 @@ export default function InstructorLayout() {
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                               <Menu.Item>
+                                <button 
+                                  className={'block px-4 py-2 text-sm text-gray-700'}
+                                >
+                                  Profile
+                                </button>
+                              </Menu.Item>
+                              <Menu.Item>
                                   <button
                                     onClick={(ev) => logout(ev)}
                                     className={'block px-4 py-2 text-sm text-gray-700'}
@@ -111,6 +118,75 @@ export default function InstructorLayout() {
                         </button>
                     </div>
                   </div>
+                  {/*Mobile Menu*/}
+                  <Menu as='div' className='relative z-50 lg:hidden'>
+                    <div className=''>
+                      <Menu.Button>
+                        <Bars3Icon className='w-10 h-10 text-white'/>
+                      </Menu.Button>
+                    </div>
+                    
+                    <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                      <Menu.Items className='absolute -right-10 w-[450%] origin-bottom-left py-5  bg-[#D9D9D9] rounded-3xl'>
+                        {navigation.map((item) => (
+                          <Menu.Item key={item.name}>
+                            {({active}) => (
+                              <NavLink
+                                key={item.name}
+                                to={item.to}
+                                className={({isActive}) => classNames(
+                                  isActive
+                                  ? 'bg-[#CCEFCC]  text-[#757575]'
+                                  : 'text-[#757575] hover:bg-gray-200 hover:text-black',
+                                  'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
+                                )}
+                              >
+                                <img src={item.img} className='w-10  pr-5'/>
+                                {item.name}
+                              </NavLink>
+                            )}
+                          </Menu.Item>
+                        ))}
+                        <div className="border-t border-gray-500 mt-5 pb-3 pt-4">
+                          <div className="flex items-center px-5">
+                            <div className="flex-shrink-0">
+                            <UserIcon className=' w-8 h-8 rounded-full text-white bg-black hover:cursor-pointer' onClick={() => setIsProfileOpen(true)} />
+                            </div>
+                            
+                            <button
+                              type="button"
+                              className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                            >
+                              <span className="absolute -inset-1.5" />
+                              <span className="sr-only">View notifications</span>
+                              <BellIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                          </div>
+                          <div className="mt-3 space-y-1 px-2">
+                              <button
+                                as="a"
+                                href="#"
+                                onClick={(ev) => logout(ev)}
+                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                              >
+                                Sign out
+                              </button>
+                          </div>
+                        </div>
+                      
+                      </Menu.Items>
+
+                    </Transition>
+                  </Menu>
+
               </div>
             </div>
           </div>
