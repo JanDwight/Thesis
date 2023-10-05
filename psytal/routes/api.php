@@ -55,7 +55,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
     
+    //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
+    Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+    Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
 });
 
     Route::post('/addlink', [LinksController::class, 'addLink']);
@@ -66,5 +69,3 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createTmpPreReg']);
 
-Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
-Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']);

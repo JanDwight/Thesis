@@ -45,10 +45,12 @@ class CurriculumController extends Controller
     {
         try {
             // Find the curriculum record based on the provided $id
-            $curriculumId = curriculum::findOrFail($curriculumId);
-    
+            $curriculum = curriculum::find($curriculumId);
+            
             // Update the curriculum archived status to 1
-            $curriculumId->update(['archived' => 1]);
+            $curriculum->update(['archived' => 1]);
+            
+            return response()->json(['message' => 'Archive course succesfully']);
 
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
