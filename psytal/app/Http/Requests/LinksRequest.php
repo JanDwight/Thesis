@@ -26,6 +26,7 @@ class LinksRequest extends FormRequest
             'class_description' => 'required|string',
             'instructor_name' => 'required|string',
             'url'=>'required|string'
+            
 
         ];
     }
