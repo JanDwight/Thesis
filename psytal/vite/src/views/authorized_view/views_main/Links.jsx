@@ -191,14 +191,7 @@ export default function Links() {
         onclose={() => setShowArchivelink(false)}
       />
 
-    {this.state.isEditUsersOpen && (
-      <EditUsers
-        showModal={this.state.isEditUsersOpen}
-        onClose={this.handleCloseEditUsers}
-        user={selectedStudent} // Pass the selected student to EditUsers
-        onSave={this.handleSaveUserChanges} // Pass the save function
-      />
-    )}  
+
 
     </>
     
