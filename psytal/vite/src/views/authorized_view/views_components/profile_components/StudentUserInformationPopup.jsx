@@ -9,15 +9,6 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
         setStudentUserInformation(event.target.value);
       };
 
-    // Generate an array of colors for the table rows.
-    const generateRowColors = () => {
-        const colors = [];
-        for (let i = 0; i < rows.length; i++) {
-        colors.push(i % 2 === 0 ? "white" : "lightgray");
-        }
-        return colors;
-    };
-
     //Bahalakana dito hahahha
     const handleSubmit = () => {
         onStudentUserInformationChange(student_userinformation);
