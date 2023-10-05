@@ -43,7 +43,6 @@ const handleRowClick = (items) => {
             <th className="text-left p-2">Name</th>
             <th className="text-left p-2">Date of Submition</th>
             <th className="text-left p-2">Status</th>
-            {/* Add more headers as needed */}
           </tr>
         </thead>
 
