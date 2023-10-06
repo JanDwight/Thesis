@@ -581,7 +581,7 @@ const handleRemoveFields = (index) => {
                 {/*column2*/}
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                  <select  onChange={handleChange} className='ml-5'>
+                  <select  /*onChange={handleChange}*/ className='ml-5'>
                     <option value="notvaccinated">Not Vaccinated</option>
                     <option value="notvaccinated">1st Dose</option>
                     <option value="notvaccinated">2nd Dose</option>
@@ -743,7 +743,7 @@ const handleRemoveFields = (index) => {
                   AVAILMENT OF FREE HIGHER EDUCATION :
                 </div> <hr className='mt-2'/>
 
-                <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                <div class="flex flex-wrap flex-row -mx-3 mb-2">
                   {/*column1*/}
                   <div className="w-full md:w-[15%] px-3  py-5 mb-6 md:mb-0 mt-2">
                     <label className=" text-gray-700 text-sm font-bold mb-2">
