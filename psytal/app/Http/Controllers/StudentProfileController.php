@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentProfileRequest;
 use App\Models\student_profile;
 use Illuminate\Http\Request;
 
 class StudentProfileController extends Controller
 {
+    public function createStudentProfileController(StudentProfileRequest $request)
+    {
+        //
+        
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +27,7 @@ class StudentProfileController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

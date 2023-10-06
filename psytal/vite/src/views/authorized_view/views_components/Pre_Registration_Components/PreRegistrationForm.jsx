@@ -5,8 +5,33 @@ import axiosClient from '../../../../axios';
 import "../../../../../src/styles.css";
 
 export default function PreRegistrationForm() {
-  const handleChange = (event) => {
+  const onhandleChange = (event) => {
     setSelectedValue(event.target.value);
+  }
+
+const [inputFields, setInputFields] = useState([
+    { classCode: '', courseCode: '', units: '', bcac: '' },
+  ]);
+//calling the Form in the adding of classes
+const handleSubmitCourseUnits = (e) => {
+    e.preventDefault();
+    console.log("InputFields", inputFields);
+  };
+//Changing the input fields
+const handleChangeInput = (index, event) => {
+    const values = [...inputFields];
+    values [index][event.target.name] = event.target.value;     
+    setInputFields(values);
+  }
+//For Adding
+const handleAddFields = () => {
+    setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
+  }
+//For removing
+const handleRemoveFields = (index) => {
+    const values  = [...inputFields];
+    values.splice(index, 1);
+    setInputFields(values);
   }
 
   const [error, setError] = useState({__html: ""});
@@ -38,7 +63,6 @@ export default function PreRegistrationForm() {
   const [emergencyContactAddress, setEmergencyContactAddress] = useState('');
   const [emergencyContactNumber, setEmergencyContactNumber] = useState('');
   const [relationship, setRelationship] = useState('');
-
   //the onSubmit function
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -72,6 +96,8 @@ export default function PreRegistrationForm() {
       contact_person_number: parseInt(emergencyContactNumber, 10), //theres an error here--doesnt accept multiple numbers
       contact_person_address: emergencyContactAddress,
       contact_person_relationship: relationship,
+      pre_reg_status: 'Pending',
+      type_of_student: 'Regular',
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
@@ -276,6 +302,7 @@ export default function PreRegistrationForm() {
                       id="shsgraduate"
                       value="SHS graduate" 
                       onChange={ev => setAcademicClassification(ev.target.value)}
+                      
                       />
                       <label
                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -516,186 +543,295 @@ export default function PreRegistrationForm() {
               </div> <hr />
 
               {/**=========================== Insurance Coverage ==========================*/} 
-              <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr class='mt-2'/>
-              <div className="flex flex-wrap -mx-3 mb-2">
-                {/*column1*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2">
-                    Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
-                  </label>
-                  <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                    {/**Radio buttion for Yes registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="yesregister"
-                        id="yesregister"
-                        value="option1" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">Yes
-                        </label>
-                    </div>
-                    {/**Radio buttion for No registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="noregister"
-                        id="noregister"
-                        value="option2" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">No
-                        </label>
-                    </div>
-                  </div>
-                  
-                </div>
-                {/*column2*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                  <select  onChange={handleChange} class='ml-5'>
-                    <option value="notvaccinated">Not Vaccinated</option>
-                    <option value="notvaccinated">1st Dose</option>
-                    <option value="notvaccinated">2nd Dose</option>
-                    <option value="notvaccinated">Booster</option>
-                  </select>
-                </div>
+                        <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
+                        <div className="flex flex-wrap -mx-3 mb-2">
+                            {/*column1*/}
+                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                                <label className=" text-gray-700 text-xs font-bold mb-2">
+                                    Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
+                                </label>
+                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                                {/**Radio buttion for Yes registered */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="yesregister"
+                                        id="yesregister"
+                                        value="option1" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="healthregistered">Yes
+                                    </label>
+                                </div>
+                                {/**Radio buttion for No registered */}
+                                <div className='mx-5 mt-2'>
+                                <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="noregister"
+                                        id="noregister"
+                                        value="option2" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="healthregistered">No
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            </div>
+                            {/*column2*/}
+                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
+                                <select  onChange={onhandleChange} className='ml-5'>
+                                    <option value="notvaccinated">Not Vaccinated</option>
+                                    <option value="notvaccinated">1st Dose</option>
+                                    <option value="notvaccinated">2nd Dose</option>
+                                    <option value="notvaccinated">Booster</option>
+                                </select>
+                            </div>
 
-                {/**/}
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
-                    Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
-                </div>
-              </div> <hr />
-          </div>
-        </div>
-        
-      {/**=========================== 3 ==========================*/}      
-      {/**Start of Filling the FORM */}
-        <div className="w-full container mx-auto">
-          <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
-            <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-                <div className="text-normal font-medium text-center mt-2">
-                  DIGITAL COMMUNICATION AND LITERACY:
-                  <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
-                </div> <hr class='mt-2'/>
-
-                <div class="flex flex-wrap flex-row -mx-3 mb-2">
-                  {/*column1*/}
-                  <div className="w-full px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
-                        Category :
-                      </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-category" type="text" placeholder=""/>                                           
-                  </div>
-                    {/*column2*/}
-                  <div className="w-full px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
-                        Level of Digital Literacy :
-                      </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-lodl" type="number" placeholder=""/>                      
-                  </div>
-                </div> <hr />
+                            {/**/}
+                            <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
+                                <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
+                                    Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
+                                </label>
+                                <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                                    {/**Radio buttion for Yes dependent */}
+                                    <div className='mx-5 mt-2'>
+                                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                            type="radio"
+                                            name="yesdependent"
+                                            id="yesdependent"
+                                            value="option1" />
+                                        <label
+                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                            htmlFor="healthdependent">Yes
+                                        </label>
+                                    </div>
+                                    {/**Radio buttion for No dependent */}
+                                    <div className='mx-5 mt-2'>
+                                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                            type="radio"
+                                            name="nodependent"
+                                            id="noredependent"
+                                            value="option2" />
+                                        <label
+                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                            htmlFor="healthdependent">No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <hr />
             </div>
           </div>
+        
+        {/**=========================== 3 ==========================*/}      
+        {/**Start of Filling the FORM */}
+        <div className="w-full lg:w-8/12 px-4 container mx-auto">
+            <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
+                <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
+                    <form>
+                        <div className="text-normal font-medium text-center mt-2">
+                            DIGITAL COMMUNICATION AND LITERACY:
+                            <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
+                        </div> <hr className='mt-2'/>
+
+                
+                        {/*column1*/}
+                        <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
+                                Category :
+                            </label>
+                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-col mb-2">
+                                {/**Radio buttion for High level technology */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="highlvl"
+                                        id="highlvl"
+                                        value="category1" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="categorytech">
+                                        <strong>High Level Technology: </strong>
+                                        <i>Availability of Devices-laptops, mobile phones, tablets, desktops, Internet connectvity-fast</i>
+                                    </label>
+                                </div>
+                                {/**Radio buttion for Medium level technology */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="mediumlvl"
+                                        id="mediumlvl"
+                                        value="category2" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="categorytech">
+                                        <strong>Medium Level Technology: </strong>
+                                        <i>Availability of Devices-Mostly available phones, Internet connectvity-slow</i>
+                                    </label>
+                                </div>
+                                {/**Radio buttion for Low level technology */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="lowlvl"
+                                        id="lowlvl"
+                                        value="category3" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="categorytech">
+                                        <strong>Low Level Technology: </strong>
+                                        <i>Availability of Devices-Some mobile phones or no technology, Internet connectvity-poor or no internet connection</i>
+                                    </label>
+                                </div>
+                            </div>                                         
+                        </div> <hr className='mt-2'/>
+
+                        {/*column2*/}
+                        <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
+                                Level of Digital Literacy :
+                            </label>
+                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                                {/**Radio buttion for Proficient literacy */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="proficient"
+                                        id="proficient"
+                                        value="lvl1" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="literacy">Proficient
+                                    </label>
+                                </div>
+                                {/**Radio buttion for Advanced literacy */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="advanced"
+                                        id="advanced"
+                                        value="lvl2" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="literacy">Advanced
+                                    </label>
+                                </div>
+                                {/**Radio buttion for Beginner literacy */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="beginner"
+                                        id="beginner"
+                                        value="lvl3" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="literacy">Beginner
+                                    </label>
+                                </div>
+                            </div>                      
+                        </div><hr />
+                    </form>
+                </div>
+            </div>
         </div>
 
       {/**=========================== 4 ==========================*/}      
-      {/**Start of Filling the FORM */}
-        <div className="w-full container mx-auto">
-          <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
-            <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-                <div className="text-normal font-medium text-center mt-2">
-                  AVAILMENT OF FREE HIGHER EDUCATION :
-                </div> <hr class='mt-2'/>
+        {/**Start of Filling the FORM */}
+        <div className="w-full lg:w-8/12 px-4 container mx-auto">
+            <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
+                <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
+                    <form>
+                        <div className="text-normal font-medium text-center mt-2">
+                            AVAILMENT FOR FREE HIGHER EDUCATION :
+                        </div> <hr className='mt-2'/>
 
-                <div class="flex flex-wrap flex-row -mx-3 mb-2">
-                  {/*column1*/}
-                  <div className="w-full md:w-[15%] px-3  py-5 mb-6 md:mb-0 mt-2">
-                    <label className=" text-gray-700 text-sm font-bold mb-2">
-                      STUDENT 
-                    </label>
-                  </div>
+                        <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                        {/*column1*/}
+                        <div className="w-full md:w-[15%] px-3  py-5 mb-6 md:mb-0 mt-2">
+                            <label className=" text-gray-700 text-sm font-bold mb-2">
+                                STUDENT 
+                            </label>
+                        </div>
 
-                  {/*column2*/}
-                  <div className="w-full md:w-[25%] px-3 mb-6 md:mb-0 mt-2">
-                    <label className=" text-gray-700 text-xs font-bold mb-2">
-                      Will you avail Free Higher Education? 
-                    </label>
-                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                      {/**Radio buttion for Yes registered */}
-                      <div className='mx-5 mt-2'>
-                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                          type="radio"
-                          name="yesavail"
-                          id="yesavail"
-                          value="option1" />
-                          <label
-                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                            htmlFor="yesavail">Yes
-                          </label>
-                      </div>
-                      {/**Radio buttion for No registered */}
-                      <div className='mx-5 mt-2'>
-                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                          type="radio"
-                          name="noavail"
-                          id="noavail"
-                          value="option2" />
-                          <label
-                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                            htmlFor="noavail">No
-                          </label>
-                      </div>
-                    </div>                  
-                  </div>
+                        {/*column2*/}
+                        <div className="w-full md:w-[25%] px-3 mb-6 md:mb-0 mt-2">
+                            <label className=" text-gray-700 text-xs font-bold mb-2">
+                                Will you avail Free Higher Education? 
+                            </label>
+                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                                {/**Radio buttion for Yes registered */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                    type="radio"
+                                    name="yesavail"
+                                    id="yesavail"
+                                    value="avail1" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="yesavail">Yes
+                                    </label>
+                                </div>
+                                {/**Radio buttion for No registered */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                    type="radio"
+                                    name="noavail"
+                                    id="noavail"
+                                    value="avail2" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="noavail">No
+                                    </label>
+                                </div>
+                            </div>                  
+                        </div>
 
-                  {/*column3*/}
-                  <div className="w-full md:w-[30%] px-3 mb-6 md:mb-0 mt-2">
-                    <label className=" text-gray-700 text-xs font-bold mb-2">
-                      Would you like to voluntarily Contribute any amount to BSU? 
-                    </label>
-                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                      {/**Radio buttion for Yes registered */}
-                      <div className='mx-5 mt-2'>
-                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                          type="radio"
-                          name="yescontribute"
-                          id="yescontribute"
-                          value="option1" />
-                          <label
-                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                            htmlFor="yescontribute">Yes
-                          </label>
-                      </div>
-                      {/**Radio buttion for No registered */}
-                      <div className='mx-5 mt-2'>
-                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                          type="radio"
-                          name="nocontribute"
-                          id="nocontribute"
-                          value="option2" />
-                          <label
-                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                            htmlFor="nocontribute">No
-                          </label>
-                      </div>
-                    </div>                  
-                  </div>
+                        {/*column3*/}
+                        <div className="w-full md:w-[30%] px-3 mb-6 md:mb-0 mt-2">
+                            <label className=" text-gray-700 text-xs font-bold mb-2">
+                                Would you like to voluntarily Contribute any amount to BSU? 
+                            </label>
+                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                                {/**Radio buttion for Yes registered */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="yescontribute"
+                                        id="yescontribute"
+                                        value="voluntary1" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="yescontribute">Yes
+                                    </label>
+                                </div>
+                                {/**Radio buttion for No registered */}
+                                <div className='mx-5 mt-2'>
+                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                        type="radio"
+                                        name="nocontribute"
+                                        id="nocontribute"
+                                        value="voluntary2" />
+                                    <label
+                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                                        htmlFor="nocontribute">No
+                                    </label>
+                                </div>
+                            </div>                  
+                        </div>
 
-                  {/**column4 */}
-                  <div className="w-full md:w-[30%] px-3 mb-6 md:mb-0 mt-2">
-                    <label className=" text-gray-700 text-xs font-bold mb-2">
-                      AMOUNT <em>(If YES, indicate amount)</em>
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-amtcontibute" type="number" placeholder=""/>
-                  </div>
+                        {/**column4 */}
+                        <div className="w-full md:w-[30%] px-3 mb-6 md:mb-0 mt-2">
+                            <label className=" text-gray-700 text-xs font-bold mb-2">
+                                AMOUNT <em>(If YES, indicate amount)</em>
+                            </label>
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-amtcontibute" type="number" placeholder=""/>
+                        </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-          </div>
         </div>
         {/**===========SUMBIT Button============= */}
         <div className="text-center flex justify-end my-8">

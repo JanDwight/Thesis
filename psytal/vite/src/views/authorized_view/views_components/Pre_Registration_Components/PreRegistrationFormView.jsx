@@ -130,6 +130,7 @@ console.log('characters:', characters);
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
+      window.location.reload();
     })
     .catch(( error ) => {
       if (error.response) {

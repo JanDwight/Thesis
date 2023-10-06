@@ -62,13 +62,13 @@ export default function ManageUsers() {
     if (includeNumbers) characters += numbers;
     if (includeSymbols) characters += symbols;
 
-    let newPassword = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      newPassword += characters.charAt(randomIndex);
-    }
+    // let newPassword = '';
+    // for (let i = 0; i < length; i++) {
+    //   const randomIndex = Math.floor(Math.random() * characters.length);
+    //   newPassword += characters.charAt(randomIndex);
+    // }
 
-    //const newPassword = 'P@55word'; //just for preventing errors
+    const newPassword = 'P@55word'; //just for preventing errors
     setPassword(newPassword);
 
     //---------------------------------------------------------------------------
@@ -79,7 +79,7 @@ export default function ManageUsers() {
     //---------------------------------------------------------------------------
 
     axiosClient
-      .post('/adduser', { name: fullName, password, role: parsedRole, email}) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: newPassword, role: parsedRole, email}) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
         // Close the modal
