@@ -1,19 +1,36 @@
 import React from 'react'
+import axiosClient from '../../../axios.js';
 
-export default function ArchiveLinks({showArchivelink, onclose, onSubmitarchivelink}) {
+export default function ArchiveLinks({onclose, selected}) {
+    console.log(selected);
+    console.log("before");
     
-    console.log('test');
+    const onSubmitarchivelink = async (e) => { 
+        console.log("after");
+        e.preventDefault();
+        try {
+            console.log("archiving");
+            const response = await axiosClient.put(`/archivelink/${selected.id}`, selected);
+            console.log('Link updated successfully:', response.data);
+            window.location.reload();
+
+            } catch (error) {
+            console.error('Error archiving link:', error);
+          }
+    };
+
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
         <div className="bg-gray-200 w-full lg:w-3/12 px-4 py-6 shadow-lg rounded-3xl">
             <div className="w-full px-4 mx-auto">
-                <form onSubmitarchivelink={onSubmitarchivelink}>
+                <form >
                 <h className='font-bold text-3xl text-[#525252] flex items-center justify-center pb-5'>Archive Link?</h>
                     {/**BUTTONS */}
                     <div className="text-center flex justify-end my-2">
                         {/**YES */}
-                        <button type="submit" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 w-full rounded-full">
+                        
+                        <button onClick={onSubmitarchivelink} type="submit" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 w-full rounded-full">
                             Yes
                         </button>
                         {/**NO */}

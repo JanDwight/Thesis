@@ -2,7 +2,7 @@ import React, { useState, } from 'react';
 import axiosClient from '../../../axios.js';
 import EditLinks from '../views_components/EditLinks.jsx'; //<-- Import EditLinks component
 
-export default function AddLinks({closeModal}) { 
+export default function AddLinks({closeModa}) { 
   const [formData, setFormData] = useState({
     class_code: '',
     class_description: '',
@@ -23,7 +23,7 @@ export default function AddLinks({closeModal}) {
     e.preventDefault();
     console.log('Form submitted!');  // Add this line
     // Make a POST request to your backend endpoint (/addlink)
-    axiosClient.post('/addlink', formData)
+    axiosClient.post('/addlink', selected)
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);

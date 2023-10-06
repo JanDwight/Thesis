@@ -22,10 +22,12 @@ class LinksRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // 'linkId' => 'required|integer',
             'class_code' => 'required|string',
             'class_description' => 'required|string',
             'instructor_name' => 'required|string',
-            'url'=>'required|string'
+            'url'=>'required|string',
+            'archived' => 'integer'
             
 
         ];
