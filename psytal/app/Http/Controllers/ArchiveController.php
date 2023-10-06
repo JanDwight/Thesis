@@ -41,7 +41,8 @@ class ArchiveController extends Controller
    {
        // order by descending order (most recent first)
        // send three items only
-       $archives = archive::orderBy('created_at', 'desc')->take(3)->get();
+       //$archives = archive::orderBy('created_at', 'desc')->take(3)->get();
+       $archives = archive::orderBy('created_at', 'desc')->get();
        return response()->json($archives);
    }
 

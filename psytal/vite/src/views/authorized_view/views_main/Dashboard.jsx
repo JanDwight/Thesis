@@ -18,7 +18,6 @@ export default function Dashboard() {
   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
 
   const openArchiveModal = () => {
-    console.log('archive open');
     setIsArchiveModalOpen(true);
   };
   
@@ -27,7 +26,6 @@ export default function Dashboard() {
   };
 
   const openLogModal = () => {
-    console.log('log open');
     setIsLogModalOpen(true);
   };
   
@@ -67,6 +65,7 @@ export default function Dashboard() {
         setLogsData(Logs_Table);
 
         const Archives_Table = show_archive.map( archive => ({
+          id: archive.id,
           item_name: archive.item_name,
           item_type: archive.item_type,
           origin_table: archive.origin_table,
@@ -169,10 +168,10 @@ export default function Dashboard() {
         {/**Archive: */}
         <h2 className="text-base font-semibold mt-8 mb-2">Recent Archives: </h2>
         <div>
-          {Archive_Data.map((archive_table, index) => (
+          {Archive_Data.slice(0,3).map((archive_table, index) => (
             <div key={index} className="border p-2">
               <div className="text-sm ">
-                {archive_table.item_type} {archive_table.item_name} is archived from: {archive_table.origin_table} table by user: {archive_table.archiver_name} and role: {archive_table.archiver_role} at {archive_table.archived_at}
+                {archive_table.item_type} {archive_table.item_name} has been archived from: {archive_table.origin_table} table by user: {archive_table.archiver_name} with role: {archive_table.archiver_role} on {archive_table.archived_at}
               </div>
             </div>
           ))}
@@ -185,13 +184,13 @@ export default function Dashboard() {
         {/**LOGS */}
         <h2 className="text-base font-semibold mt-5 mb-2">Recent Logs: </h2>
         <div>
-          {Logs_Data.map((logs_table, index) => (
-            <div key={index} className="border p-2">
-              <div className="text-sm ">
-                {logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table
-              </div>
+        {Logs_Data.slice(0, 3).map((logs_table, index) => (
+          <div key={index} className="border p-2">
+            <div className="text-sm ">
+              {logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table
             </div>
-          ))}
+          </div>
+        ))}
           <div className="flex justify-between items-center">
             <button onClick={openLogModal} className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
               More Logs...
