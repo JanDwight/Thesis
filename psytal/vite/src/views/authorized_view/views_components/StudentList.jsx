@@ -124,15 +124,15 @@ class StudentList extends Component {
                 <td className="text-left p-2">
                 <div className="flex items-center">
                   <img
-                    src={edit} // Replace 'editImage' with the path to your edit image
+                    src={edit} 
                     alt='edit'
-                    className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    className='h-5 w-5 cursor-pointer' 
                     onClick={() => this.handleEditUsersClick(student)}
                   />
                   <img
-                    src={archive} // Replace 'archiveImage' with the path to your archive image
+                    src={archive} 
                     alt='archive'
-                    className='h-7 w-7 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
+                    className='h-7 w-7 cursor-pointer' 
                     onClick={() => this.handleArchiveClick(student)}
                   />
                 </div>
@@ -149,8 +149,7 @@ class StudentList extends Component {
             user={selectedStudent} // Pass the selected student to EditUsers
             // Add other props/functions as needed for archiving
           />
-        )}
-
+        )} 
         {this.state.isEditUsersOpen && (
           <EditUsers
             showModal={this.state.isEditUsersOpen}

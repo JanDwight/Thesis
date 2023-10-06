@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\logs;
 use Illuminate\Http\Request;
+use App\Models\logs;
 
 class LogsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * rem was here
      */
     public function index()
     {
-        //
+        // Retrieve all logs starting from the most recent
+        $logs = logs::all();
+        return response()->json($logs);
     }
 
     /**
@@ -36,7 +39,10 @@ class LogsController extends Controller
      */
     public function show(logs $logs)
     {
-        //
+        // order by descending order (most recent first)
+        // send three items only
+        $logs = logs::orderBy('date', 'desc')->take(3)->get();
+        return response()->json($logs);
     }
 
     /**

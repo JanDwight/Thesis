@@ -8,11 +8,13 @@ use App\Http\Controllers\TmpPreregistrationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\UpdateLinksController;
 use App\Http\Controllers\ArchiveUserController;
 use App\Http\Controllers\ClassIndexController;
 use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
+use App\Http\Controllers\LogsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,24 +44,32 @@ Route::middleware('auth:sanctum')->group(function() {
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
-    Route::put('/updateclasses/{id}', [UpdateClassController::class],'updateClasses'); //<><><> update user
+    Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
+    //dashboard tab
+    Route::get('/show_logs', [LogsController::class, 'show']); //<><><> index for logs
+    //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
+    Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
+    Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
+    Route::get('/count_employee', [UserIndexController::class, 'count_employee']); //<><><> count employees from users table
+
     //Routes for PreregistrationIncomingTmpController
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
     
+    //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
+    Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+    Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
 });
 
-Route::post('/addlink', [LinksController::class, 'addLink']);
-Route::get('/getlinks', [LinksController::class, 'getLinks']);
-Route::post('/archivelink', [LinksController::class, 'archiveLink']);
+    Route::post('/addlink', [LinksController::class, 'addLink']);
+    Route::get('/getlinks', [LinksController::class, 'getLinks']);
+    Route::put('/archivelink', [LinksController::class, 'archiveLink']);
+    Route::put('/updatelink/{id}', [UpdateLinksController::class, 'updateLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createIncomingPreReg']);
 Route::post('/preregcontinuingtmp', [PreregistrationIncomingTmpController::class, 'createContinuingPreReg']);
 
-Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
-Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']);
-Route::post('/archivecurriculum', [CurriculumController::class, 'archiveCurriculum']);

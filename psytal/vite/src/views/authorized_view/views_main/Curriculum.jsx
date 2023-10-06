@@ -5,21 +5,29 @@ import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
 import archive from "@assets/delete.png"
+import edit from "@assets/icons8createpost.png";
 import ArchiveCourse from "../views_components/ArchiveCourse";
+import { useAsyncValue } from 'react-router-dom';
 
 export default function Curriculum(){
       //Calling the ArchiveCourse
       const [showArchivecourse, setShowArchivecourse]= useState(false);
+      const [selectedcourse, setSelectedcourse] = useState([]);
       const [errors, setErrors] = useState({ __html: '' });
      
+      const handleArchiveClick = (curriculum) => {
+        setShowArchivecourse(true);
+        setSelectedcourse(curriculum);
+      }
+      
       const addCourse = async (CurriculumData) => {
-          try {
-            const response = await axios.post('/addcurriculum', CurriculumData);
+          //try {
+          //  const response = await axios.post('/addcurriculum', CurriculumData);
             // Handle the response (e.g., show success message)
-          } catch (error) {
+          //} catch (error) {
             // Handle errors (e.g., display validation errors)
-            console.error(error);
-          }
+          //  console.error(error);
+         // }
         };
         
     
@@ -92,7 +100,7 @@ export default function Curriculum(){
                         </Menu>
                     </div>
                     <button onClick={() => setIsModalOpen(true)} 
-                        className="bg-[#0FE810] rounded-2xl  px-5 text-white font-size">
+                        className="bg-[#397439] rounded-2xl  px-5 text-white font-size">
                             Add Course
                     </button>
                     </div>
@@ -115,11 +123,11 @@ export default function Curriculum(){
                 </thead>
 
                 <tbody>
-                    {curriculum.map((curriculum) => (
+                    {curriculum.map((curriculum, index) => (
                       <tr 
-                        key={curriculum.id} 
-                        className="bg-[#7EBA7E] p-5"
-                        onSubmit={addCourse}>
+                        key={index} 
+                        className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`}
+                      >
                           <td className="text-center rounded-l-full p-2">{curriculum.class_year}</td>
                           <td className="text-center p-2">{curriculum.semester}</td>
                           <td className="text-center p-2">{curriculum.course_code}</td>
@@ -129,8 +137,11 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.course_type}</td>
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
-                            <button onClick={() => setShowArchivecourse(true)}>
-                              <img src={archive} alt='archive' className='h-7 w-7' />
+                            <button>
+                              <img src={edit} alt='edit' className='h-5 w-5' />
+                            </button>
+                            <button onClick={() => handleArchiveClick(curriculum)}>
+                              <img src={archive} alt='archive' className='h-7 w-7'/>
                             </button>
                           </td>
                         </tr>
@@ -140,7 +151,7 @@ export default function Curriculum(){
             </div>
           </div>
       
-          <ReactModal
+        <ReactModal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
             className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
@@ -151,9 +162,10 @@ export default function Curriculum(){
         </ReactModal>
 
         <ArchiveCourse
-        showArchivecourse={showArchivecourse}
-        onclose={() => setShowArchivecourse(false)}
-      />
+          showArchivecourse={showArchivecourse}
+          // onclose={() => setShowArchivecourse(false)}
+          curriculum={selectedcourse}
+        />
           
         </>
 );

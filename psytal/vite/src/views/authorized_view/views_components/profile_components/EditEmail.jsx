@@ -16,13 +16,13 @@ export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
   return (
     <div className="popup">
       <div className="popup-content">
-                <div class="flex flex-wrap flex-col mx-2 mb-2">
-                    <labe className="text-lg font-franklin">Email:</labe>
+                <div className="flex flex-wrap flex-col mx-2 mb-2">
+                    <label className="text-lg font-franklin">Email:</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="oldemail"
                             value={email.email}
-                            //onChange={handleEmailChange}
+                            readOnly
                             placeholder="Old Email"
                             style={{
                                 border: "none",

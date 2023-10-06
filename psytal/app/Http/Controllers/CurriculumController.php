@@ -41,16 +41,17 @@ class CurriculumController extends Controller
         }
     }
     
-    public function archiveCurriculum(Request $request,$curriculum_id)
+    public function archiveCurriculum(Request $request, $curriculumId)
     {
         try {
             // Find the curriculum record based on the provided $id
-            $curriculum = curriculum::findOrFail($curriculum_id);
-    
+            $curriculum = curriculum::find($curriculumId);
+            
             // Update the curriculum archived status to 1
-            $curriculum->update(['archived' => 1]);
-    
-            return response()->json(['message' => 'Course archived successfully']);
+             $curriculum->update(['archived' => 1]);
+            
+            return response()->json(['message' => 'Archive course succesfully']);
+
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
             return response()->json(['message' => 'Error archiving course'], 500);
@@ -59,13 +60,7 @@ class CurriculumController extends Controller
 
    
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.

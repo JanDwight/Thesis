@@ -84,9 +84,9 @@ export default function DefaultLayout() {
                     </form>
                   </div>
 
-                    <div className="hidden md:block">
-                      <div className="ml-4 flex items-center md:ml-6">
-                        {/* Profile dropdown */}
+                  <div className="hidden md:block">
+                    <div className="ml-4 flex items-center md:ml-6">
+                      {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full shadow-2xl shadow-black text-sm  focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -113,33 +113,32 @@ export default function DefaultLayout() {
                               >
                                 Profile
                               </button>
-                             
+                              
                             </Menu.Item>
-                              <Menu.Item>
-                                  <button
-                                    onClick={(ev) => logout(ev)}
-                                    className={'block px-4 py-2 text-sm text-gray-700'}
-                                  >
-                                    Sign out
-                                  </button>
-                              </Menu.Item>
+                            <Menu.Item>
+                              <button
+                                onClick={(ev) => logout(ev)}
+                                className={'block px-4 py-2 text-sm text-gray-700'}
+                              >
+                                Sign out
+                              </button>
+                            </Menu.Item>
                           </Menu.Items>
                         </Transition>
                       </Menu>
                       
-                        {/**Notification */}
-                        <button
-                          type="button"
-                          className="relative rounded-full p-1 ml-4 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                        >
-                          <span className="absolute -inset-1.5" />
-                          <span className="sr-only">View notifications</span>
-                          <BellIcon className="h-7 w-7" aria-hidden="true" />
-                        </button>
-
-                      
+                      {/**Notification */}
+                      <button
+                        type="button"
+                        className="relative rounded-full p-1 ml-4 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-7 w-7" aria-hidden="true" />
+                      </button>                      
                     </div>
                   </div>
+                  
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -174,7 +173,7 @@ export default function DefaultLayout() {
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                    <UserIcon className=' w-8 h-8 rounded-full text-white bg-black' />
+                    <UserIcon className=' w-8 h-8 rounded-full text-white bg-black' onClick={() => setIsProfileOpen(true)} />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
@@ -236,7 +235,7 @@ export default function DefaultLayout() {
      <ReactModal 
                                 isOpen={isProfileOpen}
                                 onRequestClose={() => setIsProfileOpen(false)}
-                                className="w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+                                className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
                                 >
                                   <div><StudentProfile closeModal={() => setIsProfileOpen(false)}/></div>
                                 </ReactModal>

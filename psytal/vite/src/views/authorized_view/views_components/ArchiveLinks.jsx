@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default function ArchiveLinks({showArchivelink, onclose, onSubmitarchivelink}) {
-    if (!showArchivelink) {
-        return null;
-    }
+    
+    console.log('test');
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
         <div className="bg-gray-200 w-full lg:w-3/12 px-4 py-6 shadow-lg rounded-3xl">

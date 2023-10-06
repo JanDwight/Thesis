@@ -57,19 +57,30 @@ export default function ManageUsers() {
     //password generator
     const numbers = '0123456789';
     const symbols = '!@#$%^&*()_+{}[]~-';
-
+    const length = 12;
+    
+    const getRandomChar = (charSet) => {
+      const randomIndex = Math.floor(Math.random() * charSet.length);
+      return charSet.charAt(randomIndex);
+    };
+    
     let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
     if (includeNumbers) characters += numbers;
     if (includeSymbols) characters += symbols;
-
-    // let newPassword = '';
-    // for (let i = 0; i < length; i++) {
-    //   const randomIndex = Math.floor(Math.random() * characters.length);
-    //   newPassword += characters.charAt(randomIndex);
-    // }
-
-    const newPassword = 'P@55word'; //just for preventing errors
-    setPassword(newPassword);
+    
+    let password = '';
+    
+    // Ensure at least one of each character type
+    password += getRandomChar('abcdefghijklmnopqrstuvwxyz');
+    password += getRandomChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    password += getRandomChar('0123456789');
+    password += getRandomChar('!@#$%^&*()_+{}[]~-');
+    
+    // Generate the rest of the password
+    for (let i = 4; i < length; i++) {
+      password += getRandomChar(characters);
+    }
 
     //---------------------------------------------------------------------------
 
@@ -79,7 +90,7 @@ export default function ManageUsers() {
     //---------------------------------------------------------------------------
 
     axiosClient
-      .post('/adduser', { name: fullName, password: newPassword, role: parsedRole, email}) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: password, role: parsedRole, email}) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
         // Close the modal
@@ -104,7 +115,7 @@ export default function ManageUsers() {
 
   return (
     <>
-  <div className="w-full h-[500px] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/**WHole container */}
+  <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/**WHole container */}
     {/**______________________1st Container from Manage - Btn Add________________________________*/}
     <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
       <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Manage Accounts</div>
@@ -112,15 +123,14 @@ export default function ManageUsers() {
       {/**Filter */}
         <div className="flex flex-row">
                   <div>
-                    <button>
+                    <button> 
                       {activeTab  === 1 && (
-                        <StudentsFilter filterText={filterText} />
+                        <span><StudentsFilter filterText={filterText} /></span>
                       )}
                       {activeTab === 2 && (
-                        <EmployeesFilter filterText={filterText} />
-                      )}
-                    </button>
-                    
+                        <span><EmployeesFilter filterText={filterText} /></span>
+                      )} 
+                    </button>                    
                   </div>
                 </div>
         <div>
@@ -137,7 +147,7 @@ export default function ManageUsers() {
 
     {/**___________________________2nd Container from Student to Filter________________________________ */}
     <div className="m-5 md:col-span-2 lg:col-span-1">
-        <div className="mx-7 font-bold flex flex-col-10 flex justify-between">
+        <div className="mx-7 font-bold flex flex-col-10 justify-between">
           <div>
             <ul className="flex mb-0 list-none flex-wrap px-4 flex-row text-gray-700">
               <Tab
@@ -153,7 +163,7 @@ export default function ManageUsers() {
               <div className="flex px-16">
                 <div className="my-4 mx-4">
                     <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>     
                 {/* Search bar */}

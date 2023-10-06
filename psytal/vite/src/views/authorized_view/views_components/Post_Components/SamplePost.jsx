@@ -7,12 +7,12 @@ import PostImage from './PostImage'
 
 export default function SamplePost() {
   return (
-    <div class="px-10 my-4 py-6 bg-gray-200 rounded-2xl shadow-2xl">
-        <div div class="flex justify-between items-center">
+    <div className="px-10 my-4 py-6 bg-gray-200 rounded-2xl shadow-2xl">
+        <div div className="flex justify-between items-center">
             <PostProfile />
             <PostEllipse />
         </div>
-        <div class="mt-2">
+        <div className="mt-2">
             <PostTitle />
             <PostImage />
             <PostDescription />
