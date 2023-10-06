@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PreRegistrationIncomingTmpRequest extends FormRequest
+class PreRegistrationContinuingTmpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,22 +24,17 @@ class PreRegistrationIncomingTmpRequest extends FormRequest
         return [
             'start_of_school_year' => 'required|integer',
             'end_of_school_year' => 'required|integer',
-            'student_school_id' => 'integer',
-            'learners_reference_number' => 'integer',
             'last_name' => 'required|string',
             'first_name' => 'required|string',
             'middle_name' => 'required|string',
             'maiden_name' => 'string',
             'type_of_student' => 'string',
-            'year_level' => 'string',
-            'academic_classification' => 'string',
-            'last_school_attended' => 'string',
-            'address_of_school_attended' => 'string',
+            'year_level' => 'required|string',
             'degree' => 'required|string',
-            'major' => 'string',
-            'candidate_for_graduation' => 'string',
-            'end_of_term_to_finnish_degree' => 'string',
-            'last_of_term_to_finnish_degree' => 'string',
+            'major' => 'required|string',
+            'candidate_for_graduation' => 'required|string',
+            'end_of_term_to_finnish_degree' => 'required|string',
+            'last_of_term_to_finnish_degree' => 'required|string',
             'date_of_birth' => 'required|date',
             'citizenship' => 'required|string',
             'ethnicity' => 'required|string',
@@ -55,8 +50,16 @@ class PreRegistrationIncomingTmpRequest extends FormRequest
             'contact_person_address' => 'required|string',
             'contact_person_relationship' => 'required|string',
             'section' => 'string',
-            'image' => 'string',
-            'pre_reg_status' => 'string'
+            'class_year' => 'integer',
+            'health_facility_registered' => 'boolean',
+            'depended_on_parents_health_facility' => 'boolean',
+            'vaccination_status' => 'string',
+            'digital_communication_and_literacy' => 'string',
+            'level_of_digital_literacy' => 'string',
+            'avail_free_higher_education' => 'boolean',
+            'voluntarily_contribute' => 'boolean',
+            'amount' => 'string',
+            'pre_reg_status' => 'string',
         ];
     }
 }

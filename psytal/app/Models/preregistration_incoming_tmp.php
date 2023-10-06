@@ -23,17 +23,23 @@ class preregistration_incoming_tmp extends Model
             'first_name',
             'middle_name',
             'maiden_name',
+            'type_of_student',
+            'year_level',
             'academic_classification',
             'last_school_attended',
             'address_of_school_attended',
             'degree',
+            'major',
+            'candidate_for_graduation',
+            'end_of_term_to_finnish_degree',
+            'last_of_term_to_finnish_degree',
             'date_of_birth',
-            'place_of_birth',
             'citizenship',
-            'sex_at_birth',
             'ethnicity',
-            'special_needs',
             'contact_number',
+            'place_of_birth',
+            'sex_at_birth',
+            'special_needs',
             'email_address',
             'home_address',
             'address_while_studying',
@@ -41,11 +47,9 @@ class preregistration_incoming_tmp extends Model
             'contact_person_number',
             'contact_person_address',
             'contact_person_relationship',
+            'section',
             'pre_reg_status',
-            'type_of_student',
-            
-            
-    ];
+        ];
 
     /**
      * Indicates if the model should be timestamped.
