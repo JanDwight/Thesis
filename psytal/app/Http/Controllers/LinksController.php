@@ -30,34 +30,26 @@ class LinksController extends Controller
     public function getLinks()
     {
         try {
-            $links = Links::where('archived', false)->get(); // Retrieve all links from the database
+            $links = Links::where('archived', 0)->get(); // Retrieve all links from the database
             return response()->json(['links' => $links], 200);
+            $link -> update(['archive'=>1]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unable to retrieve links'], 500);
         }
     }
 
 
-        public function archiveLink(Request $request)
+        public function archiveLink(Request $request,$linkId)
     {
-        // Validate the request data
-        $request->validate([
-            'linkId' => 'required|exists:links,id',
-        ]);
-
-        // Your archiving logic goes here
-        // You can access data from the request using $request->input('key')
-        // For example, if you want to archive a link by its ID
-        $linkId = $request->input('linkId');
         $link = Links::find($linkId);
-        if ($link) {
-            // Archive the link (you need to define an 'archived' column in your database)
-            $link->archived = true;
-            $link->save();
-            return response()->json(['message' => 'Link archived successfully'], 200);
-        } else {
-            return response()->json(['error' => 'Link not found'], 404);
-            return response()->json(['errors' => $validator->errors()], 422);
+        try {
+            $link->update(['archived' => 1]);
+            return response()->json(['message' => $link], 200);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error archiving course'], 500);
         }
+
+       
     }
 }

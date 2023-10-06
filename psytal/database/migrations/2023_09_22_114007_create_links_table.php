@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('class_description');
             $table->string('instructor_name')->nullable();
             $table->string('url');
-            $table->tinyInteger('archived')->default(0); // Add the 'archived' column <><>><>
+            $table->Integer('archived')->default(0); // Add the 'archived' column <><>><>
             $table->timestamps();
         });
     }

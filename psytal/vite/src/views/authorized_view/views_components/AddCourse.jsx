@@ -41,6 +41,7 @@ export default function AddCourse({closeModal}) {
 
     // Close the modal
     closeModal();
+    window.location.reload();
   };
 
   return (
@@ -56,7 +57,7 @@ export default function AddCourse({closeModal}) {
                       name="class_year"
                       type="text"
                       placeholder='Year'
-                      value={formData.classYear}
+                      value={formData.class_year}
                       onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
@@ -78,7 +79,7 @@ export default function AddCourse({closeModal}) {
                       name="course_code"
                       type="text"
                       placeholder='Course Code'
-                      value={formData.courseCode}
+                      value={formData.course_code}
                       onChange={handleChange}
                       className="block w-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
@@ -100,7 +101,7 @@ export default function AddCourse({closeModal}) {
                       name="course_title"
                       type="text"
                       placeholder='Course Title'
-                      value={formData.courseTitle}
+                      value={formData.course_title}
                       onChange={handleChange}
                       className="block w-full h-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />

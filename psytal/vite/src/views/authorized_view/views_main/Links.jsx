@@ -12,9 +12,8 @@ import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 export default function Links() {
   //Calling the Archivelinks
   const [showArchivelink, setShowArchivelink]= useState(false);
-  const [errors, setErrors] = useState({ __html: '' });
   const [isEditLinksOpen, setIsEditLinksOpen] = useState(false);
-  const [selectedLink, setSelectedLink] = useState(null);
+  const [selectedLink, setSelectedLink] = useState('');
   const [isAchiveModalOpen, setIsArchiveModalOpen] = useState(false);
   
     const addLinks = async (linkData) => {
@@ -27,22 +26,15 @@ export default function Links() {
       }
     };
     
-    const onSubmitarchivelink = async (archiveModalValue) => {
-      setIsArchiveModalOpen(archiveModalValue)
-    //   try {
-    //     const response = await axiosClient.put('/archivelink', { linkId });
-    //     fetchLinks();
-    //     setShowArchivelink(false);
-    // } catch (error) {
-    //     // Handle errors
-    //     console.error(error);
-    // }
-};
-  
+    const onSubmitarchivelink = async (archiveModalValue, index) => {
+      setSelectedLink(index);
+      setIsArchiveModalOpen(archiveModalValue);
+      console.log('selected Link: ' + selectedLink);
+    };
+
   // Calling the Addlink
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [links, setLinks] = useState([]);  
-
   useEffect(() => {
     fetchLinks();
   }, []);
@@ -56,27 +48,27 @@ export default function Links() {
     }
   };
 
-      class LinksList extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            data: [], // Initialize with an empty array
-            isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
-            isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
-            selectedLink: null, // Store the selected Link for the modals
-          };
-        }
+      // class LinksList extends Component {
+      //   constructor(props) {
+      //     super(props);
+      //     this.state = {
+      //       data: [], // Initialize with an empty array
+      //       isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
+      //       isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
+      //       selectedLink: null, // Store the selected Link for the modals
+      //     };
+      //   }
       
-        componentDidMount() {
-          this.fetchData();
-        }
+      //   componentDidMount() {
+      //     this.fetchData();
+      //   }
 
-      }
+      // }
         
   //Update Axios
   const updateLink = async (updatedLink) => {
     try {
-      const response = await axios.put(`/updatelink/${updatedLink.id}`, updatedLink);
+      const response = await axiosClient.put(`/updatelink/${updatedLink.id}`, updatedLink);
       console.log('Link updated successfully:', response.data);
       fetchLinks();
       handleCloseEditLinks(); // Close the edit modal
@@ -138,7 +130,7 @@ export default function Links() {
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
                             </button>
-                            <button onClick={() => onSubmitarchivelink(true)}>
+                            <button onClick={() => onSubmitarchivelink(true, index)}>
                               <img src={archive} alt='archive' className='h-7 w-7' />
                             </button>
                             
@@ -186,12 +178,22 @@ export default function Links() {
       >
               <div>
               <ArchiveLinks
-                onClose={handleCloseEditLinks}
+                showArchivelink={showArchivelink}
+                onclose={() => setShowArchivecourse(false)}
+                selected={selectedLink}
               />
               </div>
             
       </ReactModal>
+
+     
+      {/* <ArchiveLinks
+          showArchivelink={showArchivelink}
+          //onclose={() => setShowArchivecourse(false)}
+          index={selectedLink}
+        /> */}
       </>
+      
 
     
   );
