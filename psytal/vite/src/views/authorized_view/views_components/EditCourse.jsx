@@ -146,7 +146,7 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        checked= {curriculum.course_type === "Lec"}
+                        //checked= {curriculum.course_type}
                         value={"Lec"}
                         onChange={(e) => setCourseType(e.target.value)}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
@@ -158,7 +158,7 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        checked= {curriculum.course_type === "Lab"}
+                        //checked= {curriculum.course_type}
                         value={"Lab"}
                         onChange={(e) => setCourseType(e.target.value)}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
