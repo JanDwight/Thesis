@@ -62,10 +62,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
     Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
 });
-
+    //Routes for LinksController
     Route::post('/addlink', [LinksController::class, 'addLink']);
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
-    Route::put('/archivelink', [LinksController::class, 'archiveLink']);
+    Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
     Route::put('/updatelink/{id}', [UpdateLinksController::class, 'updateLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
