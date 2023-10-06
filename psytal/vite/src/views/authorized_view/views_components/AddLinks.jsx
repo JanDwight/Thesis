@@ -8,6 +8,7 @@ export default function AddLinks({closeModal}) {
     class_description: '',
     instructor_name: '',
     url: '',
+    
   });
 
   const handleChange = (e) => {

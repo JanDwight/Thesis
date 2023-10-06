@@ -1,43 +1,29 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function EditLinks({ showModal, onClose, user, onSave }) {
+function EditLinks({ showModal, onClose, user, onSave,props }) {
   const [id, setid] = useState(link.id);
   const [class_code, setClassCode] = useState(link.class_code);
-  const [class_description, setClassDescription] = useState(link.role);
-  const [instructor_name, setInstructorName] = useState(link.email);
+  const [class_description, setClassDescription] = useState(link.class_description);
+  const [instructor_name, setInstructorName] = useState(link.instructor_name);
   const [url, setUrl] = useState(link.url);
-  const [lastedit, setLastedit] = useState(link.updated_at);
 
   const handleSave = async() => {
 
- /*   console.log('role: ', role);
-
-    const roleLowerCase = role.toLowerCase(); //lowercase to avoid errors
-
-    const roleMapping = {
-      'admin': 1,
-      'staff': 2,
-      'instructor': 3,
-      'student': 4,
-    };
-    */
-    
-    const updatedUser = {
+    const updatedUserLinks = {
       id,
       class_code,
-      class_description,    //: roleMapping[roleLowerCase],
+      class_description, 
       instructor_name,
       url,
-      lastedit,
+
     };
 
     try {
-      const response = await axiosClient.put(`/updatelink/${link.id}`, updatedLinks);
-  
+      const response = await axiosClient.put(`/updatelink/${link.id}`, updateLink);
       if (response.status === 200) {
         // Update was successful
-        onSave(updatedUser); // Pass the updated user data to the onSave function
+        onSave(updatedUserLinks); // Pass the updated user data to the onSave function
         //onClose(); uncomment this line if frontend errors are fixed
       } else {
         // Handle errors or display feedback to the user
@@ -83,7 +69,7 @@ export default function EditLinks({ showModal, onClose, user, onSave }) {
                   name="class_code"
                   type="text"
                   value={class_code}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setClassCode(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -95,7 +81,7 @@ export default function EditLinks({ showModal, onClose, user, onSave }) {
                   id="class_description"
                   name="class_description"
                   defaultValue={class_description}
-                  onChange={(e) => setRole(e.target.value)}
+                  onChange={(e) => setClassDescription(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 >
                   <option value="admin">Admin</option>
@@ -113,7 +99,7 @@ export default function EditLinks({ showModal, onClose, user, onSave }) {
                   name="instructor_name"
                   type="text"
                   value={instructor_name}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setInstructorName(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -122,11 +108,11 @@ export default function EditLinks({ showModal, onClose, user, onSave }) {
                   Last Update:
                 </label>
                 <input
-                  id="lastedit"
-                  name="lastedit"
+                  id="url"
+                  name="url"
                   type="text"
-                  value={lastedit}
-                  onChange={(e) => setLastedit(e.target.value)}
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
                   disabled //makes field uneditable
                   className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   //old css: block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6
@@ -148,3 +134,4 @@ export default function EditLinks({ showModal, onClose, user, onSave }) {
     // ... (rest of your component code)
   );
 }
+export default EditLinks;

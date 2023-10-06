@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\links;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\LinksRequest;
 
 
@@ -31,7 +30,7 @@ class LinksController extends Controller
     public function getLinks()
     {
         try {
-            $links = Links::all(); // Retrieve all links from the database
+            $links = Links::where('archived', false)->get(); // Retrieve all links from the database
             return response()->json(['links' => $links], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unable to retrieve links'], 500);
@@ -41,6 +40,11 @@ class LinksController extends Controller
 
         public function archiveLink(Request $request)
     {
+        // Validate the request data
+        $request->validate([
+            'linkId' => 'required|exists:links,id',
+        ]);
+
         // Your archiving logic goes here
         // You can access data from the request using $request->input('key')
         // For example, if you want to archive a link by its ID
@@ -50,7 +54,6 @@ class LinksController extends Controller
             // Archive the link (you need to define an 'archived' column in your database)
             $link->archived = true;
             $link->save();
-
             return response()->json(['message' => 'Link archived successfully'], 200);
         } else {
             return response()->json(['error' => 'Link not found'], 404);

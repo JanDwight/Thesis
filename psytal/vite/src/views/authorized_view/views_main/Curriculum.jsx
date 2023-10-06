@@ -5,12 +5,15 @@ import { Menu, Transition } from '@headlessui/react';
 import ReactModal from 'react-modal';
 import AddCourse from "../views_components/AddCourse";
 import archive from "@assets/delete.png"
+import edit from "@assets/icons8createpost.png";
 import ArchiveCourse from "../views_components/ArchiveCourse";
+import EditCourse from "../views_components/EditCourse";
 import { useAsyncValue } from 'react-router-dom';
 
 export default function Curriculum(){
       //Calling the ArchiveCourse
       const [showArchivecourse, setShowArchivecourse]= useState(false);
+      const [showEditcourse, setShowEditcourse]= useState(false);
       const [selectedcourse, setSelectedcourse] = useState([]);
       const [errors, setErrors] = useState({ __html: '' });
      
@@ -19,6 +22,11 @@ export default function Curriculum(){
         setSelectedcourse(curriculum);
       }
       
+      const handleEditClick = (curriculum) => {
+        setShowEditcourse(true);
+        setSelectedcourse(curriculum);
+      }
+
       const addCourse = async (CurriculumData) => {
           //try {
           //  const response = await axios.post('/addcurriculum', CurriculumData);
@@ -99,7 +107,7 @@ export default function Curriculum(){
                         </Menu>
                     </div>
                     <button onClick={() => setIsModalOpen(true)} 
-                        className="bg-[#0FE810] rounded-2xl  px-5 text-white font-size">
+                        className="bg-[#397439] rounded-2xl  px-5 text-white font-size">
                             Add Course
                     </button>
                     </div>
@@ -122,10 +130,10 @@ export default function Curriculum(){
                 </thead>
 
                 <tbody>
-                    {curriculum.map((curriculum) => (
+                    {curriculum.map((curriculum, index) => (
                       <tr 
-                        key={curriculum.id} 
-                        className="bg-[#7EBA7E] p-5"
+                        key={index} 
+                        className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`}
                       >
                           <td className="text-center rounded-l-full p-2">{curriculum.class_year}</td>
                           <td className="text-center p-2">{curriculum.semester}</td>
@@ -136,8 +144,11 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.course_type}</td>
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
+                            <button onClick={() => handleEditClick(curriculum)}>
+                              <img src={edit} alt='edit' className='h-5 w-5' />
+                            </button>
                             <button onClick={() => handleArchiveClick(curriculum)}>
-                              <img src={archive} alt='archive' className='h-7 w-7' />
+                              <img src={archive} alt='archive' className='h-7 w-7'/>
                             </button>
                           </td>
                         </tr>
@@ -159,7 +170,13 @@ export default function Curriculum(){
 
         <ArchiveCourse
           showArchivecourse={showArchivecourse}
-          onclose={() => setShowArchivecourse(false)}
+          onClose={() => setShowArchivecourse(false)}
+          curriculum={selectedcourse}
+        />
+
+        <EditCourse
+          showEditcourse={showEditcourse}
+          onClose={() => setShowEditcourse(false)}
           curriculum={selectedcourse}
         />
           

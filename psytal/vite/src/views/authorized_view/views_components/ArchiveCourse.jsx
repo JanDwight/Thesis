@@ -4,19 +4,23 @@ import axiosClient from '../../../axios.js';
 export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) {
   
 
-  const handleSave = async() => {
+  const handleSave = async(e) => {
+    e.preventDefault();
     try {
-      // send selected course to archive controller
-      const response= await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
-      console.log(response.data);
-      console.log('Course archived successfully.');
+        console.log("archiving...");
+        // send selected course to archive controller     
+        const response = await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
+        console.log(response.data);
 
-      // Close the modal
-      onClose();
-    } catch (error) {
-      // Handle errors here, e.g., display an error message
-      console.error('Error archiving course', error);
-    }
+        // Close the modal
+        onClose();
+
+        } catch (error) {
+        // Handle errors here, e.g., display an error message
+        console.error('Error archiving course', error);
+        }
+        window.location.reload();
+
   }
 
   if (!showArchivecourse) {
@@ -29,6 +33,18 @@ export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) 
             <div className="w-full px-4 mx-auto">
               <form >
                 <h1 className='font-bold text-3xl text-[#525252] flex items-center justify-center pb-5'>Archive Course?</h1>
+                <div className="flex items-center justify-center flex-row"> 
+                  <label htmlFor="curriculum" className="px-6 font-bold">Selected Course:</label>
+                  <input
+                    id="curriculum"
+                    type="curriculum"
+                    name="curriculum"
+                    //value="Class 01"
+                    value={curriculum.course_title}
+                    disabled // makes field uneditable
+                    className="block w-1/3 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
                     {/**BUTTONS */}
                     <div className="text-center flex justify-end my-2">
                         {/**YES */}

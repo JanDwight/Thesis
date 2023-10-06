@@ -4,10 +4,10 @@ import { useStateContext } from '../../../context/ContextProvider.jsx';
 import AddLinks from '../views_components/AddLinks.jsx';
 import ReactModal from 'react-modal';
 import arhive from "@assets/delete.png"
-import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
-
+import EditLinks from '../views_components/EditLinks.jsx';
+import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 
 export default function Links() {
   //Calling the Archivelinks
@@ -15,8 +15,8 @@ export default function Links() {
   const [errors, setErrors] = useState({ __html: '' });
   const [isEditLinksOpen, setIsEditLinksOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
-
- 
+  const [isAchiveModalOpen, setIsArchiveModalOpen] = useState(false);
+  
     const addLinks = async (linkData) => {
       try {
         const response = await axios.post('/addlink', linkData);
@@ -26,15 +26,17 @@ export default function Links() {
         console.error(error);
       }
     };
-    const onSubmitarchivelink = async (linkId) => {
-      try {
-        const response = await axiosClient.post('/archivelink', { linkId });
-        fetchLinks();
-        setShowLinks(false);
-    } catch (error) {
-        // Handle errors
-        console.error(error);
-    }
+    
+    const onSubmitarchivelink = async (archiveModalValue) => {
+      setIsArchiveModalOpen(archiveModalValue)
+    //   try {
+    //     const response = await axiosClient.put('/archivelink', { linkId });
+    //     fetchLinks();
+    //     setShowArchivelink(false);
+    // } catch (error) {
+    //     // Handle errors
+    //     console.error(error);
+    // }
 };
   
   // Calling the Addlink
@@ -123,9 +125,9 @@ export default function Links() {
 		              </tr>
                 </thead>
                  <tbody>
-                     {links.map((link) => (
+                     {links.map((link, index) => (
                       <tr 
-                        key={link.id} 
+                        key={index} 
                         className="bg-[#7EBA7E] p-5"
                         onSubmit={addLinks}>
                           <td className="text-center rounded-l-full p-2">{link.class_code}</td>
@@ -136,7 +138,7 @@ export default function Links() {
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
                             </button>
-                            <button onClick={() => setShowArchivecourse(true)}>
+                            <button onClick={() => onSubmitarchivelink(true)}>
                               <img src={archive} alt='archive' className='h-7 w-7' />
                             </button>
                             
@@ -147,35 +149,8 @@ export default function Links() {
 	          </table>
             </div>
           </div>
-
-      {/* // <div className="mt-2">
-      //     {links.map((link) => ( */}
-      {/* //       <form key={link.id} onSubmit={(e) => e.preventDefault()}>
-      //         <a className="mx-7 font-bold  flex-col-10 flex justify-between">
-      //           <div className="text-left">{link.class_code}</div>
-      //           <div className="text-left">{link.class_description}</div>
-      //           <div className="text-left">{link.instructor_name}</div>
-      //           <div className="text-left">{link.url}</div>
-      //           <div className="text-left">
-      //           <img
-      //           src={edit} // Replace 'editImage' with the path to your edit image
-      //           alt='edit'
-      //           className='h-5 w-5 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
-      //           onClick={() => this.handleEditUsersClick(student)}
-      //             />
-      //             </div>
-      //           <div>
-      //             <button onClick={() => onSubmitarchivelink(link.id)}>
-      //               <img src={arhive} alt='archive' className='h-7 w-7' />
-      //             </button>
-      //           </div>
-      //         </a>
-      //       </form>
-      //     ))}
-      //   </div>
-      // </div> */}
-            
       
+          
 
       <ReactModal
       isOpen={isModalOpen}
@@ -186,17 +161,38 @@ export default function Links() {
           <AddLinks closeModal={() => setIsModalOpen(false)}/>
         </div>
 
-       {/* EditLinks modal */}
-      {isEditLinksOpen && (
+       
+      </ReactModal>
+      
+      <ReactModal
+      isEditLinksOpen = {isModalOpen}
+      onRequestClose={() => setIsModalOpen(false)}
+      className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+      >
+              <div>
               <EditLinks
                 link={selectedLink}
                 onClose={handleCloseEditLinks}
                 onSave={updateLink}
               />
-            )} 
+              </div>
+            
       </ReactModal>
 
-    </>
+      <ReactModal
+      isOpen={isAchiveModalOpen}
+      onRequestClose={() => setIsArchiveModalOpen(false)}
+      className=" h-0 w-0"
+      >
+              <div>
+              <ArchiveLinks
+                onClose={handleCloseEditLinks}
+              />
+              </div>
+            
+      </ReactModal>
+      </>
+
     
   );
 }

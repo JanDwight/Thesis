@@ -45,10 +45,12 @@ class CurriculumController extends Controller
     {
         try {
             // Find the curriculum record based on the provided $id
-            $curriculumId = curriculum::findOrFail($curriculumId);
-    
+            $curriculum = curriculum::find($curriculumId);
+            
             // Update the curriculum archived status to 1
-            $curriculumId->update(['archived' => 1]);
+             $curriculum->update(['archived' => 1]);
+            
+            return response()->json(['message' => 'Archive course succesfully']);
 
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
@@ -56,58 +58,21 @@ class CurriculumController extends Controller
         }
     }
 
-   
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(curricula $curricula)
+    public function updateCurriculum(Request $request, $curriculumId)
     {
         
-        // $Curriculum = DB::table('curricula')
-        // ->get();
-
-        // return $Curriculum->toArray();
+        $curriculumData = curriculum::find($curriculumId);
+        
+    if (!$curriculumData) {
+        // Handle the case where the preregID with the provided ID is not found
+        return response()->json(['message' => 'Form not found'], 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(curricula $curricula)
-    {
-        //
+    // Extract the attributes from the request
+    $attributes = $request->all();
+    
+    $curriculumData->update($attributes); 
+    return response()->json(['message' => 'Curriculum updated successfully']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, curricula $curricula)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(curricula $curricula)
-    {
-        //
-    }
-
+    
 }
