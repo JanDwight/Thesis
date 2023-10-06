@@ -7,11 +7,13 @@ import AddCourse from "../views_components/AddCourse";
 import archive from "@assets/delete.png"
 import edit from "@assets/icons8createpost.png";
 import ArchiveCourse from "../views_components/ArchiveCourse";
+import EditCourse from "../views_components/EditCourse";
 import { useAsyncValue } from 'react-router-dom';
 
 export default function Curriculum(){
       //Calling the ArchiveCourse
       const [showArchivecourse, setShowArchivecourse]= useState(false);
+      const [showEditcourse, setShowEditcourse]= useState(false);
       const [selectedcourse, setSelectedcourse] = useState([]);
       const [errors, setErrors] = useState({ __html: '' });
      
@@ -20,6 +22,11 @@ export default function Curriculum(){
         setSelectedcourse(curriculum);
       }
       
+      const handleEditClick = (curriculum) => {
+        setShowEditcourse(true);
+        setSelectedcourse(curriculum);
+      }
+
       const addCourse = async (CurriculumData) => {
           //try {
           //  const response = await axios.post('/addcurriculum', CurriculumData);
@@ -137,7 +144,7 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.course_type}</td>
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
-                            <button>
+                            <button onClick={() => handleEditClick(curriculum)}>
                               <img src={edit} alt='edit' className='h-5 w-5' />
                             </button>
                             <button onClick={() => handleArchiveClick(curriculum)}>
@@ -163,7 +170,13 @@ export default function Curriculum(){
 
         <ArchiveCourse
           showArchivecourse={showArchivecourse}
-          //onclose={() => setShowArchivecourse(false)}
+          onClose={() => setShowArchivecourse(false)}
+          curriculum={selectedcourse}
+        />
+
+        <EditCourse
+          showEditcourse={showEditcourse}
+          onClose={() => setShowEditcourse(false)}
           curriculum={selectedcourse}
         />
           

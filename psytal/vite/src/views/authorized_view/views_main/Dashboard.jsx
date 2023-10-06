@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import ShowLogs from "../views_components/ShowLogs";
+import ShowArchives from "../views_components/ShowArchives";
 import axiosClient from '../../../axios.js';
 
 export default function Dashboard() {
@@ -12,26 +14,47 @@ export default function Dashboard() {
   const [Archive_Data, setArchiveData] = useState([]); //connect later
   const [Logs_Data, setLogsData] = useState([]);
 
+  const [isLogModalOpen, setIsLogModalOpen] = useState(false);
+  const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
+
+  const openArchiveModal = () => {
+    console.log('archive open');
+    setIsArchiveModalOpen(true);
+  };
+  
+  const closeArchiveModal = () => {
+    setIsArchiveModalOpen(false);
+  };
+
+  const openLogModal = () => {
+    console.log('log open');
+    setIsLogModalOpen(true);
+  };
+  
+  const closeLogModal = () => {
+    setIsLogModalOpen(false);
+  };
+
   useEffect(() => {
     
     async function fetchData() {
       try {
-        const count_student = await fetchDataCount('/count_students');
-        const count_employee = await fetchDataCount('/count_employee');
-        const count_posts = await fetchDataCount('/count_posts');
-        //count total logins, idk how to count
-
-        const show_logs = await fetchLogs();
-        //const show_archives (how to)
+        const [count_student, count_employee, count_posts, show_logs, show_archive] = await Promise.all([
+          fetchDataCount('/count_students'),
+          fetchDataCount('/count_employee'),
+          fetchDataCount('/count_posts'),
+          fetchTables('/show_logs'),
+          fetchTables('/show_archives'),
+        ]);
         
-        const responseData = {
+        const dashcountData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
           totalPosts: count_posts,
           totalLogins: 'IP'
         };
         
-        setDash(responseData);
+        setDash(dashcountData);
 
         const Logs_Table = show_logs.map(log => ({
           action_taken: log.action_taken,
@@ -42,6 +65,17 @@ export default function Dashboard() {
         }));
 
         setLogsData(Logs_Table);
+
+        const Archives_Table = show_archive.map( archive => ({
+          item_name: archive.item_name,
+          item_type: archive.item_type,
+          origin_table: archive.origin_table,
+          archiver_name: archive.archiver_name,
+          archiver_role: archive.archiver_role,
+          archived_at: archive.created_at,
+        }));
+
+        setArchiveData(Archives_Table);
 
       } catch (error) {
         // Handle any errors that occurred during the fetch
@@ -59,12 +93,11 @@ export default function Dashboard() {
         }
       }
 
-      //fetch logs
-      async function fetchLogs() {
+      //fetch all tables
+      async function fetchTables(endpoint) {
         try {
-          const response = await axiosClient.get('/show_logs');
-          const data = response.data;
-          return data;
+          const response = await axiosClient.get(endpoint);
+          return response.data;
         } catch (error) {
           console.error('Error fetching data from the database:', error);
         }
@@ -136,15 +169,15 @@ export default function Dashboard() {
         {/**Archive: */}
         <h2 className="text-base font-semibold mt-8 mb-2">Recent Archives: </h2>
         <div>
-          {Logs_Data.map((logs_table, index) => (
+          {Archive_Data.map((archive_table, index) => (
             <div key={index} className="border p-2">
               <div className="text-sm ">
-                {logs_table.action_taken} at {logs_table.date} by {logs_table.user_name} with role {logs_table.user_role} in {logs_table.location} table
+                {archive_table.item_type} {archive_table.item_name} is archived from: {archive_table.origin_table} table by user: {archive_table.archiver_name} and role: {archive_table.archiver_role} at {archive_table.archived_at}
               </div>
             </div>
           ))}
           <div className="flex justify-between items-center">
-            <button className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
+            <button onClick={openArchiveModal} className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
               More Archives...
             </button>
           </div>
@@ -160,13 +193,23 @@ export default function Dashboard() {
             </div>
           ))}
           <div className="flex justify-between items-center">
-            <button className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
+            <button onClick={openLogModal} className="text-gray-500 hover:text-black text-sm p-2 rounded ml-auto">
               More Logs...
             </button>
           </div>
         </div>
     </div>
+      {/* Show Modals */}
+      <ShowArchives
+            showModal={isArchiveModalOpen}
+            onClose={closeArchiveModal}
+            dataTable = {Archive_Data}
+      />
+      <ShowLogs
+            showModal={isLogModalOpen}
+            onClose={closeLogModal}
+            dataTable = {Logs_Data}
+      />
    </div>
-    
   );
 }

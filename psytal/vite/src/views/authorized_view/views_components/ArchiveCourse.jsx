@@ -6,21 +6,21 @@ export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) 
 
   const handleSave = async(e) => {
     e.preventDefault();
-    console.log("before");
     try {
-      console.log("archiving");
-      // send selected course to archive controller
-      
-      const response = await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
-      console.log(response.data);
-      
+        console.log("archiving...");
+        // send selected course to archive controller     
+        const response = await axiosClient.put(`/archivecurriculum/${curriculum.id}`);
+        console.log(response.data);
 
-      // Close the modal
-      //onClose();
-    } catch (error) {
-      // Handle errors here, e.g., display an error message
-      console.error('Error archiving course', error);
-    }
+        // Close the modal
+        onClose();
+
+        } catch (error) {
+        // Handle errors here, e.g., display an error message
+        console.error('Error archiving course', error);
+        }
+        window.location.reload();
+
   }
 
   if (!showArchivecourse) {
