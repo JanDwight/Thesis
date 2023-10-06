@@ -14,7 +14,7 @@ class LogsController extends Controller
     public function index()
     {
         // Retrieve all logs starting from the most recent
-        $logs = logs::all();
+        $logs = logs::orderBy('date', 'desc')->get();
         return response()->json($logs);
     }
 

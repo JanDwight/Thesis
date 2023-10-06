@@ -15,6 +15,7 @@ use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\ArchiveController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
-    Route::get('/show_logs', [LogsController::class, 'show']); //<><><> index for logs
+    Route::get('/show_logs', [LogsController::class, 'show']); //<><><> show for logs, 3 most recent only
+    Route::get('/show_archives', [ArchiveController::class, 'show']); //<><><> show for archives, 3 most recent only
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
