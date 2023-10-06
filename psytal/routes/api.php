@@ -60,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function() {
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
     Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+    Route::put('/updatecurriculum/{id}', [CurriculumController::class, 'updateCurriculum']);
     Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
 });
 
