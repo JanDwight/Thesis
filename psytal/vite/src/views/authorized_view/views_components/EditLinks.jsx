@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios.js';
 
 export default function EditLinks({ showEditlink, onClose, selected }) {
@@ -8,7 +8,17 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
    const [instructor_name, setInstructorName] = useState(selected.instructor_name || '');
    const [url, setUrl] = useState(selected.url || '');
 
+ // Set initial values when modal is opened
+ useEffect(() => {
+  if (selected) {
+    setClassCode(selected.class_code || '');
+    setClassDescription(selected.class_description || '');
+    setInstructorName(selected.instructor_name || '');
+    setUrl(selected.url || '');
+  }
+}, [selected]);
 
+   
     const handleSave = async(e) => {
       e.preventDefault();
       const updatedUserLinks = {
@@ -34,23 +44,6 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
     if (!showEditlink) {
       return null;
     }
-  
-
-      // try {
-      //   const response = await axiosClient.put(`/updatelink/${link.id}`, updateLink);
-      //   if (response.status === 200) {
-      //     // Update was successful
-      //     onSave(updatedUserLinks); // Pass the updated user data to the onSave function
-      //     //onClose(); uncomment this line if frontend errors are fixed
-      //   } else {
-      //     // Handle errors or display feedback to the user
-      //     console.error('Update failed');
-      //   }
-      // } catch (error) {
-      //   // Handle network errors or other exceptions
-      //   console.error('Error:', error);
-      // }
-
 
 
 
@@ -129,6 +122,5 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
         </div>
       </div>
     </div>
-    // ... (rest of your component code)
   );
 }
