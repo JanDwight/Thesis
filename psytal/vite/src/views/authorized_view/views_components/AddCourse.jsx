@@ -37,11 +37,12 @@ export default function AddCourse({closeModal}) {
         } else {
           console.error(error.response.data);
         }
+      
+      window.location.reload();
       });
 
     // Close the modal
     closeModal();
-    window.location.reload();
   };
 
   return (
