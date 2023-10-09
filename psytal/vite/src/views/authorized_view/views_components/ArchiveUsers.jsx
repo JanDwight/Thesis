@@ -12,7 +12,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
       console.log('User archived successfully.');
 
       // Close the modal
-      (onClose);
+      onClose();
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving user:', error);

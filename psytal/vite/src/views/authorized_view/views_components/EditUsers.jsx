@@ -35,7 +35,7 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
       if (response.status === 200) {
         // Update was successful
         onSave(updatedUser); // Pass the updated user data to the onSave function
-        //onClose(); uncomment this line if frontend errors are fixed
+        onClose();
       } else {
         // Handle errors or display feedback to the user
         console.error('Update failed');
