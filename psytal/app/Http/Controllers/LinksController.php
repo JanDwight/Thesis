@@ -38,7 +38,6 @@ class LinksController extends Controller
         }
     }
 
-
         public function archiveLink(Request $request,$linkId)
     {
         $link = Links::find($linkId);
@@ -49,7 +48,22 @@ class LinksController extends Controller
             // Handle exceptions, e.g., log the error
             return response()->json(['message' => 'Error archiving course'], 500);
         }
-
-       
     }
+
+    public function updateLink(Request $request, $linkId)
+    {
+        $link = Links::find($linkId);
+    
+    if (!$link) {
+        // Handle the case where the preregID with the provided ID is not found
+        return response()->json(['message' => 'Form not found'], 404);
+    }
+
+    // Extract the attributes from the request
+    $attributes = $request->all();
+    
+    $link->update($attributes); 
+    return response()->json(['message' => 'Curriculum updated successfully']);
+    }
+    
 }

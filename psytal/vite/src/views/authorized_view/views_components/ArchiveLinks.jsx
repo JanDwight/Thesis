@@ -2,15 +2,11 @@ import React from 'react'
 import axiosClient from '../../../axios.js';
 
 export default function ArchiveLinks({onclose, selected}) {
-    console.log(selected);
-    console.log("before");
     
     const onSubmitarchivelink = async (e) => { 
-        console.log("after");
         e.preventDefault();
         try {
-            console.log("archiving");
-            const response = await axiosClient.put(`/archivelink/${selected.id}`, selected);
+            const response = await axiosClient.put(`/archivelink/${selected.id}`);
             console.log('Link updated successfully:', response.data);
             window.location.reload();
 

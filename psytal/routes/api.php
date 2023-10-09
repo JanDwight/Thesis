@@ -69,7 +69,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/addlink', [LinksController::class, 'addLink']);
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
     Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
-    Route::put('/updatelink/{id}', [UpdateLinksController::class, 'updateLink']);
+    Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
