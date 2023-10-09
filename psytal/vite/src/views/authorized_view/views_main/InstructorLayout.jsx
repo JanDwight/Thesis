@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
@@ -13,6 +13,8 @@ import { Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
+import UserProfile from '../views_components/profile_components/UserProfile';
+import ReactModal from 'react-modal';
 
 const navigation = [
   { img: home, name: 'Home', to: 'home'},
@@ -24,6 +26,7 @@ function classNames(...classes) {
 }
 
 export default function InstructorLayout() {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
   if (!userToken) {
@@ -229,6 +232,15 @@ export default function InstructorLayout() {
         
         
       </div>
+
+      {/**Setting the Profile Popup */}
+     <ReactModal
+                                isOpen={isProfileOpen}
+                                onRequestClose={() => setIsProfileOpen(false)}
+                                className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+                                >
+                                  <div><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
+                                </ReactModal>
     </>
   );
 }

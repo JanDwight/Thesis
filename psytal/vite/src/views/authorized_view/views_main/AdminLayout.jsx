@@ -15,7 +15,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisHorizontalIcon ,MagnifyingGlassIcon, UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
-import ProfilePopupSample from '../views_components/profile_components/ProfilePopupSample';
+import UserProfile from '../views_components/profile_components/UserProfile';
 
 const navigation = [
   { img: home, name: 'Home', to: 'home'},
@@ -36,10 +36,10 @@ export default function AdminLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole} = useStateContext();
   const [isSearchToggled, setIsSearchToggled] = useState(false);
 
-  if (!userToken) {
+  if (!userToken && !userRole) {
     return <Navigate to='/guest/landingpage' />
   }
 
@@ -292,7 +292,7 @@ export default function AdminLayout() {
       onRequestClose={() => setIsProfileOpen(false)}
       className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 "
       >
-        <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><ProfilePopupSample closeModal={() => setIsProfileOpen(false)}/></div>
+        <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
       </ReactModal>
 
       {/**<!--Footer--> */}

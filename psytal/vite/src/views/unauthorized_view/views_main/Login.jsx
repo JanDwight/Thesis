@@ -4,11 +4,11 @@ import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychLogo.png';
 
 export default function Login() {
-  const {setCurrentUser, setUserToken, setUserRole} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole, currenUser} = useStateContext();
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({__html: ""});
-  const [userRole, currentUser, userToken] = useState('');
+  const [userToken] = useState('');
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -31,8 +31,6 @@ export default function Login() {
       }
         console.error(error)
     });
-
-    
   };
 
   return (
