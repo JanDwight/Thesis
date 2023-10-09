@@ -41,7 +41,8 @@ class LogsController extends Controller
     {
         // order by descending order (most recent first)
         // send three items only
-        $logs = logs::orderBy('date', 'desc')->take(3)->get();
+        //$logs = logs::orderBy('date', 'desc')->take(3)->get();
+        $logs = logs::orderBy('date', 'desc')->get();
         return response()->json($logs);
     }
 

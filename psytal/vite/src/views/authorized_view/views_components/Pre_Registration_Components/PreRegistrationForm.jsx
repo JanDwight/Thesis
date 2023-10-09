@@ -152,587 +152,587 @@ const handleRemoveFields = (index) => {
       
       <div className="w-full lg:w-8/12 px-4 container mx-auto">
         <form onSubmit={onSubmit} action="#" method="POST">
-        <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
-          <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-            
-              {/**=========================== Shoolyear - Date ==========================*/}  
-              <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
-                    School year :
-                  </label>
-                  <span className="text-sm mt-2 pl-10"> First Semester </span> 
-                </div>
-                
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                  <div className="flex items-center mt-2 pl-3">
-                    <div className="relative w-fit">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <img src={date} className='h-5 w-5'/>
-                      </div>
-                      
-                      <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
-                        name="start"
-                        type="number" 
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                        placeholder="20-"
-                        min="2000" // Minimum year
-                        max="2099" // Maximum year
-                        step="1" // Year step
-                        value={startOfSchoolYear}
-                        onChange={ev => setStartOfSchoolYear(ev.target.value)}
-                      />
-                    </div>
-                    <span className="mx-4 text-gray-500">to</span>
-                    <div className="relative w-fit">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <img src={date} className='h-5 w-5'/>
-                      </div>
-                      <input
-                        name="end"
-                        type="number" 
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                        placeholder="20-"
-                        min="2000" 
-                        max="2099" 
-                        step="1" 
-                        value={endOfSchoolYear}
-                        onChange={ev => setEndOfSchoolYear(ev.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>                 
-              </div> <hr />
-
-              {/**=========================== Student ID - LRN ==========================*/} 
-              <div className="flex flex-wrap flex-row -mx-3 mb-2">
-                    {/*column1*/}
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
-                        student id no :
-                      </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                       id="grid-studentID"
-                       type="number"
-                       placeholder=""
-                       value={studentSchoolId}
-                       onChange={ev => setStudentSchoolId(ev.target.value)}
-                       />                          
-                    </div>
-                    {/*column2*/}
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lrn">
-                        learner's reference number (lrn) :
-                      </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                       id="grid-lrn"
-                       type="number"
-                       placeholder=""
-                       value={learnersReferenceNumber}
-                       onChange={ev => setLearnersReferenceNumber(ev.target.value)}
-                       />        
-                    </div>
-              </div> 
-
-              {/**=========================== Last Name - Madain Name ==========================*/} 
-              <div className="flex flex-wrap flex-row -mx-3 mb-2">
-                {/**column1 */}
-                <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
-                    Last Name :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-studentLastname"
-                   type="text"
-                   placeholder=""
-                   value={lastName}
-                   onChange={ev => setLastName(ev.target.value)}/>  
-                </div>
-                {/**column2 */}
-                <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentFirstname">
-                    First Name :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-studentFirstname" 
-                   type="text" 
-                   placeholder=""
-                   value={firstName}
-                   onChange={ev => setFirstName(ev.target.value)}/>  
-                </div>
-                {/**column3 */}
-                <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMiddlename">
-                    Middle Name :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-studentMiddlename" 
-                   type="text" 
-                   placeholder=""
-                   value={middleName}
-                   onChange={ev => setMiddleName(ev.target.value)}/>  
-                </div>
-                {/** */}
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
-                    Maiden Name :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-studentMaidenname" 
-                   type="text" 
-                   placeholder=""
-                   value={maidenName}
-                   onChange={ev => setMaidenName(ev.target.value)}/>  
-                </div>
-              </div> <hr />
+          <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
+            <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
               
-              {/**=========================== Academic Classification: Radio Buttons ==========================*/}
-              {/**re-do the implementation of the radio button */} 
-              <div className="flex flex-wrap flex-row -mx-3 mb-2">
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
-                </div>
-                     
-                <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                  {/**Radio buttion for SHS graduate */}
-                  <div className='mx-5 mt-2'>
-                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                      type="radio"
-                      name="typeofacadclass"
-                      id="shsgraduate"
-                      value="SHS graduate" 
-                      onChange={ev => setAcademicClassification(ev.target.value)}
+                {/**=========================== Shoolyear - Date ==========================*/}  
+                <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
+                      School year :
+                    </label>
+                    <span className="text-sm mt-2 pl-10"> First Semester </span> 
+                  </div>
+                  
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                    <div className="flex items-center mt-2 pl-3">
+                      <div className="relative w-fit">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <img src={date} className='h-5 w-5'/>
+                        </div>
+                        
+                        <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
+                          name="start"
+                          type="number" 
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          placeholder="20-"
+                          min="2000" // Minimum year
+                          max="2099" // Maximum year
+                          step="1" // Year step
+                          value={startOfSchoolYear}
+                          onChange={ev => setStartOfSchoolYear(ev.target.value)}
+                        />
+                      </div>
+                      <span className="mx-4 text-gray-500">to</span>
+                      <div className="relative w-fit">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <img src={date} className='h-5 w-5'/>
+                        </div>
+                        <input
+                          name="end"
+                          type="number" 
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
+                          placeholder="20-"
+                          min="2000" 
+                          max="2099" 
+                          step="1" 
+                          value={endOfSchoolYear}
+                          onChange={ev => setEndOfSchoolYear(ev.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>                 
+                </div> <hr />
+
+                {/**=========================== Student ID - LRN ==========================*/} 
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                      {/*column1*/}
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
+                          student id no :
+                        </label>
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-studentID"
+                        type="number"
+                        placeholder=""
+                        value={studentSchoolId}
+                        onChange={ev => setStudentSchoolId(ev.target.value)}
+                        />                          
+                      </div>
+                      {/*column2*/}
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lrn">
+                          learner's reference number (lrn) :
+                        </label>
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-lrn"
+                        type="number"
+                        placeholder=""
+                        value={learnersReferenceNumber}
+                        onChange={ev => setLearnersReferenceNumber(ev.target.value)}
+                        />        
+                      </div>
+                </div> 
+
+                {/**=========================== Last Name - Madain Name ==========================*/} 
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                  {/**column1 */}
+                  <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
+                      Last Name :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-studentLastname"
+                    type="text"
+                    placeholder=""
+                    value={lastName}
+                    onChange={ev => setLastName(ev.target.value)}/>  
+                  </div>
+                  {/**column2 */}
+                  <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentFirstname">
+                      First Name :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-studentFirstname" 
+                    type="text" 
+                    placeholder=""
+                    value={firstName}
+                    onChange={ev => setFirstName(ev.target.value)}/>  
+                  </div>
+                  {/**column3 */}
+                  <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMiddlename">
+                      Middle Name :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-studentMiddlename" 
+                    type="text" 
+                    placeholder=""
+                    value={middleName}
+                    onChange={ev => setMiddleName(ev.target.value)}/>  
+                  </div>
+                  {/** */}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
+                      Maiden Name :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-studentMaidenname" 
+                    type="text" 
+                    placeholder=""
+                    value={maidenName}
+                    onChange={ev => setMaidenName(ev.target.value)}/>  
+                  </div>
+                </div> <hr />
+                
+                {/**=========================== Academic Classification: Radio Buttons ==========================*/}
+                {/**re-do the implementation of the radio button */} 
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
+                  </div>
                       
-                      />
+                  <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                    {/**Radio buttion for SHS graduate */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                        type="radio"
+                        name="typeofacadclass"
+                        id="shsgraduate"
+                        value="SHS graduate" 
+                        onChange={ev => setAcademicClassification(ev.target.value)}
+                        
+                        />
+                        <label
+                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                          htmlFor="continuing">SHS graduate
+                        </label>
+                    </div>
+
+                    {/**Radio buttion for HS graduate */}
+                    <div className='mx-5 mt-2'>
+                      <input
+                        className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
+                        type="radio"
+                        name="typeofacadclass"
+                        id="hsgraduate"
+                        value="HS graduate"
+                        onChange={ev => setAcademicClassification(ev.target.value)}
+                        />
                       <label
                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                        htmlFor="continuing">SHS graduate
+                        htmlFor="secondsem">HS graduate
                       </label>
-                  </div>
+                    </div>
 
-                  {/**Radio buttion for HS graduate */}
-                  <div className='mx-5 mt-2'>
-                    <input
-                      className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
-                      type="radio"
-                      name="typeofacadclass"
-                      id="hsgraduate"
-                      value="HS graduate"
-                      onChange={ev => setAcademicClassification(ev.target.value)}
-                      />
-                    <label
-                      className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                      htmlFor="secondsem">HS graduate
+                    {/**Radio buttion for ALS completer */}
+                    <div className='mx-5 mt-2'>
+                      <input
+                        className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
+                        type="radio"
+                        name="typeofacadclass"
+                        id="alscompleter"
+                        value="ALS completer"
+                        onChange={ev => setAcademicClassification(ev.target.value)}
+                        />
+                      <label
+                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                        htmlFor="secondsem">ALS completer
+                      </label>
+                    </div>
+                  </div>
+                </div> <hr />
+
+                {/**=========================== Last School Attended - Degree Program ==========================*/} 
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-4">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lastschoolattended">
+                      Last School Attended :
                     </label>
-                  </div>
-
-                  {/**Radio buttion for ALS completer */}
-                  <div className='mx-5 mt-2'>
-                    <input
-                      className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
-                      type="radio"
-                      name="typeofacadclass"
-                      id="alscompleter"
-                      value="ALS completer"
-                      onChange={ev => setAcademicClassification(ev.target.value)}
-                      />
-                    <label
-                      className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                      htmlFor="secondsem">ALS completer
-                    </label>
-                  </div>
-                </div>
-              </div> <hr />
-
-              {/**=========================== Last School Attended - Degree Program ==========================*/} 
-              <div className="flex flex-wrap flex-row -mx-3 mb-2">
-                <div className="w-full px-3 mb-6 md:mb-0 mt-4">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lastschoolattended">
-                    Last School Attended :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-lastschoolattended" 
-                   type="text" 
-                   placeholder=""
-                   value={lastSchoolAttended}
-                   onChange={ev => setLastSchoolAttended(ev.target.value)}/>  
-                </div>
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-addresslastschoolattended">
-                    Address of School Attended :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-addresslastschoolattended" 
-                   type="text" 
-                   placeholder=""
-                   value={addressOfSchoolAttended}
-                   onChange={ev => setAddressOfSchoolAttended(ev.target.value)}/>  
-                </div>
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-degreeprogram">
-                    Degree/Program :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                   id="grid-degreeprogram" 
-                   type="text" 
-                   placeholder=""
-                   value={degree}
-                   onChange={ev => setDegree(ev.target.value)}
-                   />  
-                </div>
-              </div> <hr />
-
-              {/**=========================== Citizenship - Email Address ==========================*/} 
-              <div className="flex flex-wrap -mx-3 mb-2">
-                {/*column1*/}
-                <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-birthdate">Date of Birth :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                    id="grid-birthdate" 
-                    type="date" 
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-lastschoolattended" 
+                    type="text" 
                     placeholder=""
-                    value={dateOfBirth}
-                    onChange={ev => setDateOfBirth(ev.target.value)}
+                    value={lastSchoolAttended}
+                    onChange={ev => setLastSchoolAttended(ev.target.value)}/>  
+                  </div>
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-addresslastschoolattended">
+                      Address of School Attended :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-addresslastschoolattended" 
+                    type="text" 
+                    placeholder=""
+                    value={addressOfSchoolAttended}
+                    onChange={ev => setAddressOfSchoolAttended(ev.target.value)}/>  
+                  </div>
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-degreeprogram">
+                      Degree/Program :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-degreeprogram" 
+                    type="text" 
+                    placeholder=""
+                    value={degree}
+                    onChange={ev => setDegree(ev.target.value)}
+                    />  
+                  </div>
+                </div> <hr />
+
+                {/**=========================== Citizenship - Email Address ==========================*/} 
+                <div className="flex flex-wrap -mx-3 mb-2">
+                  {/*column1*/}
+                  <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-birthdate">Date of Birth :</label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                      id="grid-birthdate" 
+                      type="date" 
+                      placeholder=""
+                      value={dateOfBirth}
+                      onChange={ev => setDateOfBirth(ev.target.value)}
+                      />
+
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="citizenship">
+                      Citizenship :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-nationality" 
+                    type="text" 
+                    placeholder=""
+                    value={citizenship}
+                    onChange={ev => setCitizenship(ev.target.value)}
                     />
 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="citizenship">
-                    Citizenship :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-nationality" 
-                   type="text" 
-                   placeholder=""
-                   value={citizenship}
-                   onChange={ev => setCitizenship(ev.target.value)}
-                   />
-
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="ethnicity">
-                    Ethnicity/Tribal Affilation :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-ethnicity" 
-                   type="text" 
-                   placeholder=""
-                   value={ethnicity}
-                   onChange={ev => setEthnicity(ev.target.value)}/>
-                                        
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-contactnumber" 
-                   type="number" 
-                   placeholder=""
-                   value={contactNumber}
-                   onChange={ev => setContactNumber(ev.target.value)}/>                    
-                </div>
-
-                {/*column2*/}
-                <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">                 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="placeofbirth">
-                    Place of Birth :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-placeofbirth" 
-                   type="text" 
-                   placeholder=""
-                   value={placeOfBirth}
-                   onChange={ev => setPlaceOfBirth(ev.target.value)}/>
-                    
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
-                    Sex at Birth :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                    id="grid-sexatbirth" 
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="ethnicity">
+                      Ethnicity/Tribal Affilation :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-ethnicity" 
                     type="text" 
                     placeholder=""
-                    value={sexAtBirth}
-                    onChange={ev => setSexAtBirth(ev.target.value)}/>
+                    value={ethnicity}
+                    onChange={ev => setEthnicity(ev.target.value)}/>
+                                          
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-contactnumber" 
+                    type="number" 
+                    placeholder=""
+                    value={contactNumber}
+                    onChange={ev => setContactNumber(ev.target.value)}/>                    
+                  </div>
 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
-                    Special Need/s :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-studyaddress" 
-                   type="text" 
-                   placeholder=""
-                   value={specialNeeds}
-                   onChange={ev => setSpecialNeeds(ev.target.value)}/>
-                    
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="emailaddress">
-                    Email Address :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-emailaddress" 
-                   type="text" 
-                   placeholder=""
-                   value={email}
-                   onChange={ev => setEmail(ev.target.value)}/>
-                </div>
-              </div> <hr />
-
-              {/**=========================== Filling the Adresses ==========================*/} 
-              <div className="flex flex-wrap -mx-3 mb-2">
-                <div className="w-full px-3 mb-3 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-homeaddress">Home Address :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-homeaddress" 
-                   type="text" 
-                   placeholder=""
-                   value={homeAddress}
-                   onChange={ev => setHomeAddress(ev.target.value)}/>
-                </div>
-                <div className="w-full px-3 mb-3 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
-                    Address while studying at BSU :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-studyaddress" 
-                   type="text" 
-                   placeholder=""
-                   value={addressWhileStudyingAtBsu}
-                   onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
-                </div>
-              </div> <hr />
-
-              {/**=========================== Emergy Contact ==========================*/} 
-              <div className="text-normal font-medium text-center mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</div> <hr className='mt-2'/>
-              <div className="flex flex-wrap -mx-3 mb-2"> 
-                
-                {/*column1*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Complete Name :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-contactname" 
-                   type="text" 
-                   placeholder=""
-                   value={emergencyContactName}
-                   onChange={ev => setEmergencyContactName(ev.target.value)}/>
-                  
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                    id="grid-address" 
+                  {/*column2*/}
+                  <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0 mt-2">                 
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="placeofbirth">
+                      Place of Birth :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-placeofbirth" 
                     type="text" 
                     placeholder=""
-                    value={emergencyContactAddress}
-                    onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
-                </div>
-
-                {/*column2*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
-                    Contact Number :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-contactnum" 
-                   type="number"
-                   onUpM
-                   placeholder=""
-                   value={emergencyContactNumber}
-                   onChange={ev => setEmergencyContactNumber(ev.target.value)}
-                   />
+                    value={placeOfBirth}
+                    onChange={ev => setPlaceOfBirth(ev.target.value)}/>
                       
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
-                    Relationship :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-relationship" 
-                   type="text" 
-                   placeholder=""
-                   value={relationship}
-                   onChange={ev => setRelationship(ev.target.value)}/>
-                </div>
-              </div> <hr />
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
+                      Sex at Birth :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                      id="grid-sexatbirth" 
+                      type="text" 
+                      placeholder=""
+                      value={sexAtBirth}
+                      onChange={ev => setSexAtBirth(ev.target.value)}/>
 
-              {/**=========================== Insurance Coverage ==========================*/} 
-              <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
-              <div className="flex flex-wrap -mx-3 mb-2">
-                {/*column1*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2">
-                    Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
-                  </label>
-                  <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                    {/**Radio buttion for Yes registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="yesregister"
-                        id="yesregister"
-                        value="option1" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">Yes
-                        </label>
-                    </div>
-                    {/**Radio buttion for No registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="noregister"
-                        id="noregister"
-                        value="option2" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">No
-                        </label>
-                    </div>
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
+                      Special Need/s :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-studyaddress" 
+                    type="text" 
+                    placeholder=""
+                    value={specialNeeds}
+                    onChange={ev => setSpecialNeeds(ev.target.value)}/>
+                      
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="emailaddress">
+                      Email Address :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-emailaddress" 
+                    type="text" 
+                    placeholder=""
+                    value={email}
+                    onChange={ev => setEmail(ev.target.value)}/>
                   </div>
+                </div> <hr />
+
+                {/**=========================== Filling the Adresses ==========================*/} 
+                <div className="flex flex-wrap -mx-3 mb-2">
+                  <div className="w-full px-3 mb-3 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-homeaddress">Home Address :</label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-homeaddress" 
+                    type="text" 
+                    placeholder=""
+                    value={homeAddress}
+                    onChange={ev => setHomeAddress(ev.target.value)}/>
+                  </div>
+                  <div className="w-full px-3 mb-3 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
+                      Address while studying at BSU :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-studyaddress" 
+                    type="text" 
+                    placeholder=""
+                    value={addressWhileStudyingAtBsu}
+                    onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
+                  </div>
+                </div> <hr />
+
+                {/**=========================== Emergy Contact ==========================*/} 
+                <div className="text-normal font-medium text-center mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</div> <hr className='mt-2'/>
+                <div className="flex flex-wrap -mx-3 mb-2"> 
                   
-                </div>
-                {/*column2*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                  <select  /*onChange={handleChange}*/ className='ml-5'>
-                    <option value="notvaccinated">Not Vaccinated</option>
-                    <option value="notvaccinated">1st Dose</option>
-                    <option value="notvaccinated">2nd Dose</option>
-                    <option value="notvaccinated">Booster</option>
-                  </select>
-                </div>
+                  {/*column1*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Complete Name :</label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-contactname" 
+                    type="text" 
+                    placeholder=""
+                    value={emergencyContactName}
+                    onChange={ev => setEmergencyContactName(ev.target.value)}/>
+                    
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                      id="grid-address" 
+                      type="text" 
+                      placeholder=""
+                      value={emergencyContactAddress}
+                      onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
+                  </div>
 
-                {/**/}
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
-                    Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
-                  </label>
-                  <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                    {/**Radio buttion for Yes dependent */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="yesdependent"
-                        id="yesdependent"
-                        value="option1" />
-                      <label
-                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                        htmlFor="healthdependent">Yes
-                      </label>
+                  {/*column2*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
+                      Contact Number :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-contactnum" 
+                    type="number"
+                    onUpM
+                    placeholder=""
+                    value={emergencyContactNumber}
+                    onChange={ev => setEmergencyContactNumber(ev.target.value)}
+                    />
+                        
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
+                      Relationship :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-relationship" 
+                    type="text" 
+                    placeholder=""
+                    value={relationship}
+                    onChange={ev => setRelationship(ev.target.value)}/>
+                  </div>
+                </div> <hr />
+
+                {/**=========================== Insurance Coverage ==========================*/} 
+                <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                  {/*column1*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2">
+                      Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                      {/**Radio buttion for Yes registered */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="yesregister"
+                          id="yesregister"
+                          value="option1" />
+                          <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthregistered">Yes
+                          </label>
+                      </div>
+                      {/**Radio buttion for No registered */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="noregister"
+                          id="noregister"
+                          value="option2" />
+                          <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthregistered">No
+                          </label>
+                      </div>
                     </div>
-                    {/**Radio buttion for No dependent */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="nodependent"
-                        id="noredependent"
-                        value="option2" />
-                      <label
+                    
+                  </div>
+                  {/*column2*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
+                    <select  /*onChange={handleChange}*/ className='ml-5'>
+                      <option value="notvaccinated">Not Vaccinated</option>
+                      <option value="notvaccinated">1st Dose</option>
+                      <option value="notvaccinated">2nd Dose</option>
+                      <option value="notvaccinated">Booster</option>
+                    </select>
+                  </div>
+
+                  {/**/}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
+                      Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                      {/**Radio buttion for Yes dependent */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="yesdependent"
+                          id="yesdependent"
+                          value="option1" />
+                        <label
                           className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthdependent">No
-                      </label>
+                          htmlFor="healthdependent">Yes
+                        </label>
+                      </div>
+                      {/**Radio buttion for No dependent */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="nodependent"
+                          id="noredependent"
+                          value="option2" />
+                        <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthdependent">No
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div> <hr />
-          </div>
-        </div>
-        
-      {/**=========================== 3 ==========================*/}      
-      {/**Start of Filling the FORM */}
-        <div className="w-full container mx-auto">
-          <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
-            <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-                <div className="text-normal font-medium text-center mt-2">
-                  DIGITAL COMMUNICATION AND LITERACY:
-                  <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
-                </div> <hr className='mt-2'/>
-
-                {/*column1*/}
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
-                                Category :
-                            </label>
-                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-col mb-2">
-                                {/**Radio buttion for High level technology */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="highlvl"
-                                        id="highlvl"
-                                        value="category1" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="categorytech">
-                                        <strong>High Level Technology: </strong>
-                                        <i>Availability of Devices-laptops, mobile phones, tablets, desktops, Internet connectvity-fast</i>
-                                    </label>
-                                </div>
-                                {/**Radio buttion for Medium level technology */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="mediumlvl"
-                                        id="mediumlvl"
-                                        value="category2" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="categorytech">
-                                        <strong>Medium Level Technology: </strong>
-                                        <i>Availability of Devices-Mostly available phones, Internet connectvity-slow</i>
-                                    </label>
-                                </div>
-                                {/**Radio buttion for Low level technology */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="lowlvl"
-                                        id="lowlvl"
-                                        value="category3" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="categorytech">
-                                        <strong>Low Level Technology: </strong>
-                                        <i>Availability of Devices-Some mobile phones or no technology, Internet connectvity-poor or no internet connection</i>
-                                    </label>
-                                </div>
-                            </div>                                         
-                        </div> <hr className='mt-2'/>
-
-                        {/*column2*/}
-                        <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
-                                Level of Digital Literacy :
-                            </label>
-                            <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                                {/**Radio buttion for Proficient literacy */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="proficient"
-                                        id="proficient"
-                                        value="lvl1" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="literacy">Proficient
-                                    </label>
-                                </div>
-                                {/**Radio buttion for Advanced literacy */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="advanced"
-                                        id="advanced"
-                                        value="lvl2" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="literacy">Advanced
-                                    </label>
-                                </div>
-                                {/**Radio buttion for Beginner literacy */}
-                                <div className='mx-5 mt-2'>
-                                    <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                        type="radio"
-                                        name="beginner"
-                                        id="beginner"
-                                        value="lvl3" />
-                                    <label
-                                        className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                        htmlFor="literacy">Beginner
-                                    </label>
-                                </div>
-                            </div>                      
-                        </div><hr />
+                </div> <hr />
             </div>
           </div>
-        </div>
+        
+          {/**=========================== 3 ==========================*/}      
+          {/**Start of Filling the FORM */}
+          <div className="w-full container mx-auto">
+            <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
+              <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
+                  <div className="text-normal font-medium text-center mt-2">
+                    DIGITAL COMMUNICATION AND LITERACY:
+                    <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
+                  </div> <hr className='mt-2'/>
+
+                  {/*column1*/}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
+                      Category :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-col mb-2">
+                      {/**Radio buttion for High level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="highlvl"
+                                id="highlvl"
+                                value="category1" />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>High Level Technology: </strong>
+                               <i>Availability of Devices-laptops, mobile phones, tablets, desktops, Internet connectvity-fast</i>
+                        </label>
+                      </div>
+                      {/**Radio buttion for Medium level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="mediumlvl"
+                                id="mediumlvl"
+                                value="category2" />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>Medium Level Technology: </strong>
+                              <i>Availability of Devices-Mostly available phones, Internet connectvity-slow</i>
+                        </label>
+                      </div>
+                      {/**Radio buttion for Low level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="lowlvl"
+                                id="lowlvl"
+                                value="category3" />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>Low Level Technology: </strong>
+                              <i>Availability of Devices-Some mobile phones or no technology, Internet connectvity-poor or no internet connection</i>
+                        </label>
+                      </div>
+                    </div>                                         
+                  </div> <hr className='mt-2'/>
+
+                  {/*column2*/}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
+                      Level of Digital Literacy :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                    {/**Radio buttion for Proficient literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="proficient"
+                              id="proficient"
+                              value="lvl1" />
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Proficient
+                      </label>
+                    </div>
+                    {/**Radio buttion for Advanced literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="advanced"
+                              id="advanced"
+                              value="lvl2" />
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Advanced
+                      </label>
+                    </div>
+                    {/**Radio buttion for Beginner literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="beginner"
+                              id="beginner"
+                              value="lvl3" />
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Beginner
+                      </label>
+                    </div>
+                  </div>                      
+                </div><hr />
+              </div>
+            </div>
+          </div>
 
       {/**=========================== 4 ==========================*/}      
       {/**Start of Filling the FORM */}
@@ -743,7 +743,7 @@ const handleRemoveFields = (index) => {
                   AVAILMENT OF FREE HIGHER EDUCATION :
                 </div> <hr className='mt-2'/>
 
-                <div class="flex flex-wrap flex-row -mx-3 mb-2">
+                <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   {/*column1*/}
                   <div className="w-full md:w-[15%] px-3  py-5 mb-6 md:mb-0 mt-2">
                     <label className=" text-gray-700 text-sm font-bold mb-2">
