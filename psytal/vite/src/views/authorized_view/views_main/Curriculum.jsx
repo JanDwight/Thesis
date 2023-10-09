@@ -61,56 +61,11 @@ export default function Curriculum(){
                 <div className="font-bold text-6xl text-[#525252]">Curriculum</div>
                 {/*Filter and Add Courses */}
                 <div className="flex flex-row">
-                    <div>
-                        <Menu>
-                            <Menu.Button className="relative mr-5 py-1 px-5 border-2 border-black">Filter</Menu.Button>
-                            <Menu.Items className="absolute px-[7px] border-2 border-black bg-white">
-                                <div className="flex flex-col">
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <a
-                                            className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                        >
-                                          1st Year
-                                        </a>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                  {({ active }) => (
-                                    <a
-                                      className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                    >
-                                      2nd Year
-                                    </a>
-                                  )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                  {({ active }) => (
-                                    <a
-                                      className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                    >
-                                      3rd Year
-                                    </a>
-                                  )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                  {({ active }) => (
-                                    <a
-                                      className={`${active && 'bg-[#CCEFCC]'}`}
-                                    >
-                                      4th Year
-                                    </a>
-                                  )}
-                                </Menu.Item>
-                                </div>
-                            </Menu.Items>
-                        </Menu>
-                    </div>
                     <button onClick={() => setIsModalOpen(true)} 
                         className="bg-[#397439] rounded-2xl  px-5 text-white font-size">
                             Add Course
                     </button>
-                    </div>
+                </div>
             </div>
             
             <div className="table-container overflow-y-auto">

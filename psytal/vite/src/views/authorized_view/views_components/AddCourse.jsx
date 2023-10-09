@@ -29,6 +29,7 @@ export default function AddCourse({closeModal}) {
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);
+        window.location.reload();
       })
       .catch(error => {
         // Handle errors, including validation errors
@@ -37,8 +38,6 @@ export default function AddCourse({closeModal}) {
         } else {
           console.error(error.response.data);
         }
-      
-      window.location.reload();
       });
 
     // Close the modal
