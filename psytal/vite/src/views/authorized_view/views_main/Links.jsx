@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
 import axiosClient from '../../../axios.js';
-import { useStateContext } from '../../../context/ContextProvider.jsx';
 import AddLinks from '../views_components/AddLinks.jsx';
 import ReactModal from 'react-modal';
 import arhive from "@assets/delete.png"
@@ -11,23 +10,19 @@ import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
 
 export default function Links() {
   //Calling the Archivelinks
-  const [showArchivelink, setShowArchivelink]= useState(false);
-  const [isEditLinksOpen, setIsEditLinksOpen] = useState(false);
+  const [showEditlink, setshowEditlink] = useState(false);
   const [selectedLink, setSelectedLink] = useState('');
   const [isAchiveModalOpen, setIsArchiveModalOpen] = useState(false);
-  
     const addLinks = async (linkData) => {
       try {
         const response = await axios.post('/addlink', linkData);
-        // Handle the response (e.g., show success message)
       } catch (error) {
-        // Handle errors (e.g., display validation errors)
         console.error(error);
       }
     };
     
     const onSubmitarchivelink = async (archiveModalValue, index) => {
-      setSelectedLink(index);
+      setSelectedLink(links[index]); // Make sure the correct link is selected 
       setIsArchiveModalOpen(archiveModalValue);
       console.log('selected Link: ' + selectedLink);
     };
@@ -47,23 +42,6 @@ export default function Links() {
       console.error(error);
     }
   };
-
-      // class LinksList extends Component {
-      //   constructor(props) {
-      //     super(props);
-      //     this.state = {
-      //       data: [], // Initialize with an empty array
-      //       isArchiveLinksOpen: false, // Initially, the custom modal for archiving links is closed
-      //       isEditLinksOpen: false, // Initially, the custom modal for editing links is closed
-      //       selectedLink: null, // Store the selected Link for the modals
-      //     };
-      //   }
-      
-      //   componentDidMount() {
-      //     this.fetchData();
-      //   }
-
-      // }
         
   //Update Axios
   const updateLink = async (updatedLink) => {
@@ -78,8 +56,8 @@ export default function Links() {
   };
 
   const handleEditClick = (link) => {
+    setshowEditlink(true);
     setSelectedLink(link);
-    setIsEditLinksOpen(true);
   };
 
   const handleCloseEditLinks = () => {
@@ -110,10 +88,10 @@ export default function Links() {
             <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
 		            <thead>
 		              <tr>
-                    <th className="text-center">Title</th>
-                    <th className="text-center">Description</th>
-                    <th className="text-center">Author</th>
-                    <th className="text-center">Action</th>
+                    <th className="text-center">Class Code</th>
+                    <th className="text-center">Class Description</th>
+                    <th className="text-center">Instructor</th>
+                    <th className="text-center">Link Code</th>
 		              </tr>
                 </thead>
                  <tbody>
@@ -122,10 +100,14 @@ export default function Links() {
                         key={index} 
                         className="bg-[#7EBA7E] p-5"
                         onSubmit={addLinks}>
-                          <td className="text-center rounded-l-full p-2">{link.class_code}</td>
-                          <td className="text-center p-2">{link.class_description}</td>
-                          <td className="text-center p-2">{link.instructor_name}</td>
-                          <td className="text-center p-2">{link.url}</td>
+                          <td className="text-center rounded-l-full p-2 overflow-hidden overflow-wrap break-word">{link.class_code}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_description.slice(0.30)}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.instructor_name}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">
+                            <a href={link.url} target="_blank" rel="noopener noreferrer">
+                           {link.url.slice(0, 50)}... {/* Displaying the first 10 characters */}
+                            </a>
+                          </td>
                           <td className= "text-center rounded-r-full">
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
@@ -141,9 +123,8 @@ export default function Links() {
 	          </table>
             </div>
           </div>
-      
-          
 
+      {/* Addlinks Modal*/}
       <ReactModal
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
@@ -152,48 +133,29 @@ export default function Links() {
         <div>
           <AddLinks closeModal={() => setIsModalOpen(false)}/>
         </div>
-
-       
       </ReactModal>
+
       
-      <ReactModal
-      isEditLinksOpen = {isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
-      className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
-      >
-              <div>
-              <EditLinks
-                link={selectedLink}
-                onClose={handleCloseEditLinks}
-                onSave={updateLink}
-              />
-              </div>
-            
-      </ReactModal>
-
       <ReactModal
       isOpen={isAchiveModalOpen}
       onRequestClose={() => setIsArchiveModalOpen(false)}
       className=" h-0 w-0"
       >
-              <div>
-              <ArchiveLinks
-                showArchivelink={showArchivelink}
-                onclose={() => setShowArchivecourse(false)}
-                selected={selectedLink}
+      {/* Archive Modal*/}  
+      <ArchiveLinks
+       onClose={handleCloseEditLinks}
+      selected={selectedLink}
               />
-              </div>
-            
-      </ReactModal>
 
-     
-      {/* <ArchiveLinks
-          showArchivelink={showArchivelink}
-          //onclose={() => setShowArchivecourse(false)}
-          index={selectedLink}
-        /> */}
+      {/* Edit/Update Modal         */}
+      </ReactModal>
+        < EditLinks
+              showEditlink={showEditlink}
+              onClose={() => setshowEditlink(false)}
+              selected={selectedLink}
+            />
+            
       </>
-      
 
     
   );
