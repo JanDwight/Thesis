@@ -56,7 +56,7 @@ export default function Curriculum(){
 
   return (
         <>
-        <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12 table-container overflow-y-auto">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-6xl text-[#525252]">Curriculum</div>
                 {/*Filter and Add Courses */}
@@ -113,7 +113,7 @@ export default function Curriculum(){
                     </div>
             </div>
             
-            <div>
+            <div className="table-container overflow-y-auto">
             <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
 		            <thead>
 		              <tr>
@@ -136,13 +136,13 @@ export default function Curriculum(){
                         className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`}
                       >
                           <td className="text-center rounded-l-full p-2">{curriculum.class_year}</td>
-                          <td className="text-center p-2">{curriculum.semester}</td>
-                          <td className="text-center p-2">{curriculum.course_code}</td>
-                          <td className="text-center p-2">{curriculum.units}</td>
-                          <td className="text-center p-2">{curriculum.course_title}</td>
-                          <td className="text-center p-2">{curriculum.hoursperWeek}</td>
-                          <td className="text-center p-2">{curriculum.course_type}</td>
-                          <td className="text-center p-2">{curriculum.preReq}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.semester}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.course_code}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.units}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.course_title}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.hoursperWeek}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.course_type}</td>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.preReq}</td>
                           <td className= "text-center rounded-r-full">
                             <button onClick={() => handleEditClick(curriculum)}>
                               <img src={edit} alt='edit' className='h-5 w-5' />
