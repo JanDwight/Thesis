@@ -61,18 +61,18 @@ class CurriculumController extends Controller
     public function updateCurriculum(Request $request, $curriculumId)
     {
         
-        $curriculumData = curriculum::find($curriculumId);
-        
-    if (!$curriculumData) {
-        // Handle the case where the preregID with the provided ID is not found
-        return response()->json(['message' => 'Form not found'], 404);
-    }
+            $curriculumData = curriculum::find($curriculumId);
+            
+        if (!$curriculumData) {
+            // Handle the case where the preregID with the provided ID is not found
+            return response()->json(['message' => 'Form not found'], 404);
+        }
 
-    // Extract the attributes from the request
-    $attributes = $request->all();
-    
-    $curriculumData->update($attributes); 
-    return response()->json(['message' => 'Curriculum updated successfully']);
+        // Extract the attributes from the request
+        $attributes = $request->all();
+        
+        $curriculumData->update($attributes); 
+        return response()->json(['message' => 'Curriculum updated successfully']);
     }
     
 }
