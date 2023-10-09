@@ -48,8 +48,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
-    Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs, 3 most recent only
-    Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives, 3 most recent only
+    Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
+    Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table

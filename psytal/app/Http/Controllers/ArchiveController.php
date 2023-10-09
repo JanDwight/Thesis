@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\archive;
+use Illuminate\Database\Eloquent\SoftDeletes; // Import SoftDeletes trait
 
 class ArchiveController extends Controller
 {
@@ -69,4 +70,36 @@ class ArchiveController extends Controller
    {
        //
    }
+   //permanent delete users
+   public function forceDeleteUser(Request $request, $userId)
+   {
+   try {
+       // Find the user by ID or fail with a 404 response if not found
+       $user = User::findOrFail($userId);
+
+       // Perform a true deletion
+       $user->forceDelete();
+
+       return response()->json(['message' => 'User deleted permanently']);
+    } catch (\Exception $e) {
+        // Handle exceptions, e.g., log the error
+        return response()->json(['message' => 'Error deleting user'], 500);
+    }
+   }
+   //restore users by id
+   public function restoreUser(Request $request, $userId)
+    {
+        try {
+            // Find the trashed user by ID or fail with a 404 response if not found
+            $user = User::withTrashed()->findOrFail($userId);
+
+            // Restore the user
+            $user->restore();
+    
+            return response()->json(['message' => 'User restored successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error restoring user'], 500);
+        }
+    }
 }

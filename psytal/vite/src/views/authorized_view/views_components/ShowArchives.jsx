@@ -57,7 +57,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
           X
         </button>
 
-        <div className="mb-4"> {/* Add margin to the bottom of the table */}
+        <div className="mb-6"> {/* Add margin to the bottom of the table */}
           <table className="min-w-full">
             <thead>
               <tr>

@@ -14,6 +14,10 @@ class PostController extends Controller
        
     $data = $request->validated();
 
+    // $post = auth()->user()->posts()->create([
+    //    'title' => $data['title'],
+    //    'description' => $data['description'],
+
     // Create a new post
     $post = auth()->user()->posts()->create([
         'title' => $data['title'],

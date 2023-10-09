@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Import the DB facade
 use App\Models\User;
+use App\Models\archive;
 
 class ArchiveUserController extends Controller
 {
@@ -11,11 +13,22 @@ class ArchiveUserController extends Controller
     {
         try {
             // Find the user by ID or fail with a 404 response if not found
-            //$user = User::findOrFail($userId);
-            $user = User::find($userId);
-    
-            // Update the user's archived status to 1
-            //$user->update(['archived' => 1]);
+            $user = User::findOrFail($userId);
+
+            $userTableName = (new User)->getTable(); //getting table associated w/ User model
+
+            // Create an Archive instance
+            $archive = new archive;
+            $archive->item_id = $user->id;
+            $archive->item_name = $user->name;
+            $archive->item_type = 'User';
+            $archive->origin_table = $userTableName;
+            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
+            $archive->archiver_name = auth()->user()->name;
+            $archive->archiver_role = auth()->user()->role;
+
+            //save to archives table
+            $archive->save();
 
             $user->archived = 1;
             $user->save();
@@ -26,4 +39,5 @@ class ArchiveUserController extends Controller
             return response()->json(['message' => 'Error archiving user'], 500);
         }
     }
+    // COPY FOR ALL CONTROLLERS WITH ARCHIVE
 }
