@@ -11,10 +11,14 @@ class ArchiveUserController extends Controller
     {
         try {
             // Find the user by ID or fail with a 404 response if not found
-            $user = User::findOrFail($userId);
+            //$user = User::findOrFail($userId);
+            $user = User::find($userId);
     
             // Update the user's archived status to 1
-            $user->update(['archived' => 1]);
+            //$user->update(['archived' => 1]);
+
+            $user->archived = 1;
+            $user->save();
     
             return response()->json(['message' => 'User archived successfully']);
         } catch (\Exception $e) {

@@ -725,20 +725,7 @@ export default function PreRegistrationForContinuing() {
 
                     </div>
                 </div>
-                
-        {/**===========SUMBIT Button============= */}
-        <div className="text-center flex justify-end my-8">
-                <button 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
-                  Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
-                  Submit
-                </button>
-              </div>
-            </form>
+            </form>        
         </div>
 
         {/**=========================== 3 ==========================*/}      
@@ -1099,6 +1086,18 @@ export default function PreRegistrationForContinuing() {
                 
             </form>
         </div>
+        {/**===========SUMBIT Button============= */}
+        <div className="text-center items-center my-8">
+            <button 
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Cancel
+            </button>
+            <button 
+                type="submit"
+                className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+                  Submit
+            </button>
+        </div>   
 
 
     </main>
