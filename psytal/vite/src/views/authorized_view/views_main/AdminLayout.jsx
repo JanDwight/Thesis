@@ -265,7 +265,7 @@ export default function AdminLayout() {
                 to={item.to}
                 className={({label, isActive, onClick }) => classNames(
                 isActive
-                  ? 'bg-lime-300  text-black'
+                  ? 'bg-[#aaf0aa]  text-black'
                   : 'text-gray-600 hover:bg-gray-200 hover:text-black',
                   'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
                 )}
