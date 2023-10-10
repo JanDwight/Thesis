@@ -7,6 +7,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
     //Create new migration w/ the archivde field
     try {
       // send selected subject to archive controller
+      //change 'class_id' with just 'id'
       const response = await axiosClient.put(`/archiveclasses/${subject.class_id}`);
 
       console.log('Class archived successfully.');

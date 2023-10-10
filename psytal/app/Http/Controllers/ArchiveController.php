@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\archive;
-use Illuminate\Database\Eloquent\SoftDeletes; // Import SoftDeletes trait
 
 class ArchiveController extends Controller
 {
@@ -70,36 +69,64 @@ class ArchiveController extends Controller
    {
        //
    }
-   //permanent delete users
-   public function forceDeleteUser(Request $request, $userId)
+   // DELETE DELETE DELETE
+   public function deleteArchive(Request $request, $userId)
    {
-   try {
-       // Find the user by ID or fail with a 404 response if not found
-       $user = User::findOrFail($userId);
-
-       // Perform a true deletion
-       $user->forceDelete();
-
-       return response()->json(['message' => 'User deleted permanently']);
-    } catch (\Exception $e) {
-        // Handle exceptions, e.g., log the error
-        return response()->json(['message' => 'Error deleting user'], 500);
-    }
-   }
-   //restore users by id
-   public function restoreUser(Request $request, $userId)
-    {
         try {
-            // Find the trashed user by ID or fail with a 404 response if not found
-            $user = User::withTrashed()->findOrFail($userId);
+            //not connected via routes yet
+            // Retrieve the array of selected item IDs from the request payload
+            $selectedItems = $request->input('selectedItems');
+        
+            // Delete the selected items from the 'archives' table
+            archive::whereIn('id', $selectedItems)->delete();
 
-            // Restore the user
-            $user->restore();
-    
-            return response()->json(['message' => 'User restored successfully']);
+            //find each item in origin table then delete them permanently
+        
+            // After deleting the selected items, return a response indicating success
+            return response()->json(['message' => 'Items deleted successfully']);
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
-            return response()->json(['message' => 'Error restoring user'], 500);
+            return response()->json(['message' => 'Error deleting items'], 500);
+        }
+   }
+   // RESTORE RESTORE RESTORE
+   public function returnArchive(Request $request)
+    {
+        try {
+            // Retrieve the array of selected item IDs from the request payload
+            $selectedItems = $request->input('selectedItems');
+    
+            // Query the archives table to select specific columns
+            $archivedItems = archive::whereIn('id', $selectedItems)
+                ->select('id', 'item_id', 'item_name', 'item_type', 'origin_table')
+                ->get();
+    
+            // Process the archived items and restore them to their source tables
+            foreach ($archivedItems as $archivedItem) {
+                // Determine the source model class based on 'item_type' and 'origin_table'
+                $modelClass = 'App\\Models\\' . ucfirst($archivedItem->item_type);
+    
+                // Check if the model class exists
+                if (class_exists($modelClass)) {
+                    // Use 'item_id' to find the item in the source table
+                    $sourceItem = $modelClass::find($archivedItem->item_id);
+    
+                    // If the source item is found, you can update it as needed
+                    if ($sourceItem) {
+                        // Update the 'archived' column to 0 in the source item
+                        $sourceItem->update(['archived' => 0]);
+                    }
+                }
+            }
+
+            // Force delete the selected items from the 'archives' table
+            archive::whereIn('id', $selectedItems)->forceDelete();
+    
+            // After processing the selectedItems, return a response indicating success
+            return response()->json(['message' => 'Items restored successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error restoring items'], 500);
         }
     }
 }

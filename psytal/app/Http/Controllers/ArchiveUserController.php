@@ -17,11 +17,14 @@ class ArchiveUserController extends Controller
 
             $userTableName = (new User)->getTable(); //getting table associated w/ User model
 
-            // Create an Archive instance
+            // Get the name of the current model
+            $itemType = class_basename($user);
+
+            // Create an Archive instance // make one for all archiveable items
             $archive = new archive;
             $archive->item_id = $user->id;
             $archive->item_name = $user->name;
-            $archive->item_type = 'User';
+            $archive->item_type = $itemType;
             $archive->origin_table = $userTableName;
             $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
             $archive->archiver_name = auth()->user()->name;
