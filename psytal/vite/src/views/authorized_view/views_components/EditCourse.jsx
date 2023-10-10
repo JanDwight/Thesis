@@ -45,9 +45,11 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
+      <div className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5">
         <div className="w-full px-4 mx-auto mt-6">
-          <p className="block uppercase tracking-wide font-semibold text-green-800 my-3">Update Course:</p>
+          <div className='flex justify-center font-bold text-4xl text-[#525252]'>
+              Edit Course
+          </div>
           <div>
             <form>
                 <div className='mt-2 flex flex-col-2 justify-between'>
@@ -136,7 +138,7 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                     />  
                 </div>
 
-                <p className="block text-sm text-gray-700">
+                <p className="block text-sm font-bold text-gray-700">
                     Course Type:
                 </p>
                 <div className="flex justify-between mt-2">
@@ -180,7 +182,7 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                       className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
                 </div>
-              <div className="text-center flex justify-end my-7">
+              <div className="text-center flex justify-center my-7">
                 <button onClick={handleSubmit} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Save
                 </button>
