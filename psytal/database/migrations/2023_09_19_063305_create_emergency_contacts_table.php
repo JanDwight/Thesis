@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emergency_contacts', function (Blueprint $table) {
-            $table->id('emergency_contact_id');
-            $table->foreignId(\App\Models\student_profile::class, 'student_profiles');
+            $table->id("emergencycontact_id");
+            $table->foreignId('user_id')->onDelete('cascade');
             $table->integer('student_id');
             $table->string('contact_name');
             $table->string('contact_address');

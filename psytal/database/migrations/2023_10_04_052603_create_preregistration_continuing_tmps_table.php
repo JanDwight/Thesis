@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('preregistration_continuing_tmps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');
             $table->string('last_name');

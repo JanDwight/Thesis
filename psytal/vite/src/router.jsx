@@ -140,21 +140,21 @@ const router = createBrowserRouter([
     },
 
     {
-        path: '/',
+        path: '/student',
         element: <DefaultLayout />,
         children: [
             {
-                path: '/home',
+                path: 'home',
                 element: <Home />
             },
 
             {
-                path: '/preregistrationforcontinuing',
+                path: 'preregistrationforcontinuing',
                 element: <PreRegistrationForContinuing />
             },
 
             {
-                path: '/linksforstudent',
+                path: 'linksforstudent',
                 element: <LinksForStudent />
             }
 

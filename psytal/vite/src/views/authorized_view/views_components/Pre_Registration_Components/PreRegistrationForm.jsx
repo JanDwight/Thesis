@@ -98,6 +98,7 @@ const handleRemoveFields = (index) => {
       contact_person_relationship: relationship,
       pre_reg_status: 'Pending',
       type_of_student: 'Regular',
+      year_level: '1st Yearw'
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)

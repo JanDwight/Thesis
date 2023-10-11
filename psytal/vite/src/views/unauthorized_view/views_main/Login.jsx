@@ -4,7 +4,7 @@ import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychLogo.png';
 
 export default function Login() {
-  const {setCurrentUser, setUserToken, setUserRole, currenUser} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole, setContextPass, currentUser} = useStateContext();
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({__html: ""});
@@ -20,9 +20,10 @@ export default function Login() {
       password,
     })
     .then(({ data }) => {
-      setCurrentUser(data.user)
-      setUserToken(data.token)
+      setCurrentUser(data.user_name)
+      setUserToken(data.token)  
       setUserRole(data.role)
+      setContextPass(password)
     })
     .catch(( error ) => {
       if (error.response) {

@@ -36,8 +36,10 @@ export default function AdminLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
   const [isSearchToggled, setIsSearchToggled] = useState(false);
+
+  console.log(currenUser)
 
   if (!userToken && !userRole) {
     return <Navigate to='/guest/landingpage' />
@@ -292,7 +294,9 @@ export default function AdminLayout() {
       onRequestClose={() => setIsProfileOpen(false)}
       className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 "
       >
-        <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
+        <div className='relative flex flex-col min-w-0 break-words w-full mt-3'>
+          <UserProfile closeModal={() => setIsProfileOpen(false)}/>
+        </div>
       </ReactModal>
 
       {/**<!--Footer--> */}

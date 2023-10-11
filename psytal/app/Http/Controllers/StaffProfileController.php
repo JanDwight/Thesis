@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\staff_profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StaffProfileController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */

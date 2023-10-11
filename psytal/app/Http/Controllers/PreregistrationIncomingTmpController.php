@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PreRegistrationIncomingTmpRequest;
 use App\Models\preregistration_incoming_tmp;
-use App\Models\student_profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,34 +13,6 @@ class PreregistrationIncomingTmpController extends Controller
     public function createIncomingPreReg(PreRegistrationIncomingTmpRequest $request)
     {
         $data = $request->validated();
-
-
-        $anotherRecord = preregistration_incoming_tmp::create([
-            'App\Models\User' => $data['App\Models\User'],
-            'App\Models\emergency_contact' => $data['App\Models\emergency_contact'],
-            'given_name' => $data['given_name'],
-            'family_name' => $data['family_name'],
-            'middle_name' => $data['middle_name'],
-            'maiden_name' => $data['maiden_name'],
-            'student_id' => $data['student_id'],
-            'image' => $data['image'],
-            'start_of_school_year' => $data['start_of_school_year'],
-            'end_of_school_year' => $data['end_of_school_year'],
-            'class_year' => $data['class_year'],
-            'class_section' => $data['class_section'],
-            'semester' => $data['semester'],
-            'learners_reference_number' => $data['learners_reference_number'],
-            'degree' => $data['degree'],
-            'major' => $data['major'],
-            'last_school_attended' => $data['last_school_attended'],
-            'date_of_birth' => $data['date_of_birth'],
-            'nationality' => $data['nationality'],
-            'home_address' => $data['home_address'],
-            'address_while_studying' => $data['address_while_studying'],
-            'contact_number' => $data['contact_number'],
-            'email_address' => $data['email_address'],
-        ]);
-
 
         $preRegTmpincoming = preregistration_incoming_tmp::create([
             'start_of_school_year' => $data['start_of_school_year'],
@@ -72,49 +43,17 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_relationship' => $data['contact_person_relationship'],
             'pre_reg_status' => $data['pre_reg_status'],
             'type_of_student' => $data['type_of_student'],
-            'another_table_id' => $anotherRecord->id,
         ]);
 
         
         return response([
             'prereg' => $preRegTmpincoming,
-            'anotherRecord' => $anotherRecord,
         ]);
-
-
     }
 
     public function createContinuingPreReg(PreRegistrationIncomingTmpRequest $request)
     {
         $data = $request->validated();
-
-        
-
-        $anotherRecord = student_profile::create([
-            'App\Models\User' => $data['App\Models\User'],
-            'App\Models\emergency_contact' => $data['App\Models\emergency_contact'],
-            'given_name' => $data['first_name'],
-            'family_name' => $data['last_name'],
-            'middle_name' => $data['middle_name'],
-            'maiden_name' => $data['maiden_name'],
-            'student_id' => $data['student_id'],
-            'image' => $data['image'],
-            'start_of_school_year' => $data['start_of_school_year'],
-            'end_of_school_year' => $data['end_of_school_year'],
-            'class_year' => $data['class_year'],
-            'class_section' => $data['class_section'],
-            'semester' => $data['semester'],
-            'learners_reference_number' => $data['learners_reference_number'],
-            'degree' => $data['degree'],
-            'major' => $data['major'],
-            'last_school_attended' => $data['last_school_attended'],
-            'date_of_birth' => $data['date_of_birth'],
-            'nationality' => $data['nationality'],
-            'home_address' => $data['home_address'],
-            'address_while_studying' => $data['address_while_studying'],
-            'contact_number' => $data['contact_number'],
-            'email_address' => $data['email_address'],
-        ]);
 
 
         $preRegTmpincoming = preregistration_incoming_tmp::create([
@@ -146,14 +85,12 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_address' => $data['contact_person_address'],
             'contact_person_relationship' => $data['contact_person_relationship'],
             'section' => $data['section'],
-
             'pre_reg_status' => $data['pre_reg_status'],
         ]);
 
         
         return response([
             'prereg' => $preRegTmpincoming,
-            'anotherRecord' => $anotherRecord,
         ]);
     }
     /**
@@ -179,21 +116,7 @@ class PreregistrationIncomingTmpController extends Controller
             return $PreReg->toArray();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Display the specified resource.
@@ -217,12 +140,18 @@ class PreregistrationIncomingTmpController extends Controller
     }
 
     // Extract the attributes from the request
-    $attributes = $request->all();
+    $data = $request->all();
     
-    $preregData->update($attributes); 
+    $preregData->update($data);  
     return response()->json(['message' => 'User updated successfully']);
     }
 
+    /**
+     * Create profile for the accepted student
+     */
+    public function acceptprereg(){
+
+    }
     /**
      * Remove the specified resource from storage.
      */
