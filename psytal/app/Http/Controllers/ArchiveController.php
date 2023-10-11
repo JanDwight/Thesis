@@ -69,4 +69,64 @@ class ArchiveController extends Controller
    {
        //
    }
+   // DELETE DELETE DELETE
+   public function deleteArchive(Request $request, $userId)
+   {
+        try {
+            //not connected via routes yet
+            // Retrieve the array of selected item IDs from the request payload
+            $selectedItems = $request->input('selectedItems');
+        
+            // Delete the selected items from the 'archives' table
+            archive::whereIn('id', $selectedItems)->delete();
+
+            //find each item in origin table then delete them permanently
+        
+            // After deleting the selected items, return a response indicating success
+            return response()->json(['message' => 'Items deleted successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error deleting items'], 500);
+        }
+   }
+   // RESTORE RESTORE RESTORE
+   public function returnArchive(Request $request)
+    {
+        try {
+            // Retrieve the array of selected item IDs from the request payload
+            $selectedItems = $request->input('selectedItems');
+    
+            // Query the archives table to select specific columns
+            $archivedItems = archive::whereIn('id', $selectedItems)
+                ->select('id', 'item_id', 'item_name', 'item_type', 'origin_table')
+                ->get();
+    
+            // Process the archived items and restore them to their source tables
+            foreach ($archivedItems as $archivedItem) {
+                // Determine the source model class based on 'item_type' and 'origin_table'
+                $modelClass = 'App\\Models\\' . ucfirst($archivedItem->item_type);
+    
+                // Check if the model class exists
+                if (class_exists($modelClass)) {
+                    // Use 'item_id' to find the item in the source table
+                    $sourceItem = $modelClass::find($archivedItem->item_id);
+    
+                    // If the source item is found, you can update it as needed
+                    if ($sourceItem) {
+                        // Update the 'archived' column to 0 in the source item
+                        $sourceItem->update(['archived' => 0]);
+                    }
+                }
+            }
+
+            // Force delete the selected items from the 'archives' table
+            archive::whereIn('id', $selectedItems)->forceDelete();
+    
+            // After processing the selectedItems, return a response indicating success
+            return response()->json(['message' => 'Items restored successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error restoring items'], 500);
+        }
+    }
 }

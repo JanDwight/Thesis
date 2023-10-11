@@ -67,6 +67,8 @@ class LogsController extends Controller
      */
     public function destroy(logs $logs)
     {
-        //
+        //30-90 days lifetime
+        //print button
+        //delete
     }
 }

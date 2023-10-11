@@ -29,6 +29,7 @@ export default function AddCourse({closeModal}) {
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);
+        window.location.reload();
       })
       .catch(error => {
         // Handle errors, including validation errors
@@ -37,8 +38,6 @@ export default function AddCourse({closeModal}) {
         } else {
           console.error(error.response.data);
         }
-      
-      window.location.reload();
       });
 
     // Close the modal
@@ -157,12 +156,12 @@ export default function AddCourse({closeModal}) {
                     />
                 </div>
 
-                <div className='grid grid-row-2 justify-center'>
-                    <button type="submit" className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white font-size">
-                         Add Course
+                <div className="text-center flex justify-center my-7">
+                    <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                         Add
                     </button>
 
-                    <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+                    <button onClick={closeModal} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                          Cancel
                     </button>
                 </div>

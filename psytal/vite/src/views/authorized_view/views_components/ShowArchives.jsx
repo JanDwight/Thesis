@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+import axiosClient from '../../../axios.js';
 
 export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const [selectedRows, setSelectedRows] = useState([]);
+
+  const roleMapping = {
+    1: 'Admin',
+    2: 'Staff',
+    3: 'Instructor',
+    4: 'Student',
+  };
 
   if (!showModal) {
     return null;
@@ -30,15 +38,25 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     onClose();
   };
 
-  const handleRestore = () => {
+  const handleRestore = async () => {
     // Get the data of the selected rows
     const selectedItems = selectedRows.map((index) => dataTable[index].id);
-    
-    // Perform any desired action with the selected items here
-    console.log('Selected Items for restore:', selectedItems);
-    //popup for items have been restored
-    setSelectedRows([]); // Reset selectedRows when handling delete
-    onClose();
+    console.log('Selected:', selectedItems);
+
+    try {
+      // Make a POST request to your backend endpoint with selectedItems as the request payload
+      const response = await axiosClient.post('/return_archives', { selectedItems });
+
+      // Handle the response from the backend as needed
+      console.log('Response from backend:', response.data);
+
+      // Reset selectedRows when handling restore
+      setSelectedRows([]);
+      onClose();
+    } catch (error) {
+      console.error('Error restoring items:', error);
+      // Handle errors
+    }
   };
 
   const handleCloseModal = () => {
@@ -57,7 +75,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
           X
         </button>
 
-        <div className="mb-4"> {/* Add margin to the bottom of the table */}
+        <div className="mb-6"> {/* Add margin to the bottom of the table */}
           <table className="min-w-full">
             <thead>
               <tr>
@@ -84,6 +102,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
                   <td>{item.item_name}</td>
                   <td>{item.origin_table}</td>
                   <td>{item.archiver_name}</td>
+                  {/*<td>{roleMapping[item.archiver_role]}</td> uncomment when everything is fixed-rem*/}
                   <td>{item.archiver_role}</td>
                   <td>{item.archived_at}</td>
                 </tr>
