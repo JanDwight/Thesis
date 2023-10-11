@@ -1,8 +1,7 @@
 import React, { useState, } from 'react';
 import axiosClient from '../../../axios.js';
-import EditLinks from '../views_components/EditLinks.jsx'; //<-- Import EditLinks component
 
-export default function AddLinks({closeModal}) { 
+export default function AddLinks({closeModal, }) { 
   const [formData, setFormData] = useState({
     class_code: '',
     class_description: '',
@@ -25,6 +24,7 @@ export default function AddLinks({closeModal}) {
     // Make a POST request to your backend endpoint (/addlink)
     axiosClient.post('/addlink', formData)
       .then(response => {
+        window.location.reload();
         // Handle success, e.g., show a success message
         console.log(response.data);
       })
@@ -41,19 +41,6 @@ export default function AddLinks({closeModal}) {
     closeModal();
   };
 
-const updateLink = async (updatedLink) => {
-    try {
-      const response = await axios.put(`/updatelink/${updatedLink.id}`, updatedLink);
-      console.log('Link updated successfully:', response.data);
-      fetchLinks();
-      handleCloseEditLinks(); // Close the edit modal
-    } catch (error) {
-      console.error('Error updating link:', error);
-    }
-  };
-
-
-  
   return (
     <>
       {/* ... your JSX ... */}

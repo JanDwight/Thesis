@@ -15,6 +15,7 @@ use App\Http\Controllers\UpdateClassController;
 use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\ArchiveController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,8 +49,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
-    Route::get('/show_logs', [LogsController::class, 'show']); //<><><> index for logs
-
+    Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
+    Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
+    Route::post('/return_archives', [ArchiveController::class, 'returnArchive']);//<><><> archive restore
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
@@ -63,13 +65,14 @@ Route::middleware('auth:sanctum')->group(function() {
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
     Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
+    Route::put('/updatecurriculum/{id}', [CurriculumController::class, 'updateCurriculum']);
     Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
 });
-
+    //Routes for LinksController
     Route::post('/addlink', [LinksController::class, 'addLink']);
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
-    Route::put('/archivelink', [LinksController::class, 'archiveLink']);
-    Route::put('/updatelink/{id}', [UpdateLinksController::class, 'updateLink']);
+    Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
+    Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
 
 Route::post('/login', [AuthController::class, 'login']);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, } from 'react';
 import axiosClient from '../../../axios.js';
 
 export default function ArchiveUsers({ showModal, onClose, user }) {
@@ -7,12 +7,13 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
 
     try {
       // send selected user to archive controller
+
       const response = await axiosClient.put(`/archiveuser/${user.id}`);
 
       console.log('User archived successfully.');
 
       // Close the modal
-      (onClose);
+      onClose();
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving user:', error);

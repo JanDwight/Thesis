@@ -17,6 +17,7 @@ class links extends Model
         'class_description',
         'instructor_name',
         'url',
+        'archived',
 
     ];
 }

@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function EditUsers({ showModal, onClose, user, onSave }) {
+export default function EditUsers({ showModal, onClose, user }) {
   const [id, setid] = useState(user.id);
   const [name, setName] = useState(user.name);
   const [role, setRole] = useState(user.role);
   const [email, setEmail] = useState(user.email);
   const [lastedit, setLastedit] = useState(user.updated_at);
 
-  const handleSave = async() => {
+  const handleSave = async(e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
 
     console.log('role: ', role);
 
-    const roleLowerCase = role.toLowerCase(); //lowercase to avoid errors
-
-    const roleMapping = {
-      'admin': 1,
-      'staff': 2,
-      'instructor': 3,
-      'student': 4,
-    };
-    
     const updatedUser = {
       id,
       name,
-      role: roleMapping[roleLowerCase],
+      role,
       email,
       lastedit,
     };
@@ -34,8 +26,7 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
   
       if (response.status === 200) {
         // Update was successful
-        onSave(updatedUser); // Pass the updated user data to the onSave function
-        //onClose(); uncomment this line if frontend errors are fixed
+        onClose();
       } else {
         // Handle errors or display feedback to the user
         console.error('Update failed');
@@ -91,14 +82,14 @@ export default function EditUsers({ showModal, onClose, user, onSave }) {
                 <select
                   id="role"
                   name="role"
-                  defaultValue={role.toLowerCase()}
+                  defaultValue={role}
                   onChange={(e) => setRole(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 >
-                  <option value="admin">Admin</option>
-                  <option value="staff">Staff</option>
-                  <option value="instructor">Instructor</option>
-                  <option value="student">Student</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Staff</option>
+                  <option value="3">Instructor</option>
+                  <option value="4">Student</option>
                 </select>
               </div>
               <div className="mb-4">

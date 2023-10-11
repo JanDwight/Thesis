@@ -29,6 +29,7 @@ export default function AddCourse({closeModal}) {
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);
+        window.location.reload();
       })
       .catch(error => {
         // Handle errors, including validation errors
@@ -56,7 +57,7 @@ export default function AddCourse({closeModal}) {
                       name="class_year"
                       type="text"
                       placeholder='Year'
-                      value={formData.classYear}
+                      value={formData.class_year}
                       onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
@@ -78,7 +79,7 @@ export default function AddCourse({closeModal}) {
                       name="course_code"
                       type="text"
                       placeholder='Course Code'
-                      value={formData.courseCode}
+                      value={formData.course_code}
                       onChange={handleChange}
                       className="block w-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
@@ -100,7 +101,7 @@ export default function AddCourse({closeModal}) {
                       name="course_title"
                       type="text"
                       placeholder='Course Title'
-                      value={formData.courseTitle}
+                      value={formData.course_title}
                       onChange={handleChange}
                       className="block w-full h-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
@@ -155,12 +156,12 @@ export default function AddCourse({closeModal}) {
                     />
                 </div>
 
-                <div className='grid grid-row-2 justify-center'>
-                    <button type="submit" className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white font-size">
-                         Add Course
+                <div className="text-center flex justify-center my-7">
+                    <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                         Add
                     </button>
 
-                    <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+                    <button onClick={closeModal} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                          Cancel
                     </button>
                 </div>

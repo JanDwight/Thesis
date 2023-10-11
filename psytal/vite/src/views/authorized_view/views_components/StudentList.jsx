@@ -29,21 +29,7 @@ class StudentList extends Component {
       // Filter the data to only include role 4 (student)
       const filteredData = data.filter(user => [4].includes(user.role));
 
-      // Define a mapping object to map numeric roles to strings
-      const roleMapping = {
-        1: 'Admin',
-        2: 'Staff',
-        3: 'Instructor',
-        4: 'Student',
-      };
-
-      // Map the roles to strings
-      const mappedData = filteredData.map(user => ({
-        ...user,
-        role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
-      }));
-
-      this.setState({ data: mappedData });
+      this.setState({ data: filteredData });
       //this.fetchData();
 
     })
@@ -101,7 +87,6 @@ class StudentList extends Component {
       (student) =>
         student.id.toString().includes(filterText) || // Filter by ID
         student.name.toLowerCase().includes(filterText.toLowerCase()) 
-        //filtering using roles is disabled because roles are int not string so they cannot be set to lowercase
     );
 
     return (
@@ -155,7 +140,6 @@ class StudentList extends Component {
             showModal={this.state.isEditUsersOpen}
             onClose={this.handleCloseEditUsers}
             user={selectedStudent} // Pass the selected student to EditUsers
-            onSave={this.handleSaveUserChanges} // Pass the save function
           />
         )}
         

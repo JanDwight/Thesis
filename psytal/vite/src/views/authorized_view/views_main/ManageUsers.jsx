@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import axiosClient from '../../../axios.js';
-import { Menu, Transition } from '@headlessui/react';
-import { useStateContext } from '../../../context/ContextProvider.jsx';
 import AddUsers from '../views_components/AddUsers.jsx';
 import StudentList from '../views_components/StudentList.jsx';
 import EmployeeList from '../views_components/EmployeeList.jsx';
 import StudentsFilter from '../views_components/studentsfilter.jsx';
 import EmployeesFilter from '../views_components/EmployeesFilter.jsx';
-import edit from "@assets/icons8createpost.png";
-
-
 
 {/*Tab Highlight */}
 const Tab = ({ label, isActive, onClick }) => {
@@ -33,20 +28,15 @@ const Tab = ({ label, isActive, onClick }) => {
 
 export default function ManageUsers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState('');
-
   
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
 
   //for addusers modal
   const [fullName, setFullName] = useState(''); // Required by AddUsers
-  const [password, setPassword] = useState(''); // Required by AddUsers
-  const [length] = useState(9); // Required by AddUsers
   const [includeNumbers] = useState(true); // Required by AddUsers
   const [includeSymbols] = useState(true); // Required by AddUsers
   const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
-  const [parsedRole, setParsedRole] = useState(1); // Required by AddUsers
   const [email, setEmail] = useState(null); // Required by AddUsers
   
   //add users onsubmit
@@ -81,16 +71,11 @@ export default function ManageUsers() {
     for (let i = 4; i < length; i++) {
       password += getRandomChar(characters);
     }
-
-    //---------------------------------------------------------------------------
-
-    //string "selectedRole" to int "parsedRole"
-    const parsedValue = parseInt(selectedRole, 10); // Base 10
-    setParsedRole(parsedValue);
+    
     //---------------------------------------------------------------------------
 
     axiosClient
-      .post('/adduser', { name: fullName, password: password, role: parsedRole, email}) // Back end, needs edit
+      .post('/adduser', { name: fullName, password: password, role: selectedRole, email}) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
         // Close the modal

@@ -10,6 +10,14 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
     setSelectedAccountType(event.target.value);
   };
 
+  const handleCloseModal = () => {
+    // Reset input field values when the modal is closed
+    setFullName('');
+    setEmail('');
+    setSelectedAccountType('1'); // Assuming '1' is the default value for 'Admin'
+    onClose();
+  };
+
   if (!showModal) {
     return null;
   }
@@ -72,7 +80,7 @@ export default function AddUsers({ showModal, onClose, fullName, setFullName, on
               <button type="submit" className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white text-lg font-bold">
                 Save
               </button>
-              <button type="button" onClick={onClose} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white text-lg font-bold">
+              <button type="button" onClick={handleCloseModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white text-lg font-bold">
                 Cancel
               </button>
 
