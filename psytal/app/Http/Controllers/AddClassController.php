@@ -15,20 +15,20 @@ class AddClassController extends Controller
         /** @var \App\Models\classes $class */
 
         $class = classes::create([
-             //variable from data = > database
-             'course_title' => $data['course_title'],
-             'year' => $data['year'],
-             'semester' => $data['semester'],
-             'courseCode' => $data['courseCode'],
-             'units' => $data['units'],
-             'type' => $data['coursetype'],
-             'section' => $data['section']
+            'course_title' => $data['course_title'],
+            'curriculum_checklist_id' => $data['curriculum_checklist_id'],
+            'class_year' => $data['year'], // Update to match the actual column name
+            'semester' => $data['semester'],
+            'course_code' => $data['courseCode'], // Update to match the actual column name
+            'units' => $data['units'],
+            'course_type' => $data['coursetype'],
+            'class_section' => $data['section'],
         ]);
-        $token = $class->createToken('main')->plainTextToken;
+        //$token = $class->createToken('main')->plainTextToken;
 
         return response([
             'class' => $class,
-            'token' => $token,
+            //'token' => $token,
         ]);
     }
 }

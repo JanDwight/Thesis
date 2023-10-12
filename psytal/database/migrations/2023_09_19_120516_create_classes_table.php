@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id('class_id');;
-            $table->foreignId(\App\Models\curriculum::class, 'curriculum_checklist_id');
+            $table->string('curriculum_checklist_id');
             $table->string('class_year');
             $table->string('semester');
             $table->string('course_code');

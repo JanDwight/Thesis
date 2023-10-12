@@ -11,11 +11,15 @@ export default function AddClass({closeModal}) {
   const [year, setYear] = useState('1'); // Define state for year with an initial value of '1'
   const [section, setSection] = useState(''); // Define state for section
   const [units, setUnits] = useState('1'); // Define state for section
+  const curricula = '102';
+
 
   const handleSubmit = (ev) => {
     ev.preventDefault(); // Prevent the default form submission behavior
     // You can access the form data using the state variables (title, courseCode, coursetype, etc.)
+    //FOLLOW FIGMA DESIGN?
     console.log('course title: ', course_title);
+    console.log('curriculum_checklist_di: ', curricula);
     console.log('units', units);
     console.log('coursecode: ', courseCode);
     console.log('coursetype', coursetype);
@@ -23,8 +27,10 @@ export default function AddClass({closeModal}) {
     console.log('year', year);
     console.log('section: ', section);
 
+    
     const formData = {
       course_title,
+      curriculum_checklist_id: curricula,
       units,
       courseCode,
       coursetype,
@@ -80,6 +86,7 @@ export default function AddClass({closeModal}) {
                         placeholder='Course Title'
                         onChange={ev => setTitle(ev.target.value)}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                        required
                       />
                 </div>
                 <div className='mt-5 flex flex-col-2 justify-between'>
@@ -90,6 +97,7 @@ export default function AddClass({closeModal}) {
                       placeholder='Course Code'
                       onChange={ev => setCourseCode(ev.target.value)}
                       className="block w-[49%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                      required
                     />
 
                     <select
@@ -165,6 +173,7 @@ export default function AddClass({closeModal}) {
                       //force to uppercase
                       onChange={ev => setSection(ev.target.value)}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                      required
                     />
                   </div>
                 </div>
