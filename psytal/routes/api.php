@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
     Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
     Route::post('/return_archives', [ArchiveController::class, 'returnArchive']);//<><><> archive restore
+    Route::post('/delete_archives', [ArchiveController::class, 'deleteArchive']);//<><><> archive delete [permanent]
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
