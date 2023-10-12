@@ -45,6 +45,15 @@ return new class extends Migration
             $table->bigInteger('contact_person_number');
             $table->string('contact_person_address');
             $table->string('contact_person_relationship');
+            $table->string("health_facility_registered");
+            $table->string('parent_health_facility_dependent');
+            $table->string('vaccination_status');
+            $table->string('technology_level');
+            $table->string('digital_literacy');
+            $table->string('avail_free_higher_education');
+            $table->string('voluntary_contribution');
+            $table->string('contribution_amount');
+            $table->string('complied_to_admission_policy');
             $table->string('section')->nullable();
             $table->timestamps();
             $table->string('pre_reg_status')->nullable();
