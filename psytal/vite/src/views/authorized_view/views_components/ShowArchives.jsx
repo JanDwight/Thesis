@@ -26,13 +26,26 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   };
 
   // Handle delete
-  const handleDelete = () => {
+  const handleDelete = async () => {
     // Get the data of the selected rows
     const selectedItems = selectedRows.map((index) => dataTable[index].id);
-    
-    // Perform any desired action with the selected items here
     console.log('Selected Items for delete:', selectedItems);
-    //popup for items have been deleted
+    
+    try {
+      // Make a POST request to your backend endpoint with selectedItems as the request payload
+      const response = await axiosClient.post('/delete_archives', { selectedItems });
+
+      // Handle the response from the backend as needed
+      console.log('Response from backend:', response.data);
+
+      // Reset selectedRows when handling restore
+      setSelectedRows([]);
+      onClose();
+    } catch (error) {
+      console.error('Error restoring items:', error);
+      // Handle errors
+    }
+
     //send selectedItems as array to the controller
     setSelectedRows([]); // Reset selectedRows when handling delete
     onClose();

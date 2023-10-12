@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { useState } from 'react';
 //good for now
 
 export default function AddUsers({ showModal, onClose, fullName, setFullName, onSubmit, selectedAccountType, setSelectedAccountType,

@@ -38,6 +38,7 @@ export default function ManageUsers() {
   const [includeSymbols] = useState(true); // Required by AddUsers
   const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
   const [email, setEmail] = useState(null); // Required by AddUsers
+  const [error, setError] = useState('');
   
   //add users onsubmit
   const onSubmit = (ev) => {
