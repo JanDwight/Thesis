@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createContext } from "react";
 
 const StateContext = createContext({
-    currenUser: {},
+    currentUser: {},
     userToken: null,
     userRole: {},
     setCurrentUser: () => {},
@@ -14,7 +14,7 @@ const StateContext = createContext({
 })
 
 export const ContextProvider = ({children}) => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState();
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '');
     const [userPermission, setUserPermission] = useState();
     const [userRole, setUserRole] = useState();

@@ -5,35 +5,7 @@ import axiosClient from '../../../../axios';
 import "../../../../../src/styles.css";
 
 export default function PreRegistrationForm() {
-  const onhandleChange = (event) => {
-    setSelectedValue(event.target.value);
-  }
-
-const [inputFields, setInputFields] = useState([
-    { classCode: '', courseCode: '', units: '', bcac: '' },
-  ]);
-//calling the Form in the adding of classes
-const handleSubmitCourseUnits = (e) => {
-    e.preventDefault();
-    console.log("InputFields", inputFields);
-  };
-//Changing the input fields
-const handleChangeInput = (index, event) => {
-    const values = [...inputFields];
-    values [index][event.target.name] = event.target.value;     
-    setInputFields(values);
-  }
-//For Adding
-const handleAddFields = () => {
-    setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
-  }
-//For removing
-const handleRemoveFields = (index) => {
-    const values  = [...inputFields];
-    values.splice(index, 1);
-    setInputFields(values);
-  }
-
+  
   const [error, setError] = useState({__html: ""});
 
   //variables for the user inputs
@@ -63,6 +35,16 @@ const handleRemoveFields = (index) => {
   const [emergencyContactAddress, setEmergencyContactAddress] = useState('');
   const [emergencyContactNumber, setEmergencyContactNumber] = useState('');
   const [relationship, setRelationship] = useState('');
+  const [healthfacilityregistered, sethealthfacilityregistered] = useState('');
+  const [parenthealthfacilitydependent, setparenthealthfacilitydependent] = useState('');
+  const [vaccinationstatus, setvaccinationstatus] = useState('');
+  const [technologylevel, settechnologylevel] = useState('');
+  const [digitalliteracy, setdigitalliteracy] = useState('');
+  const [availfreehighereducation, setavailfreehighereducation] = useState('');
+  const [voluntarycontribution, setvoluntarycontribution] = useState('');
+  const [contributionamount, setcontributionamount] = useState('');
+  const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('');
+
   //the onSubmit function
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -96,8 +78,18 @@ const handleRemoveFields = (index) => {
       contact_person_number: parseInt(emergencyContactNumber, 10), //theres an error here--doesnt accept multiple numbers
       contact_person_address: emergencyContactAddress,
       contact_person_relationship: relationship,
+      health_facility_registered: healthfacilityregistered,
+      parent_health_facility_dependent: parenthealthfacilitydependent,
+      vaccination_status: vaccinationstatus,
+      technology_level: technologylevel,
+      digital_literacy: digitalliteracy,
+      avail_free_higher_education: availfreehighereducation,
+      voluntary_contribution: voluntarycontribution,
+      contribution_amount: contributionamount,
+      complied_to_admission_policy: compliedtoadmissionpolicy,
       pre_reg_status: 'Pending',
       type_of_student: 'Regular',
+      year_level: '1st Year'
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
@@ -557,7 +549,9 @@ const handleRemoveFields = (index) => {
                           type="radio"
                           name="yesregister"
                           id="yesregister"
-                          value="option1" />
+                          value='Yes' 
+                          onChange={ev => sethealthfacilityregistered(ev.target.value)}
+                          />
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="healthregistered">Yes
@@ -569,7 +563,9 @@ const handleRemoveFields = (index) => {
                           type="radio"
                           name="noregister"
                           id="noregister"
-                          value="option2" />
+                          value='No'
+                          onChange={ev => sethealthfacilityregistered(ev.target.value)}
+                          />
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="healthregistered">No
@@ -581,11 +577,21 @@ const handleRemoveFields = (index) => {
                   {/*column2*/}
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                    <select  /*onChange={handleChange}*/ className='ml-5'>
-                      <option value="notvaccinated">Not Vaccinated</option>
-                      <option value="notvaccinated">1st Dose</option>
-                      <option value="notvaccinated">2nd Dose</option>
-                      <option value="notvaccinated">Booster</option>
+                    <select  className='ml-5'
+                      onChange={ev => setvaccinationstatus(ev.target.value)} 
+                      value={vaccinationstatus}>
+                      <option 
+                        value="Not Vaccinated">
+                          Not Vaccinated</option>
+                      <option 
+                        value="1st Dose">
+                          1st Dose</option>
+                      <option 
+                        value="2nd Dose">
+                          2nd Dose</option>
+                      <option 
+                        value="With Booster">
+                          Booster</option>
                     </select>
                   </div>
 
@@ -599,9 +605,11 @@ const handleRemoveFields = (index) => {
                       <div className='mx-5 mt-2'>
                         <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                           type="radio"
-                          name="yesdependent"
-                          id="yesdependent"
-                          value="option1" />
+                          name="healthdependent"
+                          id="Dependent"
+                          value="Yes" 
+                          onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
+                          />
                         <label
                           className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                           htmlFor="healthdependent">Yes
@@ -611,9 +619,11 @@ const handleRemoveFields = (index) => {
                       <div className='mx-5 mt-2'>
                         <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                           type="radio"
-                          name="nodependent"
-                          id="noredependent"
-                          value="option2" />
+                          name="healthdependent"
+                          id="Dependent"
+                          value="No" 
+                          onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
+                          />
                         <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="healthdependent">No
@@ -647,7 +657,9 @@ const handleRemoveFields = (index) => {
                                 type="radio"
                                 name="highlvl"
                                 id="highlvl"
-                                value="category1" />
+                                value="category1" 
+                                onChange={ev => settechnologylevel(ev.target.value)}
+                                />
                         <label
                               className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                               htmlFor="categorytech">
@@ -661,7 +673,9 @@ const handleRemoveFields = (index) => {
                                 type="radio"
                                 name="mediumlvl"
                                 id="mediumlvl"
-                                value="category2" />
+                                value="category2" 
+                                onChange={ev => settechnologylevel(ev.target.value)}
+                                />
                         <label
                               className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                               htmlFor="categorytech">
@@ -675,7 +689,9 @@ const handleRemoveFields = (index) => {
                                 type="radio"
                                 name="lowlvl"
                                 id="lowlvl"
-                                value="category3" />
+                                value="category3" 
+                                onChange={ev => settechnologylevel(ev.target.value)}
+                                />
                         <label
                               className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                               htmlFor="categorytech">
@@ -698,7 +714,8 @@ const handleRemoveFields = (index) => {
                               type="radio"
                               name="proficient"
                               id="proficient"
-                              value="lvl1" />
+                              value="lvl1" 
+                              onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="literacy">Proficient
@@ -710,7 +727,8 @@ const handleRemoveFields = (index) => {
                               type="radio"
                               name="advanced"
                               id="advanced"
-                              value="lvl2" />
+                              value="lvl2" 
+                              onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="literacy">Advanced
@@ -722,7 +740,8 @@ const handleRemoveFields = (index) => {
                               type="radio"
                               name="beginner"
                               id="beginner"
-                              value="lvl3" />
+                              value="lvl3" 
+                              onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="literacy">Beginner
@@ -763,7 +782,9 @@ const handleRemoveFields = (index) => {
                                     type="radio"
                                     name="yesavail"
                                     id="yesavail"
-                                    value="avail1" />
+                                    value="Yes" 
+                                    onChange={ev => setavailfreehighereducation(ev.target.value)}
+                                    />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                                         htmlFor="yesavail">Yes
@@ -775,7 +796,9 @@ const handleRemoveFields = (index) => {
                                     type="radio"
                                     name="noavail"
                                     id="noavail"
-                                    value="avail2" />
+                                    value="avail2" 
+                                    onChange={ev => setavailfreehighereducation(ev.target.value)}
+                                    />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                                         htmlFor="noavail">No
@@ -796,7 +819,9 @@ const handleRemoveFields = (index) => {
                                         type="radio"
                                         name="yescontribute"
                                         id="yescontribute"
-                                        value="voluntary1" />
+                                        value="Yes" 
+                                        onChange={ev => setvoluntarycontribution(ev.target.value)}
+                                    />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                                         htmlFor="yescontribute">Yes
@@ -808,7 +833,9 @@ const handleRemoveFields = (index) => {
                                         type="radio"
                                         name="nocontribute"
                                         id="nocontribute"
-                                        value="voluntary2" />
+                                        value="No" 
+                                        onChange={ev => setvoluntarycontribution(ev.target.value)}
+                                    />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                                         htmlFor="nocontribute">No
@@ -822,7 +849,13 @@ const handleRemoveFields = (index) => {
                     <label className=" text-gray-700 text-xs font-bold mb-2">
                       AMOUNT <em>(If YES, indicate amount)</em>
                     </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-amtcontibute" type="number" placeholder=""/>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-amtcontibute" 
+                    type="text" 
+                    placeholder=""
+                    value={contributionamount}
+                    onChange={ev => setcontributionamount(ev.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="flex flex-wrap flex-row -mx-3 mb-2">
@@ -852,83 +885,22 @@ const handleRemoveFields = (index) => {
                           type="radio"
                           name="yescompiled"
                           id="yescompiled"
-                          value="compiled1" />
+                          value="Yes" 
+                          onChange={ev => setcompliedtoadmissionpolicy(ev.target.value)}
+                          />
                         <label
                           className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                           htmlFor="yesavail">Yes
                         </label>
                       </div>
-                      {/**Radio buttion for No Compiled */}
-                      <div className='mx-5 mt-2'>
-                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                          type="radio"
-                          name="noavail"
-                          id="noavail"
-                          value="compiled2" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="noavail">No
-                        </label>
-                      </div>
+                     
                   </div>  
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/**=========================== 5  ==========================*/}      
-        {/**Start of Filling the FORM for CLASS CODES UNITS FOR REGULAR*/}
-        <div className="w-full container mx-auto">
-            <form>
-                <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
-                    <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-                        <div className="text-normal font-medium text-center mt-2">
-                            SECTION/COURSE(S) TO BE ENROLLED : <strong>FOR REGULAR STUDENT</strong>
-                        </div> <hr className='mt-2'/>
-                        <div className="flex flex-wrap flex-row px-3 -mx-3 mt-3 mb-3">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-section`}>Section</label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type='text'
-                                            name="section"
-                                            label="section"
-                                        />  
-                                
-                            </div>
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                                <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
-                                    Courses to be EXCLUDED (if applicable) :
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="grid-courseexcluded" 
-                                    type="text" 
-                                    placeholder=""                                   
-                                    />
-                            </div>
-                            {/**Total Unit */}
-                            <div className="flex flex-row w-[70%] px-3">
-                                <div className='w-full mx-5 mt-2 content-center'>
-                                    <label
-                                        className="text-gray-700 text-lg font-bold mb-2 block"
-                                        htmlFor="grid-totalunits"
-                                    >
-                                        Total No. Units :
-                                    </label>
-                                    <input
-                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        id="grid-totalunits"
-                                        type="number"
-                                        placeholder=""
-                                    />
-                                </div>
-                                                               
-                            </div>
-                            
-                        </div><hr className='mt-2'/>
-                    </div>
-                </div>
-            </form>
-        </div>
+        
         {/**===========SUMBIT Button============= */}
         <div className="text-center flex justify-end my-8">
                 <button 

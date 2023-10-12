@@ -32,7 +32,7 @@ export default function InstructorLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
   if (!userToken) {
-    return <Navigate to='/landingpage' />
+    return <Navigate to='/guest/landingpage' />
   }
 
   const logout = (ev) => {

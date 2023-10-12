@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
-use App\Http\Controllers\TmpPreregistrationController;
+use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\UpdateUserController;
@@ -16,7 +16,6 @@ use App\Http\Controllers\ArchiveClassesController;
 use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\ArchiveController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,6 +41,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
     Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
     Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
+    Route::get('/getuserdetails', [AuthController::class, 'getuserdetails']);
+
     //classes tab
     Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
     Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
@@ -57,9 +58,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
     Route::get('/count_employee', [UserIndexController::class, 'count_employee']); //<><><> count employees from users table
 
-    //Routes for PreregistrationIncomingTmpController
+    //Routes for Pre-Registration Checking
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
+    Route::post('/createstudentprofile', [StudentProfileController::class, 'create']);
     
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);
@@ -75,6 +77,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
 Route::post('/login', [AuthController::class, 'login']);
 
+//Routes for Pre-Registration Form submition
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createIncomingPreReg']);
 Route::post('/preregcontinuingtmp', [PreregistrationIncomingTmpController::class, 'createContinuingPreReg']);
 

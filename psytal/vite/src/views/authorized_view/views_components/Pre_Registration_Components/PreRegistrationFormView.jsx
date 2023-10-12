@@ -3,7 +3,7 @@ import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 
-export default function PreRegistrationFormView({prereg}, onClose) {
+export default function PreRegistrationFormView({prereg}) {
   const includeNumbers = true;  // Include numbers in the password
   const includeSymbols = true;  // Include symbols in the password
   const role = "4";
@@ -48,8 +48,38 @@ export default function PreRegistrationFormView({prereg}, onClose) {
 
   console.log('id' + id);
 
+  //On Decline Click
+  const onDecline = (ev) => {
+    ev.preventDefault();
+    
+    axiosClient
+    // create Update function for preregincommingtmp
+    .put(`/preregcheck/${id}`, {
+      pre_reg_status: 'Decline'
+    })
+    .then(({ data }) => {
+      //setFamilyName(data.family_name)
+      window.location.reload();
+    })
+  }
+
+  //On Return
+  const onReturn = (ev) => {
+    ev.preventDefault();
+    
+    axiosClient
+    // create Update function for preregincommingtmp
+    .put(`/preregcheck/${id}`, {
+      pre_reg_status: 'Returned'
+    })
+    .then(({ data }) => {
+      //setFamilyName(data.family_name)
+      window.location.reload();
+    })
+  }
+
+  //On Accept Click
   const onClickAccept = (ev) => {
-    console.log(preregData)
     ev.preventDefault();
     setError({ __html: "" });
 
@@ -82,22 +112,50 @@ export default function PreRegistrationFormView({prereg}, onClose) {
     for (let i = 4; i < length; i++) {
       password += getRandomChar(characters);
     }
-
+    console.log(password)
  
-    console.log('includeNumbers:', includeNumbers);
-console.log('includeSymbols:', includeSymbols);
-console.log('length:', length);
-console.log('characters:', characters);
-
     axiosClient.post('/adduser', {
       name:fullName,
       role: parseInt(role),
       password: password,
-      email: preregData.email_address
+      email: preregData.email_address,
      })
 
+    //Create student profile
+     axiosClient
+    .post(`/createstudentprofile`, {
+      user_id: String(preregData.id),
+      start_of_school_year: parseInt(preregData.start_of_school_year),
+      end_of_school_year: parseInt(preregData.end_of_school_year),
+      student_school_id: parseInt(preregData.student_school_id),
+      learners_reference_number: parseInt(preregData.learners_reference_number),
+      last_name: preregData.last_name,
+      first_name: preregData.first_name,
+      middle_name: preregData.middle_name,
+      maiden_name: preregData.maiden_name,
+      academic_classification: preregData.academic_classification,
+      last_school_attended: preregData.last_school_attended,
+      address_of_school_attended: preregData.address_of_school_attended,
+      degree: preregData.degree,
+      date_of_birth: preregData.date_of_birth,
+      place_of_birth: preregData.place_of_birth,
+      citizenship: preregData.citizenship,
+      sex_at_birth: preregData.sex_at_birth,
+      ethnicity: preregData.ethnicity,
+      special_needs: preregData.special_needs,
+      contact_number: parseInt(preregData.contact_number),
+      email_address: preregData.email_address,
+      home_address: preregData.home_address,
+      address_while_studying: preregData.address_while_studying,
+      contact_person_name: preregData.contact_person_name,
+      contact_person_number: parseInt(preregData.contact_person_number), 
+      contact_person_address: preregData.contact_person_address,
+      contact_person_relationship: preregData.contact_person_relationship,
+      pre_reg_status: 'Accepted',
+      type_of_student: 'Regular',
+    })
+
     axiosClient
-    // create Update function for preregincommingtmp
     .put(`/preregcheck/${id}`, {
       start_of_school_year: parseInt(preregData.start_of_school_year),
       end_of_school_year: parseInt(preregData.end_of_school_year),
@@ -130,7 +188,7 @@ console.log('characters:', characters);
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
-      window.location.reload();
+
     })
     .catch(( error ) => {
       if (error.response) {
@@ -148,7 +206,7 @@ console.log('characters:', characters);
     axiosClient
     .put(`/preregview/${preregData}`)
     .then(({ data }) => {
-      //setFamilyName(data.family_name)
+      
     })
     .catch(( error ) => {
       if (error.response) {
@@ -159,18 +217,7 @@ console.log('characters:', characters);
     });
   };
 
-  // const fetchPreRegFormView = async () => {
-  //   try {
-  //     axiosClient
-  //     .put(`/preregview/${prereg}`)
-  //     .then((response) => {
-  //       setPreRegData(response.data);  // Assuming res.data is an array
-  //       });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  
+
   
   return (
     <>
@@ -802,11 +849,11 @@ console.log('characters:', characters);
         </div>
         {/**===========SUMBIT Button============= */}
         <div className="text-center flex justify-end my-8">
-                <button onClick={onClose}
+                <button onClick={onDecline}
                   className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Decline
                 </button>
-                <button onClick={onClose}
+                <button onClick={onReturn}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Return
                 </button>

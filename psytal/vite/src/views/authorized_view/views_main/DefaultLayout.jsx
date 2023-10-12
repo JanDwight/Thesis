@@ -6,7 +6,7 @@ import { NavLink, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../../../context/ContextProvider'
 import axiosClient from '../../../axios'
 import PsychLogo from '../../../assets/PsychCircle.png'
-import StudentProfile from '../views_components/profile_components/StudentProfile'
+import UserProfile from '../views_components/profile_components/UserProfile'
 
 // const user = {
 //   name: 'Tom Cook',
@@ -16,9 +16,9 @@ import StudentProfile from '../views_components/profile_components/StudentProfil
 // }
 
 const navigation = [
-  { name: 'Home', to: '/'},
-  { name: 'Pre-Registration', to: '/preregistrationforcontinuing'},  
-  { name: 'Links', to: '/linksforstudent'}  
+  { name: 'Home', to: '/student/home'},
+  { name: 'Pre-Registration', to: '/student/preregistrationforcontinuing'},  
+  { name: 'Links', to: '/student/linksforstudent'}  
 ]
 
 const userNavigation = [
@@ -38,7 +38,7 @@ export default function DefaultLayout() {
   const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
 
   if (!userToken) {
-    return <Navigate to='/landingpage' />
+    return <Navigate to='/guest/landingpage' />
   }
 
   const logout = (ev) => {
@@ -237,7 +237,7 @@ export default function DefaultLayout() {
                                 onRequestClose={() => setIsProfileOpen(false)}
                                 className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
                                 >
-                                  <div><StudentProfile closeModal={() => setIsProfileOpen(false)}/></div>
+                                  <div><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
                                 </ReactModal>
     </>
   )

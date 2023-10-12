@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 
-export const StudentEditEmail = ({onCloseStudentEditEmail, displayData, onStudentEmailChange}) => {
+export const StudentEditEmail = ({onCloseStudentEditEmail,data}) => {
     //calling the sample data
-    const [student_email, setEmailStudent] = useState(displayData);
 
     //changing the email
     const handleStudentEmailChange = (event) => {
@@ -21,7 +20,7 @@ export const StudentEditEmail = ({onCloseStudentEditEmail, displayData, onStuden
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="oldemail"
-                            value={student_email.email}
+                            value={data.email}
                             //onChange={handleEmailChange}
                             placeholder="Old Email"
                             style={{
@@ -36,7 +35,7 @@ export const StudentEditEmail = ({onCloseStudentEditEmail, displayData, onStuden
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="newemail"
-                            value={student_email.newemail}
+                            value={data.newemail}
                             onChange={handleStudentEmailChange}
                             placeholder="New Email"
                             style={{

@@ -60,7 +60,13 @@ const handleRowClick = (items) => {
                 <div className="m-2">{item.created_at}</div>
               </td>
               <td className="text-left p-1">
-                <div className={`bg-${item.pre_reg_status === 'Accepted' ? 'green' : 'blue'}-600 w-fit py-2 px-2 rounded-xl`}>
+                <div className={`${
+                    item.pre_reg_status === 'Accepted'
+                    ? 'bg-green-600'
+                    : item.pre_reg_status === 'Pending'
+                    ? 'bg-blue-600'
+                    : 'bg-red-600'
+                } w-fit py-2 px-2 rounded-xl`}>
                   {item.pre_reg_status}
                 </div>
               </td>
