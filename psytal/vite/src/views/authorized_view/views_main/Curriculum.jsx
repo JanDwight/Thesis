@@ -87,7 +87,7 @@ export default function Curriculum(){
                       <input
                         id="search_bar"
                         type="text"
-                        placeholder="Search by Class Code, Class Description, Instructor, Link Code..."
+                        placeholder="Search..."
                         value={filterText}
                         onChange={(event) => setFilterText(event.target.value)}
                         className="h-10 px-7 py-4 border border-gray-300 focus:ring-viridianHue focus:border-viridianHue rounded-lg"
