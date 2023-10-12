@@ -16,11 +16,13 @@ class ArchiveClassesController extends Controller
 
             $classTableName = (new classes)->getTable(); //getting table associated w/ classes model
 
+            $itemType = class_basename($class_id);
+
             // Create an Archive instance
             $archive = new archive;
             $archive->item_id = $class_id->class_id;
             $archive->item_name = $class_id->course_title;
-            $archive->item_type = 'Class';
+            $archive->item_type = $itemType;
             $archive->origin_table = $classTableName;
             $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
             $archive->archiver_name = auth()->user()->name;
