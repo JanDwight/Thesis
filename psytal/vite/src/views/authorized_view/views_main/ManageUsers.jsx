@@ -45,19 +45,6 @@ export default function ManageUsers() {
     <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
       <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Manage Accounts</div>
       <div className="flex">
-      {/**Filter */}
-        <div className="flex flex-row">
-                  <div>
-                    <button> 
-                      {activeTab  === 1 && (
-                        <span><StudentsFilter filterText={filterText} /></span>
-                      )}
-                      {activeTab === 2 && (
-                        <span><EmployeesFilter filterText={filterText} /></span>
-                      )} 
-                    </button>                    
-                  </div>
-                </div>
         <div>
           {/**Add Users */}
           <button onClick={handleAddUserClick}
@@ -66,8 +53,7 @@ export default function ManageUsers() {
           </button>
         </div>
       </div>
-      
-          
+
     </div>
 
     {/**___________________________2nd Container from Student to Filter________________________________ */}
