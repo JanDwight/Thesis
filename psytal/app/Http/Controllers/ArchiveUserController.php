@@ -26,10 +26,9 @@ class ArchiveUserController extends Controller
             $archive->item_name = $user->name;
             $archive->item_type = $itemType;
             $archive->origin_table = $userTableName;
-            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
-            $archive->archiver_name = auth()->user()->name;
-            $archive->archiver_role = auth()->user()->role;
-
+            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication 
+            $archive->archiver_name = auth()->user()->name; 
+            $archive->archiver_role = auth()->user()->role; 
             //save to archives table
             $archive->save();
 

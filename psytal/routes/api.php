@@ -68,12 +68,14 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
     Route::put('/updatecurriculum/{id}', [CurriculumController::class, 'updateCurriculum']);
     Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
-});
-    //Routes for LinksController
+
+    //Routes for LinksController //moved to authenticate to avoid errors in archive, archive restore, and archive delete
     Route::post('/addlink', [LinksController::class, 'addLink']);
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
     Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
     Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
+});
+   
 
 Route::post('/login', [AuthController::class, 'login']);
 
