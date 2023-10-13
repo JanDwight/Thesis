@@ -49,7 +49,7 @@ export default function Dashboard() {
           totalStudents: count_student,
           totalEmployees: count_employee,
           totalPosts: count_posts,
-          totalLogins: 'IP'
+          totalLogins: count_employee+count_student,
         };
         
         setDash(dashcountData);
@@ -149,13 +149,13 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/**Total Logins 
+          {/**Total Logins //replaced with total users because how do I count logins???
            * marked as pending IGNORE
           */}
           <div className='md:col-span-1 lg:col-span-1 block rounded-3xl bg-white text-center drop-shadow-xl'>
             {/**----Head---- */}
             <div className='flex flex-col rounded-t-3xl items-center bg-dash4 border border-gray-300 pb-5 pt-5'>
-              <span className='text-white font-semibold'>Total Logins</span>
+              <span className='text-white font-semibold'>Total Users</span>
             </div>
             {/**----Body---- */}
             <div className='p-7'>
