@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddCurriculumRequest;
 use App\Models\curriculum;
 use Illuminate\Http\Request;
+use App\Models\archive;
 
 class CurriculumController extends Controller
 {
@@ -44,11 +45,29 @@ class CurriculumController extends Controller
     public function archiveCurriculum(Request $request, $curriculumId)
     {
         try {
-            // Find the curriculum record based on the provided $id
-            $curriculum = curriculum::find($curriculumId);
-            
-            // Update the curriculum archived status to 1
-             $curriculum->update(['archived' => 1]);
+
+            $curriculum = curriculum::findOrFail($curriculumId);
+
+            $curriculumTableName = (new curriculum)->getTable(); // Getting the table associated with the Link model
+
+            // Get the name of the current model
+            $itemType = class_basename($curriculum);
+
+            $archive = new archive;
+            $archive->item_id = $curriculum->id;
+            $archive->item_name = $curriculum->course_code; // Use 'class_description' as the item name
+            $archive->item_type = $itemType;
+            $archive->origin_table = $curriculumTableName;
+            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
+            $archive->archiver_name = auth()->user()->name; 
+            $archive->archiver_role = auth()->user()->role;
+
+            // Save to archives table
+            $archive->save();
+            //----
+    
+            $curriculum->archived = 1;
+            $curriculum->save();
             
             return response()->json(['message' => 'Archive course succesfully']);
 

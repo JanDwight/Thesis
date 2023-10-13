@@ -20,7 +20,7 @@ return new class extends Migration
             $table->smallInteger('units');
             $table->integer('hoursperWeek');
             $table->string('course_type');
-            $table->string('preReq');
+            $table->string('preReq'); //potentially na nullable
             $table->tinyInteger('archived')->default(0); // Add the 'archived' column <><>><>
             $table->timestamps();
         });
