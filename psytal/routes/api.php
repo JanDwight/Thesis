@@ -6,16 +6,11 @@ use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserIndexController;
-use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\UpdateLinksController;
-use App\Http\Controllers\ArchiveUserController;
-use App\Http\Controllers\ClassIndexController;
-use App\Http\Controllers\UpdateClassController;
-use App\Http\Controllers\ArchiveClassesController;
-use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,9 +33,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     //manage users tab
     Route::post('/adduser', [AuthController::class, 'adduser']);
-    Route::get('/users', [UserIndexController::class, 'index']); //<><><> index users
-    Route::put('/updateuser/{id}', [UpdateUserController::class, 'updateUser']); //<><><> update user
-    Route::put('/archiveuser/{id}', [ArchiveUserController::class, 'archiveUser']); //<><><> archive user
+    Route::get('/users', [UserController::class, 'index']); //<><><> index users
+    Route::put('/updateuser/{id}', [UserController::class, 'updateUser']); //<><><> update user
+    Route::put('/archiveuser/{id}', [UserController::class, 'archiveUser']); //<><><> archive user
     Route::get('/getuserdetails', [AuthController::class, 'getuserdetails']);
 
     //classes tab
@@ -52,10 +47,11 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
     Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
     Route::post('/return_archives', [ArchiveController::class, 'returnArchive']);//<><><> archive restore
+    Route::post('/delete_archives', [ArchiveController::class, 'deleteArchive']);//<><><> archive delete [permanent]
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
-    Route::get('/count_students', [UserIndexController::class, 'count_students']); //<><><> count students from users table
-    Route::get('/count_employee', [UserIndexController::class, 'count_employee']); //<><><> count employees from users table
+    Route::get('/count_students', [UserController::class, 'count_students']); //<><><> count students from users table
+    Route::get('/count_employee', [UserController::class, 'count_employee']); //<><><> count employees from users table
 
     //Routes for Pre-Registration Checking
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
@@ -67,12 +63,14 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getcurriculum', [CurriculumController::class, 'getCurriculum']);
     Route::put('/updatecurriculum/{id}', [CurriculumController::class, 'updateCurriculum']);
     Route::put('/archivecurriculum/{id}', [CurriculumController::class, 'archiveCurriculum']); 
-});
-    //Routes for LinksController
+
+    //Routes for LinksController //moved to authenticate to avoid errors in archive, archive restore, and archive delete
     Route::post('/addlink', [LinksController::class, 'addLink']);
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
     Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
     Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
+});
+   
 
 Route::post('/login', [AuthController::class, 'login']);
 

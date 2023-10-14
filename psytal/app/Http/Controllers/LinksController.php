@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
+
+//use App\Http\Controllers\Controller;
 use App\Models\links;
 use Illuminate\Http\Request;
 use App\Http\Requests\LinksRequest;
+use App\Models\archive;
 
 
 class LinksController extends Controller
@@ -40,13 +42,37 @@ class LinksController extends Controller
 
         public function archiveLink(Request $request,$linkId)
     {
-        $link = Links::find($linkId);
         try {
-            $link->update(['archived' => 1]);
-            return response()->json(['message' => $link], 200);
+            // Find the link by ID or fail with a 404 response if not found
+            $link = links::findOrFail($linkId);
+
+            $linkTableName = (new links)->getTable(); // Getting the table associated with the Link model
+    
+            // Get the name of the current model
+            $itemType = class_basename($link);
+    
+            //----
+            // Create an Archive instance
+            $archive = new archive;
+            $archive->item_id = $link->id;
+            $archive->item_name = $link->class_code; // Use 'class_description' as the item name
+            $archive->item_type = $itemType;
+            $archive->origin_table = $linkTableName;
+            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
+            $archive->archiver_name = auth()->user()->name; 
+            $archive->archiver_role = auth()->user()->role;
+
+            // Save to archives table
+            $archive->save();
+            //----
+    
+            $link->archived = 1;
+            $link->save();
+    
+            return response()->json(['message' => 'Link archived successfully']);
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
-            return response()->json(['message' => 'Error archiving course'], 500);
+            return response()->json(['message' => 'Error archiving link: ' . $e->getMessage()], 500);
         }
     }
 

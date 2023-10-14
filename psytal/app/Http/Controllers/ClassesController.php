@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddClassRequest;
-use App\Models\classes;
 use Illuminate\Http\Request;
+use App\Models\classes;
+use App\Http\Requests\AddClassRequest;
+use App\Models\archive;
 
 class ClassesController extends Controller
 {
@@ -12,56 +13,97 @@ class ClassesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    //show
     public function index()
     {
-        //
-    }
+        //$subjects = classes::all();
+        //return response()->json($subjects); //sends ALL data from classes table
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $subjects = classes::where('archived', 0)->get(); // Change '0' to '1' to get archived users
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return response()->json($subjects);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(classes $classes)
+    //add class
+    public function addClass(AddClassRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        /** @var \App\Models\classes $class */
+
+        $class = classes::create([
+            'course_title' => $data['course_title'],
+            'curriculum_checklist_id' => $data['curriculum_checklist_id'],
+            'class_year' => $data['year'], // Update to match the actual column name
+            'semester' => $data['semester'],
+            'course_code' => $data['courseCode'], // Update to match the actual column name
+            'units' => $data['units'],
+            'course_type' => $data['coursetype'],
+            'class_section' => $data['section'],
+        ]);
+        //$token = $class->createToken('main')->plainTextToken;
+
+        return response([
+            'class' => $class,
+            //'token' => $token,
+        ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(classes $classes)
+    //update class
+    public function updateClasses(Request $request, $id)
     {
-        //
+        // Validate the incoming data
+        //delete everythin make GPT do all of it
+        $validatedData = $request->validate([
+            'course_title' => 'required|string|max:255',
+            'course_code' => 'required|string|max:255',
+            'instructor_name' => 'required|string|max:255',
+            'lastedit' => 'required|date', // Modify this validation rule as needed
+        ]);
+
+        // Retrieve the user based on the provided ID
+        $subject = classes::where('class_id', $id)->first();
+
+        if (!$subject) {
+            // Handle the case where the user with the provided ID is not found
+            return response()->json(['message' => 'Class not found'], 404);
+        }
+
+        // Update the user's information with the validated data
+        $subject->update($validatedData);
+
+        // Return a success response
+        return response()->json(['message' => 'Class updated successfully']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, classes $classes)
+    //archive
+    public function archiveclasses(Request $request, $class_id)
     {
-        //
-    }
+        try {
+            // Find the class by ID or fail with a 404 response if not found
+            $class_id = classes::findOrFail($class_id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(classes $classes)
-    {
-        //
+            $classTableName = (new classes)->getTable(); //getting table associated w/ classes model
+
+            $itemType = class_basename($class_id);
+
+            // Create an Archive instance
+            $archive = new archive;
+            $archive->item_id = $class_id->class_id;
+            $archive->item_name = $class_id->course_title;
+            $archive->item_type = $itemType;
+            $archive->origin_table = $classTableName;
+            $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication
+            $archive->archiver_name = auth()->user()->name;
+            $archive->archiver_role = auth()->user()->role;
+
+            //save to archives table
+            $archive->save();
+
+            $class_id->archived = 1;
+            $class_id->save();
+    
+            return response()->json(['message' => 'Class archived successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, e.g., log the error
+            return response()->json(['message' => 'Error archiving user'], 500);
+        }
     }
 }

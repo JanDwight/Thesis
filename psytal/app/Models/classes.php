@@ -16,6 +16,7 @@ class classes extends Model
     // Define the fillable fields that can be mass-assigned
     protected $fillable = [
         'class_year',
+        'curriculum_checklist_id',//test here
         'semester',
         'course_code',
         'course_title',

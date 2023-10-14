@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axiosClient from '../../../axios.js';
 import AddUsers from '../views_components/AddUsers.jsx';
 import StudentList from '../views_components/StudentList.jsx';
 import EmployeeList from '../views_components/EmployeeList.jsx';
@@ -32,66 +31,7 @@ export default function ManageUsers() {
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
 
-  //for addusers modal
-  const [fullName, setFullName] = useState(''); // Required by AddUsers
-  const [includeNumbers] = useState(true); // Required by AddUsers
-  const [includeSymbols] = useState(true); // Required by AddUsers
-  const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
-  const [email, setEmail] = useState(null); // Required by AddUsers
   
-  //add users onsubmit
-  const onSubmit = (ev) => {
-    ev.preventDefault();
-    setError({ __html: 'Error Detected' });
-
-    //password generator
-    const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+{}[]~-';
-    const length = 12;
-    
-    const getRandomChar = (charSet) => {
-      const randomIndex = Math.floor(Math.random() * charSet.length);
-      return charSet.charAt(randomIndex);
-    };
-    
-    let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    
-    if (includeNumbers) characters += numbers;
-    if (includeSymbols) characters += symbols;
-    
-    let password = '';
-    
-    // Ensure at least one of each character type
-    password += getRandomChar('abcdefghijklmnopqrstuvwxyz');
-    password += getRandomChar('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    password += getRandomChar('0123456789');
-    password += getRandomChar('!@#$%^&*()_+{}[]~-');
-    
-    // Generate the rest of the password
-    for (let i = 4; i < length; i++) {
-      password += getRandomChar(characters);
-    }
-    
-    //---------------------------------------------------------------------------
-
-    axiosClient
-      .post('/adduser', { name: fullName, password: password, role: selectedRole, email}) // Back end, needs edit
-      .then((response) => {
-        console.log('Success:', response.data);
-        // Close the modal
-        setIsModalOpen(false);
-      })
-      .catch((error) => {
-        if (error.response) {
-          const finalErrors = Object.values(error.response.data.errors).reduce(
-            (accum, next) => [...accum, ...next],
-            []
-          );
-          setError({ __html: finalErrors.join('<br>') });
-        }
-        console.error(error);
-      });
-  };  
 
   const handleAddUserClick = () => {
     console.log('ModalShowing');
@@ -105,19 +45,6 @@ export default function ManageUsers() {
     <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
       <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Manage Accounts</div>
       <div className="flex">
-      {/**Filter */}
-        <div className="flex flex-row">
-                  <div>
-                    <button> 
-                      {activeTab  === 1 && (
-                        <span><StudentsFilter filterText={filterText} /></span>
-                      )}
-                      {activeTab === 2 && (
-                        <span><EmployeesFilter filterText={filterText} /></span>
-                      )} 
-                    </button>                    
-                  </div>
-                </div>
         <div>
           {/**Add Users */}
           <button onClick={handleAddUserClick}
@@ -126,8 +53,7 @@ export default function ManageUsers() {
           </button>
         </div>
       </div>
-      
-          
+
     </div>
 
     {/**___________________________2nd Container from Student to Filter________________________________ */}
@@ -184,12 +110,6 @@ export default function ManageUsers() {
         <AddUsers
           showModal={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          setFullName={setFullName}
-          onSubmit={onSubmit}
-          selectedAccountType={selectedRole}
-          setSelectedAccountType={setSelectedRole}
-          email={email}
-          setEmail={setEmail}
         />
   </div>
     </>
