@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axiosClient from '../../../axios';
 import ReactModal from 'react-modal';
 import PreRegistrationFormView from '../views_components/Pre_Registration_Components/PreRegistrationFormView';
+import PreRegistrationForContinuingView from '../views_components/Pre_Registration_Components/PreRegistrationForContinuingView';
 
 export default function PreRegistration() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ const handleRowClick = (items) => {
       });
   }, []);
 
+  console.log('test ' + selectedData.type_of_student)
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
       <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
@@ -86,11 +88,18 @@ const handleRowClick = (items) => {
             className="w-fit h-[98%] bg-[#FFFFFF] rounded-3xl shadow-2xl mt-[1%] mx-auto p-5 overflow-y-scroll"
         >
             <div>
-                <PreRegistrationFormView 
-                  closeModal={() => setIsPreRegFormModalOpen(false)}
-                  prereg={selectedData}
-                />
-            </div>
+    {selectedData.type_of_student === 'Irregular' ? (
+      <PreRegistrationForContinuingView
+        closeModal={() => setIsPreRegFormModalOpen(false)}
+        prereg={selectedData}
+      />
+    ) : (
+      <PreRegistrationFormView
+        closeModal={() => setIsPreRegFormModalOpen(false)}
+        prereg={selectedData}
+      />
+    )}
+  </div>
         </ReactModal>
     </div>
   )

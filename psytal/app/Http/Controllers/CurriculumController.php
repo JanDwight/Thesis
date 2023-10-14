@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCurriculumRequest;
 use App\Models\curriculum;
+use App\Models\classes;
 use Illuminate\Http\Request;
 
 class CurriculumController extends Controller
@@ -24,6 +25,10 @@ class CurriculumController extends Controller
             'course_type' => $data['course_type'],
             'preReq' => $data['preReq']
         ]);
+
+        
+       
+
 
         return response([
             'curriculum' => $curriculum,

@@ -3,11 +3,44 @@ import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 
-export default function PreRegistrationForContinuing() {
+export default function PreRegistrationForContinuingView({prereg}) {
     const [error, setError] = useState({__html: ""});
+    
     const onhandleChange = (event) => {
         setSelectedValue(event.target.value);
       }
+
+
+      const [preregData, setPreregData] = useState(prereg, {
+        start_of_school_year: '',   
+        end_of_school_year: '',
+        student_school_id: '',      
+        learners_reference_number: '',
+        last_name: '',              
+        first_name: '',
+        middle_name: '',            
+        maiden_name: '',
+        academic_classification: '',
+        last_school_attended: '',
+        address_of_school_attended: '',
+        degree: '',
+        date_of_birth: '',
+        place_of_birth: '',
+        citizenship: '',
+        sex_at_birth: '',
+        ethnicity: '',
+        special_needs: '',
+        contact_number: '',
+        email_address: '',
+        home_address: '',
+        address_while_studying: '',
+        contact_person_name: '',
+        contact_person_number: '',
+        contact_person_address: '',
+        contact_person_relationship: '',
+        pre_reg_status: 'Accepted',
+        type_of_student: 'Regular',
+      });
 
       //variables for the user inputs
   const [startOfSchoolYear, setStartOfSchoolYear] = useState('');
@@ -131,6 +164,7 @@ export default function PreRegistrationForContinuing() {
         })
         .then(({ data }) => {
           //setFamilyName(data.family_name)
+          console.log('test: ' + preregData.candidate_for_graduation)
         })
         .catch(( error ) => {
           if (error.response) {
@@ -141,11 +175,14 @@ export default function PreRegistrationForContinuing() {
         });
       };
       
-
+      
   return (
     <>
     <main>
-        <div className="w-full lg:w-8/12 px-4 container mx-auto">          
+        
+    <form onSubmit={onSubmit} action="#" method="POST">   
+        <div className="w-full lg:w-8/12 px-4 container mx-auto">      
+         
             <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
                 <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className="">
@@ -177,7 +214,6 @@ export default function PreRegistrationForContinuing() {
         {/**=========================== 2 ==========================*/}      
         {/**Start of Filling the FORM */}
         <div className="w-full lg:w-8/12 px-4 container mx-auto">
-            <form onSubmit={onSubmit} action="#" method="POST">
                 <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
                     <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                         {/**=========================== Shoolyear - Date ==========================*/}  
@@ -204,7 +240,7 @@ export default function PreRegistrationForContinuing() {
                                         min="2000" // Minimum year
                                         max="2099" // Maximum year
                                         step="1" // Year step
-                                        value={startOfSchoolYear}
+                                        value={preregData.start_of_school_year}
                                         onChange={ev => setStartOfSchoolYear(ev.target.value)}
                                     />
                                     </div>
@@ -221,7 +257,7 @@ export default function PreRegistrationForContinuing() {
                                         min="2000" 
                                         max="2099" 
                                         step="1" 
-                                        value={endOfSchoolYear}
+                                        value={preregData.end_of_school_year}
                                         onChange={ev => setEndOfSchoolYear(ev.target.value)}
                                     />
                                     </div>
@@ -240,7 +276,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-studentLastname"
                                 type="text"
                                 placeholder=""
-                                value={lastName}
+                                value={preregData.last_name}
                                 onChange={ev => setLastName(ev.target.value)}
                                 />  
                             </div>
@@ -253,7 +289,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-studentFirstname" 
                                 type="text" 
                                 placeholder=""
-                                value={firstName}
+                                value={preregData.first_name}
                                 onChange={ev => setFirstName(ev.target.value)}
                                 />  
                             </div>
@@ -266,7 +302,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-studentMiddlename" 
                                 type="text" 
                                 placeholder=""
-                                value={middleName}
+                                value={preregData.middle_name}
                                 onChange={ev => setMiddleName(ev.target.value)}
                                 />  
                             </div>
@@ -279,7 +315,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-studentMaidenname" 
                                 type="text" 
                                 placeholder=""
-                                value={maidenName}
+                                value={preregData.maiden_name}
                                 onChange={ev => setMaidenName(ev.target.value)}
                                 />  
                             </div>
@@ -298,6 +334,7 @@ export default function PreRegistrationForContinuing() {
                                             name="typeofstudent"
                                             id="continuing"
                                             value="Continuing" 
+                                            checked={preregData.type_of_student === 'Continuing'}
                                             onChange={ev => setTypeOfStudent(ev.target.value)}
                                             />
                                         <label
@@ -313,6 +350,7 @@ export default function PreRegistrationForContinuing() {
                                             name="typeofstudent"
                                             id="returnee"
                                             value="Returnee"
+                                            checked={preregData.type_of_student === 'Returnee'}
                                             onChange={ev => setTypeOfStudent(ev.target.value)}
                                             />
                                         <label
@@ -329,6 +367,7 @@ export default function PreRegistrationForContinuing() {
                                             name="typeofstudent"
                                             id="shifter"
                                             value="Shifter" 
+                                            checked={preregData.type_of_student === 'Shifter'}
                                             onChange={ev => setTypeOfStudent(ev.target.value)}
                                             />
                                         <label
@@ -344,6 +383,7 @@ export default function PreRegistrationForContinuing() {
                                             name="typeofstudent"
                                             id="readmittedshifter"
                                             value="Re-admitted Shifter"
+                                            checked={preregData.type_of_student === 'Re-admitted Shifter'}
                                             onChange={ev => setTypeOfStudent(ev.target.value)}
                                             />
                                         <label
@@ -365,7 +405,7 @@ export default function PreRegistrationForContinuing() {
                                             min="0" 
                                             max="99" 
                                             step="1"
-                                            value={yearLevel}
+                                            value={preregData.year_level}
                                             onChange={ev => setYearLevel(ev.target.value)}
                                             />
                                 </div>                            
@@ -395,7 +435,7 @@ export default function PreRegistrationForContinuing() {
                                         name="major"
                                         type='text'
                                         placeholder='(optional)'
-                                        value={major}
+                                        value={preregData.major}
                                         onChange={ev => setMajor(ev.target.value)}
                                     />
                                 </div>
@@ -415,6 +455,7 @@ export default function PreRegistrationForContinuing() {
                                             name="candidateofgraduation"
                                             id="yes"
                                             value='Yes' 
+                                            checked={preregData.candidate_for_graduation === 'Continuing'}
                                             onChange={ev => setCandidateForGraduadtion(ev.target.value)}
                                             />
                                             
@@ -431,6 +472,7 @@ export default function PreRegistrationForContinuing() {
                                             name="candidateofgraduation"
                                             id="no"
                                             value="No"
+                                            checked={preregData.candidate_for_graduation === 'Continuing'}
                                             onChange={ev => setCandidateForGraduadtion(ev.target.value)}
                                             />
                                             
@@ -450,7 +492,7 @@ export default function PreRegistrationForContinuing() {
                                         name="major"
                                         type='text'
                                         placeholder=''
-                                        value={endOfTermToFinishDegree}
+                                        value={preregData.end_of_term_to_finnish_degree}
                                         onChange={ev => setendOfTermToFinishDegree(ev.target.value)}
                                     />
                                 </div>
@@ -503,7 +545,7 @@ export default function PreRegistrationForContinuing() {
                                         name="major"
                                         type='text'
                                         placeholder=''
-                                        value={lastOfTermTofinishDegree}
+                                        value={preregData.last_of_term_to_finnish_degree}
                                         onChange={ev => setLastOfTermTofinishDegree(ev.target.value)}
                                     />
                                 </div>
@@ -519,7 +561,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-birthdate" 
                                 type="date" 
                                 placeholder=""
-                                value={dateOfBirth}
+                                value={preregData.date_of_birth}
                                 onChange={ev => setDateOfBirth(ev.target.value)}
                                 />
 
@@ -530,7 +572,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-nationality" 
                             type="text" 
                             placeholder=""
-                            value={citizenship}
+                            value={preregData.citizenship}
                             onChange={ev => setCitizenship(ev.target.value)}
                             />
 
@@ -541,7 +583,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-ethnicity" 
                             type="text" 
                             placeholder=""
-                            value={ethnicity}
+                            value={preregData.ethnicity}
                             onChange={ev => setEthnicity(ev.target.value)}
                             />
                                                     
@@ -550,7 +592,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-contactnumber" 
                             type="number" 
                             placeholder=""
-                            value={contactNumber}
+                            value={preregData.contact_number}
                             onChange={ev => setContactNumber(ev.target.value)}/>                    
                             </div>
 
@@ -563,7 +605,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-placeofbirth" 
                             type="text" 
                             placeholder=""
-                            value={placeOfBirth}
+                            value={preregData.place_of_birth}
                             onChange={ev => setPlaceOfBirth(ev.target.value)}/>
                                 
                             <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="sexatbirth">
@@ -573,7 +615,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-sexatbirth" 
                                 type="text" 
                                 placeholder=""
-                                value={sexAtBirth}
+                                value={preregData.sex_at_birth}
                                 onChange={ev => setSexAtBirth(ev.target.value)}
                                 />
 
@@ -584,7 +626,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-studyaddress" 
                             type="text" 
                             placeholder=""
-                            value={specialNeeds}
+                            value={preregData.special_needs}
                             onChange={ev => setSpecialNeeds(ev.target.value)}
                             />
                                 
@@ -595,7 +637,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-emailaddress" 
                             type="text" 
                             placeholder=""
-                            value={email}
+                            value={preregData.email_address}
                             onChange={ev => setEmail(ev.target.value)}/>
                             </div>
                         </div> <hr />
@@ -608,7 +650,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-homeaddress" 
                             type="text" 
                             placeholder=""
-                            value={homeAddress}
+                            value={preregData.home_address}
                             onChange={ev => setHomeAddress(ev.target.value)}
                             />
                             </div>
@@ -620,7 +662,7 @@ export default function PreRegistrationForContinuing() {
                             id="grid-studyaddress" 
                             type="text" 
                             placeholder=""
-                            value={addressWhileStudyingAtBsu}
+                            value={preregData.address_while_studying}
                             onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
                             </div>
                         </div> <hr />
@@ -636,7 +678,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-contactname" 
                                 type="text" 
                                 placeholder=""
-                                value={emergencyContactName}
+                                value={preregData.contact_person_name}
                                 onChange={ev => setEmergencyContactName(ev.target.value)}
                                 />
                                 
@@ -645,7 +687,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-address" 
                                 type="text" 
                                 placeholder=""
-                                value={emergencyContactAddress}
+                                value={preregData.contact_person_address}
                                 onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
                             </div>
 
@@ -658,7 +700,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-contactnum" 
                                 type="number" 
                                 placeholder=""
-                                value={emergencyContactNumber}
+                                value={preregData.contact_person_number}
                                 onChange={ev => setEmergencyContactNumber(ev.target.value)}
                                 />
                                     
@@ -669,7 +711,7 @@ export default function PreRegistrationForContinuing() {
                                 id="grid-relationship" 
                                 type="text" 
                                 placeholder=""
-                                value={relationship}
+                                value={preregData.contact_person_relationship}
                                 onChange={ev => setRelationship(ev.target.value)}
                                 />
                             </div>
@@ -994,7 +1036,7 @@ export default function PreRegistrationForContinuing() {
                     id="grid-amtcontibute" 
                     type="text" 
                     placeholder=""
-                    value={contributionamount}
+                    value={preregData.voluntary_contribution}
                     onChange={ev => setcontributionamount(ev.target.value)}
                     />
                   </div>
@@ -1004,19 +1046,7 @@ export default function PreRegistrationForContinuing() {
                     </div>
                 </div>
 
-                  {/**===========SUMBIT Button============= */}
-        <div className="text-center items-center my-8">
-            <button 
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
-                  Cancel
-            </button>
-            <button 
-                type="submit"
-                className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
-                  Submit
-            </button>
-        </div>  
-            </form>        
+                      
         </div>
 
        
@@ -1025,10 +1055,7 @@ export default function PreRegistrationForContinuing() {
 
         {/**=========================== 4 ==========================*/}      
         {/**Start of Filling the FORM for CLASS CODES UNITS*/}
-        <div className="w-full lg:w-8/12 px-4 container mx-auto">            
-            <form 
-                //ah basta hhaha
-                onSubmit={handleSubmitCourseUnits}>
+        <div className="w-full lg:w-8/12 px-4 container mx-auto">        
                 <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
                     <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                         <div className="text-normal font-medium text-center mt-2">
@@ -1170,11 +1197,26 @@ export default function PreRegistrationForContinuing() {
                 </div>
                 
               
-            </form>
+            
         </div>
-         
+         {/**===========SUMBIT Button============= */}
+        <div className="text-center flex justify-end my-8">
+                <button //onClick={onDecline}
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Decline
+                </button>
+                <button //onClick={onReturn}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Return
+                </button>
+                <button //onClick={onClickAccept}
+                  type="submit"
+                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+                  Accept
+                </button>
+              </div>
 
-
+        </form>
     </main>
     </>
 

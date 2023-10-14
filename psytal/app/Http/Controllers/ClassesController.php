@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddClassRequest;
 use App\Models\classes;
 use Illuminate\Http\Request;
 
 class ClassesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
