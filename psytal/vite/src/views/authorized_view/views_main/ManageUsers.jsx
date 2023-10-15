@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import AddUsers from '../views_components/AddUsers.jsx';
 import StudentList from '../views_components/StudentList.jsx';
 import EmployeeList from '../views_components/EmployeeList.jsx';
-import StudentsFilter from '../views_components/studentsfilter.jsx';
-import EmployeesFilter from '../views_components/EmployeesFilter.jsx';
 
 {/*Tab Highlight */}
 const Tab = ({ label, isActive, onClick }) => {

@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id('class_id');;
-            $table->string('curriculum_checklist_id');
-            $table->string('class_year');
+            $table->integer('class_year');
             $table->string('semester');
             $table->string('course_code');
             $table->string('course_title');
             $table->smallInteger('units');
             $table->string('course_type');
-            $table->string('course_schedule')->nullable();
+            $table->string('course_schedule_time')->nullable();
+            $table->string('course_schedule_day')->nullable();
             $table->string('class_section')->nullable();
             $table->string('instructor_name')->nullable();
             $table->boolean('archived')->default(false); // Add the 'archived' column <><>><>

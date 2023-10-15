@@ -93,5 +93,5 @@ class CurriculumController extends Controller
         $curriculumData->update($attributes); 
         return response()->json(['message' => 'Curriculum updated successfully']);
     }
-    
+
 }

@@ -16,16 +16,16 @@ class classes extends Model
     // Define the fillable fields that can be mass-assigned
     protected $fillable = [
         'class_year',
-        'curriculum_checklist_id',//test here
         'semester',
         'course_code',
         'course_title',
         'units',
         'course_type',
-        'course_schedule',
+        'course_schedule_time',
+        'course_schedule_day',
         'class_section',
         'instructor_name',
         'archived', // Add the 'archived' field to the fillable array <><><>
-        // Add other columns here
+        // Add other columns here time and day
     ];
 }
