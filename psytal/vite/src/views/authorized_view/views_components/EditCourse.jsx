@@ -13,10 +13,10 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    // Create an object with the updated class data
+    // Create an object with the updated curriculum data
     console.log('Submitting'+ {curriculum});
     const updatedCourse = {
-      // Assuming classId is still the same
+      // Assuming curriculumId is still the same
       class_year,
       semester,
       course_code,
@@ -139,7 +139,7 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                 </div>
 
                 <p className="block text-sm font-bold text-gray-700">
-                    Course Type:
+                    Course Type: {curriculum.course_type}
                 </p>
                 <div className="flex justify-between mt-2">
                   <div>
@@ -148,9 +148,11 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        //checked= {curriculum.course_type}
-                        value={"Lec"}
+                        value="Lec" 
+                        // checked={curriculum.course_type === "Lec"}
                         onChange={(e) => setCourseType(e.target.value)}
+                        // onChange={(e) => setCourseType({curriculum, course_type: e.target.value})}
+                        // onChange={(e) => setCourseType(e.target.value)}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
                     </div>
@@ -160,8 +162,8 @@ export default function EditCourse({ showEditcourse, onClose, curriculum}) {
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        //checked= {curriculum.course_type}
-                        value={"Lab"}
+                        value="Lab" 
+                        // checked={curriculum.course_type === "Lab"}
                         onChange={(e) => setCourseType(e.target.value)}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />

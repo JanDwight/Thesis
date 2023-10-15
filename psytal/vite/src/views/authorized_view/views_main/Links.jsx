@@ -96,19 +96,19 @@ export default function Links() {
           <input
             id="search_bar"
             type="text"
-            placeholder="Search by Class Code, Class Description, Instructor, Link Code..."
+            placeholder="Search..."
             value={filterText}
             onChange={(event) => setFilterText(event.target.value)}
             className="h-10 px-7 py-4 border border-gray-300 focus:ring-viridianHue focus:border-viridianHue rounded-lg"
           />
-        </div>
+        
           {/* Add Links button */}
           <button onClick={() =>  setIsModalOpen(true)}
-            className="bg-[#75ba75] rounded-2xl  px-7 py-2 text-white font-size ml-10"
+            className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10"
           >
             Add Links
           </button>
-                    
+          </div>            
         </div>
       </div>
     
@@ -117,10 +117,10 @@ export default function Links() {
             <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
 		            <thead>
 		              <tr>
-                    <th className="text-center">Class Code</th>
-                    <th className="text-center">Class Description</th>
-                    <th className="text-center">Instructor</th>
-                    <th className="text-center">Link Code</th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Class Code</th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Class Description</th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Instructor</th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Link Code</th>
 		              </tr>
                 </thead>
                  <tbody>

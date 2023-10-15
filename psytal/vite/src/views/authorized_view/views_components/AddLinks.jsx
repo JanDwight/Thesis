@@ -1,7 +1,7 @@
 import React, { useState, } from 'react';
 import axiosClient from '../../../axios.js';
 
-export default function AddLinks({closeModal, }) { 
+export default function AddLinks({closeModal}) { 
   const [formData, setFormData] = useState({
     class_code: '',
     class_description: '',
@@ -24,9 +24,9 @@ export default function AddLinks({closeModal, }) {
     // Make a POST request to your backend endpoint (/addlink)
     axiosClient.post('/addlink', formData)
       .then(response => {
-        window.location.reload();
         // Handle success, e.g., show a success message
         console.log(response.data);
+        window.location.reload();
       })
       .catch(error => {
         // Handle errors, including validation errors
@@ -96,12 +96,15 @@ export default function AddLinks({closeModal, }) {
         
      
         {/* ... your form inputs ... */}
-        <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
-          Add Link
-        </button>
-        <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
-          Cancel
-        </button>
+        <div className="text-center flex justify-center my-7">
+            <button type="submit" className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                Add
+            </button>
+
+            <button onClick={closeModal} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                Cancel
+            </button>
+        </div>
           </form>
         </div>
 
