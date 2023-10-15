@@ -1,6 +1,8 @@
 import React from 'react'
 import AddingPost from '../views_components/AddingPost';
 import PostArticles from '../views_components/Post_Components/PostArticles';
+
+
 export default function Home() {
   return (
     <div>

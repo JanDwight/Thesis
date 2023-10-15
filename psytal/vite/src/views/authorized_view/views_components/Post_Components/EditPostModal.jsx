@@ -3,7 +3,6 @@ import axiosClient from '../../../../axios';
 
 export default function EditPostModal({ selectedPost, closeModal, handleSave }) {
     if (!selectedPost) {
-    
         return null;
     }
 
@@ -25,7 +24,11 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
         const formData = new FormData();
         formData.append('title', editedPost.title);
         formData.append('description', editedPost.description);
-        formData.append('image', editedPost.image);
+
+        // Check if there's a new image to upload
+        if (editedPost.image instanceof File) {
+            formData.append('image', editedPost.image);
+        }
 
         try {
             const response = await axiosClient.put(`/posts/${editedPost.id}`, formData);

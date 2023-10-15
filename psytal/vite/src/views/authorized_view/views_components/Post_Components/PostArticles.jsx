@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import avatar from "@assets/icons8avatar.png";
-import axiosClient from '../../../../axios'; 
+import axiosClient from '../../../../axios';
 import EditPostModal from './EditPostModal';
-import ArchivePost from './ArchivePost'; 
+import ArchivePost from './ArchivePost';
 
 export default function PostArticles() {
     const [posts, setPosts] = useState([]);
     const [showMenu, setShowMenu] = useState(null);
-    const [editModalOpen, setEditModalOpen] = useState(false); 
-    const [selectedPost, setSelectedPost] = useState(null); 
-    const [archiveConfirmation, setArchiveConfirmation] = useState(false); // State for the confirmation modal
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [selectedPost, setSelectedPost] = useState(null);
+    const [archiveConfirmation, setArchiveConfirmation] = useState(false);
 
     useEffect(() => {
         // Define a function to fetch posts
@@ -45,19 +45,17 @@ export default function PostArticles() {
 
     const confirmArchive = async () => {
         try {
-           
             const response = await axiosClient.post(`/archivePost/${selectedPost.id}`);
             if (response.status === 200) {
                 // Post archived successfully, remove it from the list
                 const updatedPosts = posts.filter((post) => post.id !== selectedPost.id);
                 setPosts(updatedPosts);
             } else {
-                throw new Error('Network response was not ok');
+                throw new Error('Error Network response');
             }
         } catch (error) {
             console.error('Error archiving the post: ', error);
         } finally {
-          
             setArchiveConfirmation(false);
         }
     };
@@ -110,27 +108,35 @@ export default function PostArticles() {
                                     <p className="font-light text-gray-600">{post.created_at}</p>
                                 </div>
                             </a>
+                            <div className="content">
+                            <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
+                        </div>
                         </div>
                     </div>
 
                     {/* Description section */}
-                    <div className="mt-2">
-                        <a className="text-2xl text-gray-700 font-bold hover:text-gray-600">
-                            {post.title}
-                        </a>
-                        <div className="flex justify-center items-center py-5">
-                            {post.image && (
+                    <div className="flex justify-center items-center py-5">
+                    {post.images && post.images.length > 0 && (
+                        // Conditionally set the image size based on the number of images
+                        post.images.length === 1 ? (
+                            <img
+                                src={`http://localhost:8000/storage/${post.images[0]}`}
+                                alt="Image"
+                                className="m-2 max-w-[400px] max-h-[300px]"
+                            />
+                        ) : (
+                            post.images.map((image, i) => (
                                 <img
-                                    src={`http://localhost:8000/storage/${post.image}`}
-                                    alt="announcement"
-                                    height={700}
-                                    width={700}
+                                    key={i}
+                                    src={`http://localhost:8000/storage/${image}`}
+                                    alt={`Image ${i}`}
+                                    height={200}
+                                    width={200}
+                                    className="mx-2" // Add spacing between images
                                 />
-                            )}
-                        </div>
-                        <div className="content">
-                            <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
-                        </div>
+                            ))
+                        )
+                    )}   
                     </div>
                 </div>
             ))}

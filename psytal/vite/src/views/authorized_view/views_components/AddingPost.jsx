@@ -6,7 +6,7 @@ export default function AddingPost() {
   const [error, setError] = useState({ __html: "" });
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null); // Store the selected image
+  const [selectedImages, setSelectedImages] = useState([]); // Store the selected images
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -24,15 +24,20 @@ export default function AddingPost() {
     setError({ __html: "" });
     setTitle('');
     setDescription('');
-    setSelectedImage(null); // Reset selected image
+    setSelectedImages([]); // Reset selected images
     setSuccessMessage(null);
     openModal();
   };
 
   // Function to handle image upload and preview
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file); // Set the selected image as the file object
+    const files = event.target.files;
+    // Ensure a maximum of three images are selected
+    if (selectedImages.length + files.length <= 3 || selectedImages.length === 0) {
+      setSelectedImages([...selectedImages, ...files]); // Add selected images to the array
+    } else {
+      setError('You can select up to three images or leave it empty.');
+    }
   };
 
   const onSubmit = async (ev) => {
@@ -46,9 +51,10 @@ export default function AddingPost() {
       formData.append('title', title);
       formData.append('description', description);
 
-      if (selectedImage) {
-        formData.append('image', selectedImage);
-      }
+      // Append all selected images to the form data
+      selectedImages.forEach((image, index) => {
+        formData.append(`images[${index}]`, image);
+      });
 
       const response = await axiosClient.post('/createposts', formData, {
         headers: {
@@ -76,7 +82,7 @@ export default function AddingPost() {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
     <>
@@ -98,7 +104,6 @@ export default function AddingPost() {
         <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6">
-
               <form onSubmit={onSubmit} action="#" method="POST">
                 {/* Attach Photo / File */}
                 <div className="rounded-md bg-transparent p-3 w-30 h-30">
@@ -106,15 +111,27 @@ export default function AddingPost() {
                     <img src={image} className="h-8 w-auto mt-5" alt="Upload Icon" />
                     <span className="text-md lg-text-md mx-2 font-semibold text-green-800 mt-5">Attach Photo / File</span>
                   </label>
-                  <input id="upload"
+                  <input
+                    id="upload"
                     type="file"
-                    name="image"
+                    name="images"
                     accept="image/*" // Limit to image files
+                    multiple
                     onChange={handleImageUpload} // Call the image upload function
-                    className="hidden" />
+                    className="hidden"
+                  />
                 </div>
-                {selectedImage && ( // Display the selected image
-                  <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" className="h-25 w-25 mx-2" />
+                {selectedImages && selectedImages.length > 0 && (
+                  <div className="flex flex-wrap">
+                    {selectedImages.map((image, index) => (
+                      <img
+                        key={index}
+                        src={URL.createObjectURL(image)}
+                        alt={`Selected Image ${index}`}
+                        className="h-25 w-25 mx-2"
+                      />
+                    ))}
+                  </div>
                 )}
 
                 {/* Title Input */}
@@ -161,7 +178,7 @@ export default function AddingPost() {
           </div>
         </div>
       )}
-      {successMessage && ( // Display the success message if isPostSuccessful is true
+      {successMessage && (
         <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6">

@@ -15,15 +15,14 @@ class CreatePostRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array
      */
     public function rules(): array
     {
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Allow an array of images
         ];
     }
 }
