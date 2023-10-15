@@ -33,6 +33,16 @@ class UserController extends Controller
         $employeeCount = (int)User::whereIn('role', [1, 2, 3])->count();
         return response()->json($employeeCount);
     }
+    //for add class instructors
+    //only send id and name pending delete
+    public function show_instructors()
+    {
+        $instructors = User::where('role', 3)
+        ->select('id', 'name')
+        ->get();
+
+        return response()->json($instructors);
+    }
     //for update user
     public function updateUser(Request $request, $id)
     {

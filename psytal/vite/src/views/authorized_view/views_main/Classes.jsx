@@ -71,55 +71,6 @@ export default function Classes(){
             </div>
 
             <div className="m-5">
-                <div className=" md:hidden lg:hidden">
-                    <Menu>
-                        <Menu.Button className="relative mr-5 py-1 px-5 border-2 border-black">Filter</Menu.Button>
-                        <Menu.Items className="absolute px-[7px] border-2 border-black bg-white">
-                            <div className="flex flex-col">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <a
-                                        className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                    >
-                                      1st Year
-                                    </a>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <a
-                                  className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                >
-                                  2nd Year
-                                </a>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <a
-                                  className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                  href="/account-settings"
-                                >
-                                  3rd Year
-                                </a>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <a
-                                  className={`${active && 'bg-[#CCEFCC]'}`}
-                                  href="/account-settings"
-                                >
-                                  4th Year
-                                </a>
-                              )}
-                            </Menu.Item>
-                            </div>
-                        </Menu.Items>
-                    </Menu>
-                </div>
-                
-
                     {/* table */}
                     <div className="m-5">
                     <div className="">

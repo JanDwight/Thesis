@@ -32,7 +32,6 @@ class ClassesController extends Controller
 
         $class = classes::create([
             'course_title' => $data['course_title'],
-            'curriculum_checklist_id' => $data['curriculum_checklist_id'],
             'class_year' => $data['year'], // Update to match the actual column name
             'semester' => $data['semester'],
             'course_code' => $data['courseCode'], // Update to match the actual column name
@@ -51,12 +50,11 @@ class ClassesController extends Controller
     public function updateClasses(Request $request, $id)
     {
         // Validate the incoming data
-        //delete everythin make GPT do all of it
         $validatedData = $request->validate([
-            'course_title' => 'required|string|max:255',
-            'course_code' => 'required|string|max:255',
             'instructor_name' => 'required|string|max:255',
-            'lastedit' => 'required|date', // Modify this validation rule as needed
+            'class_section' => 'required|string|max:255',
+            'course_schedule_time' => 'required|string|max:255',
+            'course_schedule_day' => 'required|string|max:255',
         ]);
 
         // Retrieve the user based on the provided ID
