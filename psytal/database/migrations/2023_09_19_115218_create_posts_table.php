@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description'); // Changed to 'text' for longer descriptions
             $table->string('slug')->unique(); // Unique slug for each post
             $table->timestamps();
+            $table->boolean('archived')->default(false);
         });
 
         // Create a new table for storing post images
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->foreignId('post_id')->constrained();
             $table->string('image_path');
             $table->timestamps();
+            $table->boolean('archived')->default(false);
         });
     }
 
