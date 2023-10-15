@@ -1041,7 +1041,7 @@ export default function PreRegistrationFormView({prereg}) {
                           name="yescompiled"
                           id="yescompiled"
                           value="Yes" 
-                          onChange={ev => setcompliedtoadmissionpolicy(ev.target.value)}
+                          onChange={(ev) => setPreregData({ ...preregData, complied_to_admission_policy: ev.target.value })}
                           />
                         <label
                           className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"

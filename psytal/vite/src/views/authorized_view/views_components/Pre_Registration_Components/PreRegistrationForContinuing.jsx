@@ -84,7 +84,6 @@ export default function PreRegistrationForContinuing() {
         ev.preventDefault();
         setError({ __html: "" });
         
-        console.log('Test');
             
         axiosClient
         .post('/preregcontinuingtmp', {
@@ -140,7 +139,6 @@ export default function PreRegistrationForContinuing() {
             console.error(error)
         });
       };
-      
 
   return (
     <>
