@@ -141,23 +141,23 @@ export default function AddCourse({closeModal}) {
                 </div>
                 <div className="flex justify-between mt-2">
                   <div>
-                      <label for= "lec">Lecture</label>
+                      <label for= "Lec">Lecture</label>
                       <input
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        value={"Lec"}
+                        value="Lec"
                         onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
                     </div>
                     <div>
-                      <label for= "lab">Laboratory</label>
+                      <label for= "Lab">Laboratory</label>
                       <input
                         id="course_type"
                         name="course_type"
                         type="radio" //change to radio
-                        value={"Lab"}
+                        value="Lab"
                         onChange={handleChange}
                         className="block rounded-md border-2 border-solid border-neutral-300" 
                       />
