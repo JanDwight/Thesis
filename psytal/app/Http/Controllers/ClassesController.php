@@ -9,6 +9,10 @@ use App\Models\archive;
 
 class ClassesController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     */
     //show
     public function index()
     {

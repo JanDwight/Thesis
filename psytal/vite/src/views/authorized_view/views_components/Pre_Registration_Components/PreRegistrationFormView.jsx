@@ -2,8 +2,12 @@ import React, {useEffect, useState} from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
+import { Navigate } from 'react-router-dom';
 
 export default function PreRegistrationFormView({prereg}) {
+
+  console.log(prereg.health_facility_registered)
+
   const includeNumbers = true;  // Include numbers in the password
   const includeSymbols = true;  // Include symbols in the password
   const role = "4";
@@ -35,6 +39,7 @@ export default function PreRegistrationFormView({prereg}) {
     contact_person_number: '',
     contact_person_address: '',
     contact_person_relationship: '',
+    vaccination_status: '',
     pre_reg_status: 'Accepted',
     type_of_student: 'Regular',
   });
@@ -46,7 +51,6 @@ export default function PreRegistrationFormView({prereg}) {
   const [error, setError] = useState({__html: ""});
   const id = preregData.id;
 
-  console.log('id' + id);
 
   //On Decline Click
   const onDecline = (ev) => {
@@ -183,11 +187,12 @@ export default function PreRegistrationFormView({prereg}) {
       contact_person_number: parseInt(preregData.contact_person_number), 
       contact_person_address: preregData.contact_person_address,
       contact_person_relationship: preregData.contact_person_relationship,
+
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
     .then(({ data }) => {
-      //setFamilyName(data.family_name)
+      
 
     })
     .catch(( error ) => {
@@ -412,6 +417,7 @@ export default function PreRegistrationFormView({prereg}) {
                       name="typeofacadclass"
                       id="shsgraduate"
                       value="SHS graduate" 
+                      checked={preregData.academic_classification === 'SHS graduate'}
                       onChange={(ev) => setPreregData({ ...preregData, academic_classification: ev.target.value })}
                       />
                       <label
@@ -428,6 +434,7 @@ export default function PreRegistrationFormView({prereg}) {
                       name="typeofacadclass"
                       id="hsgraduate"
                       value="HS graduate"
+                      checked={preregData.academic_classification === 'HS graduate'}
                       onChange={(ev) => setPreregData({ ...preregData, academic_classification: ev.target.value })}
                       />
                     <label
@@ -444,6 +451,7 @@ export default function PreRegistrationFormView({prereg}) {
                       name="typeofacadclass"
                       id="alscompleter"
                       value="ALS completer"
+                      checked={preregData.academic_classification === 'ALS completer'}
                       onChange={(ev) => setPreregData({ ...preregData, academic_classification: ev.target.value })}
                       />
                     <label
@@ -665,93 +673,234 @@ export default function PreRegistrationFormView({prereg}) {
                 </div>
               </div> <hr />
 
-              {/**=========================== Insurance Coverage ==========================*/} 
-              <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
-              <div className="flex flex-wrap -mx-3 mb-2">
-                {/*column1*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className=" text-gray-700 text-xs font-bold mb-2">
-                    Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
-                  </label>
-                  <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                    {/**Radio buttion for Yes registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="yesregister"
-                        id="yesregister"
-                        value="option1" />
-                        <label
-                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">Yes
-                        </label>
+               {/**=========================== Insurance Coverage ==========================*/} 
+               <div className="text-normal text-center font-medium mt-2">INSURANCE COVERAGE (As per CHED-DOH Joint Memorandum Circular No. 2021 - 001:VI.J)</div> <hr className='mt-2'/>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                  {/*column1*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-xs font-bold mb-2">
+                      Are you registed as by a health facility with Phil Health or equivalent Medical Insurance that covers medical expenses: 
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                      {/**Radio buttion for Yes registered */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="yesregister"
+                          id="yesregister"
+                          value='Yes' 
+                          checked={preregData.health_facility_registered === 'Yes'}
+                          onChange={(ev) => setPreregData({ ...preregData, health_facility_registered: ev.target.value })}
+                          />
+                          <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthregistered">Yes
+                          </label>
+                      </div>
+                      {/**Radio buttion for No registered */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="noregister"
+                          id="noregister"
+                          value='No'
+                          checked={preregData.health_facility_registered === 'No'}
+                          onChange={(ev) => setPreregData({ ...preregData, health_facility_registered: ev.target.value })}
+                          />
+                          <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthregistered">No
+                          </label>
+                      </div>
                     </div>
-                    {/**Radio buttion for No registered */}
-                    <div className='mx-5 mt-2'>
-                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                        type="radio"
-                        name="noregister"
-                        id="noregister"
-                        value="option2" />
+                    
+                  </div>
+                  {/*column2*/}
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
+                    <select  className='ml-5'
+                      onChange={(ev) => setPreregData({ ...preregData, vaccination_status: ev.target.value })}
+                      value={preregData.vaccination_status}>
+                      <option 
+                        value="Not Vaccinated">
+                          Not Vaccinated</option>
+                      <option 
+                        value="1st Dose">
+                          1st Dose</option>
+                      <option 
+                        value="2nd Dose">
+                          2nd Dose</option>
+                      <option 
+                        value="With Booster">
+                          Booster</option>
+                    </select>
+                  </div>
+
+                  {/**/}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
+                    <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
+                      Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                      {/**Radio buttion for Yes dependent */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="healthdependent"
+                          id="Dependent"
+                          value="Yes" 
+                          checked={preregData.parent_health_facility_dependent === 'Yes'}
+                          onChange={(ev) => setPreregData({ ...preregData, parent_health_facility_dependent: ev.target.value })}
+                          />
                         <label
                           className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                          htmlFor="healthregistered">No
+                          htmlFor="healthdependent">Yes
                         </label>
+                      </div>
+                      {/**Radio buttion for No dependent */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="healthdependent"
+                          id="Dependent"
+                          value="No" 
+                          checked={preregData.parent_health_facility_dependent === 'No'}
+                          onChange={(ev) => setPreregData({ ...preregData, parent_health_facility_dependent: ev.target.value })}
+                          />
+                        <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="healthdependent">No
+                        </label>
+                      </div>
                     </div>
                   </div>
-                  
-                </div>
-                {/*column2*/}
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold py-4 mb-2">Covid-19 Vaccination Status :</label>
-                  <select  onChange={handleChange} className='ml-5'>
-                    <option value="notvaccinated">Not Vaccinated</option>
-                    <option value="notvaccinated">1st Dose</option>
-                    <option value="notvaccinated">2nd Dose</option>
-                    <option value="notvaccinated">Booster</option>
-                  </select>
-                </div>
-
-                {/**/}
-                <div className="w-full px-3 mb-6 md:mb-0 mt-2">                 
-                  <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
-                    Are you DEPENDENT on your Mother/Father/Legal Guardian of a health facility with Phil Health or equivalent Medical Insurance that covers Medical Expenses related to COVID-19? :
-                  </label>
-                  <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contactnum" type="text" placeholder=""/>
-                </div>
-              </div> <hr />
+                </div> <hr />
           </div>
         </div>
         
       {/**=========================== 3 ==========================*/}      
-      {/**Start of Filling the FORM */}
-        <div className="w-full container mx-auto">
-          <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
-            <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
-                <div className="text-normal font-medium text-center mt-2">
-                  DIGITAL COMMUNICATION AND LITERACY:
-                  <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
-                </div> <hr className='mt-2'/>
+          {/**Start of Filling the FORM */}
+          <div className="w-full container mx-auto">
+            <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
+              <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
+                  <div className="text-normal font-medium text-center mt-2">
+                    DIGITAL COMMUNICATION AND LITERACY:
+                    <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
+                  </div> <hr className='mt-2'/>
 
-                <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   {/*column1*/}
-                  <div className="w-full px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
-                        Category :
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-category">
+                      Category :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-col mb-2">
+                      {/**Radio buttion for High level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="highlvl"
+                                id="highlvl"
+                                value="category1" 
+                                checked={preregData.technology_level === 'category1'}
+                                onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
+                                />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>High Level Technology: </strong>
+                               <i>Availability of Devices-laptops, mobile phones, tablets, desktops, Internet connectvity-fast</i>
+                        </label>
+                      </div>
+                      {/**Radio buttion for Medium level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="mediumlvl"
+                                id="mediumlvl"
+                                value="category2" 
+                                checked={preregData.technology_level === 'category1'}
+                                onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
+                                />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>Medium Level Technology: </strong>
+                              <i>Availability of Devices-Mostly available phones, Internet connectvity-slow</i>
+                        </label>
+                      </div>
+                      {/**Radio buttion for Low level technology */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                                type="radio"
+                                name="lowlvl"
+                                id="lowlvl"
+                                value="category3" 
+                                checked={preregData.technology_level === 'category1'}
+                                onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
+                                />
+                        <label
+                              className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                              htmlFor="categorytech">
+                              <strong>Low Level Technology: </strong>
+                              <i>Availability of Devices-Some mobile phones or no technology, Internet connectvity-poor or no internet connection</i>
+                        </label>
+                      </div>
+                    </div>                                         
+                  </div> <hr className='mt-2'/>
+
+                  {/*column2*/}
+                  <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
+                      Level of Digital Literacy :
+                    </label>
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                    {/**Radio buttion for Proficient literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="proficient"
+                              id="proficient"
+                              value="lvl1" 
+                              checked={preregData.digital_literacy === 'lvl1'}
+                              onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}/>
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Proficient
                       </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-category" type="text" placeholder=""/>                                           
-                  </div>
-                    {/*column2*/}
-                  <div className="w-full px-3 mb-6 md:mb-0 mt-5">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lodl">
-                        Level of Digital Literacy :
+                    </div>
+                    {/**Radio buttion for Advanced literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="advanced"
+                              id="advanced"
+                              value="lvl2" 
+                              checked={preregData.digital_literacy === 'lvl2'}
+                              onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}/>
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Advanced
                       </label>
-                      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-lodl" type="number" placeholder=""/>                      
-                  </div>
-                </div> <hr />
+                    </div>
+                    {/**Radio buttion for Beginner literacy */}
+                    <div className='mx-5 mt-2'>
+                      <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                              type="radio"
+                              name="beginner"
+                              id="beginner"
+                              value="lvl3" 
+                              checked={preregData.digital_literacy === 'lvl3'}
+                              onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}/>
+                      <label
+                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                            htmlFor="literacy">Beginner
+                      </label>
+                    </div>
+                  </div>                      
+                </div><hr />
+              </div>
             </div>
           </div>
-        </div>
 
       {/**=========================== 4 ==========================*/}      
       {/**Start of Filling the FORM */}
@@ -782,7 +931,10 @@ export default function PreRegistrationFormView({prereg}) {
                           type="radio"
                           name="yesavail"
                           id="yesavail"
-                          value="option1" />
+                          value="Yes"
+                          checked={preregData.avail_free_higher_education === 'Yes'}
+                          onChange={(ev) => setPreregData({ ...preregData, avail_free_higher_education: ev.target.value })}
+                          />
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="yesavail">Yes
@@ -794,7 +946,10 @@ export default function PreRegistrationFormView({prereg}) {
                           type="radio"
                           name="noavail"
                           id="noavail"
-                          value="option2" />
+                          value="No" 
+                          checked={preregData.avail_free_higher_education === 'No'}
+                          onChange={(ev) => setPreregData({ ...preregData, avail_free_higher_education: ev.target.value })}
+                          />
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="noavail">No
@@ -815,7 +970,10 @@ export default function PreRegistrationFormView({prereg}) {
                           type="radio"
                           name="yescontribute"
                           id="yescontribute"
-                          value="option1" />
+                          value="Yes"
+                          checked={preregData.voluntary_contribution === 'Yes'}
+                          onChange={(ev) => setPreregData({ ...preregData, voluntary_contribution: ev.target.value })} />
+                          
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="yescontribute">Yes
@@ -827,7 +985,11 @@ export default function PreRegistrationFormView({prereg}) {
                           type="radio"
                           name="nocontribute"
                           id="nocontribute"
-                          value="option2" />
+                          value="No"
+                          checked={preregData.voluntary_contribution === 'No'}
+                          onChange={(ev) => setPreregData({ ...preregData, voluntary_contribution: ev.target.value })} 
+                          />
+                          
                           <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                             htmlFor="nocontribute">No
@@ -841,10 +1003,67 @@ export default function PreRegistrationFormView({prereg}) {
                     <label className=" text-gray-700 text-xs font-bold mb-2">
                       AMOUNT <em>(If YES, indicate amount)</em>
                     </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-amtcontibute" type="number" placeholder=""/>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    id="grid-amtcontibute" 
+                    type="text" 
+                    placeholder=""
+                    value={preregData.contribution_amount}
+                    onChange={(ev) => setPreregData({ ...preregData, contribution_amount: ev.target.value })} 
+                    />
                   </div>
                 </div>
             </div>
+            <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                  {/*column1*/}
+                  <div className="w-full md:w-[15%] px-3  py-2 mb-6 md:mb-0 mt-2">
+                    <label className=" text-gray-700 text-sm font-bold mb-2">
+                        COLLEGE
+                    </label>
+                  </div>
+                  {/*column2*/}
+                  <div className="w-full md:w-[50%] px-3 mb-6 md:mb-0 mt-2">
+                    <div>
+                      <label className=" text-gray-700 text-xs font-bold mb-2">
+                        Did the Student complied with the Admission Policy
+                      </label>
+                      <label className=" text-gray-700 text-xs font-bold mb-2">
+                        If No, not eligible to Avail Free Higher Education for the current Semester/Term
+                      </label>
+                    </div>                                                
+                  </div>
+                  {/**column3 */}
+                  <div className="w-full md:w-[20%] px-3 mb-6 md:mb-0 mt-2">
+                    <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
+                      {/**Radio buttion for Yes compiled */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="yescompiled"
+                          id="yescompiled"
+                          value="Yes" 
+                          onChange={(ev) => setPreregData({ ...preregData, complied_to_admission_policy: ev.target.value })}
+                          />
+                        <label
+                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                          htmlFor="yesavail">Yes
+                        </label>
+                      </div>
+                      {/**Radio buttion for No Compiled */}
+                      <div className='mx-5 mt-2'>
+                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
+                          type="radio"
+                          name="noavail"
+                          id="noavail"
+                          value="No" 
+                          onChange={ev => setcompliedtoadmissionpolicy(ev.target.value)}/>
+                        <label
+                          className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
+                          htmlFor="noavail">No
+                        </label>
+                      </div>
+                  </div>  
+                </div>
+              </div>
           </div>
         </div>
         {/**===========SUMBIT Button============= */}
