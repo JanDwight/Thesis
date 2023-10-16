@@ -43,9 +43,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getuserdetails', [AuthController::class, 'getuserdetails']);
 
     //classes tab
-    Route::post('/addclass', [ClassessController::class, 'addClass']); // <><><> add classes
-    Route::get('/classes', [ClassessController::class, 'index']); //<><><> index classes
-    Route::put('/updateclasses/{id}', [ClassessController::class, 'updateClasses']); //<><><> update user
+    Route::post('/addclass', [ClassesController::class, 'addClass']); // <><><> add classes
+    Route::get('/classes', [ClassesController::class, 'index']); //<><><> index classes
+    Route::put('/updateclasses/{id}', [ClassesController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
     Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
