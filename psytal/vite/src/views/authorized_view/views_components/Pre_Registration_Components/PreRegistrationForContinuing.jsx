@@ -49,7 +49,7 @@ export default function PreRegistrationForContinuing() {
   const [availfreehighereducation, setavailfreehighereducation] = useState('');
   const [voluntarycontribution, setvoluntarycontribution] = useState('');
   const [contributionamount, setcontributionamount] = useState('');
-  const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('none');
+  const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('NO');
   const [typeofstudent, setTypeOfStudent] = useState('');
   const [candidateForGraduadtion, setCandidateForGraduadtion] = useState('');
 

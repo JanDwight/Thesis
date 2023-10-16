@@ -28,8 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
+
+
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
+    Route::put('/posts/{postId}', [PostController::class, 'update']);
+    Route::put('/posts/archive/{postId}', [PostController::class, 'archivePost']);
 
     //manage users tab
     Route::post('/adduser', [AuthController::class, 'adduser']);
@@ -39,14 +43,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getuserdetails', [AuthController::class, 'getuserdetails']);
 
     //classes tab
-    Route::post('/addclass', [ClassesController::class, 'addClass']); // <><><> add classes
-    Route::get('/classes', [ClassesController::class, 'index']); //<><><> index classes
-    Route::put('/updateclasses/{id}', [ClassesController::class, 'updateClasses']); //<><><> update user
-    Route::put('/archiveclasses/{id}', [ClassesController::class, 'archiveclasses']); //<><><> archive class
-
-    //edit class modal
-    Route::get('/show_instructors', [UserController::class, 'show_instructors']); //<><><><><><><>
-
+    Route::post('/addclass', [AddClassController::class, 'addClass']); // <><><> add classes
+    Route::get('/classes', [ClassIndexController::class, 'index']); //<><><> index classes
+    Route::put('/updateclasses/{id}', [UpdateClassController::class, 'updateClasses']); //<><><> update user
+    Route::put('/archiveclasses/{id}', [ArchiveClassesController::class, 'archiveclasses']); //<><><> archive class
     //dashboard tab
     Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
     Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives

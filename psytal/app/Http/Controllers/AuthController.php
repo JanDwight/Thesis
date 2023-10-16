@@ -7,10 +7,12 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AuthController extends Controller
 {
-    public function getuserdetails(){
+    public function getUserDetails() {
         // Retrieve the authenticated user
         $user = Auth::user();
 
@@ -22,11 +24,8 @@ class AuthController extends Controller
         }
     }
 
-    public function adduser(AddUserRequest $request)
-    {
+    public function addUser(AddUserRequest $request) {
         $data = $request->validated();
-
-        /** @var \App\Models\User $user */
 
         $user = User::create([
             'name' => $data['name'],
@@ -34,6 +33,8 @@ class AuthController extends Controller
             'role' => $data['role'],
             'email' => $data['email']
         ]);
+
+        
 
         $token = $user->createToken('main')->plainTextToken;
 
@@ -43,15 +44,14 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(LoginRequest $request)
-    {
+    public function login(LoginRequest $request) {
         $credentials = $request->validated();
         $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
 
         if (!Auth::attempt($credentials, $remember)) {
             return response([
-                'error' => 'The Provided credentials are not correct'
+                'error' => 'The provided credentials are not correct'
             ], 422);
         }
         $user = Auth::user();
@@ -61,24 +61,17 @@ class AuthController extends Controller
 
         return response([
             'user_name' => $userName,
-            'token' =>$token,
-            'role' =>$role
+            'token' => $token,
+            'role' => $role
         ]);
     }
 
-    public function logout(Request $request)
-    {
-
-        /** @var User $user */
-
+    public function logout(Request $request) {
         $user = Auth::user();
-        //Revoke the token that was used to authenticate the current request
-
         $user->currentAccessToken()->delete();
 
         return response([
-            'succes' => true
+            'success' => true
         ]);
     }
-
 }
