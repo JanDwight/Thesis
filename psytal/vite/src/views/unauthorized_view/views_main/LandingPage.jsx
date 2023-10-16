@@ -1,6 +1,7 @@
 import React, { Component }  from 'react'
-import coverVid from "@assets/LandingPage.mp4";
+import coverVid from "@assets/LandingpageBG.mp4";
 import schoolLogo from "@assets/BSUlogo.png";
+import bgcover from "@assets/bgcover.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Carousel from '../../unauthorized_view/views_main/Carousel';
@@ -34,13 +35,13 @@ export default function LandingPage() {
       </div>
 
       <div >
-        <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000"alt="Image 1" />
+        <img src= {bgcover}/>
       </div>
     </div>,
 
     <div className="relative">
-      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="carousel" className="absolute h-50 w-300 object-cover" />
-      <div className="absolute top-0 left-0 md:p-6 text-white text-3xl max-w-full">
+      <img src={bgcover}/>
+      <div className="absolute top-0 left-0 md:p-6 text-white text-3xl w-100%">
         {/* Your content */}
         <div>
          {/* Psychology Program Objectives */}
@@ -67,16 +68,16 @@ export default function LandingPage() {
                 
     <div className="relative">
       <img
-        src={temp1}
+        src={bgcover}
         alt="Image 1"
-        className="w-full h-auto md:w-auto md:h-100 object-cover"/>
+        className="w-100% h-auto md:w-auto md:h-100 object-cover"/>
       </div>                   
   ];
 
   const items2 = [
     /* BSU VISION */
     <div className="relative">
-      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="Your Image" className="w-full" />
+      <img src={bgcover} className="w-100%" />
         <div className="absolute top-0 left-0 md:p-6 text-white text-4xl ">
           <h6 className="text-3xl font-bold mt-3 mx-5 text-center">BSU Vision</h6>
           <div className="max-h-60">
@@ -89,7 +90,7 @@ export default function LandingPage() {
 
     /* BSU MISSION */
     <div className="relative">
-      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000" alt="Your Image" className="w-full" />
+      <img src={bgcover} className="w-100%" />
       <div className="absolute top-0 left-0 md:p-0 text-white text-2xl ">
         <h6 className="text-4xl font-bold mt-3 mx-5 text-center">BSU Mission</h6>
         <div className="max-h-60 ">
@@ -105,7 +106,7 @@ export default function LandingPage() {
     </div>,
                        
     <div className="relative">
-      <img src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000 " alt="Image" className="w-full rounded-lg" />
+      <img src={bgcover} className="w-full rounded-lg" />
       <div className="absolute top-0 left-0 md:p-6 text-white text-3xl max-w-full ">
         {/* COLLEGE GOALS */}
         <div className=' h-60 mx-1 rounded-lg p-2 text-xl '>

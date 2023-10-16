@@ -37,15 +37,11 @@ export default function Classes(){
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Classes</div>
 
-                <div className="flex flex-row">
-                    {/*add class*/}
-                    <button onClick={() => setIsModalOpen(true)} 
-                        className="bg-[#0FE810] rounded-2xl  px-5 text-white font-size">
-                            Add Class
-                    </button>
+                <div className="mt-5 mx-5 flex flex-row justify-between items-baseline">
+                    
                     {/*search*/}
 
-                    <div className="flex">
+                    <div className="flex items-baseline">
                         
                         <div className="my-4 mx-4" id="magnifying_glass">
                           <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -56,15 +52,17 @@ export default function Classes(){
                         <input
                           id="search_bar"
                           type="text"
-                          placeholder={
-                            activeTab === 1
-                              ? 'Search by ID, name, or year & section...'
-                              : 'Search by name or role...'
-                          }
+                          placeholder="Search..."
                           value={filterText}
                           onChange={(event) => setFilterText(event.target.value)}
                           className="h-10 px-6 py-4 border border-gray-300 focus:ring-viridianHue focus:border-viridianHue rounded-lg"
                         ></input>
+
+                        {/*add class*/}
+                    <button onClick={() => setIsModalOpen(true)} 
+                        className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10">
+                            Add Class
+                    </button>
                     </div>
 
                 </div>
