@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Str;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class posts extends Model
 {
@@ -13,11 +13,8 @@ class posts extends Model
     protected $fillable = [
         'title',
         'description',
-        'image',
     ];
 
-   
-    // default id for user_id = logged user
     protected static function boot()
     {
         parent::boot();
@@ -31,6 +28,14 @@ class posts extends Model
             $post->slug = Str::slug($post->title);
         });
     }
-   
-}
 
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class, 'post_id');
+    }
+}

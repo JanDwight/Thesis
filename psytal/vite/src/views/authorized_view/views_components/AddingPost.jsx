@@ -3,10 +3,10 @@ import axiosClient from '../../../axios';
 import image from "@assets/icons8image.png";
 
 export default function AddingPost() {
-  const [error, setError] = useState({ __html: "" });
+  const [error, setError] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedImages, setSelectedImages] = useState([]); // Store the selected images
+  const [selectedImages, setSelectedImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -21,20 +21,18 @@ export default function AddingPost() {
   };
 
   const resetFormAndOpenModal = () => {
-    setError({ __html: "" });
+    setError('');
     setTitle('');
     setDescription('');
-    setSelectedImages([]); // Reset selected images
+    setSelectedImages([]);
     setSuccessMessage(null);
     openModal();
   };
 
-  // Function to handle image upload and preview
   const handleImageUpload = (event) => {
     const files = event.target.files;
-    // Ensure a maximum of three images are selected
     if (selectedImages.length + files.length <= 3 || selectedImages.length === 0) {
-      setSelectedImages([...selectedImages, ...files]); // Add selected images to the array
+      setSelectedImages([...selectedImages, ...files]);
     } else {
       setError('You can select up to three images or leave it empty.');
     }
@@ -42,52 +40,60 @@ export default function AddingPost() {
 
   const onSubmit = async (ev) => {
     ev.preventDefault();
-    setError({ __html: "" });
+    setError('');
     setLoading(true);
 
     try {
+      if (!title || !description) {
+        setError('Please enter both a title and description.');
+        setLoading(false);
+        return;
+      }
+
       const formData = new FormData();
       formData.append('title', title);
       formData.append('description', description);
 
-      // Append selected images to the form data
       selectedImages.forEach((image) => {
         formData.append('images[]', image);
       });
 
-      // Make a POST request to create a post
-      
-      const response = await axiosClient.post('/createposts', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      try {
+        const response = await axiosClient.post('/createposts', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-      console.log(response.data);
+        if (response.status === 200) {
+          console.log(response.data);
+          setTitle('');
+          setDescription('');
+          closeModal();
 
-      // Handle success
-      setTitle('');
-      setDescription('');
-      closeModal();
+          setSuccessMessage({
+            message: 'Post was successful!',
+          });
 
-      setSuccessMessage({
-        message: 'Post was successful!',
-      });
-
-      setTimeout(() => {
-        setSuccessMessage(null);
-        closeModal();
-      }, 2000);
+          setTimeout(() => {
+            setSuccessMessage(null);
+            closeModal();
+          }, 2000);
+        } else {
+          setError('An error occurred while posting.');
+        }
+      } catch (error) {
+        console.error(error);
+        setError('An error occurred while posting.');
+      } finally {
+        setLoading(false);
+      }
     } catch (error) {
       console.error(error);
-
-      // Handle errors
       setError('An error occurred while posting.');
-    } finally {
-      setLoading(false);
+      setLoading(false); // Add this line to ensure loading is set to false in case of an error.
     }
-  }
-
+  };
 
   return (
     <>
@@ -101,6 +107,8 @@ export default function AddingPost() {
             type="text"
             className="w-full rounded-full h-8 bg-white px-6 py-0 border-none focus:ring-green-700 text-xs m-5"
             placeholder="Create Post . . ."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
       </div>
@@ -109,7 +117,7 @@ export default function AddingPost() {
         <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6">
-              <form onSubmit={onSubmit} action="#" method="POST">
+              <form onSubmit={onSubmit}>
                 {/* Attach Photo / File */}
                 <div className="rounded-md bg-transparent p-3 w-30 h-30">
                   <label htmlFor="upload" className="flex flex-row items-center gap-2 cursor-pointer">
@@ -120,14 +128,14 @@ export default function AddingPost() {
                     id="upload"
                     type="file"
                     name="images"
-                    accept="image/*" // Limit to image files
+                    accept="image/*"
                     multiple
-                    onChange={handleImageUpload} // Call the image upload function
+                    onChange={handleImageUpload}
                     className="hidden"
                   />
                 </div>
                 {selectedImages && selectedImages.length > 0 && (
-                  <div className="flex flex-wrap">  
+                  <div className="flex flex-wrap">
                     {selectedImages.map((image, index) => (
                       <img
                         key={index}

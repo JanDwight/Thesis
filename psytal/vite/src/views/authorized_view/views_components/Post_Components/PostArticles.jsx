@@ -15,7 +15,7 @@ export default function PostArticles() {
         // Define a function to fetch posts
         const fetchPosts = async () => {
             try {
-                const response = await axiosClient.get('/posts');
+                const response = await axiosClient.get('/posts'); // Use the correct API endpoint
                 if (response.status === 200) {
                     setPosts(response.data);
                 } else {
@@ -25,7 +25,7 @@ export default function PostArticles() {
                 console.error('Error fetching data: ', error);
             }
         };
-
+    
         fetchPosts();
     }, []);
 
@@ -42,13 +42,13 @@ export default function PostArticles() {
         setSelectedPost(post);
         setArchiveConfirmation(true);
     };
-
+    
     const confirmArchive = async () => {
         try {
-            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`);
+            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`); // Use the correct API endpoint
             if (response.status === 200) {
                 // Post archived successfully, remove it from the list
-                const updatedPosts = posts.filter((post) => post.id !== selectedPost.id);
+                const updatedPosts = posts.filter((p) => p.id !== selectedPost.id);
                 setPosts(updatedPosts);
             } else {
                 throw new Error('Error Network response');
