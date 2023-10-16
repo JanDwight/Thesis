@@ -7,36 +7,36 @@ use App\Http\Requests\CreatePostRequest;
 class PostController extends Controller
 {
     //CREATE NEW POSTS
-    public function createPosts(CreatePostRequest $request)
-{
-    $data = $request->validated();
+    public function createPost(CreatePostRequest $request)
+    {
+        $data = $request->validated();
 
-    $post = auth()->user()->posts()->create([
-        'title' => $data['title'],
-        'description' => $data['description'],
-    ]);
+        // Create the post
+        $post = auth()->user()->posts()->create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+        ]);
 
-    if ($request->hasFile('images')) {
-        $images = $request->file('images');
+        if ($request->hasFile('images')) {
+            // Handle image uploads
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/images', $filename);
 
-        foreach ($images as $image) {
-            $filename = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $filename);
-
-            $imagePath = 'images/' . $filename;
-            $post->images()->create(['image_path' => $imagePath]);
+                $imagePath = 'images/' . $filename;
+                $post->images()->create(['image_path' => $imagePath]);
+            }
         }
-    }
 
-    return response(['post' => $post]);
-}
+        return response(['post' => $posts]);
+    }
 
 
     //DISPLAY POSTS
     public function getPosts()
     {
         // Retrieve posts from the database, including the author's name and associated images
-        $posts = Post::select('posts.*', 'users.name as author_name')
+        $posts = Post::select('posts.*', 'users.name as author_name') //join posts table and users table
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->with('images') // Load associated images
             ->get();

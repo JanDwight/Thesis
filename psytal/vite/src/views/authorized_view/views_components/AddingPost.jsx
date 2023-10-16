@@ -46,16 +46,17 @@ export default function AddingPost() {
     setLoading(true);
 
     try {
-      // Send the selected image and other data to the server
       const formData = new FormData();
       formData.append('title', title);
       formData.append('description', description);
 
-      // Append all selected images to the form data
-      selectedImages.forEach((image, index) => {
-        formData.append(`images[${index}]`, image);
+      // Append selected images to the form data
+      selectedImages.forEach((image) => {
+        formData.append('images[]', image);
       });
 
+      // Make a POST request to create a post
+      
       const response = await axiosClient.post('/createposts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -64,6 +65,7 @@ export default function AddingPost() {
 
       console.log(response.data);
 
+      // Handle success
       setTitle('');
       setDescription('');
       closeModal();
@@ -77,12 +79,15 @@ export default function AddingPost() {
         closeModal();
       }, 2000);
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
+
+      // Handle errors
       setError('An error occurred while posting.');
     } finally {
       setLoading(false);
     }
   }
+
 
   return (
     <>
@@ -122,7 +127,7 @@ export default function AddingPost() {
                   />
                 </div>
                 {selectedImages && selectedImages.length > 0 && (
-                  <div className="flex flex-wrap">
+                  <div className="flex flex-wrap">  
                     {selectedImages.map((image, index) => (
                       <img
                         key={index}
