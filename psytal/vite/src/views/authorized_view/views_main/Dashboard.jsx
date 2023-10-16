@@ -50,6 +50,7 @@ export default function Dashboard() {
           totalEmployees: count_employee,
           totalPosts: count_posts,
           totalLogins: count_employee+count_student,
+          
         };
         
         setDash(dashcountData);

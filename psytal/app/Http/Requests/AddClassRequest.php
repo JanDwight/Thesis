@@ -23,13 +23,13 @@ class AddClassRequest extends FormRequest
     {
         return [
             //must match names with controller
-            'course_title' => 'required|string|max:255',
-            'courseCode' => 'required|string|max:10',
-            'coursetype' => 'required|in:Lecture,Laboratory',
-            'semester' => 'required|in:first,second,midyear',
-            'units' => 'required|integer|in:1,2,3',
-            'year' => 'required|integer|in:1,2,3,4',
-            'section' => 'required|string|size:1|regex:/^[A-Z]$/',
+            'course_title' => 'required|string',
+            'course_code' => 'required|string',
+            'course_type' => 'required|string',
+            'semester' => 'required|string',
+            'units' => 'required|integer',
+            'class_year' => 'required|string',
+            //'section' => 'required|string|size:1|regex:/^[A-Z]$/',
         ];
     }
 }

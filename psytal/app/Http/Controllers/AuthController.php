@@ -7,6 +7,8 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AuthController extends Controller
 {
@@ -31,6 +33,8 @@ class AuthController extends Controller
             'role' => $data['role'],
             'email' => $data['email']
         ]);
+
+        
 
         $token = $user->createToken('main')->plainTextToken;
 
