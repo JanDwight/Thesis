@@ -24,7 +24,6 @@ class AddClassRequest extends FormRequest
         return [
             //must match names with controller
             'course_title' => 'required|string|max:255',
-            'curriculum_checklist_id' => 'required|string|max:255',
             'courseCode' => 'required|string|max:10',
             'coursetype' => 'required|in:Lecture,Laboratory',
             'semester' => 'required|in:first,second,midyear',

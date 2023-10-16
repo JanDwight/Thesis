@@ -86,7 +86,9 @@ handleSaveClassChanges = () => {
       (classes) =>
         classes.course_code.toString().includes(filterText) || // Filter by ID
         classes.course_title.toLowerCase().includes(filterText.toLowerCase()) ||
-        classes.class_year.toLowerCase().includes(filterText.toLowerCase()) ||
+        //classes.class_year.toLowerCase().includes(filterText.toLowerCase()) || doesn't work because value is in in database
+        classes.class_section.toLowerCase().includes(filterText.toLowerCase()) ||
+        classes.semester.toLowerCase().includes(filterText.toLowerCase()) ||
         classes.instructor_name.toLowerCase().includes(filterText.toLowerCase())
     );
 
@@ -96,9 +98,11 @@ handleSaveClassChanges = () => {
           <thead>
             <tr>
               <th className="text-left bg-gray-200 p-2">Course Code</th>
-              <th className="bg-gray-200 text-left p-2">Description</th>
-              <th className="bg-gray-200 text-left p-2">Year/Section</th> 
+              <th className="bg-gray-200 text-left p-2">Course Title</th>
+              <th className="bg-gray-200 text-left p-2">Semester</th>
+              <th className="bg-gray-200 text-left p-2">Year & Section</th> 
               <th className="bg-gray-200 text-left p-2">Instructor</th>
+              <th className="bg-gray-200 text-left p-2">Class Schedule</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
             </tr>
           </thead>
@@ -106,8 +110,10 @@ handleSaveClassChanges = () => {
               <tr key={index} className='odd:bg-green-100'>
                 <td className="text-left p-2">{subject.course_code}</td>
                 <td className="text-left p-2">{subject.course_title}</td>
-                <td className="text-left p-2">{subject.class_year}</td> 
+                <td className="text-left p-2">{subject.semester}</td>
+                <td className="text-left p-2">{subject.class_year + '-' + subject.class_section}</td>
                 <td className="text-left p-2">{subject.instructor_name}</td>
+                <td className="text-left p-2">{subject.course_schedule_time + ' ' + subject.course_schedule_day}</td>
                 <td className="text-left p-2">
                   <div className="flex items-center">
                     <img
@@ -131,7 +137,7 @@ handleSaveClassChanges = () => {
             showModal={this.state.isArchiveClassesOpen}
             onClose={this.handleCloseArchiveClasses}
             subject={selectedClass} // Pass the selected subject to EditClasses
-            // Add other props/functions as needed for archiving
+            //  other props/functions as needed for archiving
           />
         )}
         {this.state.isEditClassesOpen && (

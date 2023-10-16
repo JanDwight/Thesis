@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import AddUsers from '../views_components/AddUsers.jsx';
 import StudentList from '../views_components/StudentList.jsx';
 import EmployeeList from '../views_components/EmployeeList.jsx';
-import StudentsFilter from '../views_components/studentsfilter.jsx';
-import EmployeesFilter from '../views_components/EmployeesFilter.jsx';
 
 {/*Tab Highlight */}
 const Tab = ({ label, isActive, onClick }) => {
@@ -48,7 +46,7 @@ export default function ManageUsers() {
         <div>
           {/**Add Users */}
           <button onClick={handleAddUserClick}
-                  className="bg-[#0FE810] rounded-2xl py-1 px-6 text-white font-size">
+                  className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10">
                     Add User
           </button>
         </div>

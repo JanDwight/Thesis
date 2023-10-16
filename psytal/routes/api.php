@@ -28,8 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
+
+
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
+    Route::put('/posts/{postId}', [PostController::class, 'update']);
+    Route::put('/posts/archive/{postId}', [PostController::class, 'archivePost']);
 
     //manage users tab
     Route::post('/adduser', [AuthController::class, 'adduser']);
