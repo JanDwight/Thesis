@@ -39,6 +39,27 @@ export default function AddCourse({closeModal}) {
         }
       });
 
+      axiosClient.post('/addclass', 
+      {
+        course_title: formData.course_title,
+        year: formData.class_year,
+        semester: formData.semester,
+        courseCode: formData.course_code,
+        units: formData.units,
+        type: formData.course_type,
+        section: null
+      })
+      .then((response) => {
+        // Handle a successful response here
+        console.log('Data sent successfully:', response.data);
+
+        // Close the modal or perform any other action as needed
+        closeModal();
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error('Error sending data:', error);
+      });
     // Close the modal
     closeModal();
   };

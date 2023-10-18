@@ -91,12 +91,9 @@ export default function AddClass({closeModal}) {
   return (
     <>
     <ReactModal appElement={document.getElementById('root')} className="custom-modal"> </ReactModal>
-        {/*For creating sections 1 class = 2 or more sections * 2 if there is both lec and lab 
-        meaning one subject can potentially have 4 classes minimum*/}
         <div className='flex justify-center font-bold text-4xl text-[#525252] mt-1'>
-        Add Class [Create New Section]
+        Add Class (pending delete)
         </div>
-        
         {/*----------*/}
         <div>
           <form onSubmit={handleSubmit}>

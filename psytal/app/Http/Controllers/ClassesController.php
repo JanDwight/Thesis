@@ -37,7 +37,7 @@ class ClassesController extends Controller
             'course_code' => $data['courseCode'], // Update to match the actual column name
             'units' => $data['units'],
             'course_type' => $data['coursetype'],
-            'class_section' => $data['section'], //how to create if there is a new section???
+            'class_section' => $data['section'],
         ]);
         //$token = $class->createToken('main')->plainTextToken;
 
