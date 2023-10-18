@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCurriculumRequest;
+use App\Http\Requests\AddClassRequest;
 use App\Models\curriculum;
 use App\Models\classes;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use App\Models\archive;
 
 class CurriculumController extends Controller
 {
-    public function addCurriculum(AddCurriculumRequest $request)
+    public function addCurriculum(AddCurriculumRequest $request, AddClassRequest $classrequest)
     {
         $data = $request->validated();
 
@@ -27,9 +28,25 @@ class CurriculumController extends Controller
             'preReq' => $data['preReq']
         ]);
 
-        
-       
+        //for classes
+        //creates a new class every time a new course is created
+        $classdata = $classrequest->validated();
 
+        $placeholder = 'TBA';
+        $classes = classes::create([
+            'class_year' => $classdata['class_year'],
+            'semester' => $classdata['semester'],
+            'course_code' => $classdata['course_code'],
+            'course_title' => $classdata['course_title'],
+            'units' => $classdata['units'],
+            'course_type' => $classdata['course_type'],
+            'course_schedule_time' => $placeholder,
+            'course_schedule_day' => $placeholder,
+            'class_section' => $placeholder,
+            'instructor_name' => $placeholder,
+        ]);
+        //placeholder value is replaced in update classes
+        //add class might be removed
 
         return response([
             'curriculum' => $curriculum,
@@ -99,4 +116,23 @@ class CurriculumController extends Controller
         return response()->json(['message' => 'Curriculum updated successfully']);
     }
 
+    //show for add classes dropdown
+    public function show_curriculum()
+    {
+        $subjects = curriculum::select('id', 'course_title', 'course_code', 'units', 'semester', 'course_type', 'class_year')
+        ->get();
+
+        return response()->json($subjects);
+    }
+    //show for add classes autofill
+    public function get_selected($id)
+    {
+        $curriculum = curriculum::find($id, ['course_title', 'course_code', 'units', 'semester', 'course_type', 'class_year']);
+
+        if (!$curriculum) {
+            return response()->json(['message' => 'Curriculum not found'], 404);
+        }
+
+        return response()->json($curriculum);
+    }
 }

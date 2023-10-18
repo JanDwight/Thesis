@@ -32,12 +32,15 @@ class ClassesController extends Controller
 
         $class = classes::create([
             'course_title' => $data['course_title'],
-            'class_year' => $data['year'], // Update to match the actual column name
+            'class_year' => $data['class_year'], // Update to match the actual column name
             'semester' => $data['semester'],
-            'course_code' => $data['courseCode'], // Update to match the actual column name
+            'course_code' => $data['course_code'], // Update to match the actual column name
             'units' => $data['units'],
-            'course_type' => $data['coursetype'],
-            'class_section' => $data['section'],
+            'course_type' => $data['course_type'],
+            'class_section' => $data['class_section'], //how to create if there is a new section???
+            'course_schedule_time' => $data['course_schedule_time'],
+            'course_schedule_day' => $data['course_schedule_day'],
+            'instructor_name' => $data['instructor_name'],
         ]);
         //$token = $class->createToken('main')->plainTextToken;
 

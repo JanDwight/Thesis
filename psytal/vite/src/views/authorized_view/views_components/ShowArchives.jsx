@@ -25,15 +25,15 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     }
   };
 
-  // Handle delete
-  const handleDelete = async () => {
+  // Handle backup
+  const handleBackup = async () => {
     // Get the data of the selected rows
     const selectedItems = selectedRows.map((index) => dataTable[index].id);
-    console.log('Selected Items for delete:', selectedItems);
+    console.log('Selected Items for backup:', selectedItems);
     
     try {
       // Make a POST request to your backend endpoint with selectedItems as the request payload
-      const response = await axiosClient.post('/delete_archives', { selectedItems });
+      const response = await axiosClient.post('/backup_archives', { selectedItems });
 
       // Handle the response from the backend as needed
       console.log('Response from backend:', response.data);
@@ -47,7 +47,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     }
 
     //send selectedItems as array to the controller
-    setSelectedRows([]); // Reset selectedRows when handling delete
+    setSelectedRows([]); // Reset selectedRows when handling BACKUP
     onClose();
   };
 
@@ -128,8 +128,8 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
           <button onClick={handleRestore} className="bg-lime-600 hover:bg-lime-700 text-white px-3 py-1 rounded-full cursor-pointer">
             Restore
           </button>
-          <button onClick={handleDelete} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-full cursor-pointer">
-            Delete
+          <button onClick={handleBackup} className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-full cursor-pointer">
+            Backup
           </button>
         </div>
       </div>
