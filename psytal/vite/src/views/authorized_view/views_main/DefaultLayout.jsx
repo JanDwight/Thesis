@@ -50,7 +50,7 @@ export default function DefaultLayout() {
         setUserRole(null)
       })
   }
-
+  console.log(currentUser)
   return (
     <>
       <div className="min-h-full">
@@ -176,8 +176,8 @@ export default function DefaultLayout() {
                     <UserIcon className=' w-8 h-8 rounded-full text-white bg-black' onClick={() => setIsProfileOpen(true)} />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{currentUser.email}</div>
+                      <div className="text-base font-medium leading-none text-white">{'test'}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{'test'}</div>
                     </div>
                     <button
                       type="button"

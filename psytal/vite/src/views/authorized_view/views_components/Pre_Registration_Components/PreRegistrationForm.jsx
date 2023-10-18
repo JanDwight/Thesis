@@ -43,7 +43,7 @@ export default function PreRegistrationForm() {
   const [availfreehighereducation, setavailfreehighereducation] = useState('');
   const [voluntarycontribution, setvoluntarycontribution] = useState('');
   const [contributionamount, setcontributionamount] = useState('');
-  const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('');
+  const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('No');
 
   //the onSubmit function
   const onSubmit = (ev) => {

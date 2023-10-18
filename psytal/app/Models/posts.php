@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Str;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class posts extends Model
 {
@@ -14,7 +15,6 @@ class posts extends Model
         'description',
     ];
 
-    // defaul id = user
     protected static function boot()
     {
         parent::boot();
@@ -27,5 +27,15 @@ class posts extends Model
             // Generate a slug from the title
             $post->slug = Str::slug($post->title);
         });
+    }
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class, 'post_id');
     }
 }

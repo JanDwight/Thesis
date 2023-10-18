@@ -1,166 +1,180 @@
-import React from 'react'
-import { useState } from 'react';
-import { Menu } from '@headlessui/react';
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
-import announcement from "@assets/Announcement.jpg"
-import axiosClient from '../../../../axios.js';
-import AddingPost from '../AddingPost.jsx';
-import ArchivePost from './ArchivePost.jsx';
-
+import React, { useState, useEffect } from 'react';
+import avatar from "@assets/icons8avatar.png";
+import axiosClient from '../../../../axios';
+import EditPostModal from './EditPostModal';
+import ArchivePost from './ArchivePost';
 
 export default function PostArticles() {
-    {/**---------READ MORE---------- */}
-    const [isShowMore, setIsShowMore] = useState(false);
-    const toggleReadMoreLess = () => {
-        setIsShowMore(!isShowMore);};
+    const [posts, setPosts] = useState([]);
+    const [showMenu, setShowMenu] = useState(null);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [selectedPost, setSelectedPost] = useState(null);
+    const [archiveConfirmation, setArchiveConfirmation] = useState(false);
+
+    useEffect(() => {
+        // Define a function to fetch posts
+        const fetchPosts = async () => {
+            try {
+                const response = await axiosClient.get('/posts'); // Use the correct API endpoint
+                if (response.status === 200) {
+                    setPosts(response.data);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
     
-    {/**---------Calling the ArchivePost--------- */}
-    const [showArchivepost, setShowArchivepost] = useState(false);
-    const [errors, setErrors] = useState({ __html: '' });
-    const onSubmitarchive = async (ev) => {
-        ev.preventDefault();
-        setError({ __html: '' });
+        fetchPosts();
+    }, []);
 
+    const toggleMenu = (index) => {
+        setShowMenu(showMenu === index ? null : index);
+    };
+
+    const openEditModal = (post) => {
+        setSelectedPost(post);
+        setEditModalOpen(true);
+    };
+
+    const handleArchive = (post) => {
+        setSelectedPost(post);
+        setArchiveConfirmation(true);
+    };
+    
+    const confirmArchive = async () => {
         try {
-        const response = await axiosClient.post('/archivepost', { });
-        fetchLinks();
-        setShowLinks(false);
+            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`); // Use the correct API endpoint
+            if (response.status === 200) {
+                // Post archived successfully, remove it from the list
+                const updatedPosts = posts.filter((p) => p.id !== selectedPost.id);
+                setPosts(updatedPosts);
+            } else {
+                throw new Error('Error Network response');
+            }
         } catch (error) {
-        if (error.response) {
-            const finalErrors = Object.values(error.response.data.errors).reduce(
-            (accum, next) => [...accum, ...next],
-            []
-            );
-            setError({ __html: finalErrors.join('<br>') });
-        }
-        console.error(error);
+            console.error('Error archiving the post: ', error);
+        } finally {
+            setArchiveConfirmation(false);
         }
     };
 
-    {/**---------Calling the AddingPost for it to edit hehe---------- */}
-    const [showPosts, setShowPosts]=useState(false);
-    const [error, setError] = useState({ __html: '' });
-    const [title, setTitle] = useState('');
-    const [postmsg, setPostmsg] = useState('');
-
-    const onSubmit = async (ev) => {
-        ev.preventDefault();
-        setError({ __html: '' });
-
-        try {
-        const response = await axiosClient.post('/addpost', { title, postmsg});
-        fetchLinks();
-        setShowLinks(false);
-        } catch (error) {
-        if (error.response) {
-            const finalErrors = Object.values(error.response.data.errors).reduce(
-            (accum, next) => [...accum, ...next],
-            []
-            );
-            setError({ __html: finalErrors.join('<br>') });
-        }
-        console.error(error);
-        }
-    };
-  return (
-    <>
-    {/*Post article */}
-    <div className="px-10 my-4 py-6 bg-gray-200 rounded-2xl shadow-2xl">
-        <div className="flex justify-between items-center">
-            <div>
-                <a className="flex items-center" href="#">
-                    <img className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar"/>
-                    <div>
-                    <h1 className="text-gray-700 font-bold">Khatab wedaa</h1>
-                    <p className="font-light text-gray-600">mar 10, 2019</p>
-                    </div>
-                    
-                </a>
-                
-            </div>
-            
-            <Menu>
-                <Menu.Button>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                    </svg>
-                    <Menu.Items>
-                        <div className='absolute bg-white flex flex-col p-2 origin-center'>
-                            <Menu.Item>
-                            {({ active }) => (
-                                <a
-                                    onClick={() => setShowPosts(true)}
-                                    className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-t-2 border-black`}
-                                    >
-                                    Edit
-                                </a>
-                            )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <a   
-                                        onClick={() => setShowArchivepost(true)}                                 
-                                        className={`${active && 'bg-[#CCEFCC]'} border-b-2 border-black`}
-                                        >
-                                        Archive
-                                    </a>
-                                )}
-                            </Menu.Item>
+    return (
+        <div>
+            {posts.map((post, index) => (
+                <div key={post.id} className="px-10 my-4 py-6 bg-gray-200">
+                    {/* Ellipsis Menu */}
+                    <div
+                        className="relative"
+                        onClick={() => toggleMenu(index)}
+                    >
+                        <div
+                            className="absolute top-5 right-5 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+                        >
+                            <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                         </div>
-                    </Menu.Items>
-                    
-                </Menu.Button>
-                
-            </Menu>
-            
-            
-        </div>
-        
-        <div className="mt-2" onClick={toggleReadMoreLess}>
-            {/**Title of the post */}
-            <a className="text-2xl text-gray-700 font-bold hover:text-gray-600">Announcement: No Classess</a>
-            {/**Attached a photo here */}
-            <div className='flex justify-center items-center py-5'>
-                <img src={announcement} alt='announcement' height={150} width={150} ></img>
-            </div>
-            {/**BODY - Description of the post */}
-            <p className="mt-2" >Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-            Tempora expedita dicta totam aspernatur doloremque. 
-            Excepturi iste iusto eos enim reprehenderit nisi, 
-            accusamus delectus nihil quis facere in modi ratione libero!
-            {isShowMore && (
-                <span>
-                Sapiente exercitationem odio quia, animi eos distinctio tempora, ipsum
-                hic vitae modi eum nostrum id perspiciatis impedit dolores.Sapiente exercitationem odio quia, animi eos distinctio tempora, ipsum
-                hic vitae modi eum nostrum id perspiciatis impedit dolores.Sapiente exercitationem odio quia, animi eos distinctio tempora, ipsum
-                hic vitae modi eum nostrum id perspiciatis impedit dolores.Sapiente exercitationem odio quia, animi eos distinctio tempora, ipsum
-                hic vitae modi eum nostrum id perspiciatis impedit dolores.
-                </span>
+                        {showMenu === index && (
+                            <div className="menu-dropdown absolute top-10 right-2 bg-gray-300 p-2 rounded-md shadow-md">
+                                <div
+                                    className="cursor-pointer hover:bg-green-200 hover:w-full" 
+                                    onClick={() => openEditModal(post)}
+                                >
+                                    Edit
+                                </div>
+                                <div
+                                    className="cursor-pointer hover:bg-green-200 hover:w-full" 
+                                    onClick={() => handleArchive(post.id)}
+                                >
+                                    Archive
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Profile section */}
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <a className="flex items-center" href="#">
+                                <img
+                                    className="mx-4 w-10 h-10 object-cover rounded-full hidden sm-block"
+                                    src={avatar}
+                                    alt="avatar"
+                                />
+                                <div>
+                                    <h1 className="text-gray-700 font-bold">{post.author?.name || 'Author Name'}</h1>
+                                    <p className="font-light text-gray-600">{post.created_at}</p>
+                                </div>
+                            </a>
+                            <div className="content">
+                            <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
+                        </div>
+                        </div>
+                    </div>
+
+                    {/* Description section */}
+                    <div className="flex justify-center items-center py-5">
+                    {post.images && post.images.length > 0 && (
+                        // Conditionally set the image size based on the number of images
+                        post.images.length === 1 ? (
+                            <img
+                                src={`http://localhost:8000/storage/${post.images[0]}`}
+                                alt="Image"
+                                className="m-2 max-w-[400px] max-h-[300px]"
+                            />
+                        ) : (
+                            post.images.map((image, i) => (
+                                <img
+                                    key={i}
+                                    src={`http://localhost:8000/storage/${image}`}
+                                    alt={`Image ${i}`}
+                                    height={200}
+                                    width={200}
+                                    className="mx-2" // Add spacing between images
+                                />
+                            ))
+                        )
+                    )}   
+                    </div>
+                </div>
+            ))}
+
+            {editModalOpen && selectedPost && (
+                <EditPostModal
+                    selectedPost={selectedPost}
+                    closeModal={() => setEditModalOpen(false)}
+                    handleSave={handleSave}
+                />
             )}
-            </p>
-            
-        </div>
-        <div className="flex justify-between items-center mt-4">
-            <a className="text-blue-600 hover:underline" onClick={toggleReadMoreLess}>{isShowMore ? "Read Less" : "Read More"}</a>
-        </div>
-    </div>
 
-    <AddingPost 
-    showPosts={showPosts}
-    onClose={() => setShowPosts(false)}
-    onSubmit={onSubmit}
-    title={title}
-    setTitle={setTitle}
-    postmsg={postmsg}
-    setPostmsg={setPostmsg}
-    />
-
-    <ArchivePost 
-    showArchivepost={showArchivepost}
-    onclose={() => setShowArchivepost(false)}
-    onSubmitarchive={onSubmitarchive}
-    />
-    </>
-  )
+            {archiveConfirmation && (
+                <ArchivePost
+                    showArchivepost={archiveConfirmation}
+                    onClose={() => setArchiveConfirmation(false)}
+                    onSubmitArchive={confirmArchive}
+                />
+            )}
+        </div>
+    );
 }
 
+function ReadMore({ children, maxCharacterCount = 200 }) {
+    const text = children;
+    const [isTruncated, setIsTruncated] = useState(true);
+    const resultString = isTruncated ? text.slice(0, maxCharacterCount) : text;
+
+    function toggleIsTruncated() {
+        setIsTruncated(!isTruncated);
+    }
+
+    return (
+        <p>
+            {resultString}
+            <a onClick={toggleIsTruncated}>
+                {isTruncated ? 'Read More' : 'Read Less'}
+            </a>
+        </p>
+    );
+}

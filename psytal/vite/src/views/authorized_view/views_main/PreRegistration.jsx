@@ -42,9 +42,9 @@ const handleRowClick = (items) => {
       <table className="table w-full table-striped">
         <thead>
           <tr>
-            <th className="text-left p-2">Name</th>
-            <th className="text-left p-2">Date of Submition</th>
-            <th className="text-left p-2">Status</th>
+            <th className="text-left text-gray-700 bg-gray-200 p-2">Name</th>
+            <th className="text-left text-gray-700 bg-gray-200 p-2">Date of Submition</th>
+            <th className="text-left text-gray-700 bg-gray-200 p-2">Status</th>
           </tr>
         </thead>
 

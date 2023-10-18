@@ -2,44 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreatePostRequest; // Import the custom request
+use App\Models\posts; 
+use App\Models\PostImage;
+use Illuminate\Support\Str;
+use App\Http\Requests\CreatePostRequest;
 
 class PostController extends Controller
 {
-    public function createPost(CreatePostRequest $request)
+    public function createPosts(CreatePostRequest $request)
     {
-       
-    $data = $request->validated();
+        $data = $request->validated();
 
-    // $post = auth()->user()->posts()->create([
-    //    'title' => $data['title'],
-    //    'description' => $data['description'],
+        // Create a new post
+        $post = auth()->user()->posts()->create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+        ]);
 
-    // Create a new post
-    $post = auth()->user()->posts()->create([
-        'title' => $data['title'],
-        'description' => $data['description'],
-    ]);
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
 
-    return response(['post' => $post]);
-    
-    }
+            foreach ($images as $image) {
+                // Generate a unique filename for each image
+                $filename = time() . '_' . $image->getClientOriginalName();
 
-    public function index()
-    {
-       // Retrieve all logs
-        $posts = posts::all();
+                // Move the image to the 'public' disk under the 'images' directory
+                $image->storeAs('public/images', $filename);
 
-        return response()->json($posts);
-       
-    }
+                // Save the file path in the 'image_path' field in the 'post_images' table
+                $imagePath = 'images/' . $filename;
 
-    public function count_posts()
-    {
-        $postCount = (int)posts::count();
-        return response()->json($postCount);
+                $post->images()->create(['image_path' => $imagePath]);
+            }
+        }
+
+        return response(['post' => $post]);
     }
 }
