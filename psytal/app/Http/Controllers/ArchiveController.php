@@ -83,7 +83,6 @@ class ArchiveController extends Controller
             ->get();
 
         // Create a backup file on the desktop
-        //$backupFileName = 'psytal_backup_' . date('Y-m-d') . '.txt'; //change to SQL or JSON if needed
         $backupFileName = 'psytal_backup_' . date('Y-m-d_H-i-s') . '.txt'; //change to SQL or JSON if needed
         $backupFilePath = public_path() . '/' . $backupFileName;
 
@@ -91,10 +90,8 @@ class ArchiveController extends Controller
         $backupFile = fopen($backupFilePath, 'w');
 
         if ($backupFile === false) {
-            // Handle the case where the backup file cannot be opened
             return response()->json(['message' => 'Error opening the backup file'], 500);
         }
-
         // Process the archived items and write their contents to the backup file
         foreach ($archivedItems as $archivedItem) {
             // Determine the source model class based on 'item_type' and 'origin_table'
@@ -109,6 +106,7 @@ class ArchiveController extends Controller
                     // Write the contents of the source item to the backup file
                     fwrite($backupFile, "Backup of item with ID: {$archivedItem->item_id}\n");
                     fwrite($backupFile, "Contents: " . json_encode($sourceItem) . "\n");
+                    fwrite($backupFile, "Source: " . json_encode($modelClass) . "\n");
                     //database = origin_table
                     //model = item_type
                     //name = item_name

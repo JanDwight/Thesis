@@ -6,6 +6,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditLinks from '../views_components/EditLinks.jsx';
 import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
+import { useStateContext } from '../../../context/ContextProvider';
 
 export default function Links() {
   //Calling the Archivelinks
@@ -13,7 +14,7 @@ export default function Links() {
   const [selectedLink, setSelectedLink] = useState('');
   const [isAchiveModalOpen, setIsArchiveModalOpen] = useState(false);
   const [filterText, setFilterText] = useState(''); //for search
-
+  const {userRole} = useStateContext('');
 
     const addLinks = async (linkData) => {
       try {
@@ -103,11 +104,14 @@ export default function Links() {
           />
         
           {/* Add Links button */}
-          <button onClick={() =>  setIsModalOpen(true)}
-            className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10"
-          >
-            Add Links
-          </button>
+          {userRole === 1 && ( // Check if userRole is equal to 1
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10"
+        >
+          Add Links
+        </button>
+      )}
           </div>            
         </div>
       </div>
