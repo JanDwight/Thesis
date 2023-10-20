@@ -191,5 +191,187 @@ class UserSeeder extends Seeder
         ],
         ];
         DB::table('links')->insert($links);
+
+        $curriculum = [
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'Psych 101	',
+            'course_title' => 'Introduction to Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'SS 21',
+            'course_title' => 'Understanding the Self',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'Eng 21',
+            'course_title' => 'Purposive Communication',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'Eng 21',
+            'course_title' => 'Contemporary World',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'Math 21',
+            'course_title' => 'Mathematics in the Modern Word',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'SS 24',
+            'course_title' => 'Ethics',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'PATHFIT 1',
+            'course_title' => 'Movement Competency Training',
+            'units' => '2',
+            'hoursperWeek' => '2',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '1st',
+            'course_code' => 'NSTP 21',
+            'course_title' => 'National Service Training Program 1',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ]
+        ];
+        DB::table('curricula')->insert($curriculum);
+
+        $classes = [
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'Psych 101	',
+                'course_title' => 'Introduction to Psychology',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'SS 21',
+                'course_title' => 'Understanding the Self',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'Eng 21',
+                'course_title' => 'Purposive Communication',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'Eng 21',
+                'course_title' => 'Contemporary World',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'Math 21',
+                'course_title' => 'Mathematics in the Modern Word',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'SS 24',
+                'course_title' => 'Ethics',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'PATHFIT 1',
+                'course_title' => 'Movement Competency Training',
+                'units' => '2',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '1st',
+                'course_code' => 'NSTP 21',
+                'course_title' => 'National Service Training Program 1',
+                'units' => '3',
+                'course_type' => 'Lec',
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA'
+            ]
+            ];
+            DB::table('classes')->insert($classes);
     }
 }
