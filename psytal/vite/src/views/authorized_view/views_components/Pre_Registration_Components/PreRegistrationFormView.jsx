@@ -818,7 +818,7 @@ export default function PreRegistrationFormView({prereg}) {
                                 name="mediumlvl"
                                 id="mediumlvl"
                                 value="category2" 
-                                checked={preregData.technology_level === 'category1'}
+                                checked={preregData.technology_level === 'category2'}
                                 onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
                                 />
                         <label
@@ -835,7 +835,7 @@ export default function PreRegistrationFormView({prereg}) {
                                 name="lowlvl"
                                 id="lowlvl"
                                 value="category3" 
-                                checked={preregData.technology_level === 'category1'}
+                                checked={preregData.technology_level === 'category3'}
                                 onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
                                 />
                         <label
