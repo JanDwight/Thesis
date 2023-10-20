@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axiosClient from '../../../axios.js';
 
 export default function ShowLogTable({ showModal, onClose, dataTable}) {
 
