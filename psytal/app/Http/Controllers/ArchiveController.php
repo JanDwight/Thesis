@@ -83,7 +83,8 @@ class ArchiveController extends Controller
             ->get();
 
         // Create a backup file on the desktop
-        $backupFileName = 'psytal_backup_' . date('Y-m-d') . '.txt'; //change to SQL or JSON if needed
+        //$backupFileName = 'psytal_backup_' . date('Y-m-d') . '.txt'; //change to SQL or JSON if needed
+        $backupFileName = 'psytal_backup_' . date('Y-m-d_H-i-s') . '.txt'; //change to SQL or JSON if needed
         $backupFilePath = public_path() . '/' . $backupFileName;
 
         // Open the backup file for writing
