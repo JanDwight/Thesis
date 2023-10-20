@@ -48,8 +48,9 @@ export default function Dashboard() {
         const dashcountData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
-          totalPosts: count_posts,
+          totalPosts: 'IP', //replace with 'count_posts' once posts are done
           totalLogins: count_employee+count_student,
+          
         };
         
         setDash(dashcountData);

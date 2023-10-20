@@ -47,11 +47,17 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/classes', [ClassesController::class, 'index']); //<><><> index classes
     Route::put('/updateclasses/{id}', [ClassesController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ClassesController::class, 'archiveclasses']); //<><><> archive class
+
+    //edit/add class modal
+    Route::get('/show_instructors', [UserController::class, 'show_instructors']); //<><><><><><><>
+    Route::get('/show_curriculum', [CurriculumController::class, 'show_curriculum']); //<><><><><><><>
+    Route::get('/get_selected/{id}', [CurriculumController::class, 'get_selected']); //<><><><><><><>
+
     //dashboard tab
     Route::get('/show_logs', [LogsController::class, 'index']); //<><><> show for logs
     Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
     Route::post('/return_archives', [ArchiveController::class, 'returnArchive']);//<><><> archive restore
-    Route::post('/delete_archives', [ArchiveController::class, 'deleteArchive']);//<><><> archive delete [permanent]
+    Route::post('/backup_archives', [ArchiveController::class, 'backupArchive']);//<><><> archive delete but store to file
     //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserController::class, 'count_students']); //<><><> count students from users table

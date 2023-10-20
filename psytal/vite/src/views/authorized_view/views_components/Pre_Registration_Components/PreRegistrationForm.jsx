@@ -37,7 +37,7 @@ export default function PreRegistrationForm() {
   const [relationship, setRelationship] = useState('');
   const [healthfacilityregistered, sethealthfacilityregistered] = useState('');
   const [parenthealthfacilitydependent, setparenthealthfacilitydependent] = useState('');
-  const [vaccinationstatus, setvaccinationstatus] = useState('');
+  const [vaccinationstatus, setvaccinationstatus] = useState('Not Vaccinated');
   const [technologylevel, settechnologylevel] = useState('');
   const [digitalliteracy, setdigitalliteracy] = useState('');
   const [availfreehighereducation, setavailfreehighereducation] = useState('');

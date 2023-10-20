@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\archive;
+use Illuminate\Support\Facades\File; //<><><><><>
 
 class ArchiveController extends Controller
 {
@@ -69,43 +70,65 @@ class ArchiveController extends Controller
    {
        //
    }
-   // DELETE DELETE DELETE
-   public function deleteArchive(Request $request)
+   // BACKUP BACKUP BACKUP
+   public function backupArchive(Request $request)
    {
-        try {
-            // Retrieve the array of selected item IDs from the request payload
-            $selectedItems = $request->input('selectedItems');
-    
-            // Query the archives table to select specific columns
-            $archivedItems = archive::whereIn('id', $selectedItems)
-                ->select('id', 'item_id', 'item_name', 'item_type', 'origin_table')
-                ->get();
-    
-            // Process the archived items and restore them to their source tables
-            foreach ($archivedItems as $archivedItem) {
-                // Determine the source model class based on 'item_type' and 'origin_table'
-                $modelClass = 'App\\Models\\' . ucfirst($archivedItem->item_type);
-    
-                // Check if the model class exists
-                if (class_exists($modelClass)) {
-                    // Use 'item_id' to find the item in the source table
-                    $sourceItem = $modelClass::find($archivedItem->item_id);
-    
-                    // If the source item is found, you can update it as needed
-                    if ($sourceItem) {
-                        // Update the 'archived' column to 0 in the source item
-                        $sourceItem->delete();
-                    }
+    try {
+        // Retrieve the array of selected item IDs from the request payload
+        $selectedItems = $request->input('selectedItems');
+
+        // Query the archives table to select specific columns
+        $archivedItems = archive::whereIn('id', $selectedItems)
+            ->select('id', 'item_id', 'item_name', 'item_type', 'origin_table')
+            ->get();
+
+        // Create a backup file on the desktop
+        $backupFileName = 'psytal_backup_' . date('Y-m-d_H-i-s') . '.txt'; //change to SQL or JSON if needed
+        $backupFilePath = public_path() . '/' . $backupFileName;
+
+        // Open the backup file for writing
+        $backupFile = fopen($backupFilePath, 'w');
+
+        if ($backupFile === false) {
+            return response()->json(['message' => 'Error opening the backup file'], 500);
+        }
+        // Process the archived items and write their contents to the backup file
+        foreach ($archivedItems as $archivedItem) {
+            // Determine the source model class based on 'item_type' and 'origin_table'
+            $modelClass = 'App\\Models\\' . ucfirst($archivedItem->item_type);
+
+            // Check if the model class exists
+            if (class_exists($modelClass)) {
+                // Use 'item_id' to find the item in the source table
+                $sourceItem = $modelClass::find($archivedItem->item_id);
+
+                if ($sourceItem) {
+                    // Write the contents of the source item to the backup file
+                    fwrite($backupFile, "Backup of item with ID: {$archivedItem->item_id}\n");
+                    fwrite($backupFile, "Contents: " . json_encode($sourceItem) . "\n");
+                    fwrite($backupFile, "Source: " . json_encode($modelClass) . "\n");
+                    //database = origin_table
+                    //model = item_type
+                    //name = item_name
+
+                    // Update the 'archived' column to 0 in the source item
+                    //$sourceItem->delete(); //uncomment after all functions are done
                 }
             }
-
-            // Force delete the selected items from the 'archives' table
-            archive::whereIn('id', $selectedItems)->forceDelete();
-            return response()->json(['message' => 'Items deleted successfully', 'data' => $archivedItems]);
-        } catch (\Exception $e) {
-            // Handle exceptions, e.g., log the error
-            return response()->json(['message' => 'Error deleting items'], 500);
         }
+
+        // Close the backup file
+        fclose($backupFile);
+
+        // Force delete the selected items from the 'archives' table
+        //archive::whereIn('id', $selectedItems)->forceDelete(); //uncomment after all functions are done
+
+        // Respond with a success message
+        return response()->json(['message' => 'Items backed up and deleted successfully']);
+    } catch (\Exception $e) {
+        // Handle exceptions, e.g., log the error
+        return response()->json(['message' => 'Error processing items'], 500);
+    }
    }
    // RESTORE RESTORE RESTORE
    public function returnArchive(Request $request)

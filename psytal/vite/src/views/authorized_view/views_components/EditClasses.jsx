@@ -6,12 +6,10 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
   const course_code = subject.course_code;
   const section_old = subject.class_section;
   const instructor_old = subject.instructor_name;
-  const date_old = subject.course_schedule_day;
-  const time_old = subject.course_schedule_time;
+
   const [instructor_name, setInstructor] = useState(instructor_old);
   const [class_section, setClass_Section] = useState(section_old);
-  const [course_schedule_time, setSched_time] = useState(time_old);
-  const [course_schedule_day, setSched_day] = useState(date_old);
+  
   
   const [instructorsTable, setInstructorsTable] = useState([]);
 
@@ -52,8 +50,6 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
       // Assuming classId is still the same
       instructor_name,
       class_section: class_section.toUpperCase(),
-      course_schedule_time,
-      course_schedule_day,
     };
   
     axiosClient
@@ -141,40 +137,6 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
                       required
                     />
               </div>
-              <div>
-                <label className="block text-sm text-gray-700 text-center  mt-2 mb-2">
-                  Class Schedule
-                </label>
-              </div>
-              <div className="mt-2 flex flex-col-2 justify-between">
-                <label htmlFor="time" className="block text-sm text-gray-700">
-                    Time:
-                </label>
-                <input
-                    id="time"
-                    type="text"
-                    name="time"
-                    //ignore for now
-                    placeholder={time_old}
-                    onChange={(ev) => setSched_time(ev.target.value)}
-                    className="block w-[94%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text"
-                />
-              </div>
-              <div className="mt-2 flex flex-col-2 justify-between">
-                  <label htmlFor="day" className="block text-sm text-gray-700">
-                      Day:
-                  </label>
-                  <input
-                      id="day"
-                      type="text"
-                      name="day"
-                      //ignore for now
-                      placeholder={date_old}
-                      onChange={(ev) => setSched_day(ev.target.value)}
-                      className="block w-[94%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text"
-                  />
-              </div>
-
               <div className="text-center flex justify-end my-7">
                 <button onClick={handleSubmit} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Save Changes

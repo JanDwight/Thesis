@@ -21,8 +21,6 @@ class classes extends Model
         'course_title',
         'units',
         'course_type',
-        'course_schedule_time',
-        'course_schedule_day',
         'class_section',
         'instructor_name',
         'archived', // Add the 'archived' field to the fillable array <><><>
