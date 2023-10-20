@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('course_title');
             $table->smallInteger('units');
             $table->string('course_type');
-            $table->string('course_schedule_time')->nullable();
-            $table->string('course_schedule_day')->nullable();
             $table->string('class_section')->nullable();
             $table->string('instructor_name')->nullable();
             $table->boolean('archived')->default(false); // Add the 'archived' column <><>><>

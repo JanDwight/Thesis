@@ -38,8 +38,6 @@ class ClassesController extends Controller
             'units' => $data['units'],
             'course_type' => $data['course_type'],
             'class_section' => $data['class_section'], //how to create if there is a new section???
-            'course_schedule_time' => $data['course_schedule_time'],
-            'course_schedule_day' => $data['course_schedule_day'],
             'instructor_name' => $data['instructor_name'],
         ]);
         //$token = $class->createToken('main')->plainTextToken;
@@ -56,8 +54,6 @@ class ClassesController extends Controller
         $validatedData = $request->validate([
             'instructor_name' => 'required|string|max:255',
             'class_section' => 'required|string|max:255',
-            'course_schedule_time' => 'required|string|max:255',
-            'course_schedule_day' => 'required|string|max:255',
         ]);
 
         // Retrieve the user based on the provided ID

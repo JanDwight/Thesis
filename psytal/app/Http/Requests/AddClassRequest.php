@@ -22,17 +22,14 @@ class AddClassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //must match names with controller
             'course_title' => 'required|string',
             'course_code' => 'required|string',
             'course_type' => 'required|string',
             'semester' => 'required|string',
             'units' => 'required|integer',
             'class_year' => 'required|string',
-            'class_section' => 'required|string',
-            'course_schedule_time' => 'required|string',
-            'course_schedule_day' => 'required|string',
-            'instructor_name' => 'required|string',
+            'class_section' => 'string', //'required|string',
+            'instructor_name' => 'string', //'required|string',
             //'section' => 'required|string|size:1|regex:/^[A-Z]$/',
         ];
     }

@@ -30,6 +30,7 @@ class CurriculumController extends Controller
 
         //for classes
         //creates a new class every time a new course is created
+
         $classdata = $classrequest->validated();
 
         $placeholder = 'TBA';
@@ -40,8 +41,6 @@ class CurriculumController extends Controller
             'course_title' => $classdata['course_title'],
             'units' => $classdata['units'],
             'course_type' => $classdata['course_type'],
-            'course_schedule_time' => $placeholder,
-            'course_schedule_day' => $placeholder,
             'class_section' => $placeholder,
             'instructor_name' => $placeholder,
         ]);

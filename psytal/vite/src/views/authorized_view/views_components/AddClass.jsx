@@ -7,9 +7,6 @@ export default function AddClass({closeModal}) {
   const [selected_subject, setSelectedSubject] = useState(''); // state for the selected subject
   const [class_section, setSection] = useState(''); // Define state for section
   const [instructor_name, setInstructor] = useState(''); // Define state for instructor
-  const [course_schedule_time, setTime] = useState(''); // Define state for sched time
-  const [course_schedule_day, setDay] = useState(''); // Define state for sched day
-
   const [subjectData, setSubjectData] = useState([]);
   const [instructorData, setInstructorData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
@@ -89,8 +86,6 @@ export default function AddClass({closeModal}) {
         course_id: selected_subject,
         class_section,
         instructor_name,
-        course_schedule_time,
-        course_schedule_day,
       };
       console.log('Selected:', formData);
   
@@ -257,42 +252,6 @@ export default function AddClass({closeModal}) {
               </select>
             
             </div>
-            <div>
-              <label className="block text-sm text-gray-700 text-center font-bold mt-2 mb-2">
-                Class Schedule
-              </label>
-            </div>
-            <div className="mt-2 flex flex-col-2 justify-between">
-              <label htmlFor="time" className="block text-sm text-gray-700 text-center font-bold mb-2">
-                  Time:
-              </label>
-              <input
-                  id="time"
-                  type="text"
-                  name="time"
-                  //ignore for now
-                  placeholder='time'
-                  onChange={(e) => setTime(e.target.value)}
-                  className="block w-[49%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text"
-                  required
-              />
-            </div>
-
-          <div className="mt-2 flex flex-col-2 justify-between">
-              <label htmlFor="day" className="block text-sm text-gray-700 text-center font-bold mb-2">
-                  Days:
-              </label>
-              <input
-                  id="day"
-                  type="text"
-                  name="day"
-                  //ignore for now
-                  placeholder='day'
-                  onChange={(e) => setDay(e.target.value)}
-                  className="block w-[49%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text"
-                  required
-              />
-          </div>
             <div className="grid grid-row-2 justify-center">
                 <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
                   Add Class
