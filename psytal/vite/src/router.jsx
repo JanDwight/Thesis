@@ -155,7 +155,7 @@ const router = createBrowserRouter([
 
             {
                 path: 'linksforstudent',
-                element: <LinksForStudent />
+                element: <Links />
             }
 
             
