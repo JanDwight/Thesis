@@ -14,7 +14,7 @@ axiosClient.interceptors.response.use(response => {
     return response;
 }, error => {
     if (error.response && error.response.status === 401) {
-        router.navigate('/login')
+        router.navigate('guest/login')
         return error;
     }
     throw error;
