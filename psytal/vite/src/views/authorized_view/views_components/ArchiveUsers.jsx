@@ -14,6 +14,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
 
       // Close the modal
       onClose();
+      window.location.reload();
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving user:', error);

@@ -96,6 +96,7 @@ export default function AddClass({closeModal}) {
 
         // Close the modal or perform any other action as needed
         closeModal();
+        window.location.reload();
       })
       .catch((error) => {
         // Handle errors here
@@ -152,7 +153,6 @@ export default function AddClass({closeModal}) {
                 id="course_code"
                 type="text"
                 name="course_code"
-                //value=retrieved item
                 placeholder='Course Code'
                 value={selectedData.course_code}
                 disabled // makes field uneditable
@@ -165,7 +165,6 @@ export default function AddClass({closeModal}) {
                 id="course_type"
                 type="text"
                 name="course_type"
-                //value=retrieved item
                 placeholder='Course Type'
                 value={selectedData.course_type}
                 disabled // makes field uneditable
@@ -180,7 +179,6 @@ export default function AddClass({closeModal}) {
                 id="units"
                 type="text"
                 name="units"
-                //value=retrieved item
                 placeholder='Units'
                 value={selectedData.units}
                 disabled // makes field uneditable
@@ -193,7 +191,6 @@ export default function AddClass({closeModal}) {
                 id="semester"
                 type="text"
                 name="semester"
-                //value=retrieved item
                 placeholder='Semester'
                 value={selectedData.semester}
                 disabled // makes field uneditable
@@ -208,7 +205,6 @@ export default function AddClass({closeModal}) {
                 id="yrlvl"
                 type="text"
                 name="yrlvl"
-                //value=retrieved item
                 placeholder='Year Level'
                 value={selectedData.class_year}
                 disabled // makes field uneditable
@@ -223,8 +219,7 @@ export default function AddClass({closeModal}) {
                       type="text"
                       maxLength={1}
                       placeholder='Section'
-                      //value={section} retrieved item
-                      onChange={(ev) => setSection(ev.target.value)}
+                      onChange={(ev) => setSection(ev.target.value.toUpperCase())}
                       className="block w-[49%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                       required
                     />
