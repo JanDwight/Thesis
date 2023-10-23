@@ -4,13 +4,6 @@ import axiosClient from '../../../axios.js';
 export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const [selectedRows, setSelectedRows] = useState([]);
 
-  const roleMapping = {
-    1: 'Admin',
-    2: 'Staff',
-    3: 'Instructor',
-    4: 'Student',
-  };
-
   if (!showModal) {
     return null;
   }
@@ -41,14 +34,13 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
       // Reset selectedRows when handling restore
       setSelectedRows([]);
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error restoring items:', error);
       // Handle errors
     }
 
     //send selectedItems as array to the controller
-    setSelectedRows([]); // Reset selectedRows when handling BACKUP
-    onClose();
   };
 
   const handleRestore = async () => {
@@ -66,6 +58,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
       // Reset selectedRows when handling restore
       setSelectedRows([]);
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error restoring items:', error);
       // Handle errors
@@ -75,6 +68,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const handleCloseModal = () => {
     setSelectedRows([]);
     onClose();
+    window.location.reload();
   };
 
   return (
@@ -115,7 +109,6 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
                   <td>{item.item_name}</td>
                   <td>{item.origin_table}</td>
                   <td>{item.archiver_name}</td>
-                  {/*<td>{roleMapping[item.archiver_role]}</td> uncomment when everything is fixed-rem*/}
                   <td>{item.archiver_role}</td>
                   <td>{item.archived_at}</td>
                 </tr>

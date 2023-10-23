@@ -57,6 +57,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
       .then((response) => {
         console.log('Class Updated Successfully');
         onSave();
+        window.location.reload();
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -132,7 +133,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
                       type="text"
                       maxLength={1}
                       placeholder={section_old}
-                      onChange={(ev) => setClass_Section(ev.target.value)}
+                      onChange={(ev) => setClass_Section(ev.target.value.toUpperCase())}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" 
                       required
                     />

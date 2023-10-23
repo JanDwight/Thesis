@@ -9,20 +9,20 @@ export default function AddUsers({ showModal, onClose}) {
   const [fullName, setFullName] = useState(''); // Required by AddUsers
   const [includeNumbers] = useState(true); // Required by AddUsers
   const [includeSymbols] = useState(true); // Required by AddUsers
-  const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
-  const [email, setEmail] = useState(null); // Required by AddUsers
+  const [selectedRole, setSelectedRole] = useState(''); // Required by AddUsers
+  const [email, setEmail] = useState(''); // Required by AddUsers
   const [error, setError] = useState('');
 
   const resetForm = () => {
     setFullName('');
     setEmail('');
-    setSelectedRole('1');
+    setSelectedRole('');
   };
   
   //add users onsubmit
   const onSubmit = (ev) => {
     ev.preventDefault();
-    setError({ __html: 'Error Detected' });
+    setError('Error Detected');
 
     //password generator
     const numbers = '0123456789';
@@ -53,24 +53,30 @@ export default function AddUsers({ showModal, onClose}) {
     }
     
     //---------------------------------------------------------------------------
+    console.log('P-word:', password);
+    console.log('Name:', fullName);
+    console.log('Role:', selectedRole);
+    console.log('Email:', email);
+
+    const formData = {
+      name: fullName,//these are errors
+      password: password,
+      role: selectedRole,//'selectedRole',//these are errors
+      email: email,//these are errors
+      
+    };
 
     axiosClient
-      .post('/adduser', { name: fullName, password: password, role: selectedRole, email}) // Back end, needs edit
+      .post('/adduser', formData) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
         // Close the modal
         onClose();
         //reset feilds
         resetForm();
+        window.location.reload();
       })
       .catch((error) => {
-        if (error.response) {
-          const finalErrors = Object.values(error.response.data.errors).reduce(
-            (accum, next) => [...accum, ...next],
-            []
-          );
-          setError({ __html: finalErrors.join('<br>') });
-        }
         console.error(error);
       });
   };  
@@ -102,7 +108,6 @@ export default function AddUsers({ showModal, onClose}) {
                 autoComplete="fullname"
                 placeholder="Full Name"
                 required
-                value={fullName}
                 onChange={ev => setFullName(ev.target.value)}
                 className="block w-full rounded-md border-0 py-2 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder-text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-5"
               />
@@ -115,7 +120,6 @@ export default function AddUsers({ showModal, onClose}) {
                 autoComplete="email"
                 placeholder="Email"
                 required
-                value={email}
                 onChange={ev => setEmail(ev.target.value)}
                 className="block w-full rounded-md border-0 py-2 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder-text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-5"
               />
@@ -126,8 +130,7 @@ export default function AddUsers({ showModal, onClose}) {
             <select
               className="block w-full rounded-md border-0 py-2 text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:leading-5"
               id="accounttype"
-              value={selectedRole}
-              onChange={setSelectedRole}
+              onChange={ev => setSelectedRole(ev.target.value)}
             >
               <option value="1">Admin</option>
               <option value="2">Staff</option>

@@ -14,6 +14,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
 
       // Close the modal
       onClose();
+      window.location.reload();
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving class:', error);
@@ -37,10 +38,9 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
                 id="subject"
                 type="subject"
                 name="subject"
-                //value="Class 01"
-                value={subject.course_title}
+                value={subject.course_code + ' - ' + subject.course_title}
                 disabled // makes field uneditable
-                className="block w-1/3 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                className="block w-1/2 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />
             </div>
             <br></br>

@@ -26,21 +26,7 @@ class EmployeeList extends Component {
         // Filter the data to only include roles 1, 2, and 3 (admin, staff and instructor)
         const filteredData = data.filter(user => [1, 2, 3].includes(user.role));
 
-        // Define a mapping object to map numeric roles to strings
-        const roleMapping = {
-          1: 'Admin',
-          2: 'Staff',
-          3: 'Instructor',
-          4: 'Student',
-        };
-
-        // Map the roles to strings
-        const mappedData = filteredData.map(user => ({
-          ...user,
-          role: roleMapping[user.role] || 'Unknown', // Default to 'Unknown' if role is not found in mapping
-        }));
-
-        this.setState({ data: mappedData });
+        this.setState({ data: filteredData });
 
       })
       .catch((error) => {
@@ -98,7 +84,7 @@ class EmployeeList extends Component {
       (employee) =>
         employee.id.toString().includes(filterText) || // Filter by ID
         employee.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        employee.role.toLowerCase().includes(filterText.toLowerCase())
+        employee.role.toString().includes(filterText.toLowerCase())
     );
 
     return (

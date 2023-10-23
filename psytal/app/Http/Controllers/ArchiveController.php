@@ -83,8 +83,8 @@ class ArchiveController extends Controller
             ->get();
 
         // Create a backup file on the desktop
-        $backupFileName = 'psytal_backup_' . date('Y-m-d_H-i-s') . '.txt'; //change to SQL or JSON if needed
-        $backupFilePath = public_path() . '/' . $backupFileName;
+        $backupFileName = 'psytal_backup_' . date('Y-m-d_H-i-s') . '.txt';
+        $backupFilePath = public_path() . '/' . $backupFileName; //change to the desktop/device of the admin???
 
         // Open the backup file for writing
         $backupFile = fopen($backupFilePath, 'w');
@@ -104,15 +104,11 @@ class ArchiveController extends Controller
 
                 if ($sourceItem) {
                     // Write the contents of the source item to the backup file
-                    fwrite($backupFile, "Backup of item with ID: {$archivedItem->item_id}\n");
+                    fwrite($backupFile, "Backup From Table: {$archivedItem->origin_table}\n");
                     fwrite($backupFile, "Contents: " . json_encode($sourceItem) . "\n");
-                    fwrite($backupFile, "Source: " . json_encode($modelClass) . "\n");
-                    //database = origin_table
-                    //model = item_type
-                    //name = item_name
 
                     // Update the 'archived' column to 0 in the source item
-                    //$sourceItem->delete(); //uncomment after all functions are done
+                    $sourceItem->delete(); //uncomment after all functions are done
                 }
             }
         }
@@ -121,7 +117,7 @@ class ArchiveController extends Controller
         fclose($backupFile);
 
         // Force delete the selected items from the 'archives' table
-        //archive::whereIn('id', $selectedItems)->forceDelete(); //uncomment after all functions are done
+        archive::whereIn('id', $selectedItems)->forceDelete(); //uncomment after all functions are done
 
         // Respond with a success message
         return response()->json(['message' => 'Items backed up and deleted successfully']);

@@ -38,6 +38,7 @@ class UserController extends Controller
     public function show_instructors()
     {
         $instructors = User::where('role', 3)
+        ->where('archived', 0)
         ->select('id', 'name')
         ->get();
 
