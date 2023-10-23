@@ -5,7 +5,6 @@ import Login from "./views/unauthorized_view/views_main/Login";
 import GuestLayout from "./views/unauthorized_view/views_main/GuestLayout";
 import DefaultLayout from "./views/authorized_view/views_main/DefaultLayout";
 import Home from "./views/authorized_view/views_main/Home";
-import Accounts from "./views/authorized_view/views_main/Accounts"
 import PreRegistration from "./views/authorized_view/views_main/PreRegistration"
 import Links from "./views/authorized_view/views_main/Links";
 import AdminLayout from "./views/authorized_view/views_main/AdminLayout";
@@ -13,7 +12,6 @@ import Dashboard from "./views/authorized_view/views_main/Dashboard";
 import ManageUsers from "./views/authorized_view/views_main/ManageUsers";
 import StudentList from "./views/authorized_view/views_components/StudentList";
 import EmployeeList from "./views/authorized_view/views_components/EmployeeList";
-import PreEnrollment from "./views/Tmp views/PreEnrollment"
 import Classes from "./views/authorized_view/views_main/Classes"
 import Curriculum from "./views/authorized_view/views_main/Curriculum"
 import StaffLayout from "./views/authorized_view/views_main/StaffLayout";
