@@ -1,7 +1,9 @@
 import React from 'react'
-
+import Links from './Links'
 export default function LinksForStudent() {
   return (
-    <div>LinksForStudent</div>
+    <>
+      <Links />
+    </>
   )
 }
