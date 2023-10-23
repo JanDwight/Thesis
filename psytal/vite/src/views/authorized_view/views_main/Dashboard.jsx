@@ -40,7 +40,7 @@ export default function Dashboard() {
         const [count_student, count_employee, count_posts, show_logs, show_archive] = await Promise.all([
           fetchDataCount('/count_students'),
           fetchDataCount('/count_employee'),
-          fetchDataCount('/count_posts'),
+          fetchDataCount('/count_posts'), //edit the posts controller once posts are done
           fetchTables('/show_logs'),
           fetchTables('/show_archives'),
         ]);

@@ -7,6 +7,7 @@ export default function EditUsers({ showModal, onClose, user }) {
   const [role, setRole] = useState(user.role);
   const [email, setEmail] = useState(user.email);
   const [lastedit, setLastedit] = useState(user.updated_at);
+  console.log('role: ', role);
 
   const handleSave = async(e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -27,6 +28,7 @@ export default function EditUsers({ showModal, onClose, user }) {
       if (response.status === 200) {
         // Update was successful
         onClose();
+        window.location.reload();
       } else {
         // Handle errors or display feedback to the user
         console.error('Update failed');

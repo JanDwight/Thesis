@@ -80,8 +80,8 @@ export default function ManageUsers() {
                     type="text"
                     placeholder={
                       activeTab === 1
-                        ? 'Search by ID, name, or year & section...'
-                        : 'Search by name or role...'
+                        ? 'Search Students...'
+                        : 'Search Employees...'
                     }
                     value={filterText}
                     onChange={(event) => setFilterText(event.target.value)}
