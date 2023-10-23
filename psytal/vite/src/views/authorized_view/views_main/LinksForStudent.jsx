@@ -1,5 +1,5 @@
 import React from 'react'
-import Links from 'E:/To revert/Thesis/psytal/vite/src/views/authorized_view/views_main/Links.jsx';
+import Links from './Links'
 export default function LinksForStudent() {
   return (
     <>
