@@ -725,14 +725,11 @@ export default function PreRegistrationFormView({prereg}) {
                         value="Not Vaccinated">
                           Not Vaccinated</option>
                       <option 
-                        value="1st Dose">
-                          1st Dose</option>
+                        value="Fully Vaccinated">
+                          Fully Vaccinated</option>
                       <option 
-                        value="2nd Dose">
-                          2nd Dose</option>
-                      <option 
-                        value="With Booster">
-                          Booster</option>
+                        value="Not Fully Vaccinated">
+                          Not Fully Vaccinated</option>
                     </select>
                   </div>
 

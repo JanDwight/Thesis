@@ -52,24 +52,17 @@ export default function InstructorLayout() {
         <div className="flex-col flex">
           <div className="bg-viridian w-full border-b-2 border-gray-200">
             <div className=" h-16 justify-between items-center mx-auto px-10 flex">
-              <div>
-                <img src= {logo}
-                  className="block btn- h-11 w-auto" alt="Department of Psychology" />
-                  </div>
-              <div className="flex flex-col">
-              <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
-              <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
+              <div className='flex flex-row'>
+                <div>
+                  <img src= {logo}
+                    className="block btn- h-11 w-auto" alt="Department of Psychology" />
+                </div>
+                <div className="hidden md:flex md:flex-col">
+                  <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
+                  <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
+                </div>
               </div>
-              <div className="lg:block mr-auto ml-40 hidden relative max-w-">
-              <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
-              <span className="justify-center items-center flex">
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                      </span>
-                </p>
-                <input placeholder="Type to search" type="search" className="border border-viridianHue focus:ring-white focus:border-white sm:text-sm w-full rounded-lg py-2 pl-10 pr-20 bg-viridianHue text-white"/>
-              </div>
+
               <div className="hidden md:block">
                       <div className="ml-4 flex items-center md:ml-6">
                         {/* Profile dropdown */}

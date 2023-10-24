@@ -20,7 +20,7 @@ export default function PreRegistrationForm() {
   const [academicClassification, setAcademicClassification] = useState('');
   const [lastSchoolAttended, setLastSchoolAttended] = useState('');
   const [addressOfSchoolAttended, setAddressOfSchoolAttended] = useState('');
-  const [degree, setDegree] = useState('');
+  const [degree, setDegree] = useState('Bachelor of Science in Psychology');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [citizenship, setCitizenship] = useState('');
   const [ethnicity, setEthnicity] = useState('');
@@ -45,6 +45,42 @@ export default function PreRegistrationForm() {
   const [contributionamount, setcontributionamount] = useState('');
   const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('No');
 
+  //clearing the input fields using the reset button
+  const handleClear = () => {
+    setStartOfSchoolYear('');
+    setEndOfSchoolYear('');
+    setStudentSchoolId('');
+    setLearnersReferenceNumber('');
+    setLastName('');
+    setFirstName('');
+    setMiddleName('');
+    setMaidenName('');
+    setAcademicClassification('');
+    setLastSchoolAttended('');
+    setAddressOfSchoolAttended('');
+    setDateOfBirth('');
+    setCitizenship('');
+    setEthnicity('');
+    setContactNumber('');
+    setPlaceOfBirth('');
+    setSexAtBirth('');
+    setSpecialNeeds('');
+    setEmail('');
+    setHomeAddress('');
+    setAddressWhileStudyingAtBsu('');
+    setEmergencyContactName('');
+    setEmergencyContactAddress('');
+    setEmergencyContactNumber('');
+    setRelationship('');
+    sethealthfacilityregistered('');
+    setparenthealthfacilitydependent('');
+    setvaccinationstatus('Not Vaccinated');
+    settechnologylevel('');
+    setdigitalliteracy('');
+    setavailfreehighereducation('');
+    setvoluntarycontribution('');
+    setcontributionamount('');
+  }
   //the onSubmit function
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -135,7 +171,9 @@ export default function PreRegistrationForm() {
                 <h6 className="text-blueGray-700 text-sm">
                     STUDENT DETAILS
                 </h6>
-                <button className="bg-blue-600 text-white active:bg-blue-800 font-bold uppercase text-xs px-4 py-1 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+                <button className="bg-blue-600 text-white active:bg-blue-800 font-bold uppercase text-xs px-4 py-1 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" 
+                        type="button"
+                        onClick={handleClear}>
                     RESET
                 </button>
               </div>         
@@ -267,8 +305,8 @@ export default function PreRegistrationForm() {
                   </div>
                   {/** */}
                   <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
-                      Maiden Name :
+                    <label className='text-xs' htmlFor="grid-studentMaidenname">
+                      <strong className="block tracking-wide text-gray-700 text-xs font-bold mb-2">MAIDEN NAME : (For female students, if married)</strong><i>(input <strong>n/a</strong> if not applicable)</i>
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMaidenname" 
@@ -293,6 +331,7 @@ export default function PreRegistrationForm() {
                         type="radio"
                         name="typeofacadclass"
                         id="shsgraduate"
+                        checked={academicClassification === 'SHS graduate'}
                         value="SHS graduate" 
                         onChange={ev => setAcademicClassification(ev.target.value)}
                         
@@ -311,6 +350,7 @@ export default function PreRegistrationForm() {
                         name="typeofacadclass"
                         id="hsgraduate"
                         value="HS graduate"
+                        checked={academicClassification === 'HS graduate'}
                         onChange={ev => setAcademicClassification(ev.target.value)}
                         />
                       <label
@@ -327,6 +367,7 @@ export default function PreRegistrationForm() {
                         name="typeofacadclass"
                         id="alscompleter"
                         value="ALS completer"
+                        checked={academicClassification === 'ALS completer'}
                         onChange={ev => setAcademicClassification(ev.target.value)}
                         />
                       <label
@@ -369,8 +410,10 @@ export default function PreRegistrationForm() {
                     id="grid-degreeprogram" 
                     type="text" 
                     placeholder=""
-                    value={degree}
-                    onChange={ev => setDegree(ev.target.value)}
+                    value="Bachelor of Science in Psychology"
+                    readOnly
+                    //value={degree} 
+                    //onChange={ev => setDegree(ev.target.value)}
                     />  
                   </div>
                 </div> <hr />
@@ -436,12 +479,12 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-sexatbirth" 
                       type="text" 
-                      placeholder=""
+                      placeholder="(eg. Male)"
                       value={sexAtBirth}
                       onChange={ev => setSexAtBirth(ev.target.value)}/>
 
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="speacialneeds">
-                      Special Need/s :
+                      Special Need/s : <i>(input n/a if not applicable)</i>
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-studyaddress" 
@@ -550,7 +593,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="yesregister"
                           id="yesregister"
-                          value='Yes' 
+                          value='Yes Register' 
+                          checked={healthfacilityregistered === 'Yes Register'}
                           onChange={ev => sethealthfacilityregistered(ev.target.value)}
                           />
                           <label
@@ -564,7 +608,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="noregister"
                           id="noregister"
-                          value='No'
+                          value='No Register'
+                          checked={healthfacilityregistered === 'No Register'}
                           onChange={ev => sethealthfacilityregistered(ev.target.value)}
                           />
                           <label
@@ -585,14 +630,11 @@ export default function PreRegistrationForm() {
                         value="Not Vaccinated">
                           Not Vaccinated</option>
                       <option 
-                        value="1st Dose">
-                          1st Dose</option>
+                        value="Fully Vaccinated">
+                          Fully Vaccinated</option>
                       <option 
                         value="2nd Dose">
-                          2nd Dose</option>
-                      <option 
-                        value="With Booster">
-                          Booster</option>
+                          Not Fully Vaccinated</option>
                     </select>
                   </div>
 
@@ -608,7 +650,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="healthdependent"
                           id="Dependent"
-                          value="Yes" 
+                          value="YesDependent" 
+                          checked={parenthealthfacilitydependent === 'YesDependent'}
                           onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
                           />
                         <label
@@ -622,7 +665,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="healthdependent"
                           id="Dependent"
-                          value="No" 
+                          value="NoDependent" 
+                          checked={parenthealthfacilitydependent === 'NoDependent'}
                           onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
                           />
                         <label
@@ -659,6 +703,7 @@ export default function PreRegistrationForm() {
                                 name="highlvl"
                                 id="highlvl"
                                 value="category1" 
+                                checked={technologylevel === 'category1'}
                                 onChange={ev => settechnologylevel(ev.target.value)}
                                 />
                         <label
@@ -675,6 +720,7 @@ export default function PreRegistrationForm() {
                                 name="mediumlvl"
                                 id="mediumlvl"
                                 value="category2" 
+                                checked={technologylevel === 'category2'}
                                 onChange={ev => settechnologylevel(ev.target.value)}
                                 />
                         <label
@@ -691,6 +737,7 @@ export default function PreRegistrationForm() {
                                 name="lowlvl"
                                 id="lowlvl"
                                 value="category3" 
+                                checked={technologylevel === 'category3'}
                                 onChange={ev => settechnologylevel(ev.target.value)}
                                 />
                         <label
@@ -716,6 +763,7 @@ export default function PreRegistrationForm() {
                               name="proficient"
                               id="proficient"
                               value="lvl1" 
+                              checked={digitalliteracy === 'lvl1'}
                               onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -729,6 +777,7 @@ export default function PreRegistrationForm() {
                               name="advanced"
                               id="advanced"
                               value="lvl2" 
+                              checked={digitalliteracy === 'lvl2'}
                               onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -742,6 +791,7 @@ export default function PreRegistrationForm() {
                               name="beginner"
                               id="beginner"
                               value="lvl3" 
+                              checked={digitalliteracy === 'lvl3'}
                               onChange={ev => setdigitalliteracy(ev.target.value)}/>
                       <label
                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -783,7 +833,8 @@ export default function PreRegistrationForm() {
                                     type="radio"
                                     name="yesavail"
                                     id="yesavail"
-                                    value="Yes" 
+                                    value="YesAvail" 
+                                    checked={availfreehighereducation === 'YesAvail'}
                                     onChange={ev => setavailfreehighereducation(ev.target.value)}
                                     />
                                     <label
@@ -797,7 +848,8 @@ export default function PreRegistrationForm() {
                                     type="radio"
                                     name="noavail"
                                     id="noavail"
-                                    value="No" 
+                                    value="NoAvail" 
+                                    checked={availfreehighereducation === 'NoAvail'}
                                     onChange={ev => setavailfreehighereducation(ev.target.value)}
                                     />
                                     <label
@@ -814,13 +866,14 @@ export default function PreRegistrationForm() {
                                 Would you like to voluntarily Contribute any amount to BSU? 
                             </label>
                             <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
-                                {/**Radio buttion for Yes registered */}
+                                {/**Radio buttion for Yes contribute */}
                                 <div className='mx-5 mt-2'>
                                     <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                         type="radio"
                                         name="yescontribute"
                                         id="yescontribute"
-                                        value="Yes" 
+                                        value="YesContribute" 
+                                        checked={voluntarycontribution === 'YesContribute'}
                                         onChange={ev => setvoluntarycontribution(ev.target.value)}
                                     />
                                     <label
@@ -828,13 +881,14 @@ export default function PreRegistrationForm() {
                                         htmlFor="yescontribute">Yes
                                     </label>
                                 </div>
-                                {/**Radio buttion for No registered */}
+                                {/**Radio buttion for No contribute */}
                                 <div className='mx-5 mt-2'>
                                     <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                         type="radio"
                                         name="nocontribute"
                                         id="nocontribute"
-                                        value="No" 
+                                        value="NoContribute" 
+                                        checked={voluntarycontribution === 'NoContribute'}
                                         onChange={ev => setvoluntarycontribution(ev.target.value)}
                                     />
                                     <label
