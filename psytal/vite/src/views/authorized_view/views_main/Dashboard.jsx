@@ -108,9 +108,11 @@ export default function Dashboard() {
 
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
+      <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
+      <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Dashboard</div>
+      </div>
       <div className="w-full px-4 mx-auto mt-0">
-        <h1 className='text-3xl font-semibold my-5 text-green-700'>DASHBOARD</h1>
-        <hr className="border-gray-400 mt-2 mb-5" />
+        <div className="mt-2 mb-5"></div>
         {/**COL TOTAL S-L */}
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
 

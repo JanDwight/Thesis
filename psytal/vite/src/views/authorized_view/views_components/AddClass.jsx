@@ -6,6 +6,7 @@ import axiosClient from '../../../axios.js';
 export default function AddClass({closeModal}) {
   const [selected_subject, setSelectedSubject] = useState(''); // state for the selected subject
   const [class_section, setSection] = useState(''); // Define state for section
+  const [class_code, setClassCode] = useState(''); // Define state for class code
   const [instructor_name, setInstructor] = useState(''); // Define state for instructor
   const [subjectData, setSubjectData] = useState([]);
   const [instructorData, setInstructorData] = useState([]);
@@ -85,6 +86,7 @@ export default function AddClass({closeModal}) {
         class_year: selectedData.class_year,
         course_id: selected_subject,
         class_section,
+        class_code,
         instructor_name,
       };
       console.log('Selected:', formData);
@@ -147,17 +149,17 @@ export default function AddClass({closeModal}) {
             </div>
             <div className="mt-2 flex flex-col-2 justify-between">
             <label htmlFor="course_code" className="block text-sm text-gray-700">
-              Code:
+              Class Code:
             </label>
             <input
-                id="course_code"
+                id="class_code"
                 type="text"
-                name="course_code"
-                placeholder='Course Code'
-                value={selectedData.course_code}
-                disabled // makes field uneditable
-                className="block w-[49%] rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-              />
+                name="class_code"
+                placeholder='Class Code'
+                onChange={(ev) => setClassCode(ev.target.value.toUpperCase())}
+                className="block w-[49%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
+                required
+            />
               <label htmlFor="course_code" className="block text-sm text-gray-700">
               Type:
               </label>

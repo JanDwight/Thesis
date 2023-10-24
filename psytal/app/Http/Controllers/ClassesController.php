@@ -32,6 +32,7 @@ class ClassesController extends Controller
 
         $class = classes::create([
             'course_title' => $data['course_title'],
+            'class_code' => $data['class_code'],
             'class_year' => $data['class_year'], // Update to match the actual column name
             'semester' => $data['semester'],
             'course_code' => $data['course_code'], // Update to match the actual column name

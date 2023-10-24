@@ -97,20 +97,24 @@ handleSaveClassChanges = () => {
         <table className="table w-full table-striped text-gray-700">
           <thead>
             <tr>
+              <th className="text-left bg-gray-200 p-2">Class Code</th>
               <th className="text-left bg-gray-200 p-2">Course Code</th>
               <th className="bg-gray-200 text-left p-2">Course Title</th>
               <th className="bg-gray-200 text-left p-2">Semester</th>
-              <th className="bg-gray-200 text-left p-2">Year & Section</th> 
+              <th className="bg-gray-200 text-left p-2">Year</th> 
+              <th className="bg-gray-200 text-left p-2">Section</th> 
               <th className="bg-gray-200 text-left p-2">Instructor</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
             </tr>
           </thead>
           <tbody>{filteredData.map((subject, index) => (
               <tr key={index} className='odd:bg-green-100'>
+                <td className="text-left p-2">{subject.class_code}</td>
                 <td className="text-left p-2">{subject.course_code}</td>
                 <td className="text-left p-2">{subject.course_title}</td>
                 <td className="text-left p-2">{subject.semester}</td>
-                <td className="text-left p-2">{subject.class_year + '-' + subject.class_section}</td>
+                <td className="text-left p-2">{subject.class_year}</td>
+                <td className="text-left p-2">{subject.class_section}</td>
                 <td className="text-left p-2">{subject.instructor_name}</td>
                 <td className="text-left p-2">
                   <div className="flex items-center">

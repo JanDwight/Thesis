@@ -23,6 +23,7 @@ class AddClassRequest extends FormRequest
     {
         return [
             'course_title' => 'required|string',
+            'class_code' => 'required|string',
             'course_code' => 'required|string',
             'course_type' => 'required|string',
             'semester' => 'required|string',

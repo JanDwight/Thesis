@@ -1124,7 +1124,7 @@ export default function PreRegistrationFormView({prereg}) {
                             <p> <label className='font-semibold'>Note: </label>
                                 <label> If the course you are enrolling is a <a className='font-semibold'>back course/ subject </a>
                                         write <a className='font-semibold'>BC, </a> and if it is an <a className='font-semibold'>advanced subject/ course </a>
-                                        write <a className='font-semibold'>AC.</a>
+                                        write <a className='font-semibold'>AC.</a> Else, leave blank.
                                 </label>
                             </p>   
                         </div><hr className='mt-2'/>
