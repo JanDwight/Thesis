@@ -178,10 +178,9 @@ export default function LandingPage() {
       </>
    
       {/**<!--Footer--> */}
-      {/**<!--Footer--> */}
-      <footer className='bg-neutral-200 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
+      <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
       {/**<!-- Social icons --> */}
-      <div className='border-b-2 border-neutral-200 p-3 dark:border-neutral-500'>
+      <div className='border-b-2 border-neutral-200 p-2 dark:border-neutral-500'>
         <div className='container mx-auto px-10'>
           <div className='flex items-center justify-center lg:justify-between'>
             <div className='mr-12 hidden lg:block'>
