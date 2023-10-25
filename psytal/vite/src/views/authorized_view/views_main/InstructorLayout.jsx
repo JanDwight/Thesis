@@ -10,7 +10,7 @@ import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
-import { Menu, Transition } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
@@ -189,44 +189,33 @@ export default function InstructorLayout() {
             </div>
           </div>
         </div>
-    
-    
-      {/*sidebar*/}
-      <div className="flex justify-start px-10 pt-5"> {/*Main container */}
-
-        <aside class="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl  " >
-          <div class="flex flex-col items-center mt-6 -mx-2 cursor-pointer"  onClick={()=>setIsInstructorProfileOpen(true)}>
-            <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
-            <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Instructor</p>
-          </div>
-
-          <div class="flex flex-col justify-between mt-2">
-            {navigation.map((item) => (
-                          
+      
+      {/**Navbar */}
+      <header className="flex bg-[#EFEFEF] h-14 items-center justify-center shadow">
+        <div className="hidden md:block">
+                      <div className="ml-10 flex items-baseline space-x-4">
+                        {navigation.map((item) => (
                           <NavLink
                             key={item.name}
                             to={item.to}
-                            className={({label, isActive, onClick }) => classNames(
+                            className={({ isActive }) => classNames(
                               isActive
-                                ? 'bg-[#aaf0aa]  text-black'
-                                : 'text-gray-600 hover:bg-gray-200 hover:text-black',
-                              'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
+                                ? 'bg-[#CCEFCC] text-[#737373]'
+                                : 'text-[#737373] hover:bg-[#CCEFCC] hover:text-[#737373]',
+                              'rounded-md px-3 py-2 text-sm font-medium'
                             )}
                           >
-                            <img src={item.img} className='w-10  pr-5'/>
                             {item.name}
                           </NavLink>
                         ))}
-       
-          </div>
-        </aside>
-            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
+                      </div>
+                    </div>
+        </header>
+        <main>
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Outlet />
-            </div>
-        
-        
-      </div>
+          </div>
+        </main>
 
       {/**Setting up the Instructor Profile */}
       <ReactModal
