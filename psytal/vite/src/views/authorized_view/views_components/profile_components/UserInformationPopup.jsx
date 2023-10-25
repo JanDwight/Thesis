@@ -18,7 +18,7 @@ export const UserInformationPopup = ({onCloseUserInfo, data, onUserInformationCh
   return (
     <div className="flex-col mx-2 mb-2"> 
         <div className='text-lg font-serif'>
-            <i>User Informatiom -<strong> Admin</strong></i>
+            <i>User Informatiom -<strong> {userinformation.position}</strong></i>
         </div> <hr className="mt-2" />
 
         <div className=' flex flex-col  items-center justify-center'>

@@ -14,7 +14,6 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
-import { InstructorProfile } from '../views_components/profile_components/InstructorProfile';
 import UserProfile from '../views_components/profile_components/UserProfile';
 
 const navigation = [
@@ -224,7 +223,7 @@ export default function InstructorLayout() {
         onRequestClose={()=> setIsInstructorProfileOpen(false)}
         className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 ">
         <div className='relative flex flex-col min-w-0 break-words w-full mt-3'>
-          <UserProfile />
+          <UserProfile closeModal={()=>setIsInstructorProfileOpen(false)} />
         </div>
       </ReactModal>
     </>
