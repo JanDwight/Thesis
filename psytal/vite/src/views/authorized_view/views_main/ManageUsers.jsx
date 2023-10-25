@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AddUsers from '../views_components/AddUsers.jsx';
 import StudentList from '../views_components/StudentList.jsx';
 import EmployeeList from '../views_components/EmployeeList.jsx';
+import { useStateContext } from '../../../context/ContextProvider';
 
 {/*Tab Highlight */}
 const Tab = ({ label, isActive, onClick }) => {
@@ -29,8 +30,9 @@ export default function ManageUsers() {
   const [activeTab, setActiveTab] = useState(1); // Initialize active tab
   const [filterText, setFilterText] = useState(''); // Filter text state
 
-  
+  const {userRole} = useStateContext(''); //just refresh server
 
+  console.log('role: ', userRole);
   const handleAddUserClick = () => {
     console.log('ModalShowing');
     setIsModalOpen(true);
@@ -45,10 +47,11 @@ export default function ManageUsers() {
       <div className="flex">
         <div>
           {/**Add Users */}
-          <button onClick={handleAddUserClick}
-                  className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10">
-                    Add User
-          </button>
+          {userRole === 1 && (
+            <button onClick={handleAddUserClick} className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10">
+              Add User
+            </button>
+          )}
         </div>
       </div>
 

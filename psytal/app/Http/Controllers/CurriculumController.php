@@ -101,7 +101,6 @@ class CurriculumController extends Controller
     public function updateCurriculum(Request $request, $curriculumId)
     {
         //also update corresponding classes in classess table
-        //<><><><><> how to haha
 
             $curriculumData = curriculum::find($curriculumId);
             
