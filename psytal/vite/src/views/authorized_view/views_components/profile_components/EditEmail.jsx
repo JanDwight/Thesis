@@ -31,13 +31,13 @@ export const EditEmail = ({onCloseEditEmail, data, onEmailChange}) => {
                                 }}
                         ></input>
                         
-                    <label className="mt-3 text-lg font-franklin">New Email</label>
+                    <label className="mt-3 text-lg font-franklin">New Email:</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="newemail"
                             value={email.newemail}
                             onChange={handleEmailChange}
-                            placeholder="New Email"
+                            placeholder="example@email.com"
                             style={{
                                 border: "none",
                                 outline: "none",
