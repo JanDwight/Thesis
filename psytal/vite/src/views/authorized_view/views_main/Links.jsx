@@ -105,13 +105,13 @@ export default function Links() {
         
           {/* Add Links button */}
           {userRole === 1 && ( // Check if userRole is equal to 1
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10"
-        >
-          Add Links
-        </button>
-      )}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl px-7 py-2 text-white font-size ml-10"
+          >
+            Add Links
+          </button>
+        )}
           </div>            
         </div>
       </div>

@@ -60,7 +60,7 @@ export default function Classes(){
 
                         {/*add class*/}
                     <button onClick={() => setIsModalOpen(true)} 
-                        className="bg-[#397439] rounded-2xl  px-7 py-2 text-white font-size ml-10">
+                        className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl  px-7 py-2 text-white font-size ml-10">
                             Add Class
                     </button>
                     </div>
@@ -89,7 +89,7 @@ export default function Classes(){
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+        className="w-full md:w-[30%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
       >
         <div>
           <AddClass closeModal={() => setIsModalOpen(false)} />
