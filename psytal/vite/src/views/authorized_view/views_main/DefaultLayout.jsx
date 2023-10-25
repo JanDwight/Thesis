@@ -18,6 +18,7 @@ import StudentProfile from '../views_components/profile_components/StudentProfil
 
 const navigation = [
   { name: 'Home', to: '/student/home'},
+  { name: 'Curriculum Checklist', to: '/student/curriculumchecklist'},
   { name: 'Pre-Registration', to: '/student/preregistrationforcontinuing'},  
   { name: 'Links', to: '/student/linksforstudent'}  
 ]

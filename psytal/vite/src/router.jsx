@@ -19,6 +19,7 @@ import InstructorLayout from "./views/authorized_view/views_main/InstructorLayou
 import PreRegistrationForm from "./views/authorized_view/views_components/Pre_Registration_Components/PreRegistrationForm";
 import PreRegistrationForContinuing from "./views/authorized_view/views_components/Pre_Registration_Components/PreRegistrationForContinuing";
 import LinksForStudent from "./views/authorized_view/views_main/LinksForStudent";
+import CurriculumChecklist from "./views/authorized_view/views_main/CurriculumChecklist";
 
 
 const router = createBrowserRouter([
@@ -144,6 +145,11 @@ const router = createBrowserRouter([
             {
                 path: 'home',
                 element: <Home />
+            },
+
+            {
+                path: 'curriculumchecklist',
+                element: <CurriculumChecklist />
             },
 
             {
