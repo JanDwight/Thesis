@@ -37,13 +37,13 @@ const handleRowClick = (items) => {
         <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Pre-Registration</div>
         
       </div>
-
+      <div className="mt-2 mb-5"></div>
       <div>
       <table className="table w-full table-striped">
         <thead>
           <tr>
             <th className="text-left text-gray-700 bg-gray-200 p-2">Name</th>
-            <th className="text-left text-gray-700 bg-gray-200 p-2">Date of Submition</th>
+            <th className="text-left text-gray-700 bg-gray-200 p-2">Date of Submission</th>
             <th className="text-left text-gray-700 bg-gray-200 p-2">Status</th>
           </tr>
         </thead>
