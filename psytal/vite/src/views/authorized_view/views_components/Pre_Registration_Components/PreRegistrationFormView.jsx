@@ -22,43 +22,41 @@ export default function PreRegistrationFormView({prereg}) {
 
     //calling the Form in the adding of classes
     const handleSubmitCourseUnits = (e) => {
-      e.preventDefault();
-      console.log("InputFields", inputFields);
-    };
-      //For Adding
-      const handleAddFields = () => {
-          setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
-        }
-      // Function to handle removing a field
-      const handleRemoveFields = (index) => {
-        // Retrieve the units from the field being removed
-        const removedUnits = parseInt(inputFields[index].units || 0, 10);
-        
-        // Subtract the removed units from the total units
-        setTotalUnits(totalUnits - removedUnits);
-        
-        // Remove the field from the inputFields array
-        const newFields = inputFields.filter((_, i) => i !== index);
-        setInputFields(newFields);
+        e.preventDefault();
+        console.log("InputFields", inputFields);
       };
+    //Changing the input fields
+    const handleChangeInput = (index, event) => {
+        const values = [...inputFields];
+        values [index][event.target.name] = event.target.value;     
+        setInputFields(values);
+      }
+    //For Adding
+    const handleAddFields = () => {
+        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
+      }
+    //For removing
+    const handleRemoveFields = (index) => {
+        const values  = [...inputFields];
+        values.splice(index, 1);
+        setInputFields(values);
+      }
 
-      // Function to handle changes in the unit field
-      const handleChangeInput = (index, event) => {
-        const { name, value } = event.target;
-        
-        // Calculate the unit difference
-        const oldUnits = parseInt(inputFields[index].units || 0, 10);
-        const newUnits = parseInt(value || 0, 10);
-        const unitDifference = newUnits - oldUnits;
-        
-        // Update the total units by adding the unit difference
-        setTotalUnits(totalUnits + unitDifference);
-        
-        // Update the input fields
-        const fields = [...inputFields];
-        fields[index] = { ...fields[index], [name]: value };
-        setInputFields(fields);
-      };
+    //units calc
+    const handleChangeUnits = (index, value) => {
+      // Calculate the unit difference
+      const oldUnits = parseInt(inputFields[index].units || 0, 10);
+      const newUnits = parseInt(value || 0, 10);
+      const unitDifference = newUnits - oldUnits;
+    
+      // Update the total units by adding the unit difference
+      setTotalUnits(totalUnits + unitDifference);
+    
+      // Update the input fields with the new "units" value
+      const fields = [...inputFields];
+      fields[index] = { ...fields[index], units: value };
+      setInputFields(fields);
+    };
 
       //auto fill dropdown
       useEffect(() => {
@@ -1200,7 +1198,7 @@ export default function PreRegistrationFormView({prereg}) {
                                     onChange={event => handleChangeInput(index, event)}
                                   >
                                     <option value="" disabled selected>
-                                      Class Code
+                                      Course Code
                                     </option>
                                     {subjectData.map(item => (
                                       <option key={item.id} value={item.course_code}>
@@ -1220,7 +1218,10 @@ export default function PreRegistrationFormView({prereg}) {
                                       variant="filled"
                                       placeholder="Units"
                                       value={inputField.units}
-                                      onChange={event => handleChangeInput(index, event)}
+                                      onChange={(event) => {
+                                        handleChangeUnits(index, event.target.value); // working
+                                        handleChangeInput(index, event); // may not work pls test
+                                      }}
                                       required
                                     />
                                 </div>
@@ -1312,8 +1313,8 @@ export default function PreRegistrationFormView({prereg}) {
                                 </div>
                                                                
                             </div> 
-                            <button className=' bg-blue-500 rounded mt-2' variant="container" type='submit'>submit [fix me]</button>
-                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container" type='submit'>clear subjects</button>
+                            <button className=' bg-blue-500 rounded mt-2' variant="container">submit [fix me]</button>
+                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container">clear subjects</button>
                             {/*fix the two buttons above, no axios connection yet, do for other view*/}
                     </div>
                 </div>
