@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         try {
             // Find the post to update
-            $post = Post::findOrFail($postId);
+            $post = posts::findOrFail($postId);
     
             // Update the post fields if they are present in the request
             if ($request->has('title')) {

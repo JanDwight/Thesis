@@ -1,61 +1,178 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect } from 'react';
 
-const Carousel = ({ items }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const slidesData = [
+  {
+    content: (
+      <>
+        <div className="w-full h-[50vh] relative">
+          {/* Remove the image src here */}
+          <div className="absolute inset-x-0 top-0 h-full w-full flex flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+            <h6 className="text-2xl font-bold text-center z-10 relative">BSU Vision</h6>
+            <div className="max-h-60 z-10 relative">
+              <p className="text-2xl text-center">BSU as an international Smart University engendering graduates to walk the intergenerational highways.</p>
+            </div>
+          </div>
+        </div>
+      </>
+    ),
+  },
+  {
+    content: (
+      <>
+        <div className="w-full h-[50vh] relative">
+          {/* Remove the image src here */}
+          <div className="absolute inset-x-0 top-0 h-full w-full flex flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+            <h6 className="text-2xl font-bold text-center z-10 relative">BSU Mission</h6>
+            <div className="max-h-60 z-10 mt-5 relative">
+              <p className="text-xl text-center">
+                <ul className="list-disc">
+                  <li>Challenge Innovation</li>
+                  <li>Advance Technology and Facilities</li>
+                  <li>Revitalize Administration</li>
+                  <li>Engender Partnership</li>
+                  <li>Serve Intergenerational Role</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </>
+    ),
+  },
+  {
+    content: (
+      <>
+        <div className="w-full h-[50vh] relative">
+          {/* Remove the image src here */}
+          <div className="absolute inset-x-0 top-0 h-full w-full flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+            <h6 className="text-xl font-bold text-center z-10 relative">College of Social Sciences Goals</h6>
+            <div className="max-h-60 z-10 mt-5 relative">
+              <p className="text-lg text-center">
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    Promote academic space advocating/mainstreaming indigenous knowledge, cultural and environmental heritage, gender sensitivity, and engaging evidence-based innovation.
+                  </li>
+                  <li>
+                    Produce globally competent graduates imbued with values systems rooted in social justice, freedom, critical thinking.
+                  </li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </>
+    ),
+  },
+];
 
-  const goToNextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+const Carousel = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+ 
+
+  useEffect(() => {
+    const slidesCount = slidesData.length;
+    const interval = setInterval(() => {
+      setActiveSlide((activeSlide + 1) % slidesCount);
+    }, 10000); // Auto slide every 10 seconds
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [activeSlide]);
+
+  const goToSlide = (index) => {
+    setActiveSlide(index);
   };
 
-  const goToPrevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
-    );
+  const nextSlide = () => {
+    setActiveSlide((activeSlide + 1) % slidesData.length);
   };
-  
+
+  const prevSlide = () => {
+    setActiveSlide((activeSlide - 1 + slidesData.length) % slidesData.length);
+  };
 
   return (
-    <div className="relative">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <button
-          className="absolute -left-10 top-1/2 transform -translate-y-1/2 text-gray-800 hover:text-gray-600"
-          onClick={goToPrevSlide}
-        >
-          &#9664;
-        </button>
-        <button
-          className="absolute -right-10 top-1/2 transform -translate-y-1/2 text-gray-800 hover:text-gray-600"
-          onClick={goToNextSlide}
-        >
-          &#9654;
-        </button>
-      </div>
-      <div className="w-full h-64 overflow-hidden ">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            width: `${items.length * 100}%`,
-          }}
-        >
-          {items.map((item, index) => (
-            <div
+    /* Carousel card */
+    <div className="w-3/4 h-1/2">
+      <div className="relative w-full h-[50vh] overflow-hidden">
+        {slidesData.map((slide, index) => (
+          <div
+            key={index}
+            className={`carousel-item relative ${
+              index === activeSlide ? '' : 'hidden'
+            } w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
+            data-te-carousel-active={index === activeSlide}
+            data-te-carousel-item
+            style={{ backfaceVisibility: 'hidden' }}
+          >
+            {slide.content}
+          </div>
+        ))}
+
+        {/*Indicator Buttons */}
+        <div className="absolute bottom-0 left-0 right-0 pb-5 z-[2] flex list-none justify-center p-0" data-te-carousel-indicators>
+          {slidesData.map((_, index) => (
+            <button
               key={index}
-              className="w-full h-64 flex-shrink-0"
-              style={{ minWidth: '100%' }}
-            >
-              {item}
-            </div>
+              type="button"
+              onClick={() => goToSlide(index)}
+              className={`mx-2 box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-3 border-solid border-transparent bg-white bg-clip-padding p-0 ${
+                index === activeSlide ? 'opacity-100' : 'opacity-50'
+              } transition-opacity duration-600 ease-in-out motion-reduce:transition-none`}
+              aria-current={index === activeSlide}
+              aria-label={`Slide ${index + 1}`}
+            ></button>
           ))}
         </div>
       </div>
+      <button
+        className="absolute bottom-0 left-0 top-0 pl-16 z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        onClick={prevSlide}
+      >
+        <span className="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </span>
+        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+          Previous
+        </span>
+      </button>
+      <button
+        className="absolute bottom-0 right-0 top-0 z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        onClick={nextSlide}
+      >
+        <span className="inline-block h-8 w-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+          </svg>
+        </span>
+        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+          Next
+        </span>
+      </button>
     </div>
-    
   );
-
-  
 };
-
-
 
 export default Carousel;

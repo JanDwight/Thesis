@@ -1,182 +1,114 @@
 import React, { Component }  from 'react'
 import coverVid from "@assets/LandingpageBG.mp4";
 import schoolLogo from "@assets/BSUlogo.png";
-import bgcover from "@assets/bgcover.png";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Carousel from '../../unauthorized_view/views_main/Carousel';
-import Carousel2 from '../../unauthorized_view/views_main/Carousel2';
-import temp1 from "@assets/TemplateWBG.png";
-import temp2 from "@assets/Template3.png";
-import bgbuilding from "@assets/bgbuilding.jpg";
+
 
 export default function LandingPage() {
 
-  const items = [
-    <div>
-      <div className='absolute text-white text-3xl px-[2%] py-[0%]'>
-        <div >
-          {/* Admission Requirements */}
-          <div >
-            <div >
-              <h6 >Admission Requirements</h6>
-              <div ><hr />
-                <div >APPLICANTS
-                  <li>Senior High School Graduate.</li>
-                  <li>High School Graduates of the Old High School curriculum who did not enroll in any degree Program 
-                      <p> in any other school after graduation from high school .</p></li>
-                  <li>Grade 12 as of application period.</li>
-                  <li>ALS/PEP Completers eligible for college admission.</li>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div >
-        <img src= {bgcover}/>
-      </div>
-    </div>,
-
-    <div className="relative">
-      <img src={bgcover}/>
-      <div className="absolute top-0 left-0 md:p-6 text-white text-3xl w-100%">
-        {/* Your content */}
-        <div>
-         {/* Psychology Program Objectives */}
-          <div>
-            <div>
-              <h6>Psychology Program Objectives</h6>
-              <div className="text-2xl p-2" >
-                <div>
-                  <ul className="list-decimal space-y-2">
-                    <li>
-                      Demonstrate the capability to discuss and analyze the major theories and concepts in psychology (knowledge in psychology).
-                    </li>
-                    <li>
-                      Demonstrate and apply methods of psychological inquiry in building knowledge on local culture and context (psychological research).
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> ,
-                
-    <div className="relative">
-      <img
-        src={bgcover}
-        alt="Image 1"
-        className="w-100% h-auto md:w-auto md:h-100 object-cover"/>
-      </div>                   
-  ];
-
-  const items2 = [
-    /* BSU VISION */
-    <div className="relative">
-      <img src={bgcover} className="w-100%" />
-        <div className="absolute top-0 left-0 md:p-6 text-white text-4xl ">
-          <h6 className="text-3xl font-bold mt-3 mx-5 text-center">BSU Vision</h6>
-          <div className="max-h-60">
-            <p className="m-5 text-3xl text-center">
-              BSU as an international Smart University engendering graduates to walk the intergenerational highways.
-            </p>
-          </div>
-        </div>
-    </div>,
-
-    /* BSU MISSION */
-    <div className="relative">
-      <img src={bgcover} className="w-100%" />
-      <div className="absolute top-0 left-0 md:p-0 text-white text-2xl ">
-        <h6 className="text-4xl font-bold mt-3 mx-5 text-center">BSU Mission</h6>
-        <div className="max-h-60 ">
-          <div className="m-2 text-3xl ">
-            <li>Challenge Innovation</li>
-            <li>Advance Technology and Facilities</li>
-            <li>Revitalize Administration</li>
-            <li>Engender Partnership</li>
-            <li>Serve Intergenerational Role</li>
-          </div>
-        </div>
-      </div>
-    </div>,
-                       
-    <div className="relative">
-      <img src={bgcover} className="w-full rounded-lg" />
-      <div className="absolute top-0 left-0 md:p-6 text-white text-3xl max-w-full ">
-        {/* COLLEGE GOALS */}
-        <div className=' h-60 mx-1 rounded-lg p-2 text-xl '>
-          <h6 className="text-3xl font-bold mt-3 mx-5 ">
-            College of Social Sciences Goals
-          </h6>
-          <div className="h-40 ">
-            <div className="m-5">
-              <ul className="list-decimal space text-2xl ">
-                <li>Promote academic space advocating/mainstreaming indigenous knowledge, 
-                    cultural and 
-                    <p>environmental heritage, gender sensitivity, and engaging evidence-based innovation.</p>
-                </li>
-                <li>Produce globally competent graduates imbued with values systems rooted in social  
-                    <p>justice, freedom, critical thinking.</p>
-                </li>
-              </ul>
-            </div>
-          </div>                    
-        </div>
-      </div>
-    </div>, /* END-Second Carousel Slide*/
-  ];
-  
   return (
-  <div className='w-full h-screen relative'>
-    <video
-      className='w-full h-full object-cover z-0'
-      src={coverVid}
-      autoPlay
-      loop
-      muted
-    />
-    <div className='absolute w-full h-full top-0 left-0 bg-gray-900/80'></div>
-    <div className='absolute left-40 ml-40 top-20 w-1/2 h-20 flex text-white py-20'></div>
-    <div className='absolute top-1 w-full h-full flex flex-col justify-center text-center text-white p-4'>
-      <div className="flex justify-center mr-1 mb-1/2">
-        <img
-          className="h-300 w-1/5 mx-2 my-4 "
-          src={schoolLogo}
-          alt="BSUlogo"/>
+    <div className='w-full h-screen relative'>
+      <video
+        className='w-full h-full object-cover z-0'
+        src={coverVid}
+        autoPlay
+        loop
+        muted
+      />
+     <div className="absolute w-full h-full top-0 left-0 bg-[#111613]/80"></div>
+
+      <div className="absolute flex w-full h-full top-10 left-0 overflow-hidden">
+        <div className="w-1/2 flex items-center text-white relative">
+          <div className="mx-8">
+            <img
+              className="h-24 w-24 mx-8 absolute top-[120px]" 
+              src={schoolLogo}
+              alt="BSUlogo"
+            />
+          </div>
+          <div>
+            <h1 className="font-franklin font-extrabold text-3xl">
+              WELCOME TO
+            </h1>
+            <h1 className="font-franklin font-extrabold text-4xl my-2">
+              BENGUET STATE UNIVERSITY
+            </h1>
+            <h1 className="font-franklin font-extrabold text-3xl">
+              DEPARTMENT OF PSYCHOLOGY
+            </h1>
+            <h2 className="font-franklin font-extrabold text-2xl my-2">
+              Exploring Indigenous Psychology towards a Decolonized Psychology
+            </h2>
+          </div>
+        </div>
+
+
+        <div className="absolute w-2/5 h-screen right-0 pl-10 flex items-center justify-center">
+        <Carousel />
       </div>
-      <div>
-        <h1 className='font-franklin font-extrabold text-5xl '>WELCOME TO</h1>
       </div>
-      <h1 className='font-franklin font-extrabold text-6xl my-2'>BENGUET STATE UNIVERSITY</h1>                                      
-      <h1 className='font-franklin font-extrabold text-5xl'>DEPARTMENT OF PSYCHOLOGY</h1>
-      <h2 className='font-franklin font-extrabold text-3xl my-2'>Exploring Indegenous Psychology towards a Decolonized Psychology</h2>
+
+
+      <div className='w-full h-screen relative flex items-center justify-center'>
+        
+      <div className="w-3/4 h-screen float-left">
+      <div className="mx-6 ">
+        {/* Green Card 1 */}
+        <div className="bg-[#002408] p-4  shadow-lg">
+          <h6 className="text-2xl text-white text-center font-bold pt-3">ADMISSION REQUIREMENTS</h6>
+          <h4 className="text-xl text-white font-bold pt-3">Applicants</h4>
+          <ul className="list-disc pl-6 text-lg text-white">
+            <li>Senior High School Graduate</li>
+            <li>High school graduates of the old high school curriculum who did not enroll in any degree program in any other school after graduation from high school.</li>
+            <li>Grade 12 as of the application period</li>
+            <li>ALS/PEPT Completers eligible for college admission</li>
+          </ul>
+        </div>
+
+        {/* Flex container for Green Card 2 and 3 */}
+        <div className="flex ">
+          {/* Green Card 2 */}
+          <div className="bg-[#596e5c] p-4 shadow-lg flex-1">
+            <h4 className="text-xl text-white font-bold pt-3">Grade</h4>
+            <ul className="list-disc pl-6 text-white text-lg">
+              <li>General Weighted Average (GWA) must be 86% or better</li>
+              <li>Grades for English, Math, Science must be 86% or better</li>
+            </ul>
+          </div>
+
+          {/* Green Card 3 */}
+          <div className="bg-[#bc6c25] p-4 shadow-lg flex-1">
+            <h4 className="text-xl text-white font-bold pt-3">Additional Requirements</h4>
+            <ul className="list-disc pl-6 text-lg text-white">
+              <li>Qualifiers must pass the interview process conducted by the Colleges.</li>
+              <li>Co-curricular and extra-curricular involvement in Senior High School may be considered by the College in the qualification of the applicant.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-     {/* Carousel Slide cards */}
-      <>
-      <div  className=' h-1/3 relative' >
-        <div  className='bg-slate-300 flex items-center justify-center h-full' >
-          <div className="container w-25 py-10  ">
-            <Carousel items={items} />
-          </div>
-        </div>
-      </div> 
-      </>
-      <>
-      <div className='h-1/3 relative'>
-        <div className='bg-slate-300 flex items-center justify-center h-full'>
-          <div className="container w-25 py-10">
-            <Carousel2 items2={items2} />
-          </div>
+      {/*DEPARTMENT OBJECTIVES*/}
+      <div className="w-1/4 h-screen float-left ml-6">
+        <div className="absolute ">
+          <p className="text-m text-center  mr-4">
+            <h6 className="text-xl font-bold pt-3">PSYCHOLOGY PROGRAM OBJECTIVES</h6>
+            <ul className="list-decimal pl-6">
+              <li>Demonstrate the capability to discuss and analyze the major theories and concepts in psychology (knowledge in psychology);</li>
+              <li>Demonstrate and apply the methods of psychological inquiry in building knowledge on local culture and context (psychological research);</li>
+              <li>Demonstrate and apply psychological theories and methods in a professional and personal setting (application of psychology);</li>
+              <li>Demonstrate capability for self-reflection and independent learning in graduate education or in a professional context (independent learning);</li>
+              <li>Demonstrate professional and ethical behaviors in research and practice in psychology (ethics);</li>
+              <li>Demonstrate harmonious interpersonal relationships with colleagues, clients, and otherwise (interpersonal skills) in diverse cultural settings; and</li>
+              <li>Demonstrate the ability to conduct psychological assessments and evaluation (psychological assessment).</li>
+            </ul>
+          </p>
         </div>
       </div>
-      </>
-   
+    </div>
+      
+      
+    
       {/**<!--Footer--> */}
       <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
         {/**<!-- Social icons --> */}
