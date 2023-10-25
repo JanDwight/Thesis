@@ -255,9 +255,7 @@ export default function PreRegistrationFormView({prereg}) {
                 <h6 className="text-blueGray-700 text-sm">
                     STUDENT DETAILS
                 </h6>
-                <button className="bg-blue-600 text-white active:bg-blue-800 font-bold uppercase text-xs px-4 py-1 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-                    RESET
-                </button>
+                
               </div>         
       </div>
       {/**=========================== 2 ==========================*/}      
