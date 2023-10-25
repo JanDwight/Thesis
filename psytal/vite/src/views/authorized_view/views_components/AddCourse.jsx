@@ -52,7 +52,7 @@ export default function AddCourse({closeModal}) {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className='mt-2 flex flex-col-2 justify-between'>
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="class_year" className="block text-sm text-gray-700 px-2">
                     Year:
                   </label>
                     <input
@@ -64,7 +64,7 @@ export default function AddCourse({closeModal}) {
                       onChange={handleChange}
                       className="block w-[48%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="semester" className="block text-sm text-gray-700 px-2">
                     Semester:
                   </label>
                     <input
@@ -91,7 +91,7 @@ export default function AddCourse({closeModal}) {
                       onChange={handleChange}
                       className="block w-[50%] rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 type=text" 
                     />
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="units" className="block text-sm text-gray-700 px-2">
                     Units:
                   </label>
                     <input
@@ -106,7 +106,7 @@ export default function AddCourse({closeModal}) {
                 </div>
 
                 <div className='mt-2 flex flex-col-1 justify-between'>
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="course_title" className="block text-sm text-gray-700 px-2">
                     Course Title:
                   </label>
                     <textarea
@@ -121,7 +121,7 @@ export default function AddCourse({closeModal}) {
                 </div>
 
                 <div className='mt-2 flex flex-col-3 justify-between'>
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="hoursperweek" className="block text-sm text-gray-700 px-2">
                     Hours per Week:
                   </label>
                     <input
@@ -135,9 +135,11 @@ export default function AddCourse({closeModal}) {
                     />
                    
                 </div>
-                <div className="mt-3 flex flex-row content-between justify-center">
-                    
-                      
+                <div className="mt-3 flex flex-col">
+                  <label htmlFor="course_type" className="block text-sm font-semibold text-gray-700 px-2">
+                    Course Type:
+                  </label>
+                    <div className=" flex flex-row ml-10">
                       <input
                         id="course_type"
                         name="course_type"
@@ -156,14 +158,16 @@ export default function AddCourse({closeModal}) {
                         type="radio" //change to radio
                         value="Lab"
                         onChange={handleChange}
-                        className="block rounded-full border-2 border-solid border-neutral-300" 
+                        className="block rounded-full border-2 border-solid border-neutral-300 ml-2" 
                       />
                       <label for= "Lab" className="block text-sm text-gray-700 px-2">Laboratory</label>
+                    </div>  
+                      
                   
                 </div>
 
                 <div className='flex justify-between mt-3'>
-                  <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                  <label htmlFor="preReq" className="block text-sm text-gray-700 px-2">
                     Pre Requisite/s:
                   </label>
                     <input

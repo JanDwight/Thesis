@@ -125,6 +125,7 @@ export default function Links() {
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Class Description</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Instructor</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Link Code</th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Action</th>
 		              </tr>
                 </thead>
                  <tbody>
@@ -141,10 +142,7 @@ export default function Links() {
                           <td className= "text-center rounded-r-full flex justify-center space-x-2">
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
-                            </button>
-                            <button onClick={() => onSubmitarchivelink(true, index)}>
-                              <img src={archive} alt='archive' className='h-7 w-7' />
-                            </button>
+                            </button>                            
                             
                           </td>
                         </tr>
