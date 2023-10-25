@@ -39,7 +39,7 @@ export default function AdminLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
   const [isSearchToggled, setIsSearchToggled] = useState(false);
 
-  console.log(currenUser)
+  console.log(userRole)
 
   if (!userToken && !userRole) {
     return <Navigate to='/guest/landingpage' />
