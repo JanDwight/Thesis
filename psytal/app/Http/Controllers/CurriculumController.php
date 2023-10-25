@@ -37,6 +37,7 @@ class CurriculumController extends Controller
         $classes = classes::create([
             'class_year' => $classdata['class_year'],
             'semester' => $classdata['semester'],
+            'class_code' => $placeholder,
             'course_code' => $classdata['course_code'],
             'course_title' => $classdata['course_title'],
             'units' => $classdata['units'],

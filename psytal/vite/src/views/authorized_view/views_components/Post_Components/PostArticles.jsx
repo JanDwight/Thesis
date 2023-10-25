@@ -168,7 +168,7 @@ export default function PostArticles() {
                         post.images.map((image, i) => (
                             <img
                                 key={i}
-                                src={`http://localhost:8000/storage/${image.image_path}`} //actual image path
+                                src={`http://localhost:8000/storage/${image.image_path}`}
                                 alt={`Image ${i}`}
                                 height={400}
                                 width={400}
