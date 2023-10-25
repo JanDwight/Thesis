@@ -7,6 +7,7 @@ import { useStateContext } from '../../../context/ContextProvider'
 import axiosClient from '../../../axios'
 import PsychLogo from '../../../assets/PsychCircle.png'
 import UserProfile from '../views_components/profile_components/UserProfile'
+import StudentProfile from '../views_components/profile_components/StudentProfile';
 
 // const user = {
 //   name: 'Tom Cook',
@@ -237,7 +238,7 @@ export default function DefaultLayout() {
                                 onRequestClose={() => setIsProfileOpen(false)}
                                 className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
                                 >
-                                  <div><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
+                                  <div><StudentProfile closeModal={() => setIsProfileOpen(false)}/></div>
                                 </ReactModal>
     </>
   )

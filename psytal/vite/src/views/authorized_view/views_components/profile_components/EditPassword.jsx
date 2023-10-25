@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 
 
-export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChange }) => {
+export const EditPassword = ({ onCloseEditPassword, data, onPasswordChange }) => {
     //calling the sample data
-    const [password, setPassword] = useState(displayData);
+    const [password, setPassword] = useState(data);
 
     const handlePasswordChange = (event) => {
       setPassword(event.target.value);
@@ -59,10 +59,10 @@ export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChang
 
                 <div className='mt-5 flex felx-row-2 justify-center'>
                     <button onClick={handleSubmit} 
-                        className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                        className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
-                    <button onClick={onCloseEditPassword} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+                    <button onClick={onCloseEditPassword} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                         Cancel
                     </button>                    
                 </div>

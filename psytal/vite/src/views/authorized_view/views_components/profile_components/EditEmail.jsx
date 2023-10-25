@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
+export const EditEmail = ({onCloseEditEmail, data, onEmailChange}) => {
     //calling the sample data
-    const [email, setEmail] = useState(displayData);
+    const [email, setEmail] = useState(data);
 
     //changing the email
     const handleEmailChange = (event) => {
@@ -48,10 +48,10 @@ export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
 
                 <div className='mt-5 flex felx-row-2 justify-center'>
                     <button onClick={handleSubmit} 
-                        className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                        className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
-                    <button onClick={onCloseEditEmail} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+                    <button onClick={onCloseEditEmail} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                         Cancel
                     </button>                    
                 </div>

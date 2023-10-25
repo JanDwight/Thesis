@@ -6,6 +6,10 @@ import { StudentEditEmail } from './StudentEditEmail';
 import { StudentEditPassword } from './StudentEditPassword';
 import { StudentUserInformationPopup } from './StudentUserInformationPopup';
 import axiosClient from '../../../../axios';
+import { UserInformationPopup } from './UserInformationPopup';
+import { EditEmail } from './EditEmail';
+import { EditPassword } from './EditPassword';
+import { EditDisplayName } from './EditDisplayName';
 
 export default function UserProfile({closeModal}) {
     // Use functional update for the state to prevent re-renders
@@ -21,12 +25,14 @@ export default function UserProfile({closeModal}) {
     });
   }, []);
     
+    //CALLING EditDisplayName
+    const [isEditDisplayName, setIsEditDisplayName] = useState(false);
     //CALLING EditPassword
-    const [isStudentEditPasswordOpen, setIsStudentEditPasswordOpen] = useState(false);
+    const [isEditPasswordOpen, setIsEditPasswordOpen] = useState(false);
     //CALLING EditPEmail
-    const [isStudentEditEmailOpen, setIsStudentEditEmailOpen] = useState(false);
+    const [isEditEmailOpen, setIsEditEmailOpen] = useState(false);
     //CALLING UserInformation
-    const [isStudentUserInformationOpen, setIsStudentUserInformationOpen] = useState(false);
+    const [isUserInformationOpen, setIsUserInformationOpen] = useState(false);
     //Password can be seen/not
     const [isVisible, setIsVisible] = useState(false);
 
@@ -57,13 +63,19 @@ export default function UserProfile({closeModal}) {
                         color: '#1f2937'
                     }}
                 />                    
-                
+                <div className='mt-10 p-2 bg-gray-200'>
+                        <img onClick={()=>setIsEditDisplayName(true)}
+                            src={edit} 
+                            alt='edit'
+                            className='h-5 w-5 cursor-pointer' 
+                        /> 
+                    </div>
             </div> 
             
             <div className="flex flex-col justify-between mx-2 mb-2">
                 {roleInt > 3 && (
-                    <label onClick={()=> setIsStudentUserInformationOpen (true)}
-                        className='cursor-pointer mx-3 px-2 py-1 bg-green-500 hover:bg-green-700 rounded-md'>User Information 
+                    <label onClick={()=> setIsUserInformationOpen (true)}
+                        className='cursor-pointer mx-3 px-2 py-1 bg-green-500 hover:bg-green-700 rounded-md'>User Information
                     </label>
                 )}
                 
@@ -73,7 +85,7 @@ export default function UserProfile({closeModal}) {
         <div className="flex flex-wrap flex-col px-3 mx-16 mt-5 mb-2">
             
             <div className="w-full px-3 md:mb-0 mt-2">
-                <label className=" text-gray-700 text-lg font-bold mb-2  p-2 rounded-md bg-green-600">Account Informations: </label> 
+                <label className=" text-gray-700 text-lg font-bold mb-2  p-2 rounded-md ">Account Information: </label> 
             </div>
             
             <div className='mx-10 mt-2'>
@@ -95,7 +107,7 @@ export default function UserProfile({closeModal}) {
                     }}
                 />
                 <div className='p-2 bg-gray-200 rounded-md mx-2'>
-                    <img onClick={()=> setIsStudentEditEmailOpen(true)}
+                    <img onClick={()=> setIsEditEmailOpen(true)}
                         src={edit} // Replace 'editImage' with the path to your edit image
                         alt='edit'
                         className='h-6 w-6 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
@@ -123,7 +135,7 @@ export default function UserProfile({closeModal}) {
                     }}
                 />
                 <div className='p-2 bg-gray-200 rounded-md mx-2'>
-                    <img onClick={()=> setIsStudentEditPasswordOpen(true)}
+                    <img onClick={()=> setIsEditPasswordOpen(true)}
                         src={edit} // Replace 'editImage' with the path to your edit image
                         alt='edit'
                         className='h-6 w-6 cursor-pointer' // Add 'cursor-pointer' to make it look clickable
@@ -145,37 +157,46 @@ export default function UserProfile({closeModal}) {
       </form>
     </div>
 
-    
+    {/**Setting the Edit Display Name */}
+    <ReactModal
+            isOpen={isEditDisplayName}
+            onRequestClose={()=> setIsEditDisplayName(false)}
+            className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5">
+                <div>
+                    <EditDisplayName 
+                        onCloseEditDisplayname={()=> setIsEditDisplayName(false)} data={data} />
+                </div>
+        </ReactModal>
 
     {/**Setting the Edit Email*/}
     <ReactModal
-    isOpen={isStudentEditEmailOpen}
-    onRequestClose={() => setIsStudentEditEmailOpen(false)}
+    isOpen={isEditEmailOpen}
+    onRequestClose={() => setIsEditEmailOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
         <div>
-            <StudentEditEmail  
-                onCloseStudentEditEmail={()=> setIsStudentEditEmailOpen (false)}
+            <EditEmail 
+                onCloseEditEmail={()=> setIsEditEmailOpen (false)}
                 data={data}/>
         </div>
     </ReactModal>
 
     {/**Setting the Edit Password*/}   
     <ReactModal
-    isOpen={isStudentEditPasswordOpen}
-    onRequestClose={() => setIsStudentEditPasswordOpen(false)}
+    isOpen={isEditPasswordOpen}
+    onRequestClose={() => setIsEditPasswordOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentEditPassword  onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)} data={data}/></div>
+        <div><EditPassword  onCloseEditPassword={()=> setIsEditPasswordOpen (false)} data={data}/></div>
     </ReactModal>
 
     {/**Setting the User Information*/} 
     <ReactModal
-    isOpen={isStudentUserInformationOpen}
-    onRequestClose={()=> setIsStudentUserInformationOpen(false)}
+    isOpen={isUserInformationOpen}
+    onRequestClose={()=> setIsUserInformationOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentUserInformationPopup  onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)} data={data}/></div>
+        <div><UserInformationPopup  onCloseUserInfo={()=> setIsUserInformationOpen (false)} data={data}/></div>
     </ReactModal>
 
     </>

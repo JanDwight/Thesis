@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
-export const EditDisplayName = ({ displayData, onCloseDisplayname }) => {
-    const [displayname, setDisplayname] = useState(displayData);
+export const EditDisplayName = ({onCloseEditDisplayname,  data,  }) => {
+    const [displayname, setDisplayname] = useState(data);
   
     const handleDisplayNameChange = (event) => {
       setDisplayname(event.target.value);
@@ -52,10 +52,10 @@ export const EditDisplayName = ({ displayData, onCloseDisplayname }) => {
 
                 <div className='mt-5 flex felx-row-2 justify-center'>
                     <button onClick={handleSubmit} 
-                        className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                        className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
-                    <button onClick={onCloseDisplayname} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+                    <button onClick={onCloseEditDisplayname} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                         Cancel
                     </button>                    
                 </div>

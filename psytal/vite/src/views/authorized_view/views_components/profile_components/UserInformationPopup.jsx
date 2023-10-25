@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInformationChange}) => {
+export const UserInformationPopup = ({onCloseUserInfo, data, onUserInformationChange}) => {
     //calling the sample data
-    const [userinformation, setUserInformation] = useState(displayData);
+    const [userinformation, setUserInformation] = useState(data);
 
     //changing the email
     const handleUserInformationChange = (event) => {
@@ -21,8 +21,8 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
             <i>User Informatiom -<strong> Admin</strong></i>
         </div> <hr className="mt-2" />
 
-        
-            <table className="table-auto mt-5" style={{border:1}}>
+        <div className=' flex flex-col  items-center justify-center'>
+            <table className="items-center mt-5" style={{border:1}}>
                 <tr className='bg-gray-200 '>
                     <th className='px-5'>Name</th>
                     <td>
@@ -69,14 +69,14 @@ export const UserInformationPopup = ({onCloseUserInfo, displayData, onUserInform
                     </td>
                 </tr>
             </table>
-        
+            </div>
 
         <div className='mt-5 flex felx-row-2 justify-center'>
             <button onClick={handleSubmit} 
-                className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                 Confirm
             </button>
-            <button onClick={onCloseUserInfo} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+            <button onClick={onCloseUserInfo} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                 Cancel
             </button>                    
         </div>

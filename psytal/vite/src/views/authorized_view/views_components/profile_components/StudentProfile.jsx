@@ -1,39 +1,38 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import avatar from "@assets/icons8avatar.png";
 import edit from "@assets/icons8createpost.png";
 import ReactModal from 'react-modal';
 import { StudentEditEmail } from './StudentEditEmail';
 import { StudentEditPassword } from './StudentEditPassword';
 import { StudentUserInformationPopup } from './StudentUserInformationPopup';
+import axiosClient from '../../../../axios';
 
 export default function StudentProfile({closeModal}) {
-    //Sample Data's
-    const [displayData, setDisplayData] = useState({
-        name: "John Doe",
-        student_id: "190000001",
-        yearsection: "4B",
-        sem_enrolled: "1st Semester, SY:2023-2024",
-        email: "john.doe@example.com",
-        contact_num:"09123456789",
-        date_of_birth: "2000-09-22",
-        address: "123, St., ABC",
-        emergency_contact_name: "Muhamad",
-        emergency_contact_num: "09123456789",
-        emergency_contact_address:"Block 123, Street 1, City",
-        newemail: "john.deo123@example.com",  
-        password: "password123",
-        newpassword: "abcde123",
-        position: "Chairperson"     
-      });
+    // Use functional update for the state to prevent re-renders
+    const [data, setData] = useState(() => null);
+    // Ensure data.role is an integer
+    const roleInt = data ? parseInt(data.role, 10) : 0; 
 
-    //calling the sample data
-    const [profile, setProfile] = useState(displayData);
+  useEffect(() => {
+    axiosClient.get('/getuserdetails')
+    .then((res) => {
+      // Use functional update to prevent re-renders caused by unchanged state
+      setData(res.data);
+    });
+  }, []);
+
     //CALLING EditPassword
     const [isStudentEditPasswordOpen, setIsStudentEditPasswordOpen] = useState(false);
     //CALLING EditPEmail
     const [isStudentEditEmailOpen, setIsStudentEditEmailOpen] = useState(false);
     //CALLING UserInformation
     const [isStudentUserInformationOpen, setIsStudentUserInformationOpen] = useState(false);
+    //Password can be seen/not
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+      setIsVisible(!isVisible);
+    };
   return (
     <>
     <div>
@@ -45,7 +44,7 @@ export default function StudentProfile({closeModal}) {
                     className="block w-full rounded-md py-1.5 text-gray-700 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" 
                     type="text"
                     name="displayname"
-                    value={profile.name}
+                    value={data && data.name ? data.name : 'Nothing to Show'}
                     //onChange={handleProfile}
                     readOnly
                     placeholder="displayname"
@@ -62,17 +61,17 @@ export default function StudentProfile({closeModal}) {
             
             <div className="flex flex-col justify-between mx-2 mb-2">
                 <label onClick={()=> setIsStudentUserInformationOpen (true)}
-                    className='cursor-pointer mx-3 px-2 py-1 bg-green-600 rounded-md'>User Information 
+                    className='cursor-pointer mx-3 px-2 py-1 bg-green-500 hover:bg-green-700 rounded-md'>User Information 
                 </label>
                 <label 
-                    className='cursor-pointer mt-1 mx-3 px-2 py-1 bg-green-600 rounded-md'>Curriculum Checklist
+                    className='cursor-pointer mt-1 mx-3 px-2 py-1 bg-green-500 hover:bg-green-700 rounded-md'>Curriculum Checklist
                 </label>
             </div>                        
         </div>
 
         <div className="flex flex-wrap flex-col px-3 mx-16 mt-5 mb-2">
             <div className="w-full px-3 md:mb-0 mt-2">
-                <label className=" text-gray-700 text-lg font-bold mb-2  p-2 rounded-md bg-green-600">Account Informations: </label> 
+                <label className=" text-gray-700 text-lg font-bold mb-2  p-2 rounded-md">Account Informations: </label> 
             </div>
             
             <div className='mx-10 mt-2'>
@@ -83,7 +82,7 @@ export default function StudentProfile({closeModal}) {
                     className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                     type="email"
                     name="email"
-                    value={profile.email}
+                    value={data && data.email ? data.email : 'Nothing to Show'}
                     readOnly
                     //onChange={handleProfile}
                     placeholder="Email"
@@ -108,9 +107,9 @@ export default function StudentProfile({closeModal}) {
             <div className='flex flex-row mx-16 mt-2'>
                 <input
                     className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                    type="password"
+                    type={isVisible ? "text" : "password"}
                     name="password"
-                    value={profile.password}
+                    value={'contextPass'} //not yet Working(Temporary)
                     readOnly
                     //onChange={handleProfile}
                     placeholder="Password"
@@ -128,10 +127,15 @@ export default function StudentProfile({closeModal}) {
                     />
                 </div>
             </div>
+            <div>
+                <label onClick={toggleVisibility} className=' text-blue-400 text-sm px-2 mb-2'>
+                    {isVisible ? "Hide Password" : "Show Password"}
+                </label>
+            </div>
         </div>       
 
         <div className='mt-5 grid grid-row-2 justify-center'>
-            <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+            <button onClick={closeModal} className="bg-[#f34450] hover:bg-red-700 rounded-2xl mt-3 px-5 text-white font-size">
                 Close
             </button>
         </div>
@@ -146,7 +150,7 @@ export default function StudentProfile({closeModal}) {
     onRequestClose={() => setIsStudentEditEmailOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentEditEmail displayData={displayData} onCloseStudentEditEmail={()=> setIsStudentEditEmailOpen (false)}/></div>
+        <div><StudentEditEmail data={data} onCloseStudentEditEmail={()=> setIsStudentEditEmailOpen (false)}/></div>
     </ReactModal>
 
     {/**Setting the Edit Password*/}   
@@ -155,7 +159,7 @@ export default function StudentProfile({closeModal}) {
     onRequestClose={() => setIsStudentEditPasswordOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentEditPassword displayData={displayData} onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)}/></div>
+        <div><StudentEditPassword data={data} onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)}/></div>
     </ReactModal>
 
     {/**Setting the User Information*/} 
@@ -164,7 +168,7 @@ export default function StudentProfile({closeModal}) {
     onRequestClose={()=> setIsStudentUserInformationOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentUserInformationPopup displayData={displayData} onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)}/></div>
+        <div><StudentUserInformationPopup data={data} onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)}/></div>
     </ReactModal>
 
     </>
