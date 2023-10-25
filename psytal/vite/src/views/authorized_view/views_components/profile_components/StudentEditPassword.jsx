@@ -62,7 +62,7 @@ export const StudentEditPassword = ({ onCloseStudentEditPassword, data, onStuden
                         className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
-                    <button onClick={onCloseStudentEditPassword} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl">
+                    <button onClick={onCloseStudentEditPassword} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                         Cancel
                     </button>                    
                 </div>

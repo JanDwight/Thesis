@@ -220,7 +220,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                 Confirm
             </button>
-            <button onClick={onCloseStudentUserInfo} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl">
+            <button onClick={onCloseStudentUserInfo} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                 Cancel
             </button>                    
         </div>
