@@ -58,7 +58,6 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/show_archives', [ArchiveController::class, 'index']); //<><><> show for archives
     Route::post('/return_archives', [ArchiveController::class, 'returnArchive']);//<><><> archive restore
     Route::post('/backup_archives', [ArchiveController::class, 'backupArchive']);//<><><> archive delete but store to file
-    //Route::get('/posts', [PostController::class, 'index']); //<><><> index for posts (unused but don't delete)
     Route::get('/count_posts', [PostController::class, 'count_posts']); //<><><> counting posts
     Route::get('/count_students', [UserController::class, 'count_students']); //<><><> count students from users table
     Route::get('/count_employee', [UserController::class, 'count_employee']); //<><><> count employees from users table
@@ -67,6 +66,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
     Route::post('/createstudentprofile', [StudentProfileController::class, 'create']);
+
+    //pre-reg courses to be enrolled + section
+    Route::get('/show_classes', [ClassesController::class, 'index']); //<><><> show for logs
     
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);

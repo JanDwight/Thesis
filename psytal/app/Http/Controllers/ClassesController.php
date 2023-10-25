@@ -32,6 +32,7 @@ class ClassesController extends Controller
 
         $class = classes::create([
             'course_title' => $data['course_title'],
+            'class_code' => $data['class_code'],
             'class_year' => $data['class_year'], // Update to match the actual column name
             'semester' => $data['semester'],
             'course_code' => $data['course_code'], // Update to match the actual column name
@@ -54,6 +55,7 @@ class ClassesController extends Controller
         $validatedData = $request->validate([
             'instructor_name' => 'required|string|max:255',
             'class_section' => 'required|string|max:255',
+            'class_code' => 'required|string|max:255',
         ]);
 
         // Retrieve the user based on the provided ID
@@ -84,7 +86,7 @@ class ClassesController extends Controller
             // Create an Archive instance
             $archive = new archive;
             $archive->item_id = $class_id->class_id;
-            $archive->item_name = $class_id->course_title;
+            $archive->item_name = $class_id->class_code;
             $archive->item_type = $itemType;
             $archive->origin_table = $classTableName;
             $archive->archiver_id = auth()->user()->id; // Assuming you have user authentication

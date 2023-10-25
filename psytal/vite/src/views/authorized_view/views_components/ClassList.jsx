@@ -3,6 +3,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditClasses from '../views_components/EditClasses.jsx';
 import ArchiveClasses from '../views_components/ArchiveClasses.jsx';
+import ClassPopUp from '../views_components/ClassPopUp.jsx';
 import axiosClient from '../../../axios.js';
 
 class ClassList extends Component {
@@ -13,6 +14,7 @@ class ClassList extends Component {
         isArchiveClassesOpen: false,
         isEditClassesOpen: false,
         selectedClass: null,
+        isClassPopUpOpen:false,
       };
   }
 
@@ -35,6 +37,20 @@ class ClassList extends Component {
 
   }
 
+  // open class pop-up modal <><><><><>
+  handleOpenPopUp = (subject) => {
+    console.log('selected row: ', subject);
+    this.setState({
+      selectedClass: subject,
+      isClassPopUpOpen: true,
+    });
+  };
+  handleCloseClassPopUp = () => {
+    this.setState({
+      isClassPopUpOpen: false,
+    });
+  };
+
   //<><><> Open ArchiveClasses modal
   handleArchiveClick = (subject) => {
     console.log('Archive Window Open');
@@ -52,10 +68,9 @@ class ClassList extends Component {
   };
 
   //<><><> Open EditClasses modal
-  handleEditClassesClick = (subject) => {
-    console.log('Edit Window Open');
+  handleEditClassesClick = (selected_subject) => {
     this.setState({
-      selectedClass: subject,
+      selectedClass: selected_subject,
       isEditClassesOpen: true,
       
     });
@@ -80,7 +95,7 @@ handleSaveClassChanges = () => {
   render() {
     const { data, selectedClass } = this.state;
     const { filterText } = this.props; // Receive filterText from parent component
-
+    
     // Apply filtering for searchbar
     const filteredData = data.filter(
       (classes) =>
@@ -97,33 +112,39 @@ handleSaveClassChanges = () => {
         <table className="table w-full table-striped text-gray-700">
           <thead>
             <tr>
+              <th className="text-left bg-gray-200 p-2">Class Code</th>
               <th className="text-left bg-gray-200 p-2">Course Code</th>
               <th className="bg-gray-200 text-left p-2">Course Title</th>
               <th className="bg-gray-200 text-left p-2">Semester</th>
-              <th className="bg-gray-200 text-left p-2">Year & Section</th> 
+              <th className="bg-gray-200 text-left p-2">Year</th> 
+              <th className="bg-gray-200 text-left p-2">Section</th> 
               <th className="bg-gray-200 text-left p-2">Instructor</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
             </tr>
           </thead>
           <tbody>{filteredData.map((subject, index) => (
-              <tr key={index} className='odd:bg-green-100'>
-                <td className="text-left p-2">{subject.course_code}</td>
-                <td className="text-left p-2">{subject.course_title}</td>
-                <td className="text-left p-2">{subject.semester}</td>
-                <td className="text-left p-2">{subject.class_year + '-' + subject.class_section}</td>
-                <td className="text-left p-2">{subject.instructor_name}</td>
+                <tr key={index} className='odd:bg-green-100 cursor-pointer'>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.class_code}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.course_code}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.course_title}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.semester}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.class_year}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.class_section}</td>
+                <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.instructor_name}</td>
                 <td className="text-left p-2">
                   <div className="flex items-center">
                     <img
                       src={edit}
-                      alt='edit'
-                      className='h-5 w-5 cursor-pointer'
-                      onClick={() => this.handleEditClassesClick(subject)}/>
+                      alt='Edit'
+                      className='h-5 w-5 cursor-pointer transform transition-transform hover:scale-125'
+                      onClick={() => this.handleEditClassesClick(subject)}
+                    />
                     <img
                       src={archive} 
-                      alt='archive'
-                      className='h-7 w-7 cursor-pointer' 
-                      onClick={() => this.handleArchiveClick(subject)}/>
+                      alt='Archive'
+                      className='h-7 w-7 cursor-pointer transform transition-transform hover:scale-125' 
+                      onClick={() => this.handleArchiveClick(subject)}
+                    />
                   </div>
                 </td>
               </tr>
@@ -134,7 +155,7 @@ handleSaveClassChanges = () => {
           <ArchiveClasses
             showModal={this.state.isArchiveClassesOpen}
             onClose={this.handleCloseArchiveClasses}
-            subject={selectedClass} // Pass the selected subject to EditClasses
+            subject={selectedClass}
             //  other props/functions as needed for archiving
           />
         )}
@@ -144,6 +165,13 @@ handleSaveClassChanges = () => {
             onClose={this.handleCloseEditClasses}
             subject={selectedClass} 
             onSave={this.handleSaveClassChanges}
+          />
+        )}
+        {this.state.isClassPopUpOpen && (
+          <ClassPopUp
+            showModal={this.state.isClassPopUpOpen}
+            onClose={this.handleCloseClassPopUp}
+            subject={selectedClass}
           />
         )}
       </div>

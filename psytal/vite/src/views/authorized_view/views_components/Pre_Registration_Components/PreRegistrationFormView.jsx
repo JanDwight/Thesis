@@ -6,11 +6,72 @@ import { Navigate } from 'react-router-dom';
 
 export default function PreRegistrationFormView({prereg}) {
 
-  console.log(prereg.health_facility_registered)
+  //console.log(prereg.health_facility_registered)
+
+  const [subjectData, setSubjectData] = useState([]); //<><><><><>
+  const [totalUnits, setTotalUnits] = useState(0); //<><><><><>
 
   const includeNumbers = true;  // Include numbers in the password
   const includeSymbols = true;  // Include symbols in the password
   const role = "4";
+
+    //<><><><><>
+    const [inputFields, setInputFields] = useState([
+      { classCode: '', courseCode: '', units: '', bcac: '' },
+    ]);
+
+    //calling the Form in the adding of classes
+    const handleSubmitCourseUnits = (e) => {
+        e.preventDefault();
+        console.log("InputFields", inputFields);
+      };
+    //Changing the input fields
+    const handleChangeInput = (index, event) => {
+        const values = [...inputFields];
+        values [index][event.target.name] = event.target.value;     
+        setInputFields(values);
+      }
+    //For Adding
+    const handleAddFields = () => {
+        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
+      }
+    //For removing
+    const handleRemoveFields = (index) => {
+        const values  = [...inputFields];
+        values.splice(index, 1);
+        setInputFields(values);
+      }
+
+    //units calc
+    const handleChangeUnits = (index, value) => {
+      // Calculate the unit difference
+      const oldUnits = parseInt(inputFields[index].units || 0, 10);
+      const newUnits = parseInt(value || 0, 10);
+      const unitDifference = newUnits - oldUnits;
+    
+      // Update the total units by adding the unit difference
+      setTotalUnits(totalUnits + unitDifference);
+    
+      // Update the input fields with the new "units" value
+      const fields = [...inputFields];
+      fields[index] = { ...fields[index], units: value };
+      setInputFields(fields);
+    };
+
+      //auto fill dropdown
+      useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axiosClient.get('/show_classes');
+            const classData = response.data; // Set the data in the state
+            setSubjectData(classData); // Set the data in the state
+          } catch (error) {
+            console.error('Error fetching data from the database:', error);
+          }
+        }
+      
+        fetchData(); // Call the fetchData function
+      }, []);
 
   const [preregData, setPreregData] = useState(prereg, {
     start_of_school_year: '',   
@@ -1080,6 +1141,187 @@ export default function PreRegistrationFormView({prereg}) {
               </div>
         </form>
       </div>
+
+      {/**=========================== 4 ==========================*/}      
+        {/**Start of Filling the FORM for CLASS CODES UNITS*/}
+        <div className="w-full lg:w-8/12 px-4 container mx-auto">            
+            <form 
+                //ah basta hhaha
+                //onSubmit={handleSubmitCourseUnits}
+                >
+                <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
+                    <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
+                        <div className="text-normal font-medium text-center mt-2">
+                            SECTION/COURSE(S) TO BE ENROLLED : FOR IRREGULAR STUDENT
+                        </div> <hr className='mt-2'/>
+                        <div className="flex items-center">
+                            <p> <label className='font-semibold'>Note: </label>
+                                <label> If the course you are enrolling is a <a className='font-semibold'>back course/ subject </a>
+                                        write <a className='font-semibold'>BC, </a> and if it is an <a className='font-semibold'>advanced subject/ course </a>
+                                        write <a className='font-semibold'>AC.</a> Else, select <b>N/A</b>.
+                                </label>
+                            </p>   
+                        </div><hr className='mt-2'/>
+
+                        { inputFields.map((inputField, index) => (
+                            <div key={index} className="flex flex-wrap flex-row px-3 -mx-3 mt-3 mb-3">
+                                {/**Class code */}
+                                <div className="w-full md:w-[25%] pr-1">
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-classcode`}>
+                                    Class Code
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="classCode"
+                                    value={inputField.classCode}
+                                    onChange={event => handleChangeInput(index, event)}
+                                  >
+                                    <option value="" disabled selected>
+                                      Class Code
+                                    </option>
+                                    {subjectData.map(item => (
+                                      <option key={item.id} value={item.class_code}>
+                                        {item.class_code}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                {/**Course code */}
+                                <div className="w-full md:w-[25%] pr-1">
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>
+                                    Course Code
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="courseCode"
+                                    value={inputField.courseCode}
+                                    onChange={event => handleChangeInput(index, event)}
+                                  >
+                                    <option value="" disabled selected>
+                                      Course Code
+                                    </option>
+                                    {subjectData.map(item => (
+                                      <option key={item.id} value={item.course_code}>
+                                        {item.course_code + ' - ' + item.course_title}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+
+                                {/**Units */}
+                                <div className="w-full md:w-[15%] pr-1">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>Unit/s</label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                      type="number"
+                                      name="units"
+                                      label="Units"
+                                      variant="filled"
+                                      placeholder="Units"
+                                      value={inputField.units}
+                                      onChange={(event) => {
+                                        handleChangeUnits(index, event.target.value); // working
+                                        handleChangeInput(index, event); // may not work pls test
+                                      }}
+                                      required
+                                    />
+                                </div>
+
+                                {/**BC or AC */}
+                                <div className="w-full md:w-[20%] pr-1">
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>
+                                    BC / AC
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="bcac"
+                                    value={inputField.bcac}
+                                    onChange={event => handleChangeInput(index, event)}
+                                    defaultValue="N/A"
+                                  >
+                                    <option value="N/A">N/A</option>
+                                    <option value="BC">BC</option>
+                                    <option value="AC">AC</option>
+                                  </select>
+                                </div>
+
+                                {/**Buttons for Adding and Removing row */}
+                                <div className='w-full md:w-[10%] flex items-center justify-center mx-0 mt-4"'>
+                                    <button type="button"
+                                            className="ml-2 text-red-600 hover:bg-red-300 hover:text-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center border border-gray-600 hover:border-red-800 hover:cursor-pointer"
+                                            disabled={inputFields.length === 1} onClick={() => handleRemoveFields(index)}
+                                            >
+                                        <svg
+                                            className="w-4 h-4"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M20 12H4"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <button type="button"
+                                            className="text-gray-600 border border-gray-600 hover:bg-gray-800 hover:text-white rounded-full p-2.5 text-center inline-flex items-center"
+                                            onClick={handleAddFields}
+                                    >
+                                        <svg
+                                            className="w-4 h-4"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                
+                            </div>
+                            )) }
+                            {/**Total Unit */}
+                            <div className="flex flex-row w-full md:w-[50%] px-5">
+                                <div className='w-full mx-5 mt-2'>
+                                    <label
+                                        className="text-gray-700 text-lg font-bold mb-2 block"
+                                        htmlFor="grid-totalunits"
+                                    >
+                                        Total Units :
+                                    </label>
+                                </div>
+
+                                <div className='mx-5 mt-2'>
+                                    <input
+                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        id="grid-totalunits"
+                                        type="number"
+                                        placeholder="0"
+                                        value={totalUnits}
+                                    />
+                                </div>
+                                                               
+                            </div> 
+                            <button className=' bg-blue-500 rounded mt-2' variant="container">submit [fix me]</button>
+                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container">clear subjects</button>
+                            {/*fix the two buttons above, no axios connection yet, do for other view*/}
+                    </div>
+                </div>
+            </form>
+        </div>
+      {/**=====================================================*/}   
+
     </main>
     </>
     

@@ -60,10 +60,12 @@ export default function GuestLayout() {
             <>
              <div className="flex justify-between items-center px-10 py-3">
                     <div className="flex items-center">
+                    <a href="/guest/landingpage">
                       <img
                         className="h-20 w-20"
                         src={logo}
                         alt="Department of Psychology"/>
+                    </a>
                          <div className="flex flex-col px-2 ">
                             <p className="font-semibold text-sm ml-2 font-franklin text-white ">Department of</p>
                             <p className="font-semibold text-sm ml-2 font-franklin text-white">Psychology</p>

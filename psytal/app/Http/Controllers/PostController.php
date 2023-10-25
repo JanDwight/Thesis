@@ -129,4 +129,12 @@ class PostController extends Controller
 
         return response(['message' => 'Archive post successfully']);
     }
+
+    //count for dashboard
+    public function count_posts()
+    {
+        $postCount = posts::count();
+
+    return $postCount;
+    }
 }

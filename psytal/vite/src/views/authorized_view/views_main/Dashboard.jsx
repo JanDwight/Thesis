@@ -40,7 +40,7 @@ export default function Dashboard() {
         const [count_student, count_employee, count_posts, show_logs, show_archive] = await Promise.all([
           fetchDataCount('/count_students'),
           fetchDataCount('/count_employee'),
-          fetchDataCount('/count_posts'), //edit the posts controller once posts are done
+          fetchDataCount('/count_posts'),
           fetchTables('/show_logs'),
           fetchTables('/show_archives'),
         ]);
@@ -48,7 +48,7 @@ export default function Dashboard() {
         const dashcountData = {
           totalStudents: count_student,
           totalEmployees: count_employee,
-          totalPosts: 'IP', //replace with 'count_posts' once posts are done
+          totalPosts: count_posts,
           totalLogins: count_employee+count_student,
           
         };
@@ -108,9 +108,11 @@ export default function Dashboard() {
 
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
+      <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
+      <div className="font-bold text-4xl lg:text-6xl text-[#525252]"> Dashboard</div>
+      </div>
       <div className="w-full px-4 mx-auto mt-0">
-        <h1 className='text-3xl font-semibold my-5 text-green-700'>DASHBOARD</h1>
-        <hr className="border-gray-400 mt-2 mb-5" />
+        <div className="mt-2 mb-5"></div>
         {/**COL TOTAL S-L */}
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
 

@@ -4,11 +4,13 @@ import axiosClient from '../../../axios.js';
 export default function EditClasses({ showModal, onClose, subject, onSave}) {
   const course_title = subject.course_title;
   const course_code = subject.course_code;
+  const class_code_old = subject.class_code;
   const section_old = subject.class_section;
   const instructor_old = subject.instructor_name;
 
   const [instructor_name, setInstructor] = useState(instructor_old);
   const [class_section, setClass_Section] = useState(section_old);
+  const [class_code, setClass_Code] = useState(class_code_old);
   
   
   const [instructorsTable, setInstructorsTable] = useState([]);
@@ -49,7 +51,8 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
     const updatedClass = {
       // Assuming classId is still the same
       instructor_name,
-      class_section: class_section.toUpperCase(),
+      class_section: class_section,
+      class_code,
     };
   
     axiosClient
@@ -77,28 +80,29 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
             <form>
             <div className="mb-4">
                 <label htmlFor="class" className="block text-sm text-gray-700">
-                  Class Name:
+                  Course Title:
                 </label>
                 <input
                   id="class"
                   name="class"
                   type="text"
-                  value={course_title}
+                  value={course_code + ' - ' +course_title}
                   disabled //makes field uneditable
                   className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />
               </div>
               <div className="mb-4">
                 <label htmlFor="c_code" className="block text-sm text-gray-700">
-                  Course Code:
+                  Class Code:
                 </label>
                 <input
                   id="c_code"
                   name="c_code"
                   type="text"
-                  value={course_code}
-                  disabled //makes field uneditable
-                  className="block w-full rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                  placeholder={class_code_old}
+                  onChange={(ev) => setClass_Code(ev.target.value.toUpperCase())}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                  required
                 />
               </div>
              {/*User Input*/}

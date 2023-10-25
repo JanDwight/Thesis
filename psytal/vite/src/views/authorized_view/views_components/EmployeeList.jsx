@@ -110,13 +110,13 @@ class EmployeeList extends Component {
                   <img
                     src={edit} 
                     alt='edit'
-                    className='h-5 w-5 cursor-pointer'
+                    className='h-5 w-5 cursor-pointer transform transition-transform hover:scale-125'
                     onClick={() => this.handleEditUsersClick(employee)}
                   />
                   <img
                     src={archive} 
                     alt='archive'
-                    className='h-7 w-7 cursor-pointer'
+                    className='h-7 w-7 cursor-pointer transform transition-transform hover:scale-125'
                     onClick={() => this.handleArchiveClick(employee)}
                   />
                 </div>
