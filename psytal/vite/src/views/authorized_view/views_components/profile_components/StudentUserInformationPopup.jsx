@@ -22,6 +22,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
         </div> <hr className="mt-2" />
 
         <form>
+            <div className=' flex flex-col  items-center justify-center'>
             <table className=" inline-table mt-5">
                 <tbody>
                 {/**Name */}
@@ -58,7 +59,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 {/**Year and Section */}
                 <tr>
-                    <th className='px-5'>Year and Section</th>
+                    <th className='px-5 bg-gray-200'>Year and Section</th>
                     <td>
                         <input 
                             type="text"
@@ -90,7 +91,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 {/**Email */}
                 <tr>
-                    <th className='px-5'>Email</th>
+                    <th className='px-5 bg-gray-200'>Email</th>
                     <td>
                         <input 
                             type="email"
@@ -106,7 +107,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 {/**Conatct Number */}
                 <tr>
-                    <th className='px-5'>Contact Number</th>
+                    <th className='px-5 bg-gray-200'>Contact Number</th>
                     <td>
                         <input 
                             type="number"
@@ -139,7 +140,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 {/**Adress */}
                 <tr>
-                    <th className='px-5'>Address</th>
+                    <th className='px-5 bg-gray-200'>Address</th>
                     <td>
                         <input 
                             type="text"
@@ -155,14 +156,16 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 </tbody> 
             </table>
+            </div>
 
         <div className='text-md font-serif py-3'>
-            <i> EMERGENCY CONTACTS :</i>
+            <i className='my-3'> EMERGENCY CONTACTS :</i>
+            <div className=' flex flex-col  items-center justify-center'>
             <table className='mt-3'>
                 <tbody>
                 {/**Name of emergency Contact */}
                 <tr>
-                    <th className='px-5'>Name:</th>
+                    <th className='px-5 bg-gray-200'>Name:</th>
                     <td>
                         <input 
                             type="text"
@@ -195,7 +198,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
 
                 <tr>
-                    <th className='px-5'>Address:</th>
+                    <th className='px-5 bg-gray-200'>Address:</th>
                     <td>
                         <input 
                             type="text"
@@ -211,6 +214,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStu
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
         
     </form>
