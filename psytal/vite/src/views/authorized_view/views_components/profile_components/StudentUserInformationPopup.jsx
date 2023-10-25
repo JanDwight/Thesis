@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData, onStudentUserInformationChange}) => {
+export const StudentUserInformationPopup = ({onCloseStudentUserInfo, data, onStudentUserInformationChange}) => {
     //calling the sample data
-    const [student_userinformation, setStudentUserInformation] = useState(displayData);
+    
 
     //changing the email
     const handleStudentUserInformationChange = (event) => {
@@ -11,7 +11,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
 
     //Bahalakana dito hahahha
     const handleSubmit = () => {
-        onStudentUserInformationChange(student_userinformation);
+        onStudentUserInformationChange(data);
         onClose();
       };
       
@@ -31,7 +31,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input className="bg-transparent"
                             type="text"
                             name="name"
-                            value={student_userinformation.name}
+                            value={data.name}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Full name"
                             style={{
@@ -47,7 +47,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="number"
                             name="student_id"
-                            value={student_userinformation.student_id}
+                            value={data.student_id}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Student ID"
                             style={{
@@ -63,7 +63,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="text"
                             name="yearsection"
-                            value={student_userinformation.yearsection}
+                            value={data.yearsection}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Year & Section"
                             style={{
@@ -79,7 +79,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="text"
                             name="sem_enrolled"
-                            value={student_userinformation.sem_enrolled}
+                            value={data.sem_enrolled}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Semester Enrolled"
                             style={{
@@ -95,7 +95,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="email"
                             name="oldemail"
-                            value={student_userinformation.email}
+                            value={data.email}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Email"
                             style={{
@@ -111,7 +111,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="number"
                             name="contact_num"
-                            value={student_userinformation.contact_num}
+                            value={data.contact_num}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Conatact Number"
                             maxLength={11}
@@ -128,7 +128,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="date"
                             name="date_of_birth"
-                            value={student_userinformation.date_of_birth}
+                            value={data.date_of_birth}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Date of Birth"
                             style={{
@@ -144,7 +144,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="text"
                             name="adress"
-                            value={student_userinformation.address}
+                            value={data.address}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Address"
                             style={{
@@ -167,7 +167,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="text"
                             name="emergency_contact_name"
-                            value={student_userinformation.emergency_contact_name}
+                            value={data.emergency_contact_name}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Name"
                             style={{
@@ -183,7 +183,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="number"
                             name="emergency_contact)_num"
-                            value={student_userinformation.emergency_contact_num}
+                            value={data.emergency_contact_num}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Contact Number"
                             maxLength={11}
@@ -200,7 +200,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                         <input 
                             type="text"
                             name="emergency_contact_address"
-                            value={student_userinformation.emergency_contact_address}
+                            value={data.emergency_contact_address}
                             onChange={handleStudentUserInformationChange}
                             placeholder="Address"
                             style={{
@@ -220,7 +220,7 @@ export const StudentUserInformationPopup = ({onCloseStudentUserInfo, displayData
                 className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                 Confirm
             </button>
-            <button onClick={onCloseStudentUserInfo} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+            <button onClick={onCloseStudentUserInfo} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl">
                 Cancel
             </button>                    
         </div>
