@@ -38,7 +38,7 @@ export const EditPassword = ({ onCloseEditPassword, data, onPasswordChange }) =>
                                 }}
                         ></input>
                         
-                    <label className="mt-3 text-lg font-franklin">New Password</label>
+                    <label className="mt-3 text-lg font-franklin">New Password:</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}
                             name="newpassword"
