@@ -6,7 +6,10 @@ import { Navigate } from 'react-router-dom';
 
 export default function PreRegistrationFormView({prereg}) {
 
-  console.log(prereg.health_facility_registered)
+  //console.log(prereg.health_facility_registered)
+
+  const [subjectData, setSubjectData] = useState([]); //<><><><><>
+  const [totalUnits, setTotalUnits] = useState(0); //<><><><><>
 
   const includeNumbers = true;  // Include numbers in the password
   const includeSymbols = true;  // Include symbols in the password
@@ -22,22 +25,55 @@ export default function PreRegistrationFormView({prereg}) {
       e.preventDefault();
       console.log("InputFields", inputFields);
     };
-    //Changing the input fields
-    const handleChangeInput = (index, event) => {
-        const values = [...inputFields];
-        values [index][event.target.name] = event.target.value;     
-        setInputFields(values);
-      }
-    //For Adding
-    const handleAddFields = () => {
-        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
-      }
-    //For removing
-    const handleRemoveFields = (index) => {
-        const values  = [...inputFields];
-        values.splice(index, 1);
-        setInputFields(values);
-      }
+      //For Adding
+      const handleAddFields = () => {
+          setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
+        }
+      // Function to handle removing a field
+      const handleRemoveFields = (index) => {
+        // Retrieve the units from the field being removed
+        const removedUnits = parseInt(inputFields[index].units || 0, 10);
+        
+        // Subtract the removed units from the total units
+        setTotalUnits(totalUnits - removedUnits);
+        
+        // Remove the field from the inputFields array
+        const newFields = inputFields.filter((_, i) => i !== index);
+        setInputFields(newFields);
+      };
+
+      // Function to handle changes in the unit field
+      const handleChangeInput = (index, event) => {
+        const { name, value } = event.target;
+        
+        // Calculate the unit difference
+        const oldUnits = parseInt(inputFields[index].units || 0, 10);
+        const newUnits = parseInt(value || 0, 10);
+        const unitDifference = newUnits - oldUnits;
+        
+        // Update the total units by adding the unit difference
+        setTotalUnits(totalUnits + unitDifference);
+        
+        // Update the input fields
+        const fields = [...inputFields];
+        fields[index] = { ...fields[index], [name]: value };
+        setInputFields(fields);
+      };
+
+      //auto fill dropdown
+      useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axiosClient.get('/show_classes');
+            const classData = response.data; // Set the data in the state
+            setSubjectData(classData); // Set the data in the state
+          } catch (error) {
+            console.error('Error fetching data from the database:', error);
+          }
+        }
+      
+        fetchData(); // Call the fetchData function
+      }, []);
 
   const [preregData, setPreregData] = useState(prereg, {
     start_of_school_year: '',   
@@ -1124,7 +1160,7 @@ export default function PreRegistrationFormView({prereg}) {
                             <p> <label className='font-semibold'>Note: </label>
                                 <label> If the course you are enrolling is a <a className='font-semibold'>back course/ subject </a>
                                         write <a className='font-semibold'>BC, </a> and if it is an <a className='font-semibold'>advanced subject/ course </a>
-                                        write <a className='font-semibold'>AC.</a> Else, leave blank.
+                                        write <a className='font-semibold'>AC.</a> Else, select <b>N/A</b>.
                                 </label>
                             </p>   
                         </div><hr className='mt-2'/>
@@ -1133,53 +1169,78 @@ export default function PreRegistrationFormView({prereg}) {
                             <div key={index} className="flex flex-wrap flex-row px-3 -mx-3 mt-3 mb-3">
                                 {/**Class code */}
                                 <div className="w-full md:w-[25%] pr-1">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-classcode`}>Class Code</label>
-                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        type='text'
-                                        name="classCode"
-                                        label="Class Code"
-                                        variant="filled"
-                                        value={inputField.classCode}
-                                        onChange={event => handleChangeInput(index, event)}
-                                    />
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-classcode`}>
+                                    Class Code
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="classCode"
+                                    value={inputField.classCode}
+                                    onChange={event => handleChangeInput(index, event)}
+                                  >
+                                    <option value="" disabled selected>
+                                      Class Code
+                                    </option>
+                                    {subjectData.map(item => (
+                                      <option key={item.id} value={item.class_code}>
+                                        {item.class_code}
+                                      </option>
+                                    ))}
+                                  </select>
                                 </div>
                                 {/**Course code */}
                                 <div className="w-full md:w-[25%] pr-1">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>Course Code</label>
-                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        type='text'
-                                        name="courseCode"
-                                        label="course Code"
-                                        variant="filled"
-                                        value={inputField.courseCode}
-                                        onChange={event => handleChangeInput(index, event)}
-                                    />
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>
+                                    Course Code
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="courseCode"
+                                    value={inputField.courseCode}
+                                    onChange={event => handleChangeInput(index, event)}
+                                  >
+                                    <option value="" disabled selected>
+                                      Class Code
+                                    </option>
+                                    {subjectData.map(item => (
+                                      <option key={item.id} value={item.course_code}>
+                                        {item.course_code + ' - ' + item.course_title}
+                                      </option>
+                                    ))}
+                                  </select>
                                 </div>
 
                                 {/**Units */}
                                 <div className="w-full md:w-[15%] pr-1">
                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>Unit/s</label>
                                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        type='number'
-                                        name="units"
-                                        label="Units"
-                                        variant="filled"
-                                        value={inputField.units}
-                                        onChange={event => handleChangeInput(index, event)}
+                                      type="number"
+                                      name="units"
+                                      label="Units"
+                                      variant="filled"
+                                      placeholder="Units"
+                                      value={inputField.units}
+                                      onChange={event => handleChangeInput(index, event)}
+                                      required
                                     />
                                 </div>
 
                                 {/**BC or AC */}
                                 <div className="w-full md:w-[20%] pr-1">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>BC / AC</label>
-                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        type='text'
-                                        name="bcac"
-                                        label="BC / AC"
-                                        variant="filled"
-                                        value={inputField.bcac}
-                                        onChange={event => handleChangeInput(index, event)}
-                                    />
+                                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={`grid-coursecode`}>
+                                    BC / AC
+                                  </label>
+                                  <select
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    name="bcac"
+                                    value={inputField.bcac}
+                                    onChange={event => handleChangeInput(index, event)}
+                                    defaultValue="N/A"
+                                  >
+                                    <option value="N/A">N/A</option>
+                                    <option value="BC">BC</option>
+                                    <option value="AC">AC</option>
+                                  </select>
                                 </div>
 
                                 {/**Buttons for Adding and Removing row */}
@@ -1245,21 +1306,20 @@ export default function PreRegistrationFormView({prereg}) {
                                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         id="grid-totalunits"
                                         type="number"
-                                        placeholder=""
+                                        placeholder="0"
+                                        value={totalUnits}
                                     />
                                 </div>
                                                                
                             </div> 
-                            <button className=' bg-blue-500 rounded mt-2' variant="container" type='submit'>submit</button>
-                    
+                            <button className=' bg-blue-500 rounded mt-2' variant="container" type='submit'>submit [fix me]</button>
+                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container" type='submit'>clear subjects</button>
+                            {/*fix the two buttons above, no axios connection yet, do for other view*/}
                     </div>
                 </div>
             </form>
         </div>
       {/**=====================================================*/}   
-
-
-
 
     </main>
     </>
