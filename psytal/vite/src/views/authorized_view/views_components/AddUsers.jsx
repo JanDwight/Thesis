@@ -94,7 +94,7 @@ export default function AddUsers({ showModal, onClose}) {
       onRequestClose={onClose}
       className="w-[20%] h-fit mt-[10%] mx-auto" //it just works don't question
     >
-    <div className="w-[20%] fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mx-auto p-5">           
         <div className='flex justify-center font-bold text-4xl text-[#525252] mt-5'>
         Add User
@@ -137,12 +137,12 @@ export default function AddUsers({ showModal, onClose}) {
               <option value="3">Instructor</option>
               <option value="4">Student</option>
             </select>
-            <div className="grid grid-row-2 justify-center">
+            <div className="text-center flex justify-center">
               
-              <button type="submit" className="bg-[#0FE810] rounded-2xl mt-3 px-5 text-white text-lg font-bold">
+              <button type="submit" className="bg-[#0FE810]  hover:bg-lime-700 text-white font-bold py-2 px-4 mt-5 rounded-full">
                 Save
               </button>
-              <button type="button" onClick={handleCloseModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white text-lg font-bold">
+              <button type="button" onClick={handleCloseModal} className="bg-[#f34450]  hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-5 ml-3 font-size">
                 Cancel
               </button>
 

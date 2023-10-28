@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\archive;
 use Illuminate\Support\Facades\File; //<><><><><>
 
-
 class ArchiveController extends Controller
 {
     /**
@@ -111,7 +110,7 @@ class ArchiveController extends Controller
                     fwrite($backupFile, "Contents: " . json_encode($sourceItem) . "\n");
 
                     // Update the 'archived' column to 0 in the source item
-                    //  $sourceItem->delete(); //uncomment after all functions are done
+                    $sourceItem->delete(); //uncomment after all functions are done
                 }
             }
         }
@@ -120,7 +119,7 @@ class ArchiveController extends Controller
         fclose($backupFile);
 
         // Force delete the selected items from the 'archives' table
-        //archive::whereIn('id', $selectedItems)->forceDelete(); //uncomment after all functions are done
+        archive::whereIn('id', $selectedItems)->forceDelete(); //uncomment after all functions are done
 
         // Respond with a success message
         return response()->json(['message' => 'Items backed up and deleted successfully']);

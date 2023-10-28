@@ -55,21 +55,9 @@ class AuthController extends Controller
             ], 422);
         }
         $user = Auth::user();
-
-        //-------
-        // Check if the user is archived
-        if ($user->archived == 1) {
-            Auth::logout(); // Log out the user if they are archived
-            return response([
-                'error' => 'Your account is archived and login is not allowed.'
-            ], 422);
-        }
-        //-------
-
         $token = $user->createToken('main')->plainTextToken;
         $role = $user->role;
         $userName = $user->name;
-        //$archive_status = $user->archived;
 
         return response([
             'user_name' => $userName,
