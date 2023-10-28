@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
 
-export const StudentEditPassword = ({ onCloseStudentEditPassword, displayData, onStudentPasswordChange }) => {
+export const StudentEditPassword = ({ onCloseStudentEditPassword, data, onStudentPasswordChange }) => {
     //calling the sample data
-    const [student_password, setStudentPassword] = useState(displayData);
+    
 
+    //changing password
     const handleStudentPasswordChange = (event) => {
       setStudentPassword(event.target.value);
     };
-  
+    //Submiting the changed data
     const handleSubmit = () => {
-      onStudentPasswordChange(student_password);
+      onStudentPasswordChange(data);
       onClose();
     };
     //Password can be seen/not
@@ -26,7 +27,7 @@ export const StudentEditPassword = ({ onCloseStudentEditPassword, displayData, o
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}
                             name="password"
-                            value={student_password.password}
+                            value={data.password}
                             //onChange={handlePasswordChange}
                             disabled readOnly
                             placeholder="old password"
@@ -41,7 +42,7 @@ export const StudentEditPassword = ({ onCloseStudentEditPassword, displayData, o
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type={isVisible ? "text" : "password"}
                             name="newpassword"
-                            value={student_password.newpassword}
+                            value={data.newpassword}
                             onChange={handleStudentPasswordChange}
                             placeholder="New Password"
                             style={{
@@ -58,10 +59,10 @@ export const StudentEditPassword = ({ onCloseStudentEditPassword, displayData, o
 
                 <div className='mt-5 flex felx-row-2 justify-center'>
                     <button onClick={handleSubmit} 
-                        className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                        className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
-                    <button onClick={onCloseStudentEditPassword} className="bg-[#E2202C] hover:bg-[#E2202C] text-white font-bold py-2 px-4 rounded-xl">
+                    <button onClick={onCloseStudentEditPassword} className="bg-[#f34450] hover:bg-red-700 text-white font-bold py-2 px-4 ml-3 rounded-xl">
                         Cancel
                     </button>                    
                 </div>

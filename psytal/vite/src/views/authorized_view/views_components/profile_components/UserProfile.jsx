@@ -27,6 +27,12 @@ export default function UserProfile({closeModal}) {
     const [isStudentEditEmailOpen, setIsStudentEditEmailOpen] = useState(false);
     //CALLING UserInformation
     const [isStudentUserInformationOpen, setIsStudentUserInformationOpen] = useState(false);
+    //Password can be seen/not
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+      setIsVisible(!isVisible);
+    };
     
   return (
     <>
@@ -57,14 +63,10 @@ export default function UserProfile({closeModal}) {
             <div className="flex flex-col justify-between mx-2 mb-2">
                 {roleInt > 3 && (
                     <label onClick={()=> setIsStudentUserInformationOpen (true)}
-                        className='cursor-pointer mx-3 px-2 py-1 bg-green-600 rounded-md'>User Information 
+                        className='cursor-pointer mx-3 px-2 py-1 bg-green-500 hover:bg-green-700 rounded-md'>User Information 
                     </label>
                 )}
-                {roleInt > 3 && (
-                    <label 
-                        className='cursor-pointer mt-1 mx-3 px-2 py-1 bg-green-600 rounded-md'>Curriculum Checklist
-                    </label>
-                )}
+                
             </div>                        
         </div>
 
@@ -107,7 +109,7 @@ export default function UserProfile({closeModal}) {
             <div className='flex flex-row mx-16 mt-2'>
                 <input
                     className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                    type="password"
+                    type={isVisible ? "text" : "password"}
                     name="password"
                     value={'contextPass'} //not yet Working(Temporary)
                     autoComplete='test'
@@ -128,10 +130,15 @@ export default function UserProfile({closeModal}) {
                     />
                 </div>
             </div>
+            <div>
+                <label onClick={toggleVisibility} className=' text-blue-400 text-sm px-2 mb-2'>
+                    {isVisible ? "Hide Password" : "Show Password"}
+                </label>
+            </div>
         </div>       
 
         <div className='mt-5 grid grid-row-2 justify-center'>
-            <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+            <button onClick={closeModal} className="bg-[#f34450] hover:bg-red-700 rounded-2xl mt-3 px-5 text-white font-size">
                 Close
             </button>
         </div>
@@ -159,7 +166,7 @@ export default function UserProfile({closeModal}) {
     onRequestClose={() => setIsStudentEditPasswordOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentEditPassword  onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)}/></div>
+        <div><StudentEditPassword  onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)} data={data}/></div>
     </ReactModal>
 
     {/**Setting the User Information*/} 
@@ -168,7 +175,7 @@ export default function UserProfile({closeModal}) {
     onRequestClose={()=> setIsStudentUserInformationOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentUserInformationPopup  onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)}/></div>
+        <div><StudentUserInformationPopup  onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)} data={data}/></div>
     </ReactModal>
 
     </>

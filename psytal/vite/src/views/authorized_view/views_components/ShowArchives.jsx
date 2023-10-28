@@ -68,6 +68,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const handleCloseModal = () => {
     setSelectedRows([]);
     onClose();
+    window.location.reload();
   };
 
   return (

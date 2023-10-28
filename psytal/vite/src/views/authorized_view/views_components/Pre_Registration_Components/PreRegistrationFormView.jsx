@@ -322,9 +322,7 @@ export default function PreRegistrationFormView({prereg}) {
                 <h6 className="text-blueGray-700 text-sm">
                     STUDENT DETAILS
                 </h6>
-                <button className="bg-blue-600 text-white active:bg-blue-800 font-bold uppercase text-xs px-4 py-1 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-                    RESET
-                </button>
+                
               </div>         
       </div>
       {/**=========================== 2 ==========================*/}      
@@ -792,14 +790,11 @@ export default function PreRegistrationFormView({prereg}) {
                         value="Not Vaccinated">
                           Not Vaccinated</option>
                       <option 
-                        value="1st Dose">
-                          1st Dose</option>
+                        value="Fully Vaccinated">
+                          Fully Vaccinated</option>
                       <option 
-                        value="2nd Dose">
-                          2nd Dose</option>
-                      <option 
-                        value="With Booster">
-                          Booster</option>
+                        value="Not Fully Vaccinated">
+                          Not Fully Vaccinated</option>
                     </select>
                   </div>
 
@@ -1138,6 +1133,10 @@ export default function PreRegistrationFormView({prereg}) {
                 <button onClick={onDecline}
                   className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Decline
+                </button>
+                <button onClick={onReturn}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                  Return
                 </button>
                 <button onClick={onClickAccept}
                   type="submit"

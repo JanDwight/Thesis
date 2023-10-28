@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\posts; 
 use App\Models\PostImage;
-use App\Models\User;
-use App\Models\archive;
 use Illuminate\Support\Str;
 use App\Http\Requests\CreatePostRequest;
 

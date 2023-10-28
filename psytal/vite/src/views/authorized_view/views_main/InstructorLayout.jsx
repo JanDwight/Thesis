@@ -10,11 +10,12 @@ import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
-import { Menu, Transition } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 import { InstructorProfile } from '../views_components/profile_components/InstructorProfile';
+import UserProfile from '../views_components/profile_components/UserProfile';
 
 const navigation = [
   { img: home, name: 'Home', to: 'home'},
@@ -52,24 +53,17 @@ export default function InstructorLayout() {
         <div className="flex-col flex">
           <div className="bg-viridian w-full border-b-2 border-gray-200">
             <div className=" h-16 justify-between items-center mx-auto px-10 flex">
-              <div>
-                <img src= {logo}
-                  className="block btn- h-11 w-auto" alt="Department of Psychology" />
-                  </div>
-              <div className="flex flex-col">
-              <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
-              <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
+              <div className='flex flex-row'>
+                <div>
+                  <img src= {logo}
+                    className="block btn- h-11 w-auto" alt="Department of Psychology" />
+                </div>
+                <div className="hidden md:flex md:flex-col">
+                  <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
+                  <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
+                </div>
               </div>
-              <div className="lg:block mr-auto ml-40 hidden relative max-w-">
-              <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
-              <span className="justify-center items-center flex">
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                      </span>
-                </p>
-                <input placeholder="Type to search" type="search" className="border border-viridianHue focus:ring-white focus:border-white sm:text-sm w-full rounded-lg py-2 pl-10 pr-20 bg-viridianHue text-white"/>
-              </div>
+
               <div className="hidden md:block">
                       <div className="ml-4 flex items-center md:ml-6">
                         {/* Profile dropdown */}
@@ -196,44 +190,33 @@ export default function InstructorLayout() {
             </div>
           </div>
         </div>
-    
-    
-      {/*sidebar*/}
-      <div className="flex justify-start px-10 pt-5"> {/*Main container */}
-
-        <aside class="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg lg:shadow-lg lg:shadow-2xl  " >
-          <div class="flex flex-col items-center mt-6 -mx-2 cursor-pointer"  onClick={()=>setIsInstructorProfileOpen(true)}>
-            <img class="object-cover w-15 h-15 mx-2 rounded-full" src={avatar} alt="avatar"/>
-            <h4 class="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
-            <p class="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Instructor</p>
-          </div>
-
-          <div class="flex flex-col justify-between mt-2">
-            {navigation.map((item) => (
-                          
+      
+      {/**Navbar */}
+      <header className="flex bg-[#EFEFEF] h-14 items-center justify-center shadow">
+        <div className="hidden md:block">
+                      <div className="ml-10 flex items-baseline space-x-4">
+                        {navigation.map((item) => (
                           <NavLink
                             key={item.name}
                             to={item.to}
-                            className={({label, isActive, onClick }) => classNames(
+                            className={({ isActive }) => classNames(
                               isActive
-                                ? 'bg-[#aaf0aa]  text-black'
-                                : 'text-gray-600 hover:bg-gray-200 hover:text-black',
-                              'rounded-full px-3 py-1 text-sm font-medium flex items-center mt-5'
+                                ? 'bg-[#CCEFCC] text-[#737373]'
+                                : 'text-[#737373] hover:bg-[#CCEFCC] hover:text-[#737373]',
+                              'rounded-md px-3 py-2 text-sm font-medium'
                             )}
                           >
-                            <img src={item.img} className='w-10  pr-5'/>
                             {item.name}
                           </NavLink>
                         ))}
-       
-          </div>
-        </aside>
-            <div className="flex flex-col w-3/4 pd-10 ml-10 ">
+                      </div>
+                    </div>
+        </header>
+        <main>
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Outlet />
-            </div>
-        
-        
-      </div>
+          </div>
+        </main>
 
       {/**Setting up the Instructor Profile */}
       <ReactModal
@@ -241,7 +224,7 @@ export default function InstructorLayout() {
         onRequestClose={()=> setIsInstructorProfileOpen(false)}
         className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 ">
         <div className='relative flex flex-col min-w-0 break-words w-full mt-3'>
-          <InstructorProfile />
+          <UserProfile />
         </div>
       </ReactModal>
     </>

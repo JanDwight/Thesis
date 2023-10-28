@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
 
     Route::post('/createposts', [PostController::class, 'createPosts']);
-    Route::get('/posts-with-users', [PostController::class, 'getPostsWithUsers']);
+    Route::get('/posts', [PostController::class, 'getPosts']); 
     Route::put('/posts/{postId}', [PostController::class, 'update']);
-    Route::put('/archivePost/{postId}', [PostController::class, 'archive']);
+    Route::put('/posts/archive/{postId}', [PostController::class, 'archivePost']);
 
     //manage users tab
     Route::post('/adduser', [AuthController::class, 'adduser']);

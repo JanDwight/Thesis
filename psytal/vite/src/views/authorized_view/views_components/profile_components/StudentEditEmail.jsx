@@ -48,7 +48,7 @@ export const StudentEditEmail = ({onCloseStudentEditEmail,data}) => {
 
                 <div className='mt-5 flex felx-row-2 justify-center'>
                     <button onClick={handleSubmit} 
-                        className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
+                        className="bg-[#0FE810] hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-xl">
                         Confirm
                     </button>
                     <button onClick={onCloseStudentEditEmail} className="bg-[#E2202C] hover:bg-[#bf0101] text-white font-bold py-2 px-4 rounded-xl">

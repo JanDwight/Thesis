@@ -174,10 +174,10 @@ export default function AddClass({closeModal}) {
               />
             </div>
             <div className="mt-5 flex flex-col-2 justify-between">
-            <label htmlFor="course_code" className="block text-sm text-gray-700">
-              Units:
-            </label>
-            <input
+              <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
+                Units:
+              </label>
+              <input
                 id="units"
                 type="text"
                 name="units"
@@ -186,7 +186,7 @@ export default function AddClass({closeModal}) {
                 disabled // makes field uneditable
                 className="block w-[49%] rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />
-              <label htmlFor="course_code" className="block text-sm text-gray-700">
+              <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
               Semester:
               </label>
               <input
@@ -200,7 +200,7 @@ export default function AddClass({closeModal}) {
               />
             </div>
             <div className="mt-5 flex flex-col-2 justify-between">
-            <label htmlFor="course_code" className="block text-sm text-gray-700">
+            <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
               Year:
             </label>
             <input
@@ -212,7 +212,7 @@ export default function AddClass({closeModal}) {
                 disabled // makes field uneditable
                 className="block w-[49%] rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />
-              <label htmlFor="course_code" className="block text-sm text-gray-700">
+              <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
               Section:
               </label>
               <input
@@ -227,7 +227,7 @@ export default function AddClass({closeModal}) {
                     />
             </div>
             <div className="mt-5 flex flex-col-2 justify-between">
-            <label htmlFor="course_code" className="block text-sm text-gray-700">
+            <label htmlFor="course_code" className="block text-sm text-gray-700 px-2">
               Instructor:
             </label>
               <select
@@ -249,11 +249,11 @@ export default function AddClass({closeModal}) {
               </select>
             
             </div>
-            <div className="grid grid-row-2 justify-center">
-                <button type="submit" className="bg-[#0FE810] rounded-2xl mt-5 px-5 text-white font-size">
+            <div className="text-center flex justify-center">
+                <button type="submit" className="bg-[#0FE810]  hover:bg-lime-700 text-white font-bold py-2 px-4 mt-5 rounded-full">
                   Add Class
                 </button>
-                <button onClick={closeModal} className="bg-[#E2202C] rounded-2xl mt-3 px-5 text-white font-size">
+                <button onClick={closeModal} className="bg-[#f34450]  hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-5 ml-3 font-size">
                   Cancel
                 </button>
             </div>

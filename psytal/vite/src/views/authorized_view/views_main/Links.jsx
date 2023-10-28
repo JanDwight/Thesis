@@ -105,45 +105,33 @@ export default function Links() {
         
           {/* Add Links button */}
           {userRole === 1 && ( // Check if userRole is equal to 1
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10"
-        >
-          Add Links
-        </button>
-      )}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl px-7 py-2 text-white font-size ml-10"
+          >
+            Add Links
+          </button>
+        )}
           </div>            
         </div>
       </div>
     
       {/* <div className="table-container overflow-x-auto"> Edited*/}
       <div className="table-container overflow-x-auto max-h-[400px] overflow-y-auto">
-            <table className="table-auto w-full mt-5 border-separate border-spacing-y-3" >
-            <colgroup>
-            
-              <col style={{ width: '23%' }} /> {/* Adjust the width as needed */}
-              <col style={{ width: '23%' }} /> {/* Adjust the width as needed */}
-              <col style={{ width: '23%' }} /> {/* Adjust the width as needed */}
-              <col style={{ width: '23%' }} /> {/* Adjust the width as needed */}
-              {userRole === 1 && ( // Conditionally render the edit and archive buttons for admin
-              <>
-              <col style={{ width: '10%' }} /> {/* Adjust the width as needed */}
-              </>
-              )}
-            </colgroup>
-                <thead >
+            <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
+		            <thead>
 		              <tr>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Class Code</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Class Description</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Instructor</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Link Code</th>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2"></th>
+                    <th className="text-center text-gray-700 bg-gray-200 p-2">Action</th>
 		              </tr>
                 </thead>
                  <tbody>
                      {filteredData.map((link, index) => (//edited
                       <tr key={index} className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`} onSubmit={addLinks}>
-                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
+                          <td className="text-center rounded-l-full p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_description.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.instructor_name.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">
@@ -151,20 +139,12 @@ export default function Links() {
                            {link.url.slice(0, 50)}... {/* Displaying the first 10 characters */}
                             </a>
                           </td>
-                          {userRole === 1 && ( // Conditionally render the edit and archive buttons for admin
-                            <>
-                          <td className= "text-center  flex justify-center space-x-2">
+                          <td className= "text-center rounded-r-full flex justify-center space-x-2">
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
-                            </button>
-                            <button onClick={() => onSubmitarchivelink(true, index)}>
-                              <img src={archive} alt='archive' className='h-7 w-7' />
-                            </button>
+                            </button>                            
                             
                           </td>
-                          </>
-                          )}
-                          
                         </tr>
                         ))}
                 </tbody>
@@ -196,7 +176,7 @@ export default function Links() {
       selected={selectedLink}
               />
 
-      {/* Edit/Update Modal*/}
+      {/* Edit/Update Modal         */}
       </ReactModal>
         < EditLinks
               showEditlink={showEditlink}

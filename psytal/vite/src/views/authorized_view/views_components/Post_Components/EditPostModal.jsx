@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axiosClient from '../../../../axios';
 
 export default function EditPostModal({ selectedPost, closeModal, handleSave }) {
-    const [editedPost, setEditedPost] = useState({ ...selectedPost });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
+    if (!selectedPost) {
+        return null;
+    }
 
-    // Load the image preview when the component first mounts
-    useEffect(() => {
-        if (editedPost.image) {
-            // Check if the image is a File (newly selected) or a URL (already saved)
-            if (editedPost.image instanceof File) {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    setImagePreview(reader.result);
-                };
-                reader.readAsDataURL(editedPost.image);
-            } else {
-                setImagePreview(`http://localhost:8000/storage/${editedPost.image}`);
-            }
-        }
-    }, [editedPost.image]);
+    const [editedPost, setEditedPost] = useState(selectedPost);
+    const [loading, setLoading] = useState(false);
 
     const handleImageChange = (ev) => {
         const file = ev.target.files[0];
@@ -35,32 +21,33 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
 
     const savePost = async () => {
         setLoading(true);
-        setError(null);
+        const formData = new FormData();
+        formData.append('title', editedPost.title);
+        formData.append('description', editedPost.description);
+
+        // Check if there's a new image to upload
+        if (editedPost.image instanceof File) {
+            formData.append('image', editedPost.image);
+        }
 
         try {
-            const formData = new FormData();
-            formData.append('title', editedPost.title);
-            formData.append('description', editedPost.description);
-            formData.append('image', editedPost.image);
-
             const response = await axiosClient.put(`/posts/${editedPost.id}`, formData);
-
             if (response.status === 200) {
+                // Trigger the handleSave function from the parent component
                 handleSave({
                     id: editedPost.id,
                     title: editedPost.title,
                     description: editedPost.description,
-                    image: response.data.image,
+                    image: response.data.image, // Update with the response image path
                 });
-                closeModal();
             } else {
                 throw new Error('Network response was not ok');
             }
         } catch (error) {
             console.error('Error updating data: ', error);
-            setError('Error updating the post. Please try again.');
         } finally {
             setLoading(false);
+            closeModal();
         }
     };
 
@@ -96,33 +83,26 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
 
                     <div className="mb-4">
                         <input type="file" accept="image/*" onChange={handleImageChange} />
-                    </div>
-
-                    <div className="mb-4">
-                        {imagePreview && (
+                        {editedPost.image && (
                             <img
-                                src={imagePreview}
+                                src={`http://localhost:8000/storage/${editedPost.image}`}
                                 alt="Image Preview"
                                 style={{ maxWidth: '100%', maxHeight: '200px' }}
                             />
                         )}
                     </div>
 
-                    {error && <p className="text-red-500">{error}</p>}
-
                     <div className="text-center flex justify-end my-7">
                         <button
                             type="submit"
                             onClick={savePost}
-                            className="bg-lime-600 hover-bg-lime-700 text-white font-bold py-2 px-4 rounded-full"
-                            disabled={loading}
+                            className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full"
                         >
                             {loading ? 'Updating...' : 'Update'}
                         </button>
                         <button
                             onClick={closeModal}
-                            className="bg-red-600 hover-bg-red-700 text-white font-bold py-2 px-4 ml-4 rounded-full"
-                            disabled={loading}
+                            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 ml-4 rounded-full"
                         >
                             Cancel
                         </button>
