@@ -279,7 +279,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -290,7 +290,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -301,7 +301,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -312,7 +312,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 101'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -323,7 +323,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -334,7 +334,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -345,7 +345,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -356,7 +356,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -367,7 +367,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '2',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '1st',
@@ -378,7 +378,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'NSTP 21'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -389,7 +389,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -400,7 +400,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -411,7 +411,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -422,7 +422,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -433,7 +433,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -444,7 +444,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Chem 12'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -455,7 +455,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'Chem 12.1'
-        ]
+        ],
         
         [
             'class_year' => '2nd',
@@ -466,7 +466,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -476,8 +476,8 @@ class UserSeeder extends Seeder
             'units' => '2',
             'hoursperWeek' => '2',
             'course_type' => 'Lec',
-            'preReq' => 'N/A'
-        ]
+             'preReq' => 'N/A'
+        ],
 
         [
             'class_year' => '2nd',
@@ -488,7 +488,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 103 , Psych 105'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -499,7 +499,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -510,7 +510,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -521,7 +521,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -532,7 +532,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -543,7 +543,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '2',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -554,7 +554,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -565,7 +565,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '2',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '2nd',
@@ -576,7 +576,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -587,7 +587,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -598,7 +598,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -609,7 +609,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -620,7 +620,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -631,7 +631,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Bio 38 & Bio 38.1'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -642,7 +642,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'Bio 38 & Bio 38.1'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -653,7 +653,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -664,7 +664,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -675,7 +675,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -686,7 +686,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102, 105, 106, 107'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -697,7 +697,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '6',
             'course_type' => 'Lab',
             'preReq' => 'Psych 108, 109'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -708,7 +708,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 108, 109'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -719,7 +719,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 101'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -730,7 +730,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
-        ]
+        ],
 
 
         [
@@ -742,7 +742,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
 
         [
@@ -754,7 +754,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '3rd',
@@ -765,7 +765,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '27',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
-        ]
+        ],
 
         [
             'class_year' => '4th',
@@ -776,7 +776,7 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'All Major Courses'
-        ]
+        ],
 
         [
             'class_year' => '4th',
@@ -887,7 +887,7 @@ class UserSeeder extends Seeder
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
                 'class_section' => 'TBA'
-            ]
+            ],
 
             [
                 'class_year' => '1st',
@@ -898,7 +898,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -909,7 +909,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -920,7 +920,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 101'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -931,7 +931,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -942,7 +942,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -953,7 +953,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -964,7 +964,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -975,7 +975,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '1st',
@@ -986,7 +986,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'NSTP 21'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -997,7 +997,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1008,7 +1008,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1019,7 +1019,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1030,7 +1030,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1041,7 +1041,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1052,7 +1052,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Chem 12'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1063,7 +1063,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'Chem 12.1'
-            ]
+            ],
             
             [
                 'class_year' => '2nd',
@@ -1074,7 +1074,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1085,7 +1085,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1096,7 +1096,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 103 , Psych 105'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1107,7 +1107,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1118,7 +1118,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1129,7 +1129,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1140,7 +1140,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1151,7 +1151,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1162,7 +1162,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1173,7 +1173,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '2nd',
@@ -1184,7 +1184,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1195,7 +1195,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1206,7 +1206,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1217,7 +1217,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1228,7 +1228,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1239,7 +1239,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Bio 38 & Bio 38.1'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1250,7 +1250,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'Bio 38 & Bio 38.1'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1261,7 +1261,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1272,7 +1272,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1283,7 +1283,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1294,7 +1294,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102, 105, 106, 107'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1305,7 +1305,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'preReq' => 'Psych 108, 109'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1316,7 +1316,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 108, 109'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1327,7 +1327,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 101'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1338,7 +1338,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'Psych 102'
-            ]
+            ],
     
     
             [
@@ -1350,7 +1350,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
     
             [
@@ -1362,7 +1362,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '3rd',
@@ -1373,7 +1373,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '27',
                 'course_type' => 'Lec',
                 'preReq' => 'N/A'
-            ]
+            ],
     
             [
                 'class_year' => '4th',
@@ -1384,7 +1384,7 @@ class UserSeeder extends Seeder
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'preReq' => 'All Major Courses'
-            ]
+            ],
     
             [
                 'class_year' => '4th',
