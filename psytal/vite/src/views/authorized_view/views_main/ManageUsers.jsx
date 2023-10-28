@@ -47,11 +47,10 @@ export default function ManageUsers() {
       <div className="flex">
         <div>
           {/**Add Users */}
-          {userRole === 1 && (
+          
             <button onClick={handleAddUserClick} className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10">
               Add User
             </button>
-          )}
         </div>
       </div>
 
