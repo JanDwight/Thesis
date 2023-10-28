@@ -20,6 +20,12 @@ export default function PreRegistrationFormView({prereg}) {
       { classCode: '', courseCode: '', units: '', bcac: '' },
     ]);
 
+    const handleClearSubjects = () => {
+      // Clear the inputFields state and set totalUnits to 0
+      setInputFields([{ classCode: '', courseCode: '', units: '', bcac: 'N/A' }]);
+      setTotalUnits(0);
+    };
+
     //calling the Form in the adding of classes
     const handleSubmitCourseUnits = (e) => {
         e.preventDefault();
@@ -1146,8 +1152,7 @@ export default function PreRegistrationFormView({prereg}) {
         {/**Start of Filling the FORM for CLASS CODES UNITS*/}
         <div className="w-full lg:w-8/12 px-4 container mx-auto">            
             <form 
-                //ah basta hhaha
-                //onSubmit={handleSubmitCourseUnits}
+                onSubmit={handleSubmitCourseUnits}
                 >
                 <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
                     <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
@@ -1314,7 +1319,7 @@ export default function PreRegistrationFormView({prereg}) {
                                                                
                             </div> 
                             <button className=' bg-blue-500 rounded mt-2' variant="container">submit [fix me]</button>
-                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container">clear subjects</button>
+                            <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container" onClick={handleClearSubjects}>clear subjects</button>
                             {/*fix the two buttons above, no axios connection yet, do for other view*/}
                     </div>
                 </div>
