@@ -279,6 +279,468 @@ class UserSeeder extends Seeder
             'hoursperWeek' => '3',
             'course_type' => 'Lec',
             'preReq' => 'N/A'
+        ],
+
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'SSP 22',
+            'course_title' => 'Philippine Indigenous Communities',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'SS 22',
+            'course_title' => 'Readings in Philippine History',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'Psych 102',
+            'course_title' => 'Theories of Personality',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 101'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'Art 21',
+            'course_title' => 'Art Appreciation',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'STS 21',
+            'course_title' => 'Science Technology and Society',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'Chem 12',
+            'course_title' => 'Organic Chemistry (Lecture)',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'Chem 12.1',
+            'course_title' => 'Organic Chemistry (Laboratory)',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'PATHFIT 2',
+            'course_title' => 'Exercise-based Fitness Activities',
+            'units' => '2',
+            'hoursperWeek' => '2',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '1st',
+            'semester' => '2nd',
+            'course_code' => 'NSTP 22',
+            'course_title' => 'National Service Training Program II',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'NSTP 21'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Psych 103',
+            'course_title' => 'Developmental Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Psych 104',
+            'course_title' => 'Biological Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Psych 105',
+            'course_title' => 'Psychological Statistics',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Psych 105',
+            'course_title' => 'Psychological Statistics',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Psych 111',
+            'course_title' => 'Social Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Chem 40',
+            'course_title' => 'BioChemistry (Lec)',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Chem 12'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'Chem 40.1',
+            'course_title' => 'BioChemistry (Lab)',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'Chem 12.1'
+        ],
+        
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'AH 22',
+            'course_title' => 'Philippine Popular Culture',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '1st',
+            'course_code' => 'PATHFIT 3',
+            'course_title' => 'Sports Based Course 1',
+            'units' => '2',
+            'hoursperWeek' => '2',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 106',
+            'course_title' => 'Psychological Assessment',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 103 , Psych 105'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 114',
+            'course_title' => 'Positive Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 109',
+            'course_title' => 'Abnormal Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Bio 38',
+            'course_title' => 'Human Anatomy and Physiology (Lec)',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Bio 38.1',
+            'course_title' => 'Human Anatomy and Physiology (Lab)',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 108',
+            'course_title' => 'Industrial/Organizational Psych',
+            'units' => '3',
+            'hoursperWeek' => '2',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'AH 23',
+            'course_title' => 'Indigenous Creative Crafts',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'PATHFIT 4',
+            'course_title' => 'Sports Based Course 2',
+            'units' => '2',
+            'hoursperWeek' => '2',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '2nd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 114',
+            'course_title' => 'Positive Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Psych 117',
+            'course_title' => 'Cordillera Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Cordi 101',
+            'course_title' => 'Cordillera: History and Socio-Cultural Heritage',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Psych 107',
+            'course_title' => 'Sikolohiyang Pilipino',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Psych 119',
+            'course_title' => 'Community Health Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Bio 32',
+            'course_title' => 'Fundemantals of Genetics (Lec)',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Bio 38 & Bio 38.1'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Bio 32.1',
+            'course_title' => 'Fundamentals of Genetics (Lab)',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'Bio 38 & Bio 38.1'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '1st',
+            'course_code' => 'Pl 21',
+            'course_title' => 'Life and Works of Rizal',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 110',
+            'course_title' => 'Experimental Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 110',
+            'course_title' => 'Experimental Psychology',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 108',
+            'course_title' => 'Field Methods in Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102, 105, 106, 107'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 108',
+            'course_title' => 'Field Methods in Psychology',
+            'units' => '2',
+            'hoursperWeek' => '6',
+            'course_type' => 'Lab',
+            'preReq' => 'Psych 108, 109'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 115',
+            'course_title' => 'Introduction to Counseling',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 108, 109'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 112',
+            'course_title' => 'Cognitive Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 101'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Psych 118',
+            'course_title' => 'Special Topics in Psychology',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 102'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Philo 101',
+            'course_title' => 'Philosophy of Science',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => '2nd',
+            'course_code' => 'Local Lang',
+            'course_title' => 'Local Language',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '3rd',
+            'semester' => 'Midyear',
+            'course_code' => 'Psych 199',
+            'course_title' => 'Practicum in Psychology (160 hours)',
+            'units' => '3',
+            'hoursperWeek' => '27',
+            'course_type' => 'Lec',
+            'preReq' => 'N/A'
+        ],
+        [
+            'class_year' => '4th',
+            'semester' => '1st',
+            'course_code' => 'Psych 200 A',
+            'course_title' => 'Thesis 1',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'All Major Courses'
+        ],
+        [
+            'class_year' => '4th',
+            'semester' => '2nd',
+            'course_code' => 'Psych 200 B',
+            'course_title' => 'Thesis 2',
+            'units' => '3',
+            'hoursperWeek' => '3',
+            'course_type' => 'Lec',
+            'preReq' => 'Psych 200 A'
         ]
         ];
         DB::table('curricula')->insert($curriculum);
@@ -370,7 +832,516 @@ class UserSeeder extends Seeder
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
                 'class_section' => 'TBA'
+            ],
+
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'SSP 22',
+                'course_title' => 'Philippine Indigenous Communities',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'SS 22',
+                'course_title' => 'Readings in Philippine History',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'Psych 102',
+                'course_title' => 'Theories of Personality',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 101'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'Art 21',
+                'course_title' => 'Art Appreciation',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'STS 21',
+                'course_title' => 'Science Technology and Society',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'Chem 12',
+                'course_title' => 'Organic Chemistry (Lecture)',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'Chem 12.1',
+                'course_title' => 'Organic Chemistry (Laboratory)',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'PATHFIT 2',
+                'course_title' => 'Exercise-based Fitness Activities',
+                'units' => '2',
+                'hoursperWeek' => '2',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '1st',
+                'semester' => '2nd',
+                'course_code' => 'NSTP 22',
+                'course_title' => 'National Service Training Program II',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'NSTP 21'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Psych 103',
+                'course_title' => 'Developmental Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Psych 104',
+                'course_title' => 'Biological Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Psych 105',
+                'course_title' => 'Psychological Statistics',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Psych 105',
+                'course_title' => 'Psychological Statistics',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Psych 111',
+                'course_title' => 'Social Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Chem 40',
+                'course_title' => 'BioChemistry (Lec)',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Chem 12'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'Chem 40.1',
+                'course_title' => 'BioChemistry (Lab)',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'Chem 12.1'
+            ],
+            
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'AH 22',
+                'course_title' => 'Philippine Popular Culture',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '1st',
+                'course_code' => 'PATHFIT 3',
+                'course_title' => 'Sports Based Course 1',
+                'units' => '2',
+                'hoursperWeek' => '2',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 106',
+                'course_title' => 'Psychological Assessment',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 103 , Psych 105'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 114',
+                'course_title' => 'Positive Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 109',
+                'course_title' => 'Abnormal Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Bio 38',
+                'course_title' => 'Human Anatomy and Physiology (Lec)',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Bio 38.1',
+                'course_title' => 'Human Anatomy and Physiology (Lab)',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 108',
+                'course_title' => 'Industrial/Organizational Psych',
+                'units' => '3',
+                'hoursperWeek' => '2',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'AH 23',
+                'course_title' => 'Indigenous Creative Crafts',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'PATHFIT 4',
+                'course_title' => 'Sports Based Course 2',
+                'units' => '2',
+                'hoursperWeek' => '2',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '2nd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 114',
+                'course_title' => 'Positive Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Psych 117',
+                'course_title' => 'Cordillera Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Cordi 101',
+                'course_title' => 'Cordillera: History and Socio-Cultural Heritage',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Psych 107',
+                'course_title' => 'Sikolohiyang Pilipino',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Psych 119',
+                'course_title' => 'Community Health Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Bio 32',
+                'course_title' => 'Fundemantals of Genetics (Lec)',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Bio 38 & Bio 38.1'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Bio 32.1',
+                'course_title' => 'Fundamentals of Genetics (Lab)',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'Bio 38 & Bio 38.1'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '1st',
+                'course_code' => 'Pl 21',
+                'course_title' => 'Life and Works of Rizal',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 110',
+                'course_title' => 'Experimental Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 110',
+                'course_title' => 'Experimental Psychology',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'Psych 102'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 108',
+                'course_title' => 'Field Methods in Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102, 105, 106, 107'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 108',
+                'course_title' => 'Field Methods in Psychology',
+                'units' => '2',
+                'hoursperWeek' => '6',
+                'course_type' => 'Lab',
+                'preReq' => 'Psych 108, 109'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 115',
+                'course_title' => 'Introduction to Counseling',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 108, 109'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 112',
+                'course_title' => 'Cognitive Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 101'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Psych 118',
+                'course_title' => 'Special Topics in Psychology',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 102'
+            ],
+    
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Philo 101',
+                'course_title' => 'Philosophy of Science',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+    
+            [
+                'class_year' => '3rd',
+                'semester' => '2nd',
+                'course_code' => 'Local Lang',
+                'course_title' => 'Local Language',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '3rd',
+                'semester' => 'Midyear',
+                'course_code' => 'Psych 199',
+                'course_title' => 'Practicum in Psychology (160 hours)',
+                'units' => '3',
+                'hoursperWeek' => '27',
+                'course_type' => 'Lec',
+                'preReq' => 'N/A'
+            ],
+    
+            [
+                'class_year' => '4th',
+                'semester' => '1st',
+                'course_code' => 'Psych 200 A',
+                'course_title' => 'Thesis 1',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'All Major Courses'
+            ],
+    
+            [
+                'class_year' => '4th',
+                'semester' => '2nd',
+                'course_code' => 'Psych 200 B',
+                'course_title' => 'Thesis 2',
+                'units' => '3',
+                'hoursperWeek' => '3',
+                'course_type' => 'Lec',
+                'preReq' => 'Psych 200 A'
             ]
+
             ];
             DB::table('classes')->insert($classes);
     }
