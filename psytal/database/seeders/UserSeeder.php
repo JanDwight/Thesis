@@ -291,7 +291,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -302,7 +301,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -313,7 +311,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 101'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -324,7 +321,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -335,7 +331,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -346,7 +341,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -357,7 +351,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -368,7 +361,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '1st',
             'semester' => '2nd',
@@ -379,7 +371,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'NSTP 21'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -390,7 +381,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -401,7 +391,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -412,7 +401,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -423,7 +411,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -434,7 +421,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -445,7 +431,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Chem 12'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -467,7 +452,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '1st',
@@ -476,9 +460,8 @@ class UserSeeder extends Seeder
             'units' => '2',
             'hoursperWeek' => '2',
             'course_type' => 'Lec',
-             'preReq' => 'N/A'
+            'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -489,7 +472,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 103 , Psych 105'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -500,7 +482,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -511,7 +492,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -522,7 +502,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -533,7 +512,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -544,7 +522,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -555,7 +532,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -566,7 +542,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '2nd',
             'semester' => '2nd',
@@ -577,7 +552,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -588,7 +562,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -599,7 +572,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -610,7 +582,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -621,7 +592,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -632,7 +602,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Bio 38 & Bio 38.1'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -643,7 +612,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'Bio 38 & Bio 38.1'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '1st',
@@ -654,7 +622,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -665,7 +632,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -676,7 +642,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'Psych 102'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -687,7 +652,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102, 105, 106, 107'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -698,7 +662,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lab',
             'preReq' => 'Psych 108, 109'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -709,7 +672,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 108, 109'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -720,7 +682,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 101'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -731,8 +692,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 102'
         ],
-
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -743,8 +702,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
-
         [
             'class_year' => '3rd',
             'semester' => '2nd',
@@ -755,7 +712,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '3rd',
             'semester' => 'Midyear',
@@ -766,7 +722,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'N/A'
         ],
-
         [
             'class_year' => '4th',
             'semester' => '1st',
@@ -777,7 +732,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'All Major Courses'
         ],
-
         [
             'class_year' => '4th',
             'semester' => '2nd',
@@ -788,7 +742,6 @@ class UserSeeder extends Seeder
             'course_type' => 'Lec',
             'preReq' => 'Psych 200 A'
         ]
-
         ];
         DB::table('curricula')->insert($curriculum);
 
@@ -796,7 +749,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f1',
                 'course_code' => 'Psych 101	',
                 'course_title' => 'Introduction to Psychology',
                 'units' => '3',
@@ -808,7 +760,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f2',
                 'course_code' => 'SS 21',
                 'course_title' => 'Understanding the Self',
                 'units' => '3',
@@ -820,7 +771,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f3',
                 'course_code' => 'Eng 21',
                 'course_title' => 'Purposive Communication',
                 'units' => '3',
@@ -832,7 +782,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f4',
                 'course_code' => 'Eng 21',
                 'course_title' => 'Contemporary World',
                 'units' => '3',
@@ -844,7 +793,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f5',
                 'course_code' => 'Math 21',
                 'course_title' => 'Mathematics in the Modern Word',
                 'units' => '3',
@@ -856,7 +804,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f6',
                 'course_code' => 'SS 24',
                 'course_title' => 'Ethics',
                 'units' => '3',
@@ -868,7 +815,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f7',
                 'course_code' => 'PATHFIT 1',
                 'course_title' => 'Movement Competency Training',
                 'units' => '2',
@@ -880,7 +826,6 @@ class UserSeeder extends Seeder
             [
                 'class_year' => '1st',
                 'semester' => '1st',
-                'class_code' => 'f8',
                 'course_code' => 'NSTP 21',
                 'course_title' => 'National Service Training Program 1',
                 'units' => '3',
