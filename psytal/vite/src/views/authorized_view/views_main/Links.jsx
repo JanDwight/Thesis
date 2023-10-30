@@ -6,7 +6,6 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import EditLinks from '../views_components/EditLinks.jsx';
 import ArchiveLinks from '../views_components/ArchiveLinks.jsx';
-import { useStateContext } from '../../../context/ContextProvider';
 
 export default function Links() {
   //Calling the Archivelinks
@@ -14,7 +13,7 @@ export default function Links() {
   const [selectedLink, setSelectedLink] = useState('');
   const [isAchiveModalOpen, setIsArchiveModalOpen] = useState(false);
   const [filterText, setFilterText] = useState(''); //for search
-  const {userRole} = useStateContext('');
+
 
     const addLinks = async (linkData) => {
       try {
@@ -97,41 +96,37 @@ export default function Links() {
           <input
             id="search_bar"
             type="text"
-            placeholder="Search..."
+            placeholder="Search by Class Code, Class Description, Instructor, Link Code..."
             value={filterText}
             onChange={(event) => setFilterText(event.target.value)}
             className="h-10 px-7 py-4 border border-gray-300 focus:ring-viridianHue focus:border-viridianHue rounded-lg"
           />
-        
+        </div>
           {/* Add Links button */}
-          {userRole === 1 && ( // Check if userRole is equal to 1
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl px-7 py-2 text-white font-size ml-10"
+          <button onClick={() =>  setIsModalOpen(true)}
+            className="bg-[#75ba75] rounded-2xl  px-7 py-2 text-white font-size ml-10"
           >
             Add Links
           </button>
-        )}
-          </div>            
+                    
         </div>
       </div>
     
       {/* <div className="table-container overflow-x-auto"> Edited*/}
       <div className="table-container overflow-x-auto max-h-[400px] overflow-y-auto">
-            <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3" >
+            <table className="table-auto w-[99%] mt-5 border-separate border-spacing-y-3" >
 		            <thead>
 		              <tr>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2">Class Code</th>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2">Class Description</th>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2">Instructor</th>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2">Link Code</th>
-                    <th className="text-center text-gray-700 bg-gray-200 p-2">Action</th>
+                    <th className="text-center">Class Code</th>
+                    <th className="text-center">Class Description</th>
+                    <th className="text-center">Instructor</th>
+                    <th className="text-center">Link Code</th>
 		              </tr>
                 </thead>
                  <tbody>
                      {filteredData.map((link, index) => (//edited
                       <tr key={index} className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`} onSubmit={addLinks}>
-                          <td className="text-center rounded-l-full p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
+                          <td className="text-center  p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_description.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.instructor_name.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">
@@ -139,10 +134,13 @@ export default function Links() {
                            {link.url.slice(0, 50)}... {/* Displaying the first 10 characters */}
                             </a>
                           </td>
-                          <td className= "text-center rounded-r-full flex justify-center space-x-2">
+                          <td className= "text-center  flex justify-center space-x-1 mr-2">
                             <button onClick={() => handleEditClick(link)}>
                             <img src={edit} alt='edit' className='h-6 w-6' />
-                            </button>                            
+                            </button>
+                            <button onClick={() => onSubmitarchivelink(true, index)}>
+                              <img src={archive} alt='archive' className='h-7 w-7' />
+                            </button>
                             
                           </td>
                         </tr>
@@ -189,4 +187,3 @@ export default function Links() {
     
   );
   }
-
