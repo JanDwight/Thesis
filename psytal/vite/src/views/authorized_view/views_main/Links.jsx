@@ -104,7 +104,7 @@ export default function Links() {
         </div>
           {/* Add Links button */}
           <button onClick={() =>  setIsModalOpen(true)}
-            className="bg-[#75ba75] rounded-2xl  px-7 py-2 text-white font-size ml-10"
+            className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl  px-7 py-2 text-white font-size ml-10"
           >
             Add Links
           </button>
@@ -114,19 +114,20 @@ export default function Links() {
     
       {/* <div className="table-container overflow-x-auto"> Edited*/}
       <div className="table-container overflow-x-auto max-h-[400px] overflow-y-auto">
-            <table className="table-auto w-[99%] mt-5 border-separate border-spacing-y-3" >
+            <table className="table w-full table-striped text-gray-700 mt-5" >
 		            <thead>
 		              <tr>
-                    <th className="text-center">Class Code</th>
-                    <th className="text-center">Class Description</th>
-                    <th className="text-center">Instructor</th>
-                    <th className="text-center">Link Code</th>
+                    <th className="text-center bg-gray-200 p-2">Class Code</th>
+                    <th className="text-center bg-gray-200 p-2">Class Description</th>
+                    <th className="text-center bg-gray-200 p-2">Instructor</th>
+                    <th className="text-center bg-gray-200 p-2">Link Code</th>
+                    <th className="text-center bg-gray-200 p-2">Action</th>
 		              </tr>
                 </thead>
                  <tbody>
                      {filteredData.map((link, index) => (//edited
-                      <tr key={index} className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`} onSubmit={addLinks}>
-                          <td className="text-center  p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
+                      <tr key={index} className={`${index % 2 === 0 ? 'odd:bg-green-100' : ''}`} onSubmit={addLinks}>
+                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_code.slice(0, 40)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.class_description.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{link.instructor_name.slice(0, 50)}</td>
                           <td className="text-center p-2 overflow-hidden overflow-wrap break-word">
@@ -136,10 +137,10 @@ export default function Links() {
                           </td>
                           <td className= "text-center  flex justify-center space-x-1 mr-2">
                             <button onClick={() => handleEditClick(link)}>
-                            <img src={edit} alt='edit' className='h-6 w-6' />
+                            <img src={edit} alt='edit' className='h-5 w-5 cursor-pointer transform transition-transform hover:scale-125'/>
                             </button>
                             <button onClick={() => onSubmitarchivelink(true, index)}>
-                              <img src={archive} alt='archive' className='h-7 w-7' />
+                              <img src={archive} alt='archive' className='h-7 w-7 cursor-pointer transform transition-transform hover:scale-125'/>
                             </button>
                             
                           </td>

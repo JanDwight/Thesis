@@ -101,7 +101,7 @@ export default function Curriculum(){
             </div>
             
             <div className="table-container overflow-y-auto">
-            <table className="table-auto w-full mt-5 rounded border-separate border-spacing-y-3 " >
+            <table className="table w-full table-striped text-gray-700 mt-5" >
 		            <thead>
 		              <tr>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Class Year</th>
@@ -120,7 +120,7 @@ export default function Curriculum(){
                     {filteredData.map((curriculum, index) => (
                       <tr 
                         key={index} 
-                        className={`${index % 2 === 0 ? 'bg-[#7EBA7E]' : 'bg-[#d2f0d2]'}`}
+                        className={`${index % 2 === 0 ? 'odd:bg-green-100' : ''}`}
                       >
                           <td className="text-center p-2">{curriculum.class_year}</td>
                           <td className="text-center p-2">{curriculum.semester}</td>
@@ -132,10 +132,10 @@ export default function Curriculum(){
                           <td className="text-center p-2">{curriculum.preReq}</td>
                           <td className= "flex items-center p-2">
                             <button onClick={() => handleEditClick(curriculum)}>
-                              <img src={edit} alt='edit' className='h-5 w-5 cursor-pointer' />
+                              <img src={edit} alt='edit' className='h-5 w-5 cursor-pointer transform transition-transform hover:scale-125' />
                             </button>
                             <button onClick={() => handleArchiveClick(curriculum)}>
-                              <img src={archive} alt='archive' className='h-7 w-7 cursor-pointer'/>
+                              <img src={archive} alt='archive' className='h-7 w-7 cursor-pointer transform transition-transform hover:scale-125'/>
                             </button>
                           </td>
                         </tr>

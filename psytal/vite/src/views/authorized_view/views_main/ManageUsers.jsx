@@ -48,7 +48,7 @@ export default function ManageUsers() {
         <div>
           {/**Add Users */}
           
-            <button onClick={handleAddUserClick} className="bg-[#397439] rounded-2xl px-7 py-2 text-white font-size ml-10">
+            <button onClick={handleAddUserClick} className="bg-[#397439] hover:bg-[#0FE810] rounded-2xl  px-7 py-2 text-white font-size ml-10">
               Add User
             </button>
         </div>
