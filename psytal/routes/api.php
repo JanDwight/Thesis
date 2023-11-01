@@ -11,8 +11,8 @@ use App\Http\Controllers\LogsController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\SendStudentAccountPasswordController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
     Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
     Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
+
+    //Routes for Sending Emails
+    Route::get('/sendstudentaccountpassword', [SendStudentAccountPasswordController::class,'sendstudentaccountpassword']);
 });
    
 

@@ -260,8 +260,12 @@ export default function PreRegistrationFormView({prereg}) {
     })
     .then(({ data }) => {
       
-
+      //For Sending student account password
+      axiosClient
+    .get('/sendstudentaccountpassword')
+      
     })
+
     .catch(( error ) => {
       if (error.response) {
         const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
