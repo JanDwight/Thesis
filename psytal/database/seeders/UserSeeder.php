@@ -754,7 +754,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -765,7 +766,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -776,7 +778,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -787,7 +790,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -798,7 +802,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -809,7 +814,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -820,7 +826,8 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -831,7 +838,8 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'course_type' => 'Lec',
                 'instructor_name' => 'TBA',
-                'class_section' => 'TBA'
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
 
             [
@@ -842,7 +850,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -853,7 +863,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -864,7 +876,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 101'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -875,7 +889,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -886,7 +902,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -897,7 +915,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -908,7 +928,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -919,7 +941,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -930,7 +954,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'NSTP 21'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -941,7 +967,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -952,7 +980,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -963,7 +993,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -974,7 +1006,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -985,7 +1019,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -996,7 +1032,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Chem 12'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1007,7 +1045,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'Chem 12.1'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
             
             [
@@ -1018,7 +1058,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1029,7 +1071,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1040,7 +1084,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 103 , Psych 105'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1051,7 +1097,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1062,7 +1110,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1073,7 +1123,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1084,7 +1136,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1095,7 +1149,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1106,7 +1162,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1117,7 +1175,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '2',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1128,7 +1188,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1139,7 +1201,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1150,7 +1214,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1161,7 +1227,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1172,7 +1240,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1183,7 +1253,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Bio 38 & Bio 38.1'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1194,7 +1266,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'Bio 38 & Bio 38.1'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1205,7 +1279,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1216,7 +1292,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1227,7 +1305,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1238,7 +1318,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102, 105, 106, 107'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1249,7 +1331,9 @@ class UserSeeder extends Seeder
                 'units' => '2',
                 'hoursperWeek' => '6',
                 'course_type' => 'Lab',
-                'preReq' => 'Psych 108, 109'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1260,7 +1344,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 108, 109'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1271,7 +1357,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 101'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1282,7 +1370,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 102'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
     
@@ -1294,7 +1384,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
     
@@ -1306,7 +1398,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1317,7 +1411,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '27',
                 'course_type' => 'Lec',
-                'preReq' => 'N/A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1328,7 +1424,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'All Major Courses'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ],
     
             [
@@ -1339,7 +1437,9 @@ class UserSeeder extends Seeder
                 'units' => '3',
                 'hoursperWeek' => '3',
                 'course_type' => 'Lec',
-                'preReq' => 'Psych 200 A'
+                'instructor_name' => 'TBA',
+                'class_section' => 'TBA',
+                'class_code' => 'TBA'
             ]
 
             ];
