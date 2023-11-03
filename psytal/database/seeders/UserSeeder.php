@@ -849,7 +849,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'SSP 22',
                 'course_title' => 'Philippine Indigenous Communities',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -862,7 +861,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'SS 22',
                 'course_title' => 'Readings in Philippine History',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -875,7 +873,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 102',
                 'course_title' => 'Theories of Personality',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -888,7 +885,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Art 21',
                 'course_title' => 'Art Appreciation',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -901,7 +897,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'STS 21',
                 'course_title' => 'Science Technology and Society',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -914,7 +909,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Chem 12',
                 'course_title' => 'Organic Chemistry (Lecture)',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -927,7 +921,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Chem 12.1',
                 'course_title' => 'Organic Chemistry (Laboratory)',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -940,7 +933,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'PATHFIT 2',
                 'course_title' => 'Exercise-based Fitness Activities',
                 'units' => '2',
-                'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -953,7 +945,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'NSTP 22',
                 'course_title' => 'National Service Training Program II',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -967,7 +958,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 103',
                 'course_title' => 'Developmental Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -980,7 +970,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 104',
                 'course_title' => 'Biological Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -993,7 +982,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 105',
                 'course_title' => 'Psychological Statistics',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1006,7 +994,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 105',
                 'course_title' => 'Psychological Statistics',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1019,7 +1006,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 111',
                 'course_title' => 'Social Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1032,7 +1018,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Chem 40',
                 'course_title' => 'BioChemistry (Lec)',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1045,7 +1030,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Chem 40.1',
                 'course_title' => 'BioChemistry (Lab)',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1058,7 +1042,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'AH 22',
                 'course_title' => 'Philippine Popular Culture',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1071,7 +1054,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'PATHFIT 3',
                 'course_title' => 'Sports Based Course 1',
                 'units' => '2',
-                'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1084,7 +1066,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 106',
                 'course_title' => 'Psychological Assessment',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1097,7 +1078,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 114',
                 'course_title' => 'Positive Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1110,7 +1090,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 109',
                 'course_title' => 'Abnormal Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1123,7 +1102,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Bio 38',
                 'course_title' => 'Human Anatomy and Physiology (Lec)',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1136,7 +1114,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Bio 38.1',
                 'course_title' => 'Human Anatomy and Physiology (Lab)',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1149,7 +1126,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 108',
                 'course_title' => 'Industrial/Organizational Psych',
                 'units' => '3',
-                'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1162,7 +1138,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'AH 23',
                 'course_title' => 'Indigenous Creative Crafts',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1175,7 +1150,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'PATHFIT 4',
                 'course_title' => 'Sports Based Course 2',
                 'units' => '2',
-                'hoursperWeek' => '2',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1188,7 +1162,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 114',
                 'course_title' => 'Positive Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1201,7 +1174,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 117',
                 'course_title' => 'Cordillera Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1214,7 +1186,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Cordi 101',
                 'course_title' => 'Cordillera: History and Socio-Cultural Heritage',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1227,7 +1198,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 107',
                 'course_title' => 'Sikolohiyang Pilipino',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1240,7 +1210,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 119',
                 'course_title' => 'Community Health Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1253,7 +1222,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Bio 32',
                 'course_title' => 'Fundemantals of Genetics (Lec)',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1266,7 +1234,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Bio 32.1',
                 'course_title' => 'Fundamentals of Genetics (Lab)',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1279,7 +1246,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Pl 21',
                 'course_title' => 'Life and Works of Rizal',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1292,7 +1258,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 110',
                 'course_title' => 'Experimental Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1305,7 +1270,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 110',
                 'course_title' => 'Experimental Psychology',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1318,7 +1282,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 108',
                 'course_title' => 'Field Methods in Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1331,7 +1294,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 108',
                 'course_title' => 'Field Methods in Psychology',
                 'units' => '2',
-                'hoursperWeek' => '6',
                 'course_type' => 'Lab',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1344,7 +1306,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 115',
                 'course_title' => 'Introduction to Counseling',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1357,7 +1318,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 112',
                 'course_title' => 'Cognitive Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1370,7 +1330,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 118',
                 'course_title' => 'Special Topics in Psychology',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1384,7 +1343,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Philo 101',
                 'course_title' => 'Philosophy of Science',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1398,7 +1356,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Local Lang',
                 'course_title' => 'Local Language',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1411,7 +1368,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 199',
                 'course_title' => 'Practicum in Psychology (160 hours)',
                 'units' => '3',
-                'hoursperWeek' => '27',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1424,7 +1380,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 200 A',
                 'course_title' => 'Thesis 1',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
@@ -1437,7 +1392,6 @@ class UserSeeder extends Seeder
                 'course_code' => 'Psych 200 B',
                 'course_title' => 'Thesis 2',
                 'units' => '3',
-                'hoursperWeek' => '3',
                 'course_type' => 'Lec',
                 'class_section' => 'TBA',
                 'instructor_name' => 'TBA'
