@@ -16,6 +16,7 @@ class preregistration_incoming_tmp extends Model
      */
     protected $fillable = [
             'start_of_school_year',
+            'user_id',
             'end_of_school_year',
             'student_school_id',
             'learners_reference_number',

@@ -22,7 +22,7 @@ class StudentProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'string',
+            'user_id' => 'integer',
             'start_of_school_year' => 'required|integer',
             'end_of_school_year' => 'required|integer',
             'student_school_id' => 'integer',

@@ -24,6 +24,7 @@ class PreRegistrationIncomingTmpRequest extends FormRequest
         return [
             'start_of_school_year' => 'required|integer',
             'end_of_school_year' => 'required|integer',
+            'user_id'=> 'integer',
             'student_school_id' => 'integer',
             'learners_reference_number' => 'integer',
             'last_name' => 'required|string',

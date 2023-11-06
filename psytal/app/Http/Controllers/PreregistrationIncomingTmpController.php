@@ -17,6 +17,7 @@ class PreregistrationIncomingTmpController extends Controller
         $preRegTmpincoming = preregistration_incoming_tmp::create([
             'start_of_school_year' => $data['start_of_school_year'],
             'end_of_school_year' => $data['end_of_school_year'],
+            'user_id'=> $data['user_id'],
             'student_school_id' => $data['student_school_id'],
             'learners_reference_number' => $data['learners_reference_number'],
             'last_name' => $data['last_name'],
@@ -55,6 +56,7 @@ class PreregistrationIncomingTmpController extends Controller
         ]);
 
         
+
         return response([
             'prereg' => $preRegTmpincoming,
         ]);
@@ -107,6 +109,7 @@ class PreregistrationIncomingTmpController extends Controller
         ]);
 
         
+
         return response([
             'prereg' => $preRegTmpincoming,
         ]);
