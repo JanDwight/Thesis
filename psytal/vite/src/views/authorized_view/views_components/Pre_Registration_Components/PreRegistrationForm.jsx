@@ -44,6 +44,7 @@ export default function PreRegistrationForm() {
   const [voluntarycontribution, setvoluntarycontribution] = useState('');
   const [contributionamount, setcontributionamount] = useState('');
   const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('No');
+  const [userId, setUserId] = useState('1');
 
   //clearing the input fields using the reset button
   const handleClear = () => {
@@ -90,6 +91,7 @@ export default function PreRegistrationForm() {
     .post('/preregincommingtmp', {
       start_of_school_year: parseInt(startOfSchoolYear, 10),
       end_of_school_year: parseInt(endOfSchoolYear, 10),
+      user_id: parseInt(userId),
       student_school_id: parseInt(studentSchoolId, 10),
       learners_reference_number: parseInt(learnersReferenceNumber, 10),
       last_name: lastName,

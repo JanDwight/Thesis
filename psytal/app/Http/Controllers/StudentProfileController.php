@@ -7,6 +7,7 @@ use App\Models\student_profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class StudentProfileController extends Controller
@@ -37,8 +38,23 @@ class StudentProfileController extends Controller
     {
         $data = $request->validated();
 
+    $fullName = $data['last_name'] . ', ' . $data['first_name'];
+
+    if (!empty($data['middle_name'])) {
+        $middleInitial = substr($data['middle_name'], 0, 1);
+        $fullName .= ' ' . $middleInitial . '.';
+    }
+
+    // Retrieve the user by full name
+    $user = User::where('name', $fullName)->first();
+
+    $userId = $user->id;
+
+
+    
+
         $studentprofile = student_profile::create([
-            'user_id' => $data['user_id'],
+            'user_id' => $userId,
             'start_of_school_year' => $data['start_of_school_year'],
             'end_of_school_year' => $data['end_of_school_year'],
             'student_school_id' => $data['student_school_id'],
@@ -70,8 +86,18 @@ class StudentProfileController extends Controller
         ]);
 
         
+        
+        
+
+        // Update other data fields
+        //$studentprofile->fill($studentprofile);
+    
+        // Save the changes to the database
+        //$studentprofile->save();
+
         return response([
             'prereg' => $studentprofile,
+            'user' => $userId,
         ]);
     }
 

@@ -80,6 +80,7 @@ export default function PreRegistrationFormView({prereg}) {
       }, []);
 
   const [preregData, setPreregData] = useState(prereg, {
+    user_id: '',
     start_of_school_year: '',   
     end_of_school_year: '',
     student_school_id: '',      
@@ -195,7 +196,7 @@ export default function PreRegistrationFormView({prereg}) {
     //Create student profile
      axiosClient
     .post(`/createstudentprofile`, {
-      user_id: String(preregData.id),
+      user_id: String(preregData.user_id),
       start_of_school_year: parseInt(preregData.start_of_school_year),
       end_of_school_year: parseInt(preregData.end_of_school_year),
       student_school_id: parseInt(preregData.student_school_id),
@@ -259,7 +260,7 @@ export default function PreRegistrationFormView({prereg}) {
       type_of_student: 'Regular',
     })
     .then(({ data }) => {
-      
+      console.log(data);
       //For Sending student account password
       axiosClient
     .get('/sendstudentaccountpassword')
@@ -278,7 +279,7 @@ export default function PreRegistrationFormView({prereg}) {
   const onSubmit = (ev) => {
     ev.preventDefault();
     setError({ __html: "" });
-
+    
     axiosClient
     .put(`/preregview/${preregData}`)
     .then(({ data }) => {
