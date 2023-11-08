@@ -4,24 +4,11 @@ import axiosClient from '../../../../axios';
 import EditPostModal from './EditPostModal';
 import ArchivePost from './ArchivePost';
 
-
-/*
- const date = new Date(timestamp);
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    
-    const timeOptions = {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-    };
-    const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
-
-    return `${formattedDate} at ${formattedTime}`;*/
+function formatTimestamp(timestamp) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const formattedDate = new Date(timestamp).toLocaleDateString('en-US', options);
+    return formattedDate;
+}
 
 export default function PostArticles() {
     const [posts, setPosts] = useState([]);
@@ -34,7 +21,7 @@ export default function PostArticles() {
         // Define a function to fetch posts
         const fetchPosts = async () => {
             try {
-                const response = await axiosClient.get('/posts'); // Use the correct API endpoint
+                const response = await axiosClient.get('/posts');
                 if (response.status === 200) {
                     setPosts(response.data);
                 } else {
@@ -51,6 +38,11 @@ export default function PostArticles() {
     const toggleMenu = (index) => {
         setShowMenu(showMenu === index ? null : index);
     };
+
+    const handleSave = (updatedPost) => {
+        console.log('Saved post:', updatedPost);
+      
+    }
 
     const openEditModal = (post) => {
         setSelectedPost(post);
@@ -104,7 +96,7 @@ export default function PostArticles() {
                                     Edit
                                 </div>
                                 <div
-                                    className="cursor-pointer hover:bg-green-200 hover:w-full" 
+                                    className="cursor-pointer hover-bg-green-200 hover-w-full" 
                                     onClick={() => handleArchive(post.id)}
                                 >
                                     Archive
@@ -117,14 +109,14 @@ export default function PostArticles() {
                     <div className="flex justify-between items-center">
                         <div>
                             <a className="flex items-center" href="#">
-                                <img
+                            <img
                                     className="mx-4 w-10 h-10 object-cover rounded-full hidden sm-block"
-                                    src={avatar}
+                                    src={post.author?.profile_picture || avatar}
                                     alt="avatar"
                                 />
                                 <div>
-                                    <h1 className="text-gray-700 font-bold">{post.author?.name || 'Author Name'}</h1>
-                                    <p className="font-light text-gray-600">{post.created_at}</p>
+                                    <h1 className="text-gray-700 font-bold">{post.author_name || 'Author Name'}</h1> {/* Display the user's name */}
+                                     <p className="font-light text-gray-600">{formatTimestamp(post.created_at)}</p>
                                 </div>
                             </a>
                             <div className="content">
@@ -139,10 +131,10 @@ export default function PostArticles() {
                         post.images.map((image, i) => (
                             <img
                                 key={i}
-                                src={`http://localhost:8000/storage/public${image}`}
+                                src={`http://localhost:8000/storage/${image.image_path}`} 
                                 alt={`Image ${i}`}
-                                height={400}
-                                width={400}
+                                height={200}
+                                width={200}
                                 className="mx-2" // Add spacing between images
                             />
                         ))

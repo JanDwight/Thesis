@@ -42,7 +42,7 @@ export default function AdminLayout() {
   console.log(userRole)
 
   if (!userToken && !userRole) {
-    return <Navigate to='/guest/landingpage' />
+    return <Navigate to='/' />
   }
 
   const logout = (ev) => {
