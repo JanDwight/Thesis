@@ -4,6 +4,25 @@ import axiosClient from '../../../../axios';
 import EditPostModal from './EditPostModal';
 import ArchivePost from './ArchivePost';
 
+
+/*
+ const date = new Date(timestamp);
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    
+    const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+    };
+    const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
+
+    return `${formattedDate} at ${formattedTime}`;*/
+
 export default function PostArticles() {
     const [posts, setPosts] = useState([]);
     const [showMenu, setShowMenu] = useState(null);
@@ -120,7 +139,7 @@ export default function PostArticles() {
                         post.images.map((image, i) => (
                             <img
                                 key={i}
-                                src={`http://localhost:8000/storage/${image.image_path}`}
+                                src={`http://localhost:8000/storage/public${image}`}
                                 alt={`Image ${i}`}
                                 height={400}
                                 width={400}

@@ -41,7 +41,7 @@ class PostController extends Controller
         return response(['post' => $post]);
     }
 
-    public function getPostsWithUsers()
+    public function getPosts()
     {
         $posts = posts::with('images')
             ->join('users', 'posts.user_id', '=', 'users.id')

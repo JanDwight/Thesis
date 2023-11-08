@@ -23,6 +23,7 @@ import CurriculumChecklist from "./views/authorized_view/views_components/Curric
 
 
 const router = createBrowserRouter([
+    
     {
         path: '/admin',
         element: <AdminLayout />,
@@ -167,9 +168,20 @@ const router = createBrowserRouter([
     },
     
     {
-        path: '/guest',
+        path: '/',
         element: <GuestLayout />,
         children: [
+            {
+                // Set the landing page as the default route
+                path: '',
+                element: <LandingPage />
+              },
+
+            {
+                path: 'landingpage',
+                element: <LandingPage />
+            },
+
             {
                 path: 'aboutus',
                 element: <AboutUs />
@@ -185,13 +197,8 @@ const router = createBrowserRouter([
             {
                 path: 'preregistrationforcontinuing',
                 element: <PreRegistrationForContinuing />
-            },
-            
-            {
-                path: 'landingpage',
-                element: <LandingPage />
-            },
-
+            },  
+           
             {
                 path: 'login',
                 element: <Login />
