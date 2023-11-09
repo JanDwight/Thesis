@@ -49,7 +49,7 @@ export default function LandingPage() {
       </div>
 
 
-      <div className='w-full h-screen relative flex items-center justify-center'>
+      <div className='w-full h-screen pb-10 relative flex items-center justify-center'>
         
       <div className="w-3/4 h-screen float-left">
       <div className="mx-6 ">
@@ -89,9 +89,9 @@ export default function LandingPage() {
     </div>
 
       {/*DEPARTMENT OBJECTIVES*/}
-      <div className="w-1/4 h-screen float-left ml-6">
-        <div className="absolute ">
-          <p className="text-m text-center  mr-4">
+      <div className="w-1/4 h-screen float-left ml-4">
+    
+          <p className="text-sm text-center  mr-6">
             <h6 className="text-xl font-bold pt-3">PSYCHOLOGY PROGRAM OBJECTIVES</h6>
             <ul className="list-decimal pl-6">
               <li>Demonstrate the capability to discuss and analyze the major theories and concepts in psychology (knowledge in psychology);</li>
@@ -103,7 +103,7 @@ export default function LandingPage() {
               <li>Demonstrate the ability to conduct psychological assessments and evaluation (psychological assessment).</li>
             </ul>
           </p>
-        </div>
+      
       </div>
     </div>
       
@@ -154,7 +154,7 @@ export default function LandingPage() {
          {/**End of Social Icons */}
 
       {/**<!-- Main footer content --> */}
-        <div className="bg-gray-300">
+        <div className="">
         <div className='container mx-auto px-4 py-5 justify-center items-center h-full'>
           <div className='mx-6 text-center'>
             <div className='grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-5'>

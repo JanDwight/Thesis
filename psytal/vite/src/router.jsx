@@ -19,10 +19,12 @@ import InstructorLayout from "./views/authorized_view/views_main/InstructorLayou
 import PreRegistrationForm from "./views/authorized_view/views_components/Pre_Registration_Components/PreRegistrationForm";
 import PreRegistrationForContinuing from "./views/authorized_view/views_components/Pre_Registration_Components/PreRegistrationForContinuing";
 import LinksForStudent from "./views/authorized_view/views_main/LinksForStudent";
-import CurriculumChecklist from "./views/authorized_view/views_components/CurriculumChecklist";
+import CurriculumChecklist from "./views/authorized_view/views_main/CurriculumChecklist";
+import ClassesForInstructors from "./views/authorized_view/views_main/ClassesForInstructors";
 
 
 const router = createBrowserRouter([
+    
     {
         path: '/admin',
         element: <AdminLayout />,
@@ -129,7 +131,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'classes',
-                element: <Classes />
+                element: <ClassesForInstructors />
             },
             {
                 path: 'links',
@@ -167,9 +169,20 @@ const router = createBrowserRouter([
     },
     
     {
-        path: '/guest',
+        path: '/',
         element: <GuestLayout />,
         children: [
+            {
+                // Set the landing page as the default route
+                path: '',
+                element: <LandingPage />
+              },
+
+            {
+                path: 'landingpage',
+                element: <LandingPage />
+            },
+
             {
                 path: 'aboutus',
                 element: <AboutUs />
@@ -185,13 +198,8 @@ const router = createBrowserRouter([
             {
                 path: 'preregistrationforcontinuing',
                 element: <PreRegistrationForContinuing />
-            },
-            
-            {
-                path: 'landingpage',
-                element: <LandingPage />
-            },
-
+            },  
+           
             {
                 path: 'login',
                 element: <Login />

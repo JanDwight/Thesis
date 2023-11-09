@@ -39,7 +39,7 @@ export default function DefaultLayout() {
   const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
 
   if (!userToken) {
-    return <Navigate to='/guest/landingpage' />
+    return <Navigate to='/' />
   }
 
   const logout = (ev) => {
