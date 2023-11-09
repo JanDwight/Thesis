@@ -264,7 +264,7 @@ export default function PreRegistrationFormView({prereg}) {
       //For Sending student account password
       axiosClient
     .get('/sendstudentaccountpassword')
-      
+      //pass the fullname, email, and password to the backendn
     })
 
     .catch(( error ) => {
@@ -338,7 +338,7 @@ export default function PreRegistrationFormView({prereg}) {
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
             
-              {/**=========================== Shoolyear - Date ==========================*/}  
+              {/**=========================== Schoolyear - Date ==========================*/}  
               <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
@@ -852,7 +852,7 @@ export default function PreRegistrationFormView({prereg}) {
               <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                   <div className="text-normal font-medium text-center mt-2">
                     DIGITAL COMMUNICATION AND LITERACY:
-                    <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
+                    <em> CHED Memorandum Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
                   </div> <hr className='mt-2'/>
 
                   {/*column1*/}
