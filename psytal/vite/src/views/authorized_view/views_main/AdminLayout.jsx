@@ -61,7 +61,7 @@ export default function AdminLayout() {
         {/*NavBar*/}
         <div className="flex-col flex">
           <div className="bg-viridian w-full border-b-2 border-gray-200">
-            <div className=" h-16 justify-between items-center mx-auto px-10 flex">
+            <div className=" h-20 justify-between items-center mx-auto px-10 flex">
               <div className='flex flex-row'>
                 <div>
                   <img src= {logo}
@@ -205,7 +205,7 @@ export default function AdminLayout() {
       {/*sidebar*/}
       <div className="flex justify-start px-10 pt-5"> {/*Main container */}
       
-        <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-60 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg  lg:shadow-2xl  " >
+        <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-1/4 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg  lg:shadow-2xl  " >
           <div className="flex flex-col items-center mt-6 -mx-2">
             <img className="object-cover w-15 h-15 mx-2 rounded-full cursor-pointer" src={avatar} alt="avatar" onClick={() => setIsProfileOpen(true)}/>
             <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>

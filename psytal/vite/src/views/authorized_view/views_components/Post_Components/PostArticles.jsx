@@ -3,25 +3,13 @@ import avatar from "@assets/icons8avatar.png";
 import axiosClient from '../../../../axios';
 import EditPostModal from './EditPostModal';
 import ArchivePost from './ArchivePost';
-
-
-/*
- const date = new Date(timestamp);
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    
-    const timeOptions = {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-    };
-    const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
-
-    return `${formattedDate} at ${formattedTime}`;*/
+import ImageGallery from './ImageGallery';
+//Formatted Timestamp
+function formatTimestamp(timestamp) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const formattedDate = new Date(timestamp).toLocaleDateString('en-US', options);
+    return formattedDate;
+}
 
 export default function PostArticles() {
     const [posts, setPosts] = useState([]);
@@ -34,7 +22,7 @@ export default function PostArticles() {
         // Define a function to fetch posts
         const fetchPosts = async () => {
             try {
-                const response = await axiosClient.get('/posts'); // Use the correct API endpoint
+                const response = await axiosClient.get('/posts');
                 if (response.status === 200) {
                     setPosts(response.data);
                 } else {
@@ -51,6 +39,11 @@ export default function PostArticles() {
     const toggleMenu = (index) => {
         setShowMenu(showMenu === index ? null : index);
     };
+
+    const handleSave = (updatedPost) => {
+        console.log('Saved post:', updatedPost);
+      
+    }
 
     const openEditModal = (post) => {
         setSelectedPost(post);
@@ -89,7 +82,7 @@ export default function PostArticles() {
                         onClick={() => toggleMenu(index)}
                     >
                         <div
-                            className="absolute top-5 right-5 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+                            className="absolute top-5 right-5 w-8 h-8 x-0 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
                         >
                             <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                             <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
@@ -104,7 +97,7 @@ export default function PostArticles() {
                                     Edit
                                 </div>
                                 <div
-                                    className="cursor-pointer hover:bg-green-200 hover:w-full" 
+                                    className="cursor-pointer hover-bg-green-200 hover-w-full" 
                                     onClick={() => handleArchive(post.id)}
                                 >
                                     Archive
@@ -113,44 +106,28 @@ export default function PostArticles() {
                         )}
                     </div>
 
-                    {/* Profile section */}
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <a className="flex items-center" href="#">
-                                <img
-                                    className="mx-4 w-10 h-10 object-cover rounded-full hidden sm-block"
-                                    src={avatar}
-                                    alt="avatar"
-                                />
-                                <div>
-                                    <h1 className="text-gray-700 font-bold">{post.author?.name || 'Author Name'}</h1>
-                                    <p className="font-light text-gray-600">{post.created_at}</p>
-                                </div>
-                            </a>
-                            <div className="content">
-                            <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
-                        </div>
-                        </div>
-                    </div>
+        {/* Profile section and Description */}
+          <div className="flex h-1/2">
+            <a href="#">
+              <img
+                className="mx-4 w-10 h-10 object-cover rounded-full sm-block"
+                src={post.author?.profile_picture || avatar}
+                alt="avatar"
+              />
+            </a>
+          <div className="w-3/4">
+            <h1 className="text-gray-700 font-bold text-3xl">{post.author_name || 'Author Name'}</h1>
+            <p className="text-xl text-gray-600">{formatTimestamp(post.created_at)}</p>
+            <div className="content text-2xl">
+              <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
+            </div>
+          </div>
+        </div>
 
-                    {/* Description section */}
-                    <div className="flex justify-center items-center py-5">
-                   {post.images && post.images.length > 0 && (
-                        post.images.map((image, i) => (
-                            <img
-                                key={i}
-                                src={`http://localhost:8000/storage/public${image}`}
-                                alt={`Image ${i}`}
-                                height={400}
-                                width={400}
-                                className="mx-2" // Add spacing between images
-                            />
-                        ))
-                    )}
-
-                    </div>
-                </div>
-            ))}
+        {/* Images section */}
+        <ImageGallery images={post.images} />
+      </div>
+    ))}
 
             {editModalOpen && selectedPost && (
                 <EditPostModal

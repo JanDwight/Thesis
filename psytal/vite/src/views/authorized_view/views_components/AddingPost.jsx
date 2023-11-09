@@ -99,13 +99,13 @@ export default function AddingPost() {
     <>
       {/* Create Post */}
       <div
-        className="bg-gray-200 w-full h-34 rounded-2xl shadow-xl cursor-pointer"
+        className="bg-gray-200 w-full h-32 rounded-2xl shadow-xl cursor-pointer"
         onClick={resetFormAndOpenModal}
       >
-        <div className="w-full h-24 flex items-center justify_between px-5">
+        <div className="w-full h-32 flex items-center justify_between px-5">
           <input
             type="text"
-            className="w-full rounded-full h-8 bg-white px-6 py-0 border-none focus:ring-green-700 text-xs m-5"
+            className="w-full rounded-full h-12 bg-white px-6 py-0 border-none focus:ring-green-700 text-m m-5"
             placeholder="Create Post . . ."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
