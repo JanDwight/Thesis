@@ -34,7 +34,7 @@ export default function LinksForStudent() {
  
   return (
     <>
-    <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
+    <div className="w-full h-full px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12  table-container overflow-y-auto">
       <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
         <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Links</div>
         <div className="mt-5 mx-5 flex flex-row justify-between items-baseline">
@@ -59,7 +59,7 @@ export default function LinksForStudent() {
       </div>
     
       {/* <div className="table-container overflow-x-auto"> Edited*/}
-      <div className="table-container overflow-x-auto max-h-[400px] overflow-y-auto">
+      <div className="table-container overflow-y-auto">
             <table className="table w-full table-striped text-gray-700 mt-5" >
 		            <thead>
 		              <tr>

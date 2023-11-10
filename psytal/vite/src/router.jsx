@@ -21,6 +21,8 @@ import PreRegistrationForContinuing from "./views/authorized_view/views_componen
 import LinksForStudent from "./views/authorized_view/views_main/LinksForStudent";
 import CurriculumChecklist from "./views/authorized_view/views_main/CurriculumChecklist";
 import ClassesForInstructors from "./views/authorized_view/views_main/ClassesForInstructors";
+import ClassesForStudents from "./views/authorized_view/views_main/ClassesForStudents";
+
 
 
 const router = createBrowserRouter([
@@ -155,7 +157,12 @@ const router = createBrowserRouter([
             },
 
             {
-                path: 'linksforstudent',
+                path: 'classes',
+                element: <ClassesForStudents />
+            },
+
+            {
+                path: 'links',
                 element: <LinksForStudent />
             },
 
