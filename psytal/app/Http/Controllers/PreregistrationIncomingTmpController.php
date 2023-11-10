@@ -7,6 +7,7 @@ use App\Models\preregistration_incoming_tmp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use mikehaertl\pdftk\Pdf;
 
 class PreregistrationIncomingTmpController extends Controller
 {
@@ -176,5 +177,83 @@ class PreregistrationIncomingTmpController extends Controller
     public function destroy(preregistration_incoming_tmp $validatedData)
     {
         //
+    }
+
+    // public function generateContinuingPdf(Request $request)
+    // {
+    //     $data = $request->all(); // Get data from the form request
+    //     $pdf = new Pdf('path-to-continuing-pdf-form.pdf');
+
+    //     // Iterate through the data and fill the PDF form fields
+    //     foreach ($data as $fieldName => $fieldValue) {
+    //         $pdf->fillForm([
+    //             $fieldName => $fieldValue,
+    //         ]);
+    //     }
+
+    //     $pdf->needAppearances();
+    //     $pdf->send('Continuing_PDF.pdf');
+    // }
+
+    public function generateFirstYearPdf(Request $request)
+    {
+        $data = $request->all(); // Get data from the form request
+       
+        $fieldMappings = [
+            'start_of_school_year' => $data['start_of_school_year'],
+            'end_of_school_year' => $data['end_of_school_year'],
+            'student_school_id' => $data['student_school_id'],
+            'learners_reference_number' => $data['learners_reference_number'],
+            'last_name' => $data['last_name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'maiden_name' => $data['maiden_name'],
+            'type_of_student' => $data['type_of_student'],
+          //  'year_level' => $data['year_level'],
+            'academic_classification' => $data['academic_classification'], //categories to shs, hs, als
+            'last_school_attended' => $data['last_school_attended'],
+            'address_of_school_attended' => $data['address_of_school_attended'],
+            'degree' => $data['degree'],
+       //     'major' => $data['major'],
+        //    'candidate_for_graduation' => $data['candidate_for_graduation'],
+       //     'end_of_term_to_finnish_degree' => $data['end_of_term_to_finnish_degree'],
+        //    'last_of_term_to_finnish_degree' => $data['last_of_term_to_finnish_degree'],
+            'date_of_birth' => $data['date_of_birth'],
+            'citizenship' => $data['citizenship'],
+            'ethnicity' => $data['ethnicity'],
+            'contact_number' => $data['contact_number'],
+            'place_of_birth' => $data['place_of_birth'],
+            'sex_at_birth' => $data['sex_at_birth'],
+            'special_needs' => $data['special_needs'],
+            'email_address' => $data['email_address'],
+            'home_address' => $data['home_address'],
+            'address_while_studying' => $data['address_while_studying'],
+            'contact_person_name' => $data['contact_person_name'],
+            'contact_person_number' => $data['contact_person_number'],
+            'contact_person_address' => $data['contact_person_address'],
+            'contact_person_relationship' => $data['contact_person_relationship'],
+            'health_facility_registered' => $data['health_facility_registered'],
+            'parent_health_facility_dependent' => $data['parent_health_facility_dependent'],
+            'vaccination_status' => $data['vaccination_status'],
+            'technology_level' => $data['technology_level'],
+            'digital_literacy' => $data['digital_literacy'],
+            'avail_free_higher_education' => $data['avail_free_higher_education'],
+            'voluntary_contribution' => $data['voluntary_contribution'], //yes / no
+            'contribution_amount' => $data['contribution_amount'],
+            'complied_to_admission_policy' => $data['complied_to_admission_policy'],
+          //  'section' => $data['section'],
+          //  'image' => $data['image'],
+            'pre_reg_status' => $data['pre_reg_status'],
+        ];
+        
+        $pdf = new Pdf('src/assets/FirstYear_PDF.pdf');
+
+        // Fill the PDF form fields using the fieldMappings array
+        $pdf->fillForm($fieldMappings);
+
+        $pdf->needAppearances();
+        $pdf->send('FirstYear_PDF.pdf');
+
+        return response(['data: ' => $data]);
     }
 }

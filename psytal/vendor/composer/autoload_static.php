@@ -44,6 +44,12 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         array (
             'voku\\' => 5,
         ),
+        'm' => 
+        array (
+            'mikehaertl\\tmp\\' => 15,
+            'mikehaertl\\shellcommand\\' => 24,
+            'mikehaertl\\pdftk\\' => 17,
+        ),
         'W' => 
         array (
             'Whoops\\' => 7,
@@ -180,6 +186,18 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'mikehaertl\\tmp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikehaertl/php-tmpfile/src',
+        ),
+        'mikehaertl\\shellcommand\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikehaertl/php-shellcommand/src',
+        ),
+        'mikehaertl\\pdftk\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src',
         ),
         'Whoops\\' => 
         array (
@@ -351,8 +369,8 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -520,7 +538,24 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AdminProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminProfileController.php',
+        'App\\Http\\Controllers\\ArchiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveController.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
+        'App\\Http\\Controllers\\ClassesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClassesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CurriculumController' => __DIR__ . '/../..' . '/app/Http/Controllers/CurriculumController.php',
+        'App\\Http\\Controllers\\EmergencyContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmergencyContactController.php',
+        'App\\Http\\Controllers\\InstructorClassesController' => __DIR__ . '/../..' . '/app/Http/Controllers/InstructorClassesController.php',
+        'App\\Http\\Controllers\\InstructorProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/InstructorProfileController.php',
+        'App\\Http\\Controllers\\LinksController' => __DIR__ . '/../..' . '/app/Http/Controllers/LinksController.php',
+        'App\\Http\\Controllers\\LogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogsController.php',
+        'App\\Http\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/PostController.php',
+        'App\\Http\\Controllers\\PreregistrationIncomingTmpController' => __DIR__ . '/../..' . '/app/Http/Controllers/PreregistrationIncomingTmpController.php',
+        'App\\Http\\Controllers\\StaffProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaffProfileController.php',
+        'App\\Http\\Controllers\\StudentClassesController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentClassesController.php',
+        'App\\Http\\Controllers\\StudentProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentProfileController.php',
+        'App\\Http\\Controllers\\TmpPreregistrationController' => __DIR__ . '/../..' . '/app/Http/Controllers/TmpPreregistrationController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -531,7 +566,36 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\AddClassRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AddClassRequest.php',
+        'App\\Http\\Requests\\AddCurriculumRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AddCurriculumRequest.php',
+        'App\\Http\\Requests\\AddUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AddUserRequest.php',
+        'App\\Http\\Requests\\CreatePostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreatePostRequest.php',
+        'App\\Http\\Requests\\LinksRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LinksRequest.php',
+        'App\\Http\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LoginRequest.php',
+        'App\\Http\\Requests\\PreRegistrationContinuingTmpRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PreRegistrationContinuingTmpRequest.php',
+        'App\\Http\\Requests\\PreRegistrationIncomingTmpRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PreRegistrationIncomingTmpRequest.php',
+        'App\\Http\\Requests\\SignupRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SignupRequest.php',
+        'App\\Http\\Requests\\StudentProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StudentProfileRequest.php',
+        'App\\Http\\Requests\\TmpPreRegistrationRequest' => __DIR__ . '/../..' . '/app/Http/Requests/TmpPreRegistrationRequest.php',
+        'App\\Mail\\UserVerification' => __DIR__ . '/../..' . '/app/Mail/UserVerification.php',
+        'App\\Models\\PostImage' => __DIR__ . '/../..' . '/app/Models/PostImage.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\admin_profile' => __DIR__ . '/../..' . '/app/Models/admin_profile.php',
+        'App\\Models\\archive' => __DIR__ . '/../..' . '/app/Models/archive.php',
+        'App\\Models\\classes' => __DIR__ . '/../..' . '/app/Models/classes.php',
+        'App\\Models\\curriculum' => __DIR__ . '/../..' . '/app/Models/curriculum.php',
+        'App\\Models\\emergency_contact' => __DIR__ . '/../..' . '/app/Models/emergency_contact.php',
+        'App\\Models\\instructor_classes' => __DIR__ . '/../..' . '/app/Models/instructor_classes.php',
+        'App\\Models\\instructor_profile' => __DIR__ . '/../..' . '/app/Models/instructor_profile.php',
+        'App\\Models\\links' => __DIR__ . '/../..' . '/app/Models/links.php',
+        'App\\Models\\logs' => __DIR__ . '/../..' . '/app/Models/logs.php',
+        'App\\Models\\posts' => __DIR__ . '/../..' . '/app/Models/posts.php',
+        'App\\Models\\preregistration_continuing_tmp' => __DIR__ . '/../..' . '/app/Models/preregistration_continuing_tmp.php',
+        'App\\Models\\preregistration_incoming_tmp' => __DIR__ . '/../..' . '/app/Models/preregistration_incoming_tmp.php',
+        'App\\Models\\staff_profile' => __DIR__ . '/../..' . '/app/Models/staff_profile.php',
+        'App\\Models\\student_classes' => __DIR__ . '/../..' . '/app/Models/student_classes.php',
+        'App\\Models\\student_profile' => __DIR__ . '/../..' . '/app/Models/student_profile.php',
+        'App\\Models\\tmp_preregistration' => __DIR__ . '/../..' . '/app/Models/tmp_preregistration.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -649,6 +713,7 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Exception\\PropertyException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',
@@ -6412,6 +6477,15 @@ class ComposerStaticInit882e51e62201a0f0dae7bcee88ee6a1a
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'mikehaertl\\pdftk\\Command' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/Command.php',
+        'mikehaertl\\pdftk\\DataFields' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/DataFields.php',
+        'mikehaertl\\pdftk\\FdfFile' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/FdfFile.php',
+        'mikehaertl\\pdftk\\InfoFields' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/InfoFields.php',
+        'mikehaertl\\pdftk\\InfoFile' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/InfoFile.php',
+        'mikehaertl\\pdftk\\Pdf' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/Pdf.php',
+        'mikehaertl\\pdftk\\XfdfFile' => __DIR__ . '/..' . '/mikehaertl/php-pdftk/src/XfdfFile.php',
+        'mikehaertl\\shellcommand\\Command' => __DIR__ . '/..' . '/mikehaertl/php-shellcommand/src/Command.php',
+        'mikehaertl\\tmp\\File' => __DIR__ . '/..' . '/mikehaertl/php-tmpfile/src/File.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );
 

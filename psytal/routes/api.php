@@ -66,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
     Route::post('/createstudentprofile', [StudentProfileController::class, 'create']);
-
+    
     //pre-reg courses to be enrolled + section
     Route::get('/show_classes', [ClassesController::class, 'index']); //<><><> show for logs
     
@@ -81,6 +81,12 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getlinks', [LinksController::class, 'getLinks']);
     Route::put('/archivelink/{id}', [LinksController::class, 'archiveLink']);
     Route::put('/updatelink/{id}', [LinksController::class, 'updateLink']);
+
+    // Display the form (GET request)
+    Route::get('/generateFirstYearPdf', [PreregistrationIncomingTmpController::class, 'generateFirstYearPdf']);
+
+    // Handle form submission and generate the PDF (POST request)
+    Route::post('/generateFirstYearPdf', [PreregistrationIncomingTmpController::class, 'generateFirstYearPdf']);
 });
    
 

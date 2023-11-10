@@ -15,6 +15,8 @@ export default function PreRegistrationFormView({prereg}) {
   const includeSymbols = true;  // Include symbols in the password
   const role = "4";
 
+  
+
     //<><><><><>
     const [inputFields, setInputFields] = useState([
       { classCode: '', courseCode: '', units: '', bcac: '' },
@@ -105,6 +107,8 @@ export default function PreRegistrationFormView({prereg}) {
     type_of_student: 'Regular',
   });
 
+  
+
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   }
@@ -144,7 +148,7 @@ export default function PreRegistrationFormView({prereg}) {
   }
 
   //On Accept Click
-  const onClickAccept = (ev) => {
+  const onClickAccept = (ev) => { //add print here download function (!!!!!)
     ev.preventDefault();
     setError({ __html: "" });
 
@@ -281,6 +285,28 @@ export default function PreRegistrationFormView({prereg}) {
       }
         console.error(error)
     });
+  };
+
+    const testsubmit = (ev) => {
+      ev.preventDefault();
+      setError({ __html: "" });
+
+    // Send a request to generate the PDF and trigger download
+  axiosClient.post('/generateFirstYearPdf', preregData, { responseType: 'blob' })
+  .then((response) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'generated.pdf');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error('Error generating PDF:', error);
+    // Handle errors, e.g., display an error message
+  });
   };
 
 
@@ -1140,6 +1166,9 @@ export default function PreRegistrationFormView({prereg}) {
                 </button>
               </div>
         </form>
+        <form onSubmit={testsubmit}>
+        <button type="submit">Download PDF</button>
+      </form>
       </div>
 
       {/**=========================== 4 ==========================*/}      

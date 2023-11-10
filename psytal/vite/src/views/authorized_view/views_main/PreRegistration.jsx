@@ -16,6 +16,7 @@ const handleRowClick = (items) => {
   setSelectedData(items);
 }
 
+
   useEffect(() => {
     setLoading(true);
     axiosClient
@@ -29,6 +30,8 @@ const handleRowClick = (items) => {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+
 
   console.log('test ' + selectedData.type_of_student)
   return (
@@ -71,6 +74,7 @@ const handleRowClick = (items) => {
                 } w-fit py-2 px-2 rounded-xl`}>
                   {item.pre_reg_status}
                 </div>
+
               </td>
             </tr>
           ))}
