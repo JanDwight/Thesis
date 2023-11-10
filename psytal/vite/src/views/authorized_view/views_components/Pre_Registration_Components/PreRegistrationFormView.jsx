@@ -184,8 +184,7 @@ export default function PreRegistrationFormView({prereg}) {
     for (let i = 4; i < length; i++) {
       password += getRandomChar(characters);
     }
-    console.log(password)
- 
+    
     axiosClient.post('/adduser', {
       name:fullName,
       role: parseInt(role),
@@ -226,7 +225,7 @@ export default function PreRegistrationFormView({prereg}) {
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
-
+    
     axiosClient
     .put(`/preregcheck/${id}`, {
       start_of_school_year: parseInt(preregData.start_of_school_year),
@@ -259,13 +258,30 @@ export default function PreRegistrationFormView({prereg}) {
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
-    .then(({ data }) => {
-      console.log(data);
-      //For Sending student account password
-      axiosClient
-    .get('/sendstudentaccountpassword')
-      //pass the fullname, email, and password to the backendn
+
+    console.log('password: ' + password);
+    //for sending emails
+    // Assuming formData is your FormData object
+    let formData = new FormData();
+
+    // Append some data to the FormData object
+    formData.append('lastName', fullName);
+    formData.append('email', preregData.email_address);
+    formData.append('password', password);
+
+    // Convert FormData to an object
+    let formDataObject = Array.from(formData.entries()).reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
+
+    axiosClient
+    .get('/sendstudentaccountpassword', {
+      params: formDataObject
     })
+      .then(({ data }) => {
+      console.log('this is form sendemails' + data);
+      })
 
     .catch(( error ) => {
       if (error.response) {

@@ -28,9 +28,6 @@ class SendPassword extends Mailable
     {
         return new Envelope(subject:'Congratulations',);
         
-        // return $this->from('psychdepartment283@gmail.com', 'Psychology Department')
-        // ->subject($this->data['subject'])
-        // ->view('email.index')->with('data',$this->data);
     }
 
     /**
