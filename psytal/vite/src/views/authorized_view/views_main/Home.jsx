@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import AddingPost from '../views_components/AddingPost';
 import PostArticles from '../views_components/Post_Components/PostArticles';
 import { useStateContext } from '../../../context/ContextProvider';

@@ -4,12 +4,9 @@ import axiosClient from '../../../../axios';
 import EditPostModal from './EditPostModal';
 import ArchivePost from './ArchivePost';
 import ImageGallery from './ImageGallery';
-//Formatted Timestamp
-function formatTimestamp(timestamp) {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    const formattedDate = new Date(timestamp).toLocaleDateString('en-US', options);
-    return formattedDate;
-}
+import Timestamp from './Timestamp';
+import ReadMore from './ReadMore'; 
+
 
 export default function PostArticles() {
     const [posts, setPosts] = useState([]);
@@ -57,7 +54,7 @@ export default function PostArticles() {
     
     const confirmArchive = async () => {
         try {
-            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`); // Use the correct API endpoint
+            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`); 
             if (response.status === 200) {
                 // Post archived successfully, remove it from the list
                 const updatedPosts = posts.filter((p) => p.id !== selectedPost.id);
@@ -73,16 +70,16 @@ export default function PostArticles() {
     };
 
     return (
-        <div>
+        <div className= "">
             {posts.map((post, index) => (
-                <div key={post.id} className="px-10 my-4 py-6 bg-gray-200">
+                <div key={post.id} className="px-10 my-8 py-8 bg-gray-200 rounded-2xl shadow-lg">
                     {/* Ellipsis Menu */}
                     <div
                         className="relative"
                         onClick={() => toggleMenu(index)}
                     >
                         <div
-                            className="absolute top-5 right-5 w-8 h-8 x-0 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+                            className="absolute top-5 right-5 w-8 h-8 z-0 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer"
                         >
                             <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                             <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
@@ -108,7 +105,7 @@ export default function PostArticles() {
 
         {/* Profile section and Description */}
           <div className="flex h-1/2">
-            <a href="#">
+            <a href="#">  {/* edit to link it to the actual user page*/}
               <img
                 className="mx-4 w-10 h-10 object-cover rounded-full sm-block"
                 src={post.author?.profile_picture || avatar}
@@ -116,8 +113,13 @@ export default function PostArticles() {
               />
             </a>
           <div className="w-3/4">
-            <h1 className="text-gray-700 font-bold text-3xl">{post.author_name || 'Author Name'}</h1>
-            <p className="text-xl text-gray-600">{formatTimestamp(post.created_at)}</p>
+            <h1 className="text-green-700 font-bold text-2xl">{post.author_name || 'Author Name'}</h1>
+            <Timestamp timestamp={post.created_at} />
+            <div>
+            <div className="pt-3">
+              <h1 className="font-bold text-3xl">{post.title}</h1>
+              </div>
+            </div>
             <div className="content text-2xl">
               <ReadMore maxCharacterCount={200}>{post.description}</ReadMore>
             </div>
@@ -126,43 +128,27 @@ export default function PostArticles() {
 
         {/* Images section */}
         <ImageGallery images={post.images} />
-      </div>
-    ))}
-
-            {editModalOpen && selectedPost && (
-                <EditPostModal
-                    selectedPost={selectedPost}
-                    closeModal={() => setEditModalOpen(false)}
-                    handleSave={handleSave}
-                />
-            )}
-
-            {archiveConfirmation && (
-                <ArchivePost
-                    showArchivepost={archiveConfirmation}
-                    onClose={() => setArchiveConfirmation(false)}
-                    onSubmitArchive={confirmArchive}
-                />
-            )}
         </div>
+
+        //Call Modals according to the option
+            ))}
+
+                    {editModalOpen && selectedPost && (
+                        <EditPostModal
+                            selectedPost={selectedPost}
+                            closeModal={() => setEditModalOpen(false)}
+                            handleSave={handleSave}
+                        />
+                    )}
+
+                    {archiveConfirmation && (
+                        <ArchivePost
+                            showArchivepost={archiveConfirmation}
+                            onClose={() => setArchiveConfirmation(false)}
+                            onSubmitArchive={confirmArchive}
+                        />
+                    )}
+                </div>
     );
 }
 
-function ReadMore({ children, maxCharacterCount = 200 }) {
-    const text = children;
-    const [isTruncated, setIsTruncated] = useState(true);
-    const resultString = isTruncated ? text.slice(0, maxCharacterCount) : text;
-
-    function toggleIsTruncated() {
-        setIsTruncated(!isTruncated);
-    }
-
-    return (
-        <p>
-            {resultString}
-            <a onClick={toggleIsTruncated}>
-                {isTruncated ? 'Read More' : 'Read Less'}
-            </a>
-        </p>
-    );
-}
