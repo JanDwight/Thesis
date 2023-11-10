@@ -27,9 +27,12 @@ export default function PreRegistrationFormView({prereg}) {
     };
 
     //calling the Form in the adding of classes
-    const handleSubmitCourseUnits = (e) => {
+    const handleSubmitCourseDetails = (e) => {
         e.preventDefault();
         console.log("InputFields", inputFields);
+        //axios
+        //send student info (preferably student ID number)
+        //send course details to curriculum checklist, ideally just the course_id + class_code [already sending course_id + class_code]
       };
     //Changing the input fields
     const handleChangeInput = (index, event) => {
@@ -1155,9 +1158,9 @@ export default function PreRegistrationFormView({prereg}) {
       {/**=========================== 4 ==========================*/}      
         {/**Start of Filling the FORM for CLASS CODES UNITS*/}
         <div className="w-full lg:w-8/12 px-4 container mx-auto">            
-            <form 
-                onSubmit={handleSubmitCourseUnits}
-                >
+            <form
+              //onSubmit={handleSubmitCourseDetails}
+            >
                 <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
                     <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                         <div className="text-normal font-medium text-center mt-2">
@@ -1190,7 +1193,7 @@ export default function PreRegistrationFormView({prereg}) {
                                     </option>
                                     {subjectData.map(item => (
                                       <option key={item.id} value={item.class_code}>
-                                        {item.class_code}
+                                        {item.class_code + ' - ' + item.course_code}
                                       </option>
                                     ))}
                                   </select>
@@ -1257,8 +1260,10 @@ export default function PreRegistrationFormView({prereg}) {
                                 <div className='w-full md:w-[10%] flex items-center justify-center mx-0 mt-4"'>
                                     <button type="button"
                                             className="ml-2 text-red-600 hover:bg-red-300 hover:text-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center border border-gray-600 hover:border-red-800 hover:cursor-pointer"
-                                            disabled={inputFields.length === 1} onClick={() => handleRemoveFields(index)}
-                                            >
+                                            disabled={inputFields.length === 1} onClick={() => {
+                                              handleChangeUnits(index, event.target.value);
+                                              handleRemoveFields(index);
+                                            }}>
                                         <svg
                                             className="w-4 h-4"
                                             aria-hidden="true"
@@ -1322,7 +1327,7 @@ export default function PreRegistrationFormView({prereg}) {
                                 </div>
                                                                
                             </div> 
-                            <button className=' bg-blue-500 rounded mt-2' variant="container">submit [fix me]</button>
+                            <button className=' bg-blue-500 rounded mt-2' variant="container" onClick={handleSubmitCourseDetails}>submit [fix me]</button>
                             <button className=' bg-blue-500 rounded mt-2 ml-2' variant="container" onClick={handleClearSubjects}>clear subjects</button>
                             {/*fix the two buttons above, no axios connection yet, do for other view*/}
                     </div>
