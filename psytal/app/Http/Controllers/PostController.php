@@ -53,29 +53,30 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $postId)
-    {
-        try {
-            // Find the post to update
-            $post = posts::findOrFail($postId);
-    
-            // Update the post fields if they are present in the request
-            if ($request->has('title')) {
-                $post->title = $request->input('title');
-            }
-    
-            if ($request->has('description')) {
-                $post->description = $request->input('description');
-            }
-    
-            // Handle image update if new images are uploaded
-            if ($request->hasFile('image')) {
-                // Assuming the input field for the image is named 'image'
-                $image = $request->file('image');
-    
+{
+    try {
+        // Find the post to update
+        $post = posts::findOrFail($postId);
+
+        // Update the post fields if they are present in the request
+        if ($request->has('title')) {
+            $post->title = $request->input('title');
+        }
+
+        if ($request->has('description')) {
+            $post->description = $request->input('description');
+        }
+
+        // Handle image update if new images are uploaded
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                // Assuming the input field for the image is named 'images'
                 $filename = time() . '_' . $image->getClientOriginalName();
                 $image->storeAs('public/images', $filename);
                 $imagePath = 'images/' . $filename;
-    
+
                 // Check if the post has an associated image
                 if ($post->postImage) {
                     // Update the existing image record
@@ -84,18 +85,20 @@ class PostController extends Controller
                 } else {
                     // Create a new image record
                     $postImage = new PostImage(['image_path' => $imagePath]);
-                    $post->postImage()->save($postImage);
+                    $post->images()->save($postImage);
                 }
             }
-    
-            // Save the changes to the post
-            $post->save();
-    
-            return response(['message' => 'Post updated successfully', 'post' => $post]);
-        } catch (\Exception $e) {
-            return response(['error' => 'Error updating the post.'], 500);
         }
+
+        // Save the changes to the post
+        $post->save();
+
+        return response(['message' => 'Post updated successfully', 'post' => $post]);
+    } catch (\Exception $e) {
+        return response(['error' => 'Error updating the post.'], 500);
     }
+}
+
     
 
     public function archive(Request $request, $postId)

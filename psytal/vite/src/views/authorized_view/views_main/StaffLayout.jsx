@@ -35,7 +35,7 @@ export default function StaffLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
 
   if (!userToken) {
-    return <Navigate to="/guest/landingpage"/> //change to guest/landingpage
+    return <Navigate to='/'/> //change to guest/landingpage
   }
 
   const logout = (ev) => {

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios';
-import { useStateContext } from '../../../context/ContextProvider.jsx';
-import { Menu, Transition } from '@headlessui/react';
-import { useAsyncValue } from 'react-router-dom';
 
 export default function CurriculumChecklist(){
       const [errors, setErrors] = useState({ __html: '' });
@@ -58,7 +55,7 @@ export default function CurriculumChecklist(){
         <div className="w-full h-full px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12  table-container overflow-y-auto">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-6xl text-[#525252]">Curriculum Checklist</div>
-                {/*Search and Add Courses */}
+                {/*Search*/}
                 <div className='mt-5 mx-5 flex flex-row justify-between items-baseline'>      
 
                       {/* //Search input */}

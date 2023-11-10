@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import AddingPost from '../views_components/AddingPost';
 import PostArticles from '../views_components/Post_Components/PostArticles';
 import { useStateContext } from '../../../context/ContextProvider';
@@ -10,10 +10,10 @@ export default function Home() {
     <div>
       <div className="flex flex-col justify-center items-center ml-10">
           <div className="w-full">
-            {userRole === 1 && <AddingPost />}
+            <AddingPost />
           </div>
 
-          <div className='pt-10'>
+          <div className="w-full mt-10">
           <PostArticles/>
           </div>
         </div>

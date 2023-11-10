@@ -187,8 +187,7 @@ export default function PreRegistrationFormView({prereg}) {
     for (let i = 4; i < length; i++) {
       password += getRandomChar(characters);
     }
-    console.log(password)
- 
+    
     axiosClient.post('/adduser', {
       name:fullName,
       role: parseInt(role),
@@ -229,7 +228,7 @@ export default function PreRegistrationFormView({prereg}) {
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
-
+    
     axiosClient
     .put(`/preregcheck/${id}`, {
       start_of_school_year: parseInt(preregData.start_of_school_year),
@@ -262,13 +261,30 @@ export default function PreRegistrationFormView({prereg}) {
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
-    .then(({ data }) => {
-      console.log(data);
-      //For Sending student account password
-      axiosClient
-    .get('/sendstudentaccountpassword')
-      
+
+    console.log('password: ' + password);
+    //for sending emails
+    // Assuming formData is your FormData object
+    let formData = new FormData();
+
+    // Append some data to the FormData object
+    formData.append('lastName', fullName);
+    formData.append('email', preregData.email_address);
+    formData.append('password', password);
+
+    // Convert FormData to an object
+    let formDataObject = Array.from(formData.entries()).reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
+
+    axiosClient
+    .get('/sendstudentaccountpassword', {
+      params: formDataObject
     })
+      .then(({ data }) => {
+      console.log('this is form sendemails' + data);
+      })
 
     .catch(( error ) => {
       if (error.response) {
@@ -341,7 +357,7 @@ export default function PreRegistrationFormView({prereg}) {
         <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
           <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
             
-              {/**=========================== Shoolyear - Date ==========================*/}  
+              {/**=========================== Schoolyear - Date ==========================*/}  
               <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
@@ -855,7 +871,7 @@ export default function PreRegistrationFormView({prereg}) {
               <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                   <div className="text-normal font-medium text-center mt-2">
                     DIGITAL COMMUNICATION AND LITERACY:
-                    <em> CHED Memorandom Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
+                    <em> CHED Memorandum Order Number 04, Series of 2020: GUIDELINES ON THE IMPLEMENTATION OF FLEXIBLE LEARNING</em>
                   </div> <hr className='mt-2'/>
 
                   {/*column1*/}

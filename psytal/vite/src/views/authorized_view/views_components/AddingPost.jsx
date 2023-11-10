@@ -38,6 +38,12 @@ export default function AddingPost() {
     }
   };
 
+  const removeSelectedImage = (index) => {
+    const newImages = [...selectedImages];
+    newImages.splice(index, 1);
+    setSelectedImages(newImages);
+  };
+
   const onSubmit = async (ev) => {
     ev.preventDefault();
     setError('');
@@ -99,7 +105,7 @@ export default function AddingPost() {
     <>
       {/* Create Post */}
       <div
-        className="bg-gray-200 w-full h-34 rounded-2xl shadow-xl cursor-pointer"
+        className="bg-gray-200 w-full h-34 rounded-2xl shadow-xl cursor-pointer z-5"
         onClick={resetFormAndOpenModal}
       >
         <div className="w-full h-24 flex items-center justify_between px-5">
@@ -134,18 +140,41 @@ export default function AddingPost() {
                     className="hidden"
                   />
                 </div>
-                {selectedImages && selectedImages.length > 0 && (
-                  <div className="flex flex-wrap">
-                    {selectedImages.map((image, index) => (
-                      <img
-                        key={index}
-                        src={URL.createObjectURL(image)}
-                        alt={`Selected Image ${index}`}
-                        className="h-25 w-25 mx-2"
-                      />
-                    ))}
-                  </div>
-                )}
+                {selectedImages.length > 0 && (
+                    <div className="flex flex-wrap">
+                      {selectedImages.map((image, index) => (
+                        <div key={index} className="relative overflow-hidden rounded-xl w-52 h-52 mx-2">
+                          {/* Make each photo clickable */}
+                          <label htmlFor={`selectedImage${index + 1}`} className="cursor-pointer">
+                            {/* Display selected images for editing */}
+                            {image && (
+                              <>
+                                <img
+                                  src={URL.createObjectURL(image)}
+                                  alt={`Selected Image ${index}`}
+                                  className="object-cover w-full h-full"
+                                />
+                                <button
+                                  onClick={() => removeSelectedImage(index)}
+                                  className="absolute top-0 right-0 p-2 bg-red-500 text-white rounded-full"
+                                >
+                                  X
+                                </button>
+                              </>
+                            )}
+                            {/* Hide the default file input */}
+                            <input
+                              id={`selectedImage${index + 1}`}
+                              type="file"
+                              accept="image/*"
+                              onChange={(ev) => handleImageUpload(ev)}
+                              className="hidden"
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                 {/* Title Input */}
                 <div className="flex items-center justify-between mt-4">
