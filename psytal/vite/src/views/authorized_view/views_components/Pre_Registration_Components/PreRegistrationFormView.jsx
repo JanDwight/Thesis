@@ -6,8 +6,6 @@ import { Navigate } from 'react-router-dom';
 
 export default function PreRegistrationFormView({prereg}) {
 
-  //console.log(prereg.health_facility_registered)
-
   const [subjectData, setSubjectData] = useState([]); //<><><><><>
   const [totalUnits, setTotalUnits] = useState(0); //<><><><><>
 
@@ -30,6 +28,7 @@ export default function PreRegistrationFormView({prereg}) {
     const handleSubmitCourseDetails = (e) => {
         e.preventDefault();
         console.log("InputFields", inputFields);
+        console.log("Student ID", preregData.student_school_id);
         //axios
         //send student info (preferably student ID number)
         //send course details to curriculum checklist, ideally just the course_id + class_code [already sending course_id + class_code]
@@ -1264,7 +1263,7 @@ export default function PreRegistrationFormView({prereg}) {
                                     name="bcac"
                                     value={inputField.bcac}
                                     onChange={event => handleChangeInput(index, event)}
-                                    defaultValue="N/A"
+                                    required
                                   >
                                     <option value="N/A">N/A</option>
                                     <option value="BC">BC</option>

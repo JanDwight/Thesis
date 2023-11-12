@@ -27,4 +27,10 @@ class classes extends Model
         'archived', // Add the 'archived' field to the fillable array <><><>
         // Add other columns here time and day
     ];
+
+
+    public function students()
+    {
+        return $this->belongsToMany(student_profile::class);
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\LogsController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\AttachSubjectController; //<><><>
 use App\Http\Controllers\SendStudentAccountPasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     //pre-reg courses to be enrolled + section
     Route::get('/show_classes', [ClassesController::class, 'index']); //<><><> show for logs
+
+    //pre-reg attach subjects to student
+    Route::post('/student_subject', [AttachSubjectController::class, 'attachSubjectToStudent']);
     
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);

@@ -59,4 +59,11 @@ class student_profile extends Model
  * @var bool
  */
 public $timestamps = true;
+
+//student has many subjects
+public function classes()
+{
+    return $this->belongsToMany(classes::class);
+}
+
 }
