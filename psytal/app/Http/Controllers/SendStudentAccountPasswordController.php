@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SendStudentPasswordRequest;
 use App\Mail\SendPassword;
+use App\Mail\ForgotPasswordInputEmail;
 use Exception;
 use Illuminate\Http\Request;
 use Mail;
@@ -28,4 +28,27 @@ class SendStudentAccountPasswordController extends Controller
           return response()->json([$studentInfo]);
         } 
     }
+
+    public function forgotpasswordsendemail(Request $request)
+{
+    try {
+        $formData = $request->query(); // Ensure you're getting the email correctly
+
+        $data = [
+            'title' => 'Forgot Password',
+            'body'  => 'Here is the code. "' . $formData['code']. '" Thank you.'
+        ];
+
+        Mail::to($formData['email'])->send(new ForgotPasswordInputEmail($data)); // Make sure the SendPassword class is correct
+
+        // You might want to log a success message or return a different response for success
+        return response()->json([
+            'success' => true,
+            'message' => 'Email sent successfully'
+        ]);
+    } catch (Exception $e) {
+        return response()->json(['error' => 'Error, Please try again later']);
+    }
+}
+
 }
