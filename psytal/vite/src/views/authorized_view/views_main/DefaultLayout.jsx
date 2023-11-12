@@ -18,7 +18,8 @@ import UserProfile from '../views_components/profile_components/UserProfile'
 const navigation = [
   { name: 'Home', to: '/student/home'},
   { name: 'Pre-Registration', to: '/student/preregistrationforcontinuing'},  
-  { name: 'Links', to: '/student/linksforstudent'},
+  { name: 'Classes', to: '/student/classes'},
+  { name: 'Links', to: '/student/links'},
   { name: 'Curriculum Checklist', to: '/student/curriculumchecklist'}  
 ]
 
@@ -68,21 +69,6 @@ export default function DefaultLayout() {
                         alt="Your Company"
                       />
                     </div>
-                  </div>
-
-                  <div className='w-1/2 '>
-                    <form action="">
-                      <input  id="search"
-                        name="search"
-                        type="text"
-                        autoComplete="search"
-                        placeholder='Search'
-                        required
-                        //value={fullName}
-                        //onChange={ev => setFullName(ev.target.value)}
-                        className="block w-full rounded-2xl border-0 py-1.5 bg-[#CCEFCC]  text-gray-900 shadow-sm ring-3 ring-[#487354] ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </form>
                   </div>
 
                   <div className="hidden md:block">

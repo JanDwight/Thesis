@@ -21,7 +21,9 @@ import PreRegistrationForContinuing from "./views/authorized_view/views_componen
 import LinksForStudent from "./views/authorized_view/views_main/LinksForStudent";
 import CurriculumChecklist from "./views/authorized_view/views_main/CurriculumChecklist";
 import ClassesForInstructors from "./views/authorized_view/views_main/ClassesForInstructors";
-
+import ClassesForStudents from "./views/authorized_view/views_main/ClassesForStudents";
+import InputEmail from "./views/unauthorized_view/views_components/Forgot_Password/InputEmail";
+import InputCode from "./views/unauthorized_view/views_components/Forgot_Password/InputCode";
 
 const router = createBrowserRouter([
     
@@ -155,7 +157,12 @@ const router = createBrowserRouter([
             },
 
             {
-                path: 'linksforstudent',
+                path: 'classes',
+                element: <ClassesForStudents />
+            },
+
+            {
+                path: 'links',
                 element: <LinksForStudent />
             },
 
@@ -203,7 +210,17 @@ const router = createBrowserRouter([
             {
                 path: 'login',
                 element: <Login />
-            }
+            },
+
+            {
+                path: 'forgotpassword',
+                element: <InputEmail />
+            },
+
+            {
+                path: 'code',
+                element: <InputCode />
+            },
         ]
     }
 ])

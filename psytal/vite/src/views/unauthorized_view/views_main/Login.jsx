@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychLogo.png';
+import { NavLink } from 'react-router-dom';
 
 export default function Login() {
   const {setCurrentUser, setUserToken, setUserRole} = useStateContext();
@@ -100,9 +101,9 @@ export default function Login() {
               </div>
             </div>
             <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
+            <NavLink to="/forgotpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+              Forgot password?
+            </NavLink>
                 </div>
             <div>
               <button
