@@ -11,41 +11,37 @@ export default function InputEmail() {
 
 
   const onSubmit = async (ev) => {
-    ev.preventDefault();
+  ev.preventDefault();
 
-    // Generate a 4-digit random code
-    const randomCode = Math.floor(1000 + Math.random() * 9000);
-    setCode(randomCode.toString());
+  // Generate a 4-digit random code
+  const randomCode = Math.floor(1000 + Math.random() * 9000);
+  const generatedCode = randomCode.toString();
+  setCode(generatedCode);
 
-    //preparing formData to be sent to backend
-    let formData = new FormData();
+  // Preparing formData to be sent to the backend
+  let formData = new FormData();
 
-    // Append some data to the FormData object
-    formData.append('code', code);
-    formData.append('email', email);
+  // Append some data to the FormData object
+  formData.append('code', generatedCode); // Use the generatedCode variable
+  formData.append('email', email);
 
-    // Convert FormData to an object
-    let formDataObject = Array.from(formData.entries()).reduce((obj, [key, value]) => {
-      obj[key] = value;
-      return obj;
-    }, {});
-    
-    console.log(code);
-    
-    try {
-      const response = await axiosClient.get('/forgotpasswordsendemail', {
-        params:  formDataObject 
-      });
+  try {
+    const response = await axiosClient.get('/forgotpasswordsendemail', {
+      params: Object.fromEntries(formData), // Convert FormData to plain object
+    });
 
-      if (response.data && response.data.success) {
-        navigate('/code'); // Use navigate instead of history.push
-      } else {
-        console.error('Password reset failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
+    if (response.data && response.data.success) {
+      // Use navigate to go to the "/code" route and pass formData as state
+      navigate('/code', { state: { formData: Object.fromEntries(formData) } });
+    } else {
+      console.error('Password reset failed');
     }
-  };
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+  
 
   return (
     <>
