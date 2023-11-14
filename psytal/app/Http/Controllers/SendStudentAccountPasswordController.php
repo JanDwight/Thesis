@@ -51,4 +51,23 @@ class SendStudentAccountPasswordController extends Controller
     }
 }
 
+public function sendnewpassword(Request $request)
+    {
+        $newpassword = $request->input('newpassword');
+
+        $data = 
+        [
+            'title'=>'Change Password',
+            'body'=> 'Here is your new Password. "'  . $newpassword['password']. '" Make sure to change it after loging into your account'
+        ];
+        try {
+            Mail::to($newpassword['email'])->send(new SendPassword($data));
+            return response()->json([$newpassword]);
+        }
+        catch(Exception $e)
+        {
+          return response()->json([$newpassword]);
+        } 
+    }
+
 }

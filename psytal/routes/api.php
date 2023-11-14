@@ -99,3 +99,5 @@ Route::post('/preregcontinuingtmp', [PreregistrationIncomingTmpController::class
 
 //Forgot Password
 Route::get('/forgotpasswordsendemail', [SendStudentAccountPasswordController::class,'forgotpasswordsendemail']);
+Route::put('/changepassword', [UserController::class,'changepassword']);
+Route::get('/sendnewpassword', [SendStudentAccountPasswordController::class,'sendnewpassword']);
