@@ -51,23 +51,24 @@ class SendStudentAccountPasswordController extends Controller
     }
 }
 
-public function sendnewpassword(Request $request)
+    public function sendnewpassword(Request $request)
     {
-        $newpassword = $request->input('newpassword');
+        $formData = $request->query();
 
-        $data = 
-        [
-            'title'=>'Change Password',
-            'body'=> 'Here is your new Password. "'  . $newpassword['password']. '" Make sure to change it after loging into your account'
+        $newPassword = $formData['newPassword']; // Access the specific parameter
+
+        $data = [
+            'title' => 'Change Password',
+            'body' => 'Here is your new Password: "' . $newPassword . '". Make sure to change it after logging into your account.'
         ];
+
         try {
-            Mail::to($newpassword['email'])->send(new SendPassword($data));
-            return response()->json([$newpassword]);
+            Mail::to($formData['email'])->send(new SendPassword($data));
+            return response()->json(['message' => 'Email sent successfully']);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Email sending failed']);
         }
-        catch(Exception $e)
-        {
-          return response()->json([$newpassword]);
-        } 
     }
+
 
 }
