@@ -8,38 +8,47 @@ use App\Models\posts;
 use App\Models\PostImage;
 use Illuminate\Support\Str;
 use App\Http\Requests\CreatePostRequest;
+use App\Models\archive;
+
 
 class PostController extends Controller
 {
     public function createPosts(CreatePostRequest $request)
     {
         $data = $request->validated();
-
+    
         // Create a new post
-        $post = auth()->user()->posts()->create([
+        $post = new posts([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
-
+    
+        // Manually set the user_id
+        $post->user_id = auth()->id();
+    
+        // Save the post (including slug generation)
+        $post->save();
+    
         if ($request->hasFile('images')) {
             $images = $request->file('images');
-
+    
             foreach ($images as $image) {
                 // Generate a unique filename for each image
                 $filename = time() . '_' . $image->getClientOriginalName();
-
+    
                 // Move the image to the 'public' disk under the 'images' directory
                 $image->storeAs('public/images', $filename);
-
+    
                 // Save the file path in the 'image_path' field in the 'post_images' table
                 $imagePath = 'images/' . $filename;
-
+    
                 $post->images()->create(['image_path' => $imagePath]);
             }
         }
-
+    
         return response(['post' => $post]);
     }
+    
 
     public function getPosts()
     {
@@ -52,65 +61,54 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-    public function update(Request $request, $postId)
-{
-    try {
-        // Find the post to update
-        $post = posts::findOrFail($postId);
-
-        // Update the post fields if they are present in the request
-        if ($request->has('title')) {
-            $post->title = $request->input('title');
-        }
-
-        if ($request->has('description')) {
-            $post->description = $request->input('description');
-        }
-
-        // Handle image update if new images are uploaded
+    public function update(Request $request, $id)
+    {
+        \Log::info('Request Data: ' . json_encode($request->all()));
+        $post = posts::findOrFail($id);
+    
+        $request->validate([
+            'title' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Update title and description
+        $post->update($request->only('title', 'description'));
+    
+        // Handle image uploads
         if ($request->hasFile('images')) {
-            $images = $request->file('images');
-
-            foreach ($images as $image) {
-                // Assuming the input field for the image is named 'images'
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/images', $filename);
-                $imagePath = 'images/' . $filename;
-
-                // Check if the post has an associated image
-                if ($post->postImage) {
-                    // Update the existing image record
-                    $post->postImage->image_path = $imagePath;
-                    $post->postImage->save();
+            foreach ($request->file('images') as $index => $image) {
+                if (isset($request->existingImages[$index])) {
+                    $postImage = PostImage::findOrFail($request->existingImages[$index]);
+                    $postImage->update(['image_path' => $image->store('images')]);
                 } else {
-                    // Create a new image record
-                    $postImage = new PostImage(['image_path' => $imagePath]);
-                    $post->images()->save($postImage);
+                    $post->images()->create(['image_path' => $image->store('images')]);
                 }
             }
         }
-
-        // Save the changes to the post
-        $post->save();
-
-        return response(['message' => 'Post updated successfully', 'post' => $post]);
-    } catch (\Exception $e) {
-        return response(['error' => 'Error updating the post.'], 500);
-    }
-}
-
     
-
+        // Refresh the post instance to get the updated data
+        $post->refresh();
+    
+        return response()->json(['post' => $post]);
+    }
+    
     public function archive(Request $request, $postId)
-    {
+{
+
+    if (!$postId) {
+        return response(['error' => 'Invalid post ID'], 400);
+    }
+
+    try {
         // Find the post to archive
-        $post = posts::findOrFail($postId);
+        $post = posts::with('images')->findOrFail($postId);
 
         // Archive the post itself
         $post->archived = true;
         $post->save();
 
-        $postTableName = (new posts)->getTable(); // Getting the table associated with the Post model
+        $postTableName = $post->getTable(); // Getting the table associated with the Post model
 
         // Get the name of the current model
         $itemType = class_basename($post);
@@ -128,14 +126,24 @@ class PostController extends Controller
         // Save to archives table
         $archive->save();
 
-        return response(['message' => 'Archive post successfully']);
-    }
-
-    //count for dashboard
-    public function count_posts()
-    {
-        $postCount = posts::count();
-
-    return $postCount;
+        foreach ($post->images as $image) {
+            $image->archived = true;
+            $image->save();
+        }
+        dd('Reached the archive method');
+        return response(['message' => 'Post archived successfully'], 204); // Use 204 No Content status code
+    } catch (\Exception $e) {
+        return response(['error' => 'Error archiving the post'], 500);
     }
 }
+
+
+    
+       //count for dashboard
+       public function count_posts()
+       {
+           $postCount = posts::count();
+   
+       return $postCount;
+       }
+}    

@@ -10,32 +10,25 @@ class posts extends Model
 {
     use HasFactory;
 
+    protected $table = 'posts';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+
     protected $fillable = [
         'title',
         'description',
+        // Add any other fields that can be mass-assigned during create/update
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($post) {
-            if (auth()->check()) {
-                $post->user_id = auth()->id();
-            }
-
-            // Generate a slug from the title
-            $post->slug = Str::slug($post->title);
-        });
-    }
-
-    public function setSlugAttribute($value)
-    {
-        $this->attributes['slug'] = Str::slug($value);
-    }
 
     public function images()
     {
         return $this->hasMany(PostImage::class, 'post_id');
+    }
+
+    // Mutator to automatically generate a slug when setting the title
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
     }
 }

@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
 
         Schema::create('post_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained('posts');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->string('image_path');
             $table->timestamps();
             $table->boolean('archived')->default(false);

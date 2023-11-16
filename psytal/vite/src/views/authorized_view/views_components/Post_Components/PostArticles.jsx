@@ -51,24 +51,8 @@ export default function PostArticles() {
         setSelectedPost(post);
         setArchiveConfirmation(true);
     };
-    
-    const confirmArchive = async () => {
-        try {
-            const response = await axiosClient.post(`/archivePost/${selectedPost.id}`); 
-            if (response.status === 200) {
-                // Post archived successfully, remove it from the list
-                const updatedPosts = posts.filter((p) => p.id !== selectedPost.id);
-                setPosts(updatedPosts);
-            } else {
-                throw new Error('Error Network response');
-            }
-        } catch (error) {
-            console.error('Error archiving the post: ', error);
-        } finally {
-            setArchiveConfirmation(false);
-        }
-    };
 
+   
     return (
         <div className= "">
             {posts.map((post, index) => (
@@ -95,7 +79,7 @@ export default function PostArticles() {
                                 </div>
                                 <div
                                     className="cursor-pointer hover-bg-green-200 hover-w-full" 
-                                    onClick={() => handleArchive(post.id)}
+                                    onClick={() => handleArchive(post)}
                                 >
                                     Archive
                                 </div>
@@ -143,9 +127,9 @@ export default function PostArticles() {
 
                     {archiveConfirmation && (
                         <ArchivePost
-                            showArchivepost={archiveConfirmation}
-                            onClose={() => setArchiveConfirmation(false)}
-                            onSubmitArchive={confirmArchive}
+                        showArchivepost={archiveConfirmation}
+                        onClose={() => setArchiveConfirmation(false)}
+                        onSubmitArchive={() => confirmArchive(selectedPost.id)}
                         />
                     )}
                 </div>

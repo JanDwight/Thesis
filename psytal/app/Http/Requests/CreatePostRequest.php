@@ -23,6 +23,7 @@ class CreatePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Allow an array of images
+            'existingImages.*' => 'string',
         ];
     }
 }
