@@ -1,26 +1,49 @@
 import React, { useState } from 'react';
-import axiosClient from '../../../../axios';
 import { useLocation } from 'react-router-dom';
+import axiosClient from '../../../../axios';
 
 export default function InputCode() {
   const [userCode, setUserCode] = useState('');
   const location = useLocation();
   const formData = location.state ? location.state.formData : null;
+  const [newPassword, setNewPassword] = useState('');
 
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
     ev.preventDefault();
 
     // Check if userCode matches the code in formData
     if (formData && userCode === formData.code) {
       // Code is correct, you can proceed with your logic
-      console.log('Code is correct');
-      // Add your logic here
+      console.log(formData);
 
+      try {
+        const response = await axiosClient.put('/changepassword', {
+          email: formData.email,
+        });
+
+        // Assuming the API response structure is { new_password: 'your_password' }
+        const newPasswordFromResponse = response.data.new_password;
+
+        setNewPassword(newPasswordFromResponse);
+
+        // Preparing formData to be sent to the backend
+        const newFormData = new FormData();
+        newFormData.append('newPassword', newPasswordFromResponse);
+        newFormData.append('email', formData.email);
+
+        await axiosClient.get('/sendnewpassword', {
+          params: Object.fromEntries(newFormData), // Convert FormData to plain object
+        });
+
+        console.log(response.data); // You can handle the response as needed
+      } catch (error) {
+        console.error('Error updating password:', error);
+        // Handle error appropriately
+      }
     } else {
       // Code is incorrect, handle accordingly
       console.log('Code is incorrect');
       // Add your logic for incorrect code
-
     }
   };
 

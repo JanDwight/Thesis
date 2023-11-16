@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\archive;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -70,6 +71,41 @@ class UserController extends Controller
         // Return a success response
         return response()->json(['message' => 'User updated successfully']);
     }
+
+    //Change Password========================================================================
+    public function changepassword(Request $request)
+{
+    // Use input() method to get the value of the "email" parameter from the request
+    $email = $request->input('email');
+
+    // Check if the email parameter is present
+    if ($email) {
+        $users = User::where('email', $email)->get();
+
+        if ($users->count() > 0) {
+            // Generate a random password
+            $newPassword = Str::random(8); // You can adjust the length as needed
+
+            // Update the password for each user
+            foreach ($users as $user) {
+                $user->password = bcrypt($newPassword);
+                $user->update();
+            }
+
+            // Additional logic if needed
+
+            return response()->json(['success' => true, 'message' => 'Password Changed', 'new_password' => $newPassword]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'User not found']);
+        }
+    } else {
+        return response()->json(['success' => false, 'message' => 'Email parameter missing']);
+    }
+}
+
+
+
+
     // for archive user
     public function archiveUser(Request $request, $userId)
     {
