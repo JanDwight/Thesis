@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
 
-function formatTimestamp(timestamp) {
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric'};
-  const formattedDate = new Date(timestamp).toLocaleDateString('en-US', options);
-  const formattedTime = new Date(timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-  return `${formattedDate} at ${formattedTime}`;
+function formatTimestamp(timestamp, updatedAt) {
+  const timeToShow = updatedAt || timestamp;
+
+  // Display format: "Month Day, Year at Hour:Minute AM/PM"
+  const formattedDateTime = moment(timeToShow).format('MMMM D, YYYY [at] h:mm A');
+
+  return updatedAt ? formattedDateTime : `Created ${formattedDateTime}`;
 }
 
-export default function Timestamp({ timestamp }) {
-  return <p className="text-xl text-gray-600">{formatTimestamp(timestamp)}</p>;
+export default function Timestamp({ timestamp, updatedAt }) {
+  return <p className="text-xl text-gray-600">{formatTimestamp(timestamp, updatedAt)}</p>;
 }

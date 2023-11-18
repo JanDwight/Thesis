@@ -1,27 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../../axios';
 
 export default function EditPostModal({ selectedPost, closeModal, handleSave }) {
-  if (!selectedPost) return null;
-
-  const [loading, setLoading] = useState(false);
   const [editedPost, setEditedPost] = useState({
-    ...selectedPost,
+    title: selectedPost.title || '',
+    description: selectedPost.description || '',
+    images: selectedPost.images || [],
     selectedImages: selectedPost.images.map(() => null),
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (selectedPost) {
+      setEditedPost({
+        title: selectedPost.title || '',
+        description: selectedPost.description || '',
+        images: selectedPost.images || [],
+        selectedImages: selectedPost.images.map(() => null),
+      });
+    }
+  }, [selectedPost]);
 
   const handleImageChange = (ev, index) => {
     const selectedImage = ev.target.files[0];
 
-    setEditedPost((prevState) => {
-      const updatedSelectedImages = [...prevState.selectedImages];
-      updatedSelectedImages[index] = selectedImage;
-
-      const updatedImages = [...prevState.images];
+    setEditedPost((prevEditedPost) => {
+      const updatedImages = [...prevEditedPost.images];
       updatedImages[index] = { file: selectedImage };
 
+      const updatedSelectedImages = [...prevEditedPost.selectedImages];
+      updatedSelectedImages[index] = URL.createObjectURL(selectedImage);
+
       return {
-        ...prevState,
+        ...prevEditedPost,
         images: updatedImages,
         selectedImages: updatedSelectedImages,
       };
@@ -29,14 +41,15 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
   };
 
   const removeImage = (index) => {
-    setEditedPost((prevState) => {
-      const updatedImages = [...prevState.images];
+    setEditedPost((prevEditedPost) => {
+      const updatedImages = [...prevEditedPost.images];
       updatedImages.splice(index, 1);
-      const updatedSelectedImages = [...prevState.selectedImages];
+
+      const updatedSelectedImages = [...prevEditedPost.selectedImages];
       updatedSelectedImages.splice(index, 1);
 
       return {
-        ...prevState,
+        ...prevEditedPost,
         images: updatedImages,
         selectedImages: updatedSelectedImages,
       };
@@ -44,43 +57,59 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
   };
 
   const updateImage = (index) => {
-    document.getElementById(`image${index + 1}`).click();
+    const existingImage = editedPost.images[index];
+
+    // If there's an existing image, replace it; otherwise, add a new image
+    if (existingImage) {
+      document.getElementById(`image${index + 1}`).click();
+    } else {
+      // Check if the current number of images is less than 3 before allowing to add
+      if (editedPost.images.length < 3) {
+        document.getElementById(`image${index + 1}`).click();
+      } else {
+        setError('You can select up to three images.');
+      }
+    }
   };
 
   const savePost = async () => {
     setLoading(true);
-  
-    if (!editedPost.title || !editedPost.description) {
-      console.error('Title and description are required.');
-      setLoading(false);
-      return;
-    }
-  
-    const formData = new FormData();
-    formData.append('title', editedPost.title);
-    formData.append('description', editedPost.description);
-  
-    editedPost.images.forEach((image, index) => {
-      if (image.file) {
-        formData.append(`images[${index}]`, image.file);
-      } else if (image.image_id) {
-        formData.append(`existingImages[${index}]`, image.image_id);
-      }
-    });
-  
+
     try {
-      const response = await axiosClient.put(`/posts/${editedPost.id}`, formData, {
+      if (!editedPost.title || !editedPost.description) {
+        setError('Please enter both a title and description.');
+        setLoading(false);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('_method', 'put');
+      formData.append('title', editedPost.title);
+      formData.append('description', editedPost.description);
+
+      editedPost.images.forEach((image, index) => {
+        formData.append(`images[${index}]`, image.file);
+
+        if (image.id) {
+          formData.append(`imageIds[${index}]`, image.id);
+        }
+      });
+
+      const response = await axiosClient.post(`/posts/${selectedPost.id}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Add this header
+          'Content-Type': 'multipart/form-data',
         },
       });
+
       if (response.status === 200) {
         handleSave({
-          id: editedPost.id,
+          id: selectedPost.id,
           title: editedPost.title,
           description: editedPost.description,
-          images: response.data.post.images,
+          images: response.data.post.images || [],
         });
+
+        closeModal();
       } else {
         throw new Error('Network response was not ok');
       }
@@ -88,14 +117,12 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
       console.error('Error updating data: ', error);
     } finally {
       setLoading(false);
-      closeModal();
     }
   };
-  
-  
-  
 
-
+  if (!selectedPost) {
+    return null;
+  }
 
   return (
     <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
@@ -137,7 +164,11 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
                     {image.image_path && (
                       <>
                         <img
-                          src={`http://localhost:8000/storage/${image.image_path}`}
+                          src={
+                            image.image_path instanceof File
+                              ? URL.createObjectURL(image.image_path)
+                              : `http://localhost:8000/storage/${image.image_path}`
+                          }
                           alt={`Image ${index + 1}`}
                           className="object-cover w-full h-full"
                         />
@@ -153,7 +184,7 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
                     {editedPost.selectedImages && editedPost.selectedImages[index] && (
                       <>
                         <img
-                          src={URL.createObjectURL(editedPost.selectedImages[index])}
+                          src={editedPost.selectedImages[index]}
                           alt={`Selected Image ${index}`}
                           className="object-cover w-full h-full"
                         />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function ImageGallery({ images }) {
-  const numImages = images.length;
+  const numImages = Array.isArray(images) ? images.length : 0;
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -15,7 +15,7 @@ function ImageGallery({ images }) {
 
   return (
     <div className="flex justify-center items-center py-5 h-1/2">
-      {images && numImages > 0 && (
+      {numImages > 0 && (
         <div className="w-full">
           {numImages === 1 ? ( //For 1 image only
             <img
@@ -84,9 +84,9 @@ function ImageGallery({ images }) {
             </button>
           </div>
         </div>
-            )}
-          </div>
-        );
-      }
+      )}
+    </div>
+  );
+}
 
 export default ImageGallery;

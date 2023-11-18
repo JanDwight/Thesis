@@ -9,24 +9,18 @@ use App\Models\PostImage;
 use Illuminate\Support\Str;
 use App\Http\Requests\CreatePostRequest;
 use App\Models\archive;
-
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
     public function createPosts(CreatePostRequest $request)
     {
-        $data = $request->validated();
-    
-        // Create a new post
         $post = new posts([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
-    
         // Manually set the user_id
         $post->user_id = auth()->id();
-    
-        // Save the post (including slug generation)
         $post->save();
     
         if ($request->hasFile('images')) {
@@ -63,35 +57,54 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        \Log::info('Request Data: ' . json_encode($request->all()));
-        $post = posts::findOrFail($id);
-    
-        $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images.*.file' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*.id' => 'nullable|integer|exists:post_images,id',
         ]);
+ 
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()], 400);
+        }
+        $post = posts::findOrFail($id);
+        \Log::info('Request Data: ' . json_encode($request->all()));
     
-        // Update title and description
-        $post->update($request->only('title', 'description'));
-    
-        // Handle image uploads
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                if (isset($request->existingImages[$index])) {
-                    $postImage = PostImage::findOrFail($request->existingImages[$index]);
-                    $postImage->update(['image_path' => $image->store('images')]);
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+        $post->save();
+   
+        \Log::info('Image IDs in request: ' . json_encode($request->input('images.*.id')));
+
+       // Update or add images
+       if ($request->hasFile('images')) {
+        $images = $request->file('images');
+        //limit to 3 images only
+        $images = array_slice($images, 0, 3);
+
+        foreach ($images as $index => $image) {
+            if ($image->isValid()) {
+                if ($request->has("imageIds.$index")) {
+                    $postImage = PostImage::findOrFail($request->input("imageIds.$index"));
+                    $filename = time() . '_' . $image->getClientOriginalName();
+                    $imagePath = $image->storeAs('public/images', $filename);
+                    $postImage->update(['image_path' => 'images/' . $filename]);
                 } else {
-                    $post->images()->create(['image_path' => $image->store('images')]);
+                    $filename = time() . '_' . $image->getClientOriginalName();
+                    $imagePath = $image->storeAs('public/images', $filename);
+                    $postImage = new PostImage(['image_path' => 'images/' . $filename]);
+                    $post->images()->save($postImage);
                 }
             }
         }
-    
-        // Refresh the post instance to get the updated data
-        $post->refresh();
-    
-        return response()->json(['post' => $post]);
     }
+
+        $post->touch();
+        $post->refresh();
+        return response(['post' => $post->fresh()]);
+    }
+    
+    
     
     public function archive(Request $request, $postId)
 {

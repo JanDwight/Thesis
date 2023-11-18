@@ -17,7 +17,7 @@ class posts extends Model
     protected $fillable = [
         'title',
         'description',
-        // Add any other fields that can be mass-assigned during create/update
+        
     ];
 
     public function images()
