@@ -17,11 +17,10 @@ return new class extends Migration
             $table->foreignId(\App\Models\classes::class, 'class_id');
             $table->string('class_year');
             $table->string('semester');
+            $table->string('class_code');
             $table->string('course_code');
             $table->string('course_title');
-            $table->smallInteger('units');
             $table->string('course_type');
-            $table->string('course_schedule');
             $table->string('class_section');
             $table->string('instructor_name');
             $table->timestamps();

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('class_year');
             $table->string('class_section');
             $table->string('semester');
+            $table->string('class_code');
             $table->string('course_code');
             $table->string('course_title');
             $table->smallInteger('units');
