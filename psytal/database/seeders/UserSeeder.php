@@ -85,6 +85,16 @@ class UserSeeder extends Seeder
                 'created_at' => '2023-09-29 07:09:32',
                 'updated_at' => '2023-09-29 07:09:32',
             ],
+            [
+                'id' => 89,
+                'name' => 'Prof X',
+                'password' => '$2y$10$7.ASjd37Vc1WqVvegINNDOVRy/0Zc38Ey1Shuszj06452laoGdSHq', // Hashed password
+                'role' => 3,
+                'email' => 'profx@abc.com',
+                'archived' => 0,
+                'created_at' => '2023-11-22 03:41:25',
+                'updated_at' => '2023-11-22 03:41:25',
+            ],
         ];
 
         DB::table('users')->insert($users);
