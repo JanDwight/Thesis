@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('admin_profiles', function (Blueprint $table) {
             $table->id('admin_id');
-            $table->foreignId(\App\Models\User::class, 'user_id');
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('email');
             $table->string('image')->nullable();
