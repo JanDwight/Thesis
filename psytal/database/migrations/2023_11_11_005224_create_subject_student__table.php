@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->constrained();
             // Add any other columns you may need in this table
             $table->timestamps();
+            //add course code, units, back course or advanced course
         });
     }
 

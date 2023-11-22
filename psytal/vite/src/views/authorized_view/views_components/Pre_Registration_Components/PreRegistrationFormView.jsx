@@ -25,6 +25,7 @@ export default function PreRegistrationFormView({prereg}) {
     };
 
     //calling the Form in the adding of classes
+    //unused, remove later <><><>
     const handleSubmitCourseDetails = (e) => {
         e.preventDefault();
         console.log("InputFields", inputFields);
@@ -156,6 +157,20 @@ export default function PreRegistrationFormView({prereg}) {
   const onClickAccept = (ev) => {
     ev.preventDefault();
     setError({ __html: "" });
+
+    //put axios here
+    console.log("InputFields", inputFields);
+    console.log("Student ID", preregData.student_school_id);
+    console.log("Subject ID", inputFields.classCode); // does not work, result is undefined
+
+    //--------------------------//
+
+    axiosClient.post('/student_subject', {
+      studentId: preregData.student_school_id,
+      subjectId: inputFields.courseCode, // result is undefined
+     })
+
+    //--------------------------//
 
     const fullName = `${preregData.last_name}, ${preregData.first_name} ${preregData.middle_name.charAt(0)}.`;
 
@@ -1151,31 +1166,15 @@ export default function PreRegistrationFormView({prereg}) {
               </div>
           </div>
         </div>
-        {/**===========SUMBIT Button============= */}
-        <div className="text-center flex justify-end my-8">
-                <button onClick={onDecline}
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
-                  Decline
-                </button>
-                <button onClick={onReturn}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
-                  Return
-                </button>
-                <button onClick={onClickAccept}
-                  type="submit"
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
-                  Accept
-                </button>
-              </div>
-        </form>
-      </div>
+        {/**=========================== 4 ==========================*/}
+
+
+       
 
       {/**=========================== 4 ==========================*/}      
         {/**Start of Filling the FORM for CLASS CODES UNITS*/}
-        <div className="w-full lg:w-8/12 px-4 container mx-auto">            
-            <form
-              //onSubmit={handleSubmitCourseDetails}
-            >
+        <div className="w-full container mx-auto">            
+            <form>
                 <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0 mt-3'>
                     <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
                         <div className="text-normal font-medium text-center mt-2">
@@ -1349,6 +1348,24 @@ export default function PreRegistrationFormView({prereg}) {
                 </div>
             </form>
         </div>
+         {/**===========SUMBIT Button============= */}
+          <div className="text-center flex justify-end my-8">
+                  <button onClick={onDecline}
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                    Decline
+                  </button>
+                  <button onClick={onReturn}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+                    Return
+                  </button>
+                  <button onClick={onClickAccept}
+                    type="submit"
+                    className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+                    Accept
+                  </button>
+          </div>
+        </form>
+      </div>
       {/**=====================================================*/}   
 
     </main>

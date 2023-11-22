@@ -12,6 +12,9 @@ class AttachSubjectController extends Controller
     //
     public function attachSubjectToStudent(Request $request)
     {
+        //recieve course code
+        //recieve student ID student_school_id
+
         // Validate the request data
         $request->validate([
             'studentId' => 'required|exists:students,id',
