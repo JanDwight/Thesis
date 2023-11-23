@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import axiosClient from '../../../axios';
 import image from "@assets/icons8image.png";
 
@@ -11,6 +11,7 @@ export default function AddingPost() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
 
+ 
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -49,6 +50,7 @@ export default function AddingPost() {
     setError('');
     setLoading(true);
 
+    
     try {
       if (!title || !description) {
         setError('Please enter both a title and description.');
@@ -84,6 +86,7 @@ export default function AddingPost() {
           setTimeout(() => {
             setSuccessMessage(null);
             closeModal();
+            window.location.reload(); 
           }, 2000);
         } else {
           setError('An error occurred while posting.');
@@ -97,7 +100,7 @@ export default function AddingPost() {
     } catch (error) {
       console.error(error);
       setError('An error occurred while posting.');
-      setLoading(false); // Add this line to ensure loading is set to false in case of an error.
+      setLoading(false); 
     }
   };
 
