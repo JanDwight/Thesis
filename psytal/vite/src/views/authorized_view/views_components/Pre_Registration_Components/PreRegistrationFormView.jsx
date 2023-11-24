@@ -161,13 +161,17 @@ export default function PreRegistrationFormView({prereg}) {
     //put axios here
     console.log("InputFields", inputFields);
     console.log("Student ID", preregData.student_school_id);
-    console.log("Subject ID", inputFields.classCode); // does not work, result is undefined
+    //console.log("Subject ID", inputFields.classCode); // does not work, result is undefined
 
     //--------------------------//
 
     axiosClient.post('/student_subject', {
       studentId: preregData.student_school_id,
-      subjectId: inputFields.courseCode, // result is undefined
+      subjectData: inputFields,
+      //subjectId: inputFields.courseCode, // result is undefined
+      //add also classCode
+      //add also units
+      //if back course or advance course
      })
 
     //--------------------------//

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('student_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained();
-            $table->foreignId('subject_id')->constrained();
+            $table->bigInteger('studentprofile_id')->unsigned()->index(); // Use the custom foreign key name
+            $table->bigInteger('class_id')->unsigned()->index(); // Use the custom foreign key name
             // Add any other columns you may need in this table
+            $table->string('course_code'); // Adjust the data type accordingly
+            $table->integer('units');
+            $table->integer('grade'); //change data type based on what is needed
+            $table->string('course_type')->default('n/a'); //back course (bc), advanced course (ac) or n/a
+
             $table->timestamps();
-            //add course code, units, back course or advanced course
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subject_student_');
+        Schema::dropIfExists('subject_student');
     }
 };

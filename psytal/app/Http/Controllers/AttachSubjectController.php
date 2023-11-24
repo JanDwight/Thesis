@@ -12,25 +12,51 @@ class AttachSubjectController extends Controller
     //
     public function attachSubjectToStudent(Request $request)
     {
-        //recieve course code
-        //recieve student ID student_school_id
-
         // Validate the request data
         $request->validate([
-            'studentId' => 'required|exists:students,id',
-            'subjectId' => 'required|exists:subjects,id',
+            'studentId' => 'required',
+            'subjectData' => 'required', 
         ]);
-    
-        // Assuming you have a pivot table named student_subjects
-        // where you store the relationships between students and subjects
-    
+
         // Attach the subject to the student
-        $student = student_profile::find($request->input('studentId'));
-        $subject = classes::find($request->input('subjectId'));
+        //$student = student_profile::find($request->input('studentId'));
+        //$subject = classes::find($request->input('subjectId'));
     
-        $student->classes()->attach($subject);
+        //$student->classes()->attach($subject);
     
         // You can return a response if needed
-        return response(['message' => 'Subject attached to student successfully'], 200);
+        //return response(['message' => 'Subject attached to student successfully'], 200);
+
+        //----------------------------*****------------------------------------
+
+        // Get the validated data
+        $student_school_id = $request->input('studentId');
+        $subjectData = $request->input('subjectData');
+
+        // Find the student_profile_id based on student_school_id
+        $studentProfile = student_profile::where('student_school_id', $student_school_id)->first();
+
+        if ($studentProfile) {
+            $studentProfileId = $studentProfile->studentprofile_id;
+    
+            // Include the studentProfileId in the response
+            return response([
+                'message' => 'Subject attached to student successfully',
+                'studentProfileId' => $studentProfileId,
+                'subjectData' => $subjectData,
+                'studentProfileId' => $studentProfile,
+            ], 200);
+        } else {
+            // If the student_profile is not found, you might want to handle this case
+            return response([
+                'error' => 'Student profile not found',
+            ], 404);
+        }
+
+        // You can include the data in the response
+        return response([
+            'message' => 'Subject attached to student successfully',
+            
+        ], 200);
     }
 }
