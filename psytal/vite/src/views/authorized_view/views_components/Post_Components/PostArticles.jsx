@@ -31,7 +31,7 @@ export default function PostArticles() {
     };
 
     fetchPosts();
-  }, []);
+  }, [editModalOpen, archiveConfirmation]);
 
   const toggleMenu = (index) => {
     setShowMenu(showMenu === index ? null : index);
@@ -52,9 +52,15 @@ export default function PostArticles() {
     setEditedPostIndex(index);
   };
 
-  const handleArchive = (post) => {
+  const handleArchiveConfirmation = (post) => {
+    console.log('Archiving post confirmation. Post ID:', post.id);
     setSelectedPost(post);
     setArchiveConfirmation(true);
+  };
+
+  const handleArchiveSuccess = () => {
+    console.log('Archive success!');
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== selectedPost.id));
   };
 
   return (
@@ -83,7 +89,7 @@ export default function PostArticles() {
                 </div>
                 <div
                   className="cursor-pointer hover:bg-green-200 hover:w-full"
-                  onClick={() => handleArchive(post)}
+                  onClick={() => handleArchiveConfirmation(post)}
                 >
                   Archive
                 </div>
@@ -127,13 +133,14 @@ export default function PostArticles() {
         />
       )}
 
-      {archiveConfirmation && (
-        <ArchivePost
-          showArchivepost={archiveConfirmation}
-          onClose={() => setArchiveConfirmation(false)}
-          onSubmitArchive={() => confirmArchive(selectedPost.id)}
-        />
-      )}
-    </div>
-  );
-}
+      {archiveConfirmation && selectedPost && (
+              <ArchivePost
+                showArchivepost={archiveConfirmation}
+                onClose={() => setArchiveConfirmation(false)}
+                postId={selectedPost.id} 
+                onArchiveSuccess={handleArchiveSuccess}
+              />
+            )}
+          </div>
+        );
+      }

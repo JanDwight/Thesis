@@ -4,10 +4,10 @@ import axiosClient from '../../../../axios';
 export default function ArchivePost({ showArchivepost, onClose, postId, onArchiveSuccess }) {
   const [isArchiving, setIsArchiving] = useState(false);
 
-  const handleArchive = async () => {
+  const confirmArchive = async () => {
     try {
       const response = await axiosClient.put(`/posts/archive/${postId}`);
-      if (response.status === 200) {
+      if (response.status === 204) {
         // Post archived successfully, inform the parent component
         onArchiveSuccess();
       } else {
@@ -18,6 +18,11 @@ export default function ArchivePost({ showArchivepost, onClose, postId, onArchiv
     } finally {
       onClose();
     }
+  };
+
+  const handleArchive = async () => {
+    setIsArchiving(true);
+    confirmArchive();
   };
 
   if (!showArchivepost) {
