@@ -7,10 +7,9 @@ import { useState, useEffect } from 'react';
 import logo from "@assets/PsychCircle.png";
 
 const navigation = [
-  { name: 'Pre-Registration', to: 'preregistration' },
-  { name: 'Pre-Registration Continuing', to: 'preregistrationforcontinuing' },
   { name: 'Home', to: 'landingpage' },
-  { name: 'Login', to: 'login' }
+  { name: 'Pre-Registration-Incoming Students', to: 'preregistrationforincoming' },
+  { name: 'Pre-Registration-Continuing Students', to: 'preregistrationforcontinuing' },
 ];
 
 function classNames(...classes) {
@@ -19,23 +18,6 @@ function classNames(...classes) {
 
 export default function GuestLayout() {
   const { userToken, userRole } = useStateContext();
-  const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsNavbarTransparent(false);
-      } else {
-        setIsNavbarTransparent(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   if (userToken && userRole === 1) {
     return <Navigate to='/admin/home' />;
@@ -49,26 +31,34 @@ export default function GuestLayout() {
 
   return (
     <>
-      <div className="relative">
-        <Disclosure as="nav" className={`fixed w-full z-20 ${isNavbarTransparent ? 'backdrop-blur-md' : 'bg-gray-600'}`}>
+      <div>
+        <header>
+        <Disclosure as="nav" className="fixed h-[20%] w-full z-20 bg-gray-600">
           {({ open }) => (
             <>
-              <div className="flex justify-between items-center px-10 py-3">
+            {/* 1st Header */}
+            <div  className="bg-viridian w-full"> 
+              <div className="flex justify-center space-x-5 px-10 py-2">
                 <div className="flex items-center">
-                  <a href="/guest/landingpage">
+                  <a href="/landingpage">
                     <img
                       className="h-20 w-20"
                       src={logo}
                       alt="Department of Psychology"
                     />
                   </a>
-                  <div className="flex flex-col px-2">
-                    <p className="font-semibold text-sm ml-2 font-franklin text-white">Department of</p>
-                    <p className="font-semibold text-sm ml-2 font-franklin text-white">Psychology</p>
+                  <div className="flex items-center px-10">
+                    <p className="font-semibold text-3xl ml-2 font-franklin text-white">
+                      DEPARTMENT OF PSYCHOLOGY PORTAL
+                    </p>
                   </div>
                 </div>
-                <div className="hidden md:flex space-x-4">
-                  <div className="ml-10 flex items-baseline space-x-4">
+                </div>
+                </div>
+              {/* 2nd Header */}
+                <div className="flex justify-center items-center px-10 py-2 bg-[#739072]">
+                <div>
+                  <div className="ml-10 flex items-baseline space-x-10">
                     {navigation.map((item) => (
                       <NavLink
                         key={item.name}
@@ -76,9 +66,9 @@ export default function GuestLayout() {
                         className={({ isActive }) =>
                           classNames(
                             isActive
-                              ? 'bg-black text-white'
+                              ? 'bg-[#3A4D39] text-white'
                               : 'text-gray-300 hover:bg-gray-500 hover:text-white',
-                            'rounded-md px-3 py-2 text-sm font-medium'
+                            'rounded-md px-3 py-2 text-l font-medium'
                           )
                         }
                       >
@@ -86,7 +76,8 @@ export default function GuestLayout() {
                       </NavLink>
                     ))}
                   </div>
-                </div>
+                  </div>
+          </div>
 
                 {/*Background*/}
                 <div className="-mr-2 flex md:hidden">
@@ -101,7 +92,7 @@ export default function GuestLayout() {
                     )}
                   </Disclosure.Button>
                 </div>
-              </div>
+              
 
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
@@ -125,9 +116,13 @@ export default function GuestLayout() {
             </>
           )}
         </Disclosure>
+        </header>
+        </div>
+
+      <div>
         <main>
-          <div className="h-screen">
-            <Outlet />
+          <div className='h-screen w-full py-[10%]'>
+            <Outlet/>
           </div>
         </main>
       </div>

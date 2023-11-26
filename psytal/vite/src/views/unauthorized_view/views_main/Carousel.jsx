@@ -97,8 +97,8 @@ const Carousel = () => {
 
   return (
     /* Carousel card */
-    <div className="w-3/4 h-1/2">
-      <div className="relative w-full h-[50vh] overflow-hidden">
+    <div className="w-[75%] h-[50%]">
+      <div className="relative w-full h-[50vh] overflow-hidden rounded-3xl">
         {slidesData.map((slide, index) => (
           <div
             key={index}
