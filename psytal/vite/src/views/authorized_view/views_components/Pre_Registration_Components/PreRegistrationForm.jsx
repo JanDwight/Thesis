@@ -595,8 +595,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="yesregister"
                           id="yesregister"
-                          value='Yes Register' 
-                          checked={healthfacilityregistered === 'Yes Register'}
+                          value='Yes' 
+                          checked={healthfacilityregistered === 'Yes'}
                           onChange={ev => sethealthfacilityregistered(ev.target.value)}
                           />
                           <label
@@ -610,8 +610,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="noregister"
                           id="noregister"
-                          value='No Register'
-                          checked={healthfacilityregistered === 'No Register'}
+                          value='No'
+                          checked={healthfacilityregistered === 'No'}
                           onChange={ev => sethealthfacilityregistered(ev.target.value)}
                           />
                           <label
@@ -652,8 +652,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="healthdependent"
                           id="Dependent"
-                          value="YesDependent" 
-                          checked={parenthealthfacilitydependent === 'YesDependent'}
+                          value="Yes" 
+                          checked={parenthealthfacilitydependent === 'Yes'}
                           onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
                           />
                         <label
@@ -667,8 +667,8 @@ export default function PreRegistrationForm() {
                           type="radio"
                           name="healthdependent"
                           id="Dependent"
-                          value="NoDependent" 
-                          checked={parenthealthfacilitydependent === 'NoDependent'}
+                          value="No" 
+                          checked={parenthealthfacilitydependent === 'No'}
                           onChange={ev => setparenthealthfacilitydependent(ev.target.value)}
                           />
                         <label
