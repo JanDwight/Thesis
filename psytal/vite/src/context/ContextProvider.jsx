@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { createContext } from "react";
 
 const StateContext = createContext({
@@ -38,6 +37,22 @@ export const ContextProvider = ({children}) => {
         _setUserRole(token);
       }
 
+      useEffect(() => {
+    const handleBeforeUnload = () => {
+      // Clear the relevant items from local storage
+      localStorage.removeItem("TOKEN");
+      localStorage.removeItem("USERROLE");
+    };
+
+    // Attach the event listener when the component mounts
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Detach the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  
     return (
         <StateContext.Provider value={{
             currentUser,
