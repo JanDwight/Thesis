@@ -149,8 +149,8 @@ export default function PreRegistrationForm() {
           dangerouslySetInnerHTML={error}>
         </div>)}
         
-    <main>
-      <div className="w-full lg:w-8/12 px-4 container mx-auto">          
+    <main className="w-[100%] h-[100%] py-[10%]">
+      <div className="lg:w-8/12 mx-auto px-4 container">          
         <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
           <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div >
@@ -168,7 +168,7 @@ export default function PreRegistrationForm() {
       </div>
 
       {/**STUDENT DETAILS */}
-      <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">  
+      <div className="lg:w-8/12 px-4 mx-auto mt-6">  
               <div className="text-center flex justify-between">
                 <h6 className="text-blueGray-700 text-sm">
                     STUDENT DETAILS
@@ -921,17 +921,17 @@ export default function PreRegistrationForm() {
         </div>
         
         {/**===========SUMBIT Button============= */}
-        <div className="text-center flex justify-end my-8">
-                <button 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+        <div className="text-center items-center my-8">
+            <button 
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+            </button>
+            <button 
+                type="submit"
+                className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
                   Submit
-                </button>
-              </div>
+            </button>
+        </div>  
         </form>
       </div>
     </main>

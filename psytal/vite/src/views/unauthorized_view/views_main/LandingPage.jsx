@@ -9,18 +9,18 @@ import Login from '../../unauthorized_view/views_main/Login';
 export default function LandingPage() {
 
   return (
-    <div className='w-full h-screen relative'>
+    <div className='w-[100%] h-[100%] py-[-10%] relative mx-auto'>
       <video
-        className='w-full h-full object-cover z-0'
+        className='w-[100%] h-[100%] object-cover z-0 mx-auto'
         src={coverVid}
         autoPlay
         loop
         muted
       />
 
-     <div className="absolute w-full h-full top-0 left-0 bg-[#111613]/80"></div> {/*cover for video*/}
+     <div className="absolute w-[100%] h-[100%] top-[0%] left-[0%] bg-[#111613]/80"></div> {/*cover for video*/}
 
-      <div className="absolute flex w-full h-full top-10 left-0 overflow-hidden">
+      <div className="absolute flex w-[100%] h-[100%] top-[10%] left-[0%] overflow-hidden">
         <div className="w-[50%] flex items-center text-white relative">
           <div className="mx-8">
             <img
@@ -28,7 +28,7 @@ export default function LandingPage() {
               src={schoolLogo}
               alt="BSUlogo"
             />
-            <div className= "absolute top-[13%] left-[13%]">
+            <div className= "absolute top-[6%] left-[13%]">
             <h1 className="font-franklin font-extrabold text-2xl text-center">
               WELCOME TO BENGUET STATE UNIVERSITY
             </h1>
@@ -38,20 +38,20 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="absolute w-[90%] h-screen top-[-1%] left-[1%] pl-10 pr-5 flex items-center justify-center">
+          <div className="absolute w-[90%] h-[100%] top-[-14%] left-[1%] pl-10 pr-5 flex items-center justify-center">
             <Carousel />
           </div>
         </div>
       </div>
 
-      <div className="absolute w-[50%] h-screen top-[-12%] right-0 pl-10 flex items-center justify-center">
+      <div className="absolute w-[50%] h-[100%] top-[-25%] right-0 pl-10 flex items-center justify-center">
             <Login />
       </div>
 
 
-      <div className='w-full h-screen pb-10 relative flex items-center justify-center'>
+      <div className='w-[100%] h-[100%] pb-10 relative flex items-center justify-center'>
         
-      <div className="w-3/4 h-screen float-left">
+      <div className="w-[75%] h-[100%] float-left">
       <div className="mx-6 ">
         {/* Green Card 1 */}
         <div className="bg-[#002408] p-4  shadow-lg">
@@ -89,7 +89,7 @@ export default function LandingPage() {
     </div>
 
       {/*DEPARTMENT OBJECTIVES*/}
-      <div className="w-1/4 h-screen float-left ml-4">
+      <div className="w-[25%] h-[100%] float-left ml-4">
     
           <p className="text-sm text-center  mr-6">
             <h6 className="text-xl font-bold pt-3">PSYCHOLOGY PROGRAM OBJECTIVES</h6>
@@ -110,7 +110,7 @@ export default function LandingPage() {
       
     
       {/**<!--Footer--> */}
-      <footer className='bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
+      <footer className='bottom-[0%] bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
       {/**<!-- Social icons --> */}
       <div className='border-b-2 border-neutral-200 p-2 dark:border-neutral-500'>
         <div className='container mx-auto px-10'>
@@ -155,7 +155,7 @@ export default function LandingPage() {
 
       {/**<!-- Main footer content --> */}
         <div className="">
-        <div className='container mx-auto px-4 py-5 justify-center items-center h-full'>
+        <div className='container mx-auto px-4 py-5 justify-center items-center h-[100%]'>
           <div className='mx-6 text-center'>
             <div className='grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-5'>
               <div></div>

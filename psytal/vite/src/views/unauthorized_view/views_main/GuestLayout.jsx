@@ -31,14 +31,14 @@ export default function GuestLayout() {
 
   return (
     <>
-      <div>
+      <div className='mx-auto'>
         <header>
-        <Disclosure as="nav" className="fixed h-[20%] w-full z-20 bg-gray-600">
+        <Disclosure as="nav" className="fixed h-[10%] w-[100%] z-20 bg-gray-600">
           {({ open }) => (
             <>
             {/* 1st Header */}
-            <div  className="bg-viridian w-full"> 
-              <div className="flex justify-center space-x-5 px-10 py-2">
+            <div  className="bg-viridian w-[100%]"> 
+              <div className="flex justify-center space-x-5 px-[2%] py-[0.2%]">
                 <div className="flex items-center">
                   <a href="/landingpage">
                     <img
@@ -47,8 +47,8 @@ export default function GuestLayout() {
                       alt="Department of Psychology"
                     />
                   </a>
-                  <div className="flex items-center px-10">
-                    <p className="font-semibold text-3xl ml-2 font-franklin text-white">
+                  <div className="flex items-center px-[-20%]">
+                    <p className="font-semibold text-2xl ml-2 font-franklin text-white">
                       DEPARTMENT OF PSYCHOLOGY PORTAL
                     </p>
                   </div>
@@ -56,7 +56,7 @@ export default function GuestLayout() {
                 </div>
                 </div>
               {/* 2nd Header */}
-                <div className="flex justify-center items-center px-10 py-2 bg-[#739072]">
+                <div className="flex justify-center items-center px-[10%] py-[0.5%] bg-[#739072]">
                 <div>
                   <div className="ml-10 flex items-baseline space-x-10">
                     {navigation.map((item) => (
@@ -121,7 +121,7 @@ export default function GuestLayout() {
 
       <div>
         <main>
-          <div className='h-screen w-full py-[10%]'>
+          <div className='w-[100%] h-[100%]'>
             <Outlet/>
           </div>
         </main>
