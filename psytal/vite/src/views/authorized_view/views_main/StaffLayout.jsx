@@ -32,7 +32,7 @@ export default function StaffLayout() {
   // Calling the ProfilePopupSample
   const [isStaffProfileOpen, setIsStaffProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const {setCurrentUser, setUserToken, userRole, userToken} = useStateContext();
 
   if (!userToken) {
     return <Navigate to='/'/> //change to guest/landingpage

@@ -30,7 +30,7 @@ export default function InstructorLayout() {
   // Calling the ProfilePopupSample
   const [isInstructorProfileOpen, setIsInstructorProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const {setCurrentUser, setUserToken, userRole, userToken} = useStateContext();
 
   if (!userToken) {
     return <Navigate to='/' />

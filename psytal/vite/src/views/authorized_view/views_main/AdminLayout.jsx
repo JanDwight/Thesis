@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState } from 'react'
 import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
@@ -7,12 +7,11 @@ import users from "@assets/icons8adduser.png";
 import avatar from "@assets/icons8avatar.png";
 import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
-import archive from "@assets/icons8archive60.png"
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
-import { NavLink, Navigate, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
-import { EllipsisHorizontalIcon ,MagnifyingGlassIcon, UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
+import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 import UserProfile from '../views_components/profile_components/UserProfile';
@@ -36,8 +35,7 @@ export default function AdminLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
-  const [isSearchToggled, setIsSearchToggled] = useState(false);
+  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole} = useStateContext();
 
   if (!userToken && !userRole) {
     localStorage.clear();
