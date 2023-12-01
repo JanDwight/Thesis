@@ -52,6 +52,11 @@ export default function DefaultLayout() {
         setUserRole(null)
       })
   }
+
+  if (userRole!=4) {
+    localStorage.clear();
+  }
+
   console.log(currentUser)
   return (
     <>

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import logo from "@assets/PsychCircle.png";
 import dashboard from "@assets/icons8dashboard.png";
 import home from "@assets/icons8home.png";
@@ -39,10 +39,12 @@ export default function AdminLayout() {
   const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
   const [isSearchToggled, setIsSearchToggled] = useState(false);
 
-  console.log(userRole)
-
   if (!userToken && !userRole) {
-    return <Navigate to='/' />
+    localStorage.clear();
+  }
+
+  if (userRole!=1) {
+    localStorage.clear();
   }
 
   const logout = (ev) => {
@@ -54,6 +56,8 @@ export default function AdminLayout() {
         setUserRole(null);
       })
   }
+
+  console.log(userRole)
 
   return (
     <>

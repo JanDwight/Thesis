@@ -48,6 +48,11 @@ export default function StaffLayout() {
       })
   }
 
+  if (userRole!=2) {
+    localStorage.clear();
+  }
+
+
   return (
     <>
       {/*NavBar*/}

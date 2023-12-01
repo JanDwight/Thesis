@@ -46,6 +46,11 @@ export default function InstructorLayout() {
       })
   }
 
+  if (userRole!=3) {
+    localStorage.clear();
+  }
+
+
   return (
     <>
       {/*NavBar*/}
