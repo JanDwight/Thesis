@@ -9,7 +9,7 @@ import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
 import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
@@ -37,12 +37,14 @@ export default function AdminLayout() {
 
   const {setCurrentUser, setUserToken, setUserRole, userToken, userRole} = useStateContext();
 
-  if (!userToken && !userRole) {
+  if (!userToken) {
     localStorage.clear();
+    return <Navigate to='/' />
   }
 
-  if (userRole!=1) {
+  if (userRole != 1) {
     localStorage.clear();
+    return <Navigate to='/' />
   }
 
   const logout = (ev) => {
@@ -55,7 +57,7 @@ export default function AdminLayout() {
       })
   }
 
-  console.log(userRole)
+  console.log(userToken)
 
   return (
     <>

@@ -33,6 +33,12 @@ export default function InstructorLayout() {
   const {setCurrentUser, setUserToken, userRole, userToken} = useStateContext();
 
   if (!userToken) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+
+  if (userRole != 3) {
+    localStorage.clear();
     return <Navigate to='/' />
   }
 
@@ -44,10 +50,6 @@ export default function InstructorLayout() {
         setUserToken(null);
         setUserRole(null)
       })
-  }
-
-  if (userRole!=3) {
-    localStorage.clear();
   }
 
 
