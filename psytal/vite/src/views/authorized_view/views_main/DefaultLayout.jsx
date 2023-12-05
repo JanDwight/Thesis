@@ -231,12 +231,14 @@ export default function DefaultLayout() {
       </div>
      {/**Setting the Profile Popup */}
      <ReactModal 
-                                isOpen={isProfileOpen}
-                                onRequestClose={() => setIsProfileOpen(false)}
-                                className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
-                                >
-                                  <div><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
-                                </ReactModal>
+        isOpen={isProfileOpen}
+        onRequestClose={() => setIsProfileOpen(false)}
+        className="w-full lg:w-[50%] bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+      >
+        <div><UserProfile closeModal={() => setIsProfileOpen(false)}/></div>
+    </ReactModal>
+
+      <Navigate to='/student/home' /> {/**This prevents the user from gaining access to /student URL*/}
     </>
   )
 }

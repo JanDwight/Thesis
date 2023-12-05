@@ -46,7 +46,7 @@ export default function AdminLayout() {
     localStorage.clear();
     return <Navigate to='/' />
   }
-
+    
   const logout = (ev) => {
     ev.preventDefault();
     axiosClient.post('/logout')
@@ -255,6 +255,8 @@ export default function AdminLayout() {
           <UserProfile closeModal={() => setIsProfileOpen(false)}/>
         </div>
       </ReactModal>
+
+      <Navigate to='/admin/home' /> {/**This prevents the user from gaining access to /admin URL*/}
   </>
   );
 }
