@@ -30,11 +30,11 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    //!!!This returns 401 (unauthorized), now that localStorage is changed to sessionStorage in which logs out the user right after logging in.
-    // Route::post('/createposts', [PostController::class, 'createPosts']);
-    // Route::get('/posts', [PostController::class, 'getPosts']); 
-    // Route::put('/posts/{postId}', [PostController::class, 'update']);
-    // Route::put('/posts/archive/{postId}', [PostController::class, 'archive']);
+    
+    Route::post('/createposts', [PostController::class, 'createPosts']);
+    Route::get('/posts', [PostController::class, 'getPosts']); 
+    Route::put('/posts/{postId}', [PostController::class, 'update']);
+    Route::put('/posts/archive/{postId}', [PostController::class, 'archive']);
 
     //manage users tab
     Route::post('/adduser', [AuthController::class, 'adduser']);
