@@ -30,9 +30,15 @@ export default function InstructorLayout() {
   // Calling the ProfilePopupSample
   const [isInstructorProfileOpen, setIsInstructorProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const {setCurrentUser, setUserToken, userRole, userToken} = useStateContext();
 
   if (!userToken) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+
+  if (userRole != 3) {
+    localStorage.clear();
     return <Navigate to='/' />
   }
 
@@ -45,6 +51,7 @@ export default function InstructorLayout() {
         setUserRole(null)
       })
   }
+
 
   return (
     <>
@@ -227,6 +234,8 @@ export default function InstructorLayout() {
           <UserProfile />
         </div>
       </ReactModal>
+
+      <Navigate to='/instructor/home' /> {/**This prevents the user from gaining access to /instructor URL*/}
     </>
   );
 }

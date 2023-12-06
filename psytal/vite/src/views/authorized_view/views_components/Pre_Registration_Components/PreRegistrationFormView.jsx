@@ -3,9 +3,11 @@ import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 import { Navigate } from 'react-router-dom';
+import { PDFDocument } from 'pdf-lib'
+import download from 'downloadjs';
+import preregFirstYearForm from '../../../../assets/preregFirstYearForm.pdf';
 
 export default function PreRegistrationFormView({prereg}) {
-
   const [subjectData, setSubjectData] = useState([]); //<><><><><>
   const [totalUnits, setTotalUnits] = useState(0); //<><><><><>
 
@@ -110,7 +112,15 @@ export default function PreRegistrationFormView({prereg}) {
     contact_person_number: '',
     contact_person_address: '',
     contact_person_relationship: '',
+    health_facility_registered: '',
+    parent_health_facility_dependent: '',
     vaccination_status: '',
+    technology_level: '',
+    digital_literacy: '',
+    avail_free_higher_education: '',
+    voluntary_contribution: '',
+    contribution_amount: '',
+    complied_to_admission_policy: '',
     pre_reg_status: 'Accepted',
     type_of_student: 'Regular',
   });
@@ -178,7 +188,7 @@ export default function PreRegistrationFormView({prereg}) {
 
     const fullName = `${preregData.last_name}, ${preregData.first_name} ${preregData.middle_name.charAt(0)}.`;
 
-    //password generator
+    //password generator============================================================================
     const numbers = '0123456789';
     const symbols = '!@#$%^&*()_+{}[]~-';
     const length = 12;
@@ -213,7 +223,7 @@ export default function PreRegistrationFormView({prereg}) {
       email: preregData.email_address,
      })
 
-    //Create student profile
+    //Create student profile============================================================================
      axiosClient
     .post(`/createstudentprofile`, {
       user_id: String(preregData.user_id),
@@ -247,6 +257,7 @@ export default function PreRegistrationFormView({prereg}) {
       type_of_student: 'Regular',
     })
     
+    //prereg update===============================================================================
     axiosClient
     .put(`/preregcheck/${id}`, {
       start_of_school_year: parseInt(preregData.start_of_school_year),
@@ -275,13 +286,23 @@ export default function PreRegistrationFormView({prereg}) {
       contact_person_number: parseInt(preregData.contact_person_number), 
       contact_person_address: preregData.contact_person_address,
       contact_person_relationship: preregData.contact_person_relationship,
+      health_facility_registered: preregData.health_facility_registered,
+      parent_health_facility_dependent: preregData.parent_health_facility_dependent,
+      vaccination_status: preregData.vaccination_status,
+      technology_level: preregData.technology_level,
+      digital_literacy: preregData.digital_literacy,
+      avail_free_higher_education: preregData.avail_free_higher_education,
+      voluntary_contribution: preregData.voluntary_contribution,
+      contribution_amount: preregData.contribution_amount,
+      complied_to_admission_policy: preregData.complied_to_admission_policy,
 
       pre_reg_status: 'Accepted',
       type_of_student: 'Regular',
     })
 
     console.log('password: ' + password);
-    //for sending emails
+
+    //for sending emails============================================================================
     // Assuming formData is your FormData object
     let formData = new FormData();
 
@@ -311,6 +332,100 @@ export default function PreRegistrationFormView({prereg}) {
       }
         console.error(error)
     });
+
+    // PDF modification code======================================================================
+    //for new incoming first years
+    const fetchPdf = async () => {
+      // Extract the first character of the middle name as the middle initial
+      const middleInitial = preregData.middle_name ? preregData.middle_name.charAt(0) + '.' : '';
+
+      // Combine last name, first name, and middle initial with comma and dot
+      const fullName = `${preregData.last_name}, ${preregData.first_name} ${middleInitial}`;
+      
+      try {
+        const pdfBytes = await fetch(preregFirstYearForm).then((res) => res.arrayBuffer());
+        const pdfDoc = await PDFDocument.load(pdfBytes);
+    
+        const form = pdfDoc.getForm();
+    
+        //const startOfSchoolYear = form.getTextField(); //get the name of the field from the form
+        //const endOfSchoolYear = form.getTextField();
+        //const studentSchoolId = form.getTextField('text_student_ID');
+        //const learnersReferenceNumber = form.getTextField('text_student_lrn');
+        const name = form.getTextField('text_student_name');
+        const maidenName = form.getTextField('text_student_maiden');
+        //const academicClassification = form.getTextField();
+        const lastSchoolAttended = form.getTextField('text_lastSchool');
+        const addressOfSchoolAttended = form.getTextField('text_lastSchool_address');
+        //const degreeProgram = form.getTextField('text_degree'); what is the name of the field?
+        const dateOfBirth = form.getTextField('text_date_birth');
+        const citizenship = form.getTextField('text_citizenship');
+        const ethnicity = form.getTextField('text_ethnicity');
+        const placeOfBirth = form.getTextField('text_birth_place');
+        const sexAtBirth = form.getTextField('text_student_sex');
+        const specialNeeds = form.getTextField('text_special_needs');
+        const emailAddress = form.getTextField('text_student_email');
+        //const contactNumber = form.getTextField('text_student_contact_num');
+        const permanentAddress = form.getTextField('text_pAddress');
+        const addressWhileStudying = form.getTextField('text_wsAddress');
+        //person to contact in case of emergency
+        const contactPersonName = form.getTextField('text_em_name');
+        //const contactPersonAddress = form.getTextField('text_em_address'); it says the type is number
+        //const contactPersonNumber = form.getTextField('text_em_number');
+         const contactPersonRelationship = form.getTextField('text_em_relationship');
+        const healthfacilityregistered = form.getTextField('text_ic_registered');
+        const parentHealthFacilityDependent = form.getTextField('text_ic_dependent');
+        const vaccinationStatus = form.getTextField('text_ic_vax_stat');
+        //const technologyLevel = form.getTextField('text_dcl_level');
+        //const digitalLiteracy = form.getTextField('text_dcl_category');
+        //const availFreeHigherEducation = form.getTextField();
+        //const contributionAmount = form.getTextField('text_fhe_amount');
+        //const compliedToAdmissionPolicy = form.getTextField('text_fhe_complied');
+
+        //startOfSchoolYear.setText(preregData.start_of_school_year);
+        //endOfSchoolYear.setText(preregData.end_of_school_year);
+        //studentSchoolId.setText(preregData.student_school_id);
+        //learnersReferenceNumber.setText(preregData.learners_reference_number);
+        name.setText(fullName)
+        maidenName.setText(preregData.maiden_name);
+        //academicClassification.setText(preregData.academic_classification);
+        lastSchoolAttended.setText(preregData.last_school_attended);
+        addressOfSchoolAttended.setText(preregData.address_of_school_attended);
+        //degreeProgram.setText(preregData.degree);
+        dateOfBirth.setText(preregData.date_of_birth);
+        citizenship.setText(preregData.citizenship);
+        ethnicity.setText(preregData.ethnicity);
+        placeOfBirth.setText(preregData.place_of_birth);
+        sexAtBirth.setText(preregData.sex_at_birth);
+        specialNeeds.setText(preregData.special_needs);
+        emailAddress.setText(preregData.email_address);
+        //contactNumber.setText(preregData.contact_number);
+        permanentAddress.setText(preregData.home_address);
+        addressWhileStudying.setText(preregData.address_while_studying);
+        contactPersonName.setText(preregData.contact_person_name);
+        //contactPersonAddress.setText(preregData.contact_person_number);
+        //contactPersonNumber.setText(preregData.contact_person_relationship);
+        contactPersonRelationship.setText(preregData.contact_person_relationship);
+        healthfacilityregistered.setText(preregData.health_facility_registered);
+        parentHealthFacilityDependent.setText(preregData.parent_health_facility_dependent);
+        vaccinationStatus.setText(preregData.vaccination_status);
+        //technologyLevel.setText(preregData.first_name);
+        //digitalLiteracy.setText(preregData.first_name);
+        //availFreeHigherEducation.setText(preregData.first_name);
+        //contributionAmount.setText(preregData.first_name);
+        //compliedToAdmissionPolicy.setText(preregData.first_name);
+
+        const finalPDF = await pdfDoc.save();
+        
+        download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+      }
+    };
+    
+    // Call the fetchPdf function directly in your component code
+    fetchPdf();
+
   };
 
   const onSubmit = (ev) => {

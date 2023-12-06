@@ -32,10 +32,16 @@ export default function StaffLayout() {
   // Calling the ProfilePopupSample
   const [isStaffProfileOpen, setIsStaffProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken} = useStateContext();
+  const {setCurrentUser, setUserToken, userRole, userToken} = useStateContext();
 
   if (!userToken) {
-    return <Navigate to='/'/> //change to guest/landingpage
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+
+  if (userRole != 2) {
+    localStorage.clear();
+    return <Navigate to='/' />
   }
 
   const logout = (ev) => {
@@ -47,6 +53,11 @@ export default function StaffLayout() {
         setUserRole(null)
       })
   }
+
+  if (userRole!=2) {
+    localStorage.clear();
+  }
+
 
   return (
     <>
@@ -239,6 +250,8 @@ export default function StaffLayout() {
         className="w-full lg:w-8/12 px-4 container h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5 ">
           <div className='relative flex flex-col min-w-0 break-words w-full mt-3'><UserProfile /></div>
       </ReactModal>
+
+      <Navigate to='/staff/home' /> {/**This prevents the user from gaining access to /staff URL*/}
     </>
   );
 }

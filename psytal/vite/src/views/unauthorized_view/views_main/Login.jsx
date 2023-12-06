@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
-import PsychLogo from '../../../assets/PsychLogo.png';
+import PsychLogo from '../../../assets/PsychCircle.png';
 import { NavLink } from 'react-router-dom';
 
 export default function Login() {
@@ -32,13 +32,17 @@ export default function Login() {
       }
         console.error(error)
     });
+  };
 
-    
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
   };
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-green-800 via-green-500 to-green-800">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
         {error.__html && (
@@ -48,15 +52,15 @@ export default function Login() {
         
 {/*box*/}
 
-        <div className="box-border md:box-content bg-white p-9 shadow-2xl">
+        <div className="box-border md:box-content rounded-3xl bg-gradient-to-r from-[#739072]/80 via-gray-400/80 to-[#739072]/80 p-9 shadow-2xl">
           
           <img
             className="mx-auto h-20 w-auto"
             src={PsychLogo}
             alt="psychology logo"
           />
-          <h2 className="mt-3 text-center text-2xl leading-9 tracking-tight text-gray-400">
-            Log In
+          <h2 className="mt-3 text-center text-2xl font-franklin leading-9 tracking-tight text-gray-900">
+            Login to PSYTAL
           </h2>
 
           <form onSubmit={onSubmit} className="space-y-6" action="#" method="POST"> 
@@ -88,27 +92,31 @@ export default function Login() {
               </div>
               <div className="mt-2">
                 <input
-                 placeholder='abcd123'
                   id="password"
                   name="password"
-                  type="password"
+                  type={isVisible ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   value={password}
                   onChange={ev => setPassword(ev.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <div>
+                  <label onClick={toggleVisibility} className='text-blue-400 text-sm text px-2 mb-2'>
+                    {isVisible ? "Hide Password" : "Show Password"}
+                  </label>
+                </div>
               </div>
             </div>
             <div className="text-sm">
             <NavLink to="/forgotpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
               Forgot password?
             </NavLink>
-                </div>
+            </div>
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-lime-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-[#397439] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#367E18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>

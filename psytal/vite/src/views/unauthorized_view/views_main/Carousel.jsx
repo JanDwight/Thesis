@@ -4,10 +4,10 @@ const slidesData = [
   {
     content: (
       <>
-        <div className="w-full h-[50vh] relative">
+        <div className="w-[100%] h-[50vh] relative">
           {/* Remove the image src here */}
-          <div className="absolute inset-x-0 top-0 h-full w-full flex flex-col justify-center items-center text-white p-5">
-            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+          <div className="absolute inset-x-0 top-0 w-[100%] h-[100%] flex flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-[100%] h-[100%] absolute inset-0"></div>
             <h6 className="text-2xl font-bold text-center z-10 relative">BSU Vision</h6>
             <div className="max-h-60 z-10 relative">
               <p className="text-2xl text-center">BSU as an international Smart University engendering graduates to walk the intergenerational highways.</p>
@@ -20,10 +20,10 @@ const slidesData = [
   {
     content: (
       <>
-        <div className="w-full h-[50vh] relative">
+        <div className="w-[100%] h-[50vh] relative">
           {/* Remove the image src here */}
-          <div className="absolute inset-x-0 top-0 h-full w-full flex flex-col justify-center items-center text-white p-5">
-            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+          <div className="absolute inset-x-0 top-0 w-[100%] h-[100%] flex flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-[100%] h-[100%] absolute inset-0"></div>
             <h6 className="text-2xl font-bold text-center z-10 relative">BSU Mission</h6>
             <div className="max-h-60 z-10 mt-5 relative">
               <p className="text-xl text-center">
@@ -44,10 +44,10 @@ const slidesData = [
   {
     content: (
       <>
-        <div className="w-full h-[50vh] relative">
+        <div className="w-[100%] h-[50vh] relative">
           {/* Remove the image src here */}
-          <div className="absolute inset-x-0 top-0 h-full w-full flex-col justify-center items-center text-white p-5">
-            <div className="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
+          <div className="absolute inset-x-0 top-0 w-[100%] h-[100%] flex-col justify-center items-center text-white p-5">
+            <div className="bg-black bg-opacity-60 w-[100%] h-[100%] absolute inset-0"></div>
             <h6 className="text-xl font-bold text-center z-10 relative">College of Social Sciences Goals</h6>
             <div className="max-h-60 z-10 mt-5 relative">
               <p className="text-lg text-center">
@@ -97,14 +97,14 @@ const Carousel = () => {
 
   return (
     /* Carousel card */
-    <div className="w-3/4 h-1/2">
-      <div className="relative w-full h-[50vh] overflow-hidden">
+    <div className="w-[75%] h-[50%]">
+      <div className="relative w-[100%] h-[50vh] overflow-hidden rounded-3xl">
         {slidesData.map((slide, index) => (
           <div
             key={index}
             className={`carousel-item relative ${
               index === activeSlide ? '' : 'hidden'
-            } w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
+            } w-[100%] transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
             data-te-carousel-active={index === activeSlide}
             data-te-carousel-item
             style={{ backfaceVisibility: 'hidden' }}
@@ -114,7 +114,7 @@ const Carousel = () => {
         ))}
 
         {/*Indicator Buttons */}
-        <div className="absolute bottom-0 left-0 right-0 pb-5 z-[2] flex list-none justify-center p-0" data-te-carousel-indicators>
+        <div className="absolute bottom-[0%] left-[0%] right-[0%] pb-5 z-[2] flex list-none justify-center p-0" data-te-carousel-indicators>
           {slidesData.map((_, index) => (
             <button
               key={index}
@@ -130,7 +130,7 @@ const Carousel = () => {
         </div>
       </div>
       <button
-        className="absolute bottom-0 left-0 top-0 pl-16 z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        className="absolute bottom-[0%] left-[0%] top-[-27%] pl-16 z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
         type="button"
         onClick={prevSlide}
       >
@@ -151,7 +151,7 @@ const Carousel = () => {
         </span>
       </button>
       <button
-        className="absolute bottom-0 right-0 top-0 z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        className="absolute bottom-[0%] right-[0%] top-[-27%] z-[11] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
         type="button"
         onClick={nextSlide}
       >

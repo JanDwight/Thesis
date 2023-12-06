@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import AboutUs from "./views/unauthorized_view/views_main/AboutUs";
 import LandingPage from "./views/unauthorized_view/views_main/LandingPage";
 import Login from "./views/unauthorized_view/views_main/Login";
 import GuestLayout from "./views/unauthorized_view/views_main/GuestLayout";
@@ -191,13 +190,8 @@ const router = createBrowserRouter([
             },
 
             {
-                path: 'aboutus',
-                element: <AboutUs />
-            },
-
-            {
         
-                path: 'preregistration',
+                path: 'preregistrationforincoming',
                 element: <PreRegistrationForm />
                 
             },

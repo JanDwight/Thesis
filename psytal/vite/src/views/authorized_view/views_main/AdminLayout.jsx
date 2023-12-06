@@ -7,12 +7,11 @@ import users from "@assets/icons8adduser.png";
 import avatar from "@assets/icons8avatar.png";
 import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
-import archive from "@assets/icons8archive60.png"
 import classicon from "@assets/icons8book.png";
 import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
-import { EllipsisHorizontalIcon ,MagnifyingGlassIcon, UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
+import { UserIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { useStateContext } from '../../../context/ContextProvider';
 import axiosClient from '../../../axios';
 import UserProfile from '../views_components/profile_components/UserProfile';
@@ -36,15 +35,18 @@ export default function AdminLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
-  const [isSearchToggled, setIsSearchToggled] = useState(false);
+  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole} = useStateContext();
 
-  console.log(userRole)
-
-  if (!userToken && !userRole) {
+  if (!userToken) {
+    localStorage.clear();
     return <Navigate to='/' />
   }
 
+  if (userRole != 1) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+    
   const logout = (ev) => {
     ev.preventDefault();
     axiosClient.post('/logout')
@@ -54,6 +56,8 @@ export default function AdminLayout() {
         setUserRole(null);
       })
   }
+
+  console.log(userToken)
 
   return (
     <>
@@ -251,6 +255,8 @@ export default function AdminLayout() {
           <UserProfile closeModal={() => setIsProfileOpen(false)}/>
         </div>
       </ReactModal>
+
+      <Navigate to='/admin/home' /> {/**This prevents the user from gaining access to /admin URL*/}
   </>
   );
 }
