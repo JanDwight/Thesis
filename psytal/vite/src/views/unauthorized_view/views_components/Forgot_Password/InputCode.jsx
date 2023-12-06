@@ -49,7 +49,7 @@ export default function InputCode() {
 
   return (
     <>
-      <div className='flex min-h-full flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-green-800 via-green-500 to-green-800'>
+      <div className='flex min-h-[100%] flex-1 flex-col items-center justify-center px-6 py-[12%] lg:px-8 bg-gradient-to-r from-green-800 via-green-500 to-green-800'>
         <div className='flex items-center justify-between'>
           <label htmlFor='password' className='block text-sm font-medium leading-6 text-gray-900'>
             Please Enter The Code We Sent You
@@ -61,7 +61,7 @@ export default function InputCode() {
             <input
               name='end'
               type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 '
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 '
               value={userCode}
               onChange={(ev) => setUserCode(ev.target.value)}
             />
