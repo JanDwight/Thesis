@@ -15,27 +15,27 @@ const StateContext = createContext({
 export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [userToken, _setUserToken] = useState(
-    sessionStorage.getItem("TOKEN") || ""
+    localStorage.getItem("TOKEN") || ""
   );
   const [userRole, _setUserRole] = useState(
-    sessionStorage.getItem("USERROLE") || ""
+    localStorage.getItem("USERROLE") || ""
   );
   const [userPermission, setUserPermission] = useState();
 
   const setUserToken = (token) => {
     if (token) {
-      sessionStorage.setItem("TOKEN", token);
+      localStorage.setItem("TOKEN", token);
     } else {
-      sessionStorage.removeItem("TOKEN");
+      localStorage.removeItem("TOKEN");
     }
     _setUserToken(token);
   };
 
   const setUserRole = (userrole) => {
     if (userrole) {
-      sessionStorage.setItem("USERROLE", userrole);
+      localStorage.setItem("USERROLE", userrole);
     } else {
-      sessionStorage.removeItem("USERROLE");
+      localStorage.removeItem("USERROLE");
     }
     _setUserRole(userrole);
   };
