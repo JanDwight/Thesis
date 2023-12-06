@@ -9,7 +9,7 @@ import Login from '../../unauthorized_view/views_main/Login';
 export default function LandingPage() {
 
   return (
-    <div className='w-[100%] h-[100%] py-[-10%] relative mx-auto'>
+    <div className='w-[100%] h-[100%] relative mx-auto'>
       <video
         className='w-[100%] h-[100%] object-cover z-0 mx-auto'
         src={coverVid}
@@ -18,17 +18,15 @@ export default function LandingPage() {
         muted
       />
 
-     <div className="absolute w-[100%] h-[100%] top-[0%] left-[0%] bg-[#111613]/80"></div> {/*cover for video*/}
-
       <div className="absolute flex w-[100%] h-[100%] top-[10%] left-[0%] overflow-hidden">
         <div className="w-[50%] flex items-center text-white relative">
           <div className="mx-8">
             <img
-              className="h-24 w-24 absolute top-[0%] left-[40%]"
+              className="h-24 w-24 absolute top-[0%] ml-[40%]"
               src={schoolLogo}
               alt="BSUlogo"
             />
-            <div className= "absolute top-[6%] left-[13%]">
+            <div className= "absolute top-[6%] ml-[13%]">
             <h1 className="font-franklin font-extrabold text-2xl text-center">
               WELCOME TO BENGUET STATE UNIVERSITY
             </h1>
@@ -38,7 +36,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="absolute w-[90%] h-[100%] top-[-14%] left-[1%] pl-10 pr-5 flex items-center justify-center">
+          <div className="absolute w-[100%] h-[100%] top-[-14%] ml-[1%] pl-10 pr-5 flex items-center justify-center">
             <Carousel />
           </div>
         </div>
@@ -54,7 +52,7 @@ export default function LandingPage() {
       <div className="w-[75%] h-[100%] float-left">
       <div className="mx-6 ">
         {/* Green Card 1 */}
-        <div className="bg-[#002408] p-4  shadow-lg">
+        <div className="bg-[#002408] p-4 shadow-lg">
           <h6 className="text-2xl text-white text-center font-bold pt-3">ADMISSION REQUIREMENTS</h6>
           <h4 className="text-xl text-white font-bold pt-3">Applicants</h4>
           <ul className="list-disc pl-6 text-lg text-white">
@@ -77,7 +75,7 @@ export default function LandingPage() {
           </div>
 
           {/* Green Card 3 */}
-          <div className="bg-[#bc6c25] p-4 shadow-lg flex-1">
+          <div className="bg-[#648058] p-4 shadow-lg flex-1">
             <h4 className="text-xl text-white font-bold pt-3">Additional Requirements</h4>
             <ul className="list-disc pl-6 text-lg text-white">
               <li>Qualifiers must pass the interview process conducted by the Colleges.</li>
@@ -89,7 +87,7 @@ export default function LandingPage() {
     </div>
 
       {/*DEPARTMENT OBJECTIVES*/}
-      <div className="w-[25%] h-[100%] float-left ml-4">
+      <div className="w-[25%] h-[100%]">
     
           <p className="text-sm text-center  mr-6">
             <h6 className="text-xl font-bold pt-3">PSYCHOLOGY PROGRAM OBJECTIVES</h6>
@@ -110,9 +108,9 @@ export default function LandingPage() {
       
     
       {/**<!--Footer--> */}
-      <footer className='bottom-[0%] bg-neutral-100 text-center text-gray-500 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left mt-[1%]'>
+      <footer className='bottom-0 bg-white text-center text-gray-500 lg:text-left mt-1'>
       {/**<!-- Social icons --> */}
-      <div className='border-b-2 border-neutral-200 p-2 dark:border-neutral-500'>
+      <div className='border-b-2 border-neutral-200 p-2'>
         <div className='container mx-auto px-10'>
           <div className='flex items-center justify-center lg:justify-between'>
             <div className='mr-12 hidden lg:block'>
@@ -120,7 +118,7 @@ export default function LandingPage() {
             </div>
             <div className='flex justify-center'>
               {/**FB */}
-              <a href="https://www.facebook.com/psychologybsu" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://www.facebook.com/psychologybsu" target="_blank" className="mr-6 text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
                     fill="currentColor"
@@ -129,7 +127,7 @@ export default function LandingPage() {
                 </svg>
               </a>
               {/**Twitter */}
-              <a href="https://twitter.com/BenguetStateU" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://twitter.com/BenguetStateU" target="_blank" className="mr-6 text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
                     fill="currentColor"
@@ -139,7 +137,7 @@ export default function LandingPage() {
               </a>
 
                   {/**Instagram */}
-              <a href="https://www.instagram.com/benguetstateuniversityofficial/" target="_blank" className="mr-6 text-gray-500 dark:text-gray-200">
+              <a href="https://www.instagram.com/benguetstateuniversityofficial/" target="_blank" className="mr-6 text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
                     fill="currentColor"
@@ -231,7 +229,7 @@ export default function LandingPage() {
       {/** End of the Main Footer Content */}
 
       {/**<!-- Copyrights --> */}
-      <div className='bg-gray-200 p-3 text-center dark:bg-neutral-700'>
+      <div className='bg-gray-200 p-3 text-center'>
         <a font-semibold="true" text-neutral-600="true" dark:text-neutral-400="true">BSU-CSS: Department of Psychology </a>
         <span> © 2023 Copyright</span>
       </div> {/**End of copyrights */}

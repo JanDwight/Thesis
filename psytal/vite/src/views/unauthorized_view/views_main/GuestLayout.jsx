@@ -33,7 +33,7 @@ export default function GuestLayout() {
     <>
       <div className='mx-auto'>
         <header>
-        <Disclosure as="nav" className="fixed h-[10%] w-[100%] z-20 bg-gray-600">
+        <Disclosure as="nav" className="fixed h-[10%] w-[100%] z-20 bg-[#ffffff]">
           {({ open }) => (
             <>
             {/* 1st Header */}
