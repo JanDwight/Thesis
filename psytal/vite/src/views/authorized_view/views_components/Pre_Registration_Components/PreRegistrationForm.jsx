@@ -221,12 +221,13 @@ export default function PreRegistrationForm() {
                           name="start"
                           type="number" 
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                          placeholder="20-"
+                          placeholder="20XX"
                           min="2000" // Minimum year
                           max="2099" // Maximum year
-                          step="1" // Year step
                           value={startOfSchoolYear}
-                          onChange={ev => setStartOfSchoolYear(ev.target.value)}
+                          onChange={ev => {
+                            setStartOfSchoolYear(ev.target.value);
+                            setEndOfSchoolYear(parseInt(ev.target.value) + 1);}}
                         />
                       </div>
                       <span className="mx-4 text-gray-500">to</span>
@@ -238,12 +239,10 @@ export default function PreRegistrationForm() {
                           name="end"
                           type="number" 
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                          placeholder="20-"
+                          placeholder="20XX"
                           min="2000" 
                           max="2099" 
-                          step="1" 
                           value={endOfSchoolYear}
-                          onChange={ev => setEndOfSchoolYear(ev.target.value)}
                         />
                       </div>
                     </div>
@@ -260,6 +259,8 @@ export default function PreRegistrationForm() {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-studentID"
                         type="number"
+                        pattern="[0-9]*" //not working
+                        maxLength={7} //not working
                         placeholder=""
                         value={studentSchoolId}
                         onChange={ev => setStudentSchoolId(ev.target.value)}
