@@ -132,7 +132,7 @@ export default function Login() {
       <ReactModal
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
-            className="w-[100%] md:w-[20%] h-fit bg-gray-300 rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-2"
+            className="w-[100%] md:w-[30%] h-fit bg-gray-300 rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-2"
         >
             <div>
                 <InputEmail
