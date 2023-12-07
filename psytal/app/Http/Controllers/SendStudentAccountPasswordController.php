@@ -65,8 +65,9 @@ class SendStudentAccountPasswordController extends Controller
         try {
             Mail::to($formData['email'])->send(new SendPassword($data));
             return response()->json(['message' => 'Email sent successfully']);
+
         } catch (Exception $e) {
-            return response()->json(['error' => 'Email sending failed']);
+            return response()->json(['error' => $formData['email']]);
         }
     }
 

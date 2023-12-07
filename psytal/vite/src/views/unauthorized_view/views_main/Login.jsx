@@ -2,7 +2,8 @@ import { useState } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychCircle.png';
-import { NavLink } from 'react-router-dom';
+import ReactModal from 'react-modal';
+import InputEmail from '../views_components/Forgot_Password/InputEmail';
 
 export default function Login() {
   const {setCurrentUser, setUserToken, setUserRole} = useStateContext();
@@ -10,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState({__html: ""});
   const [userRole, currentUser, userToken] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -109,9 +111,9 @@ export default function Login() {
               </div>
             </div>
             <div className="text-sm">
-            <NavLink to="/forgotpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            <label onClick={() => setIsModalOpen(true)} className="font-semibold text-indigo-600 hover:text-indigo-500">
               Forgot password?
-            </NavLink>
+            </label>
             </div>
             <div>
               <button
@@ -126,6 +128,18 @@ export default function Login() {
 
         </div>
       </div>
+
+      <ReactModal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            className="w-[100%] md:w-[20%] h-fit bg-gray-300 rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-2"
+        >
+            <div>
+                <InputEmail
+                 closeModal={() => setIsModalOpen(false)}/>
+            </div>
+      </ReactModal>
+
     </>
   )
 }
