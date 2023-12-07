@@ -44,7 +44,7 @@ export default function InputEmail() {
       // Use navigate to go to the "/code" route and pass formData as state
       setIsModalOpen(true);
     } else {
-      console.error('Password reset failed');
+      console.error('Email does not Exist');
     }
   } catch (error) {
     console.error('Error:', error);

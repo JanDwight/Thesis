@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendPassword;
 use App\Mail\ForgotPasswordInputEmail;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Mail;
@@ -30,26 +31,36 @@ class SendStudentAccountPasswordController extends Controller
     }
 
     public function forgotpasswordsendemail(Request $request)
-{
-    try {
-        $formData = $request->query(); // Ensure you're getting the email correctly
-
-        $data = [
-            'title' => 'Forgot Password',
-            'body'  => 'Here is the code. "' . $formData['code']. '" Thank you.'
-        ];
-
-        Mail::to($formData['email'])->send(new ForgotPasswordInputEmail($data)); // Make sure the SendPassword class is correct
-
-        // You might want to log a success message or return a different response for success
-        return response()->json([
-            'success' => true,
-            'message' => 'Email sent successfully'
-        ]);
-    } catch (Exception $e) {
-        return response()->json(['error' => 'Error, Please try again later']);
+    {
+        try {
+            $formData = $request->query(); // Ensure you're getting the email correctly
+    
+            // Check if the email exists in the database
+            $user = User::where('email', $formData['email'])->first();
+    
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Email not found in the database'
+                ]);
+            }
+    
+            $data = [
+                'title' => 'Forgot Password',
+                'body'  => 'Here is the code. "' . $formData['code'] . '" Thank you.'
+            ];
+    
+            Mail::to($formData['email'])->send(new ForgotPasswordInputEmail($data)); // Make sure the SendPassword class is correct
+    
+            // You might want to log a success message or return a different response for success
+            return response()->json([
+                'success' => true,
+                'message' => 'Email sent successfully'
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Email does not Exist']);
+        }
     }
-}
 
     public function sendnewpassword(Request $request)
     {
