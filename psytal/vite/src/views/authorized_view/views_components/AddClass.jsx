@@ -11,6 +11,7 @@ export default function AddClass({closeModal}) {
   const [subjectData, setSubjectData] = useState([]);
   const [instructorData, setInstructorData] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   
   function handleDropdownChange(selected_subject) {
@@ -97,8 +98,16 @@ export default function AddClass({closeModal}) {
         console.log('Data sent successfully:', response.data);
 
         // Close the modal or perform any other action as needed
-        closeModal();
         window.location.reload();
+
+        setSuccessMessage({
+          message: 'The CLASS was added successfully!',
+        });
+
+        setTimeout(() => {
+          setSuccessMessage(null);
+          closeModal();
+        }, 5000);
       })
       .catch((error) => {
         // Handle errors here
@@ -260,6 +269,17 @@ export default function AddClass({closeModal}) {
           </form>
         </div>
         {/*----------*/}
+        {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
