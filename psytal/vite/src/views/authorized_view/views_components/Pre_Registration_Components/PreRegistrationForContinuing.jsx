@@ -254,12 +254,14 @@ export default function PreRegistrationForContinuing() {
                                         name="start"
                                         type="number" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                                        placeholder="20-"
+                                        placeholder="20XX"
                                         min="2000" // Minimum year
                                         max="2099" // Maximum year
                                         step="1" // Year step
                                         value={startOfSchoolYear}
-                                        onChange={ev => setStartOfSchoolYear(ev.target.value)}
+                                        onChange={ev => {
+                                            setStartOfSchoolYear(ev.target.value);
+                                            setEndOfSchoolYear(parseInt(ev.target.value) + 1);}}
                                     />
                                     </div>
                                     <span className="mx-4 text-gray-500">to</span>
@@ -271,12 +273,14 @@ export default function PreRegistrationForContinuing() {
                                         name="end"
                                         type="number" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                                        placeholder="20-"
+                                        placeholder="20XX"
                                         min="2000" 
                                         max="2099" 
                                         step="1" 
                                         value={endOfSchoolYear}
-                                        onChange={ev => setEndOfSchoolYear(ev.target.value)}
+                                        onChange={ev => {
+                                            setEndOfSchoolYear(ev.target.value);
+                                            setStartOfSchoolYear(parseInt(ev.target.value) - 1);}}
                                     />
                                     </div>
                                 </div>
