@@ -129,7 +129,7 @@ export default function PreRegistrationForm() {
       contribution_amount: contributionamount,
       complied_to_admission_policy: compliedtoadmissionpolicy,
       pre_reg_status: 'Pending',
-      type_of_student: 'Regular',
+      type_of_student: 'Incoming',
       year_level: '1st Year',
       
     })

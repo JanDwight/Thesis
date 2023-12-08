@@ -6,6 +6,7 @@ use App\Http\Requests\PreRegistrationIncomingTmpRequest;
 use App\Models\preregistration_incoming_tmp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PreregistrationIncomingTmpController extends Controller
@@ -64,17 +65,19 @@ class PreregistrationIncomingTmpController extends Controller
 
     public function createContinuingPreReg(PreRegistrationIncomingTmpRequest $request)
     {
+        // Get the ID of the currently logged-in user
+        $userId = Auth::id();
         $data = $request->validated();
 
 
         $preRegTmpincoming = preregistration_incoming_tmp::create([
             'start_of_school_year' => $data['start_of_school_year'],
             'end_of_school_year' => $data['end_of_school_year'],
+            'user_id'=> $userId,
             'last_name' => $data['last_name'],
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'maiden_name' => $data['maiden_name'],
-            'type_of_student' => $data['type_of_student'],
             'year_level' => $data['year_level'],
             'degree' => $data['degree'],
             'major' => $data['major'],
@@ -106,9 +109,9 @@ class PreregistrationIncomingTmpController extends Controller
             'contact_person_relationship' => $data['contact_person_relationship'],
             'section' => $data['section'],
             'pre_reg_status' => $data['pre_reg_status'],
+            'student_status' => $data['student_status'],
+            'type_of_student' => $data['type_of_student'],
         ]);
-
-        
 
         return response([
             'prereg' => $preRegTmpincoming,

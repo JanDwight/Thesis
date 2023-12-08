@@ -88,7 +88,7 @@ const handleRowClick = (items) => {
             className="w-fit h-[98%] bg-[#FFFFFF] rounded-3xl shadow-2xl mt-[1%] mx-auto p-5 overflow-y-scroll"
         >
             <div>
-    {selectedData.type_of_student === 'Irregular' ? (
+    {selectedData.type_of_student === 'Continuing' ? (
       <PreRegistrationForContinuingView
         closeModal={() => setIsPreRegFormModalOpen(false)}
         prereg={selectedData}

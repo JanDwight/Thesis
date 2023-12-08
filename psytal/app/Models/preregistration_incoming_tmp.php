@@ -59,6 +59,7 @@ class preregistration_incoming_tmp extends Model
             'complied_to_admission_policy',
             'section',
             'pre_reg_status',
+            'student_status',
         ];
 
     /**

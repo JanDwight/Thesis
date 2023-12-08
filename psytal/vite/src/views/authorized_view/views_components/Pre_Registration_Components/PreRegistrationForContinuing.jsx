@@ -55,8 +55,10 @@ export default function PreRegistrationForContinuing() {
   const [voluntarycontribution, setvoluntarycontribution] = useState('');
   const [contributionamount, setcontributionamount] = useState('');
   const [compliedtoadmissionpolicy, setcompliedtoadmissionpolicy] = useState('NO');
-  const [typeofstudent, setTypeOfStudent] = useState('');
+  const [typeofstudent, setTypeOfStudent] = useState('Continuing');
   const [candidateForGraduadtion, setCandidateForGraduadtion] = useState('');
+  const [studentStatus, setStudentStatus] = useState('');
+  const [userId, setUserId] = useState(0);
 
   //clearing the input fields using the reset button
   const handleClear = () => {
@@ -93,7 +95,6 @@ export default function PreRegistrationForContinuing() {
     setavailfreehighereducation('');
     setvoluntarycontribution('');
     setcontributionamount('');
-    setTypeOfStudent('');
     setCandidateForGraduadtion('');
   }
 
@@ -134,6 +135,7 @@ export default function PreRegistrationForContinuing() {
             start_of_school_year: parseInt(startOfSchoolYear),
             end_of_school_year: parseInt(endOfSchoolYear),
             student_school_id: parseInt(studentSchoolId),
+            user_id: parseInt(userId),
             learners_reference_number: parseInt(learnersReferenceNumber),
             last_name: lastName,
             first_name: firstName,
@@ -168,6 +170,7 @@ export default function PreRegistrationForContinuing() {
             contribution_amount: contributionamount,
             complied_to_admission_policy: compliedtoadmissionpolicy,
             pre_reg_status: 'Pending',
+            student_status: studentStatus,
             type_of_student: typeofstudent,
             year_level: yearLevel,
             candidate_for_graduation: candidateForGraduadtion
@@ -358,76 +361,7 @@ export default function PreRegistrationForContinuing() {
 
                         {/**=========================== Type of Student - Year Level ========================== */}
                         <div className="flex flex-wrap flex-row mx-0 mb-2">
-                            {/**Type student */}
-                            <div className="flex flex-col w-full md:w-1/2 px-3 mt-5">
-                                <span className= "text-sm font-semibold">TYPE OF STUDENT : </span> <hr className="w-[40%]" />
-                                <div className="flex flex-row justify-left mx-6 ">
-                                    {/**Radio buttion for Continuing */}
-                                    <div className='mx-5 mt-2'>
-                                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                            type="radio"
-                                            name="typeofstudent"
-                                            id="continuing"
-                                            value="Continuing" 
-                                            checked={typeofstudent === 'Continuing'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
-                                            />
-                                        <label
-                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                            htmlFor="continuing">Continuing
-                                        </label>
-                                    </div>
-                                    {/**Radio buttion for Returnee/Readmitted */}
-                                    <div className='mx-5 mt-2'>
-                                        <input
-                                            className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
-                                            type="radio"
-                                            name="typeofstudent"
-                                            id="returnee"
-                                            value="Returnee"
-                                            checked={typeofstudent === 'Returnee'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
-                                            />
-                                        <label
-                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                            htmlFor="readmitted">Returnee
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="flex flex- row justify-left mx-6 ">
-                                    {/**Radio buttion for Shifter */}
-                                    <div className='mx-5 mt-2'>
-                                        <input className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
-                                            type="radio"
-                                            name="typeofstudent"
-                                            id="shifter"
-                                            value="Shifter" 
-                                            checked={typeofstudent === 'Shifter'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
-                                            />
-                                        <label
-                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                            htmlFor="shifter">Shifter
-                                        </label>
-                                    </div>
-                                    {/**Radio buttion for Returnee/Readmitted */}
-                                    <div className='mx-5 mt-2'>
-                                        <input
-                                            className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
-                                            type="radio"
-                                            name="typeofstudent"
-                                            id="readmittedshifter"
-                                            value="Re-admitted Shifter"
-                                            checked={typeofstudent === 'Re-admitted Shifter'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
-                                            />
-                                        <label
-                                            className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                            htmlFor="returne">Readmitted & Shifter
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             {/**Year Level */}
                             <div className='flex flex-col w-full md:w-1/2 px-3 mt-5'>
@@ -547,8 +481,8 @@ export default function PreRegistrationForContinuing() {
                                             name="studentstatus"
                                             id="yes"
                                             value="Regular" 
-                                            checked={typeofstudent === 'Regular'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
+                                            checked={studentStatus === 'Regular'}
+                                            onChange={ev => setStudentStatus(ev.target.value)}
                                             />
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -564,7 +498,7 @@ export default function PreRegistrationForContinuing() {
                                             id="no"
                                             value="Irregular"
                                             checked={typeofstudent === 'Irregular'}
-                                            onChange={ev => setTypeOfStudent(ev.target.value)}
+                                            onChange={ev => setStudentStatus(ev.target.value)}
                                             />
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"

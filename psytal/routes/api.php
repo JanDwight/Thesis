@@ -63,6 +63,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/count_students', [UserController::class, 'count_students']); //<><><> count students from users table
     Route::get('/count_employee', [UserController::class, 'count_employee']); //<><><> count employees from users table
 
+    ////Routes for Pre-Registration Checking
+    Route::post('/preregcontinuingtmp', [PreregistrationIncomingTmpController::class, 'createContinuingPreReg']);
+
     //Routes for Pre-Registration Checking
     Route::get('/listpreregincoming', [PreregistrationIncomingTmpController::class, 'index']);
     Route::put('/preregcheck/{id}', [PreregistrationIncomingTmpController::class, 'update']);
@@ -95,7 +98,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 //Routes for Pre-Registration Form submition
 Route::post('/preregincommingtmp', [PreregistrationIncomingTmpController::class, 'createIncomingPreReg']);
-Route::post('/preregcontinuingtmp', [PreregistrationIncomingTmpController::class, 'createContinuingPreReg']);
 
 //Forgot Password
 Route::get('/forgotpasswordsendemail', [SendStudentAccountPasswordController::class,'forgotpasswordsendemail']);
