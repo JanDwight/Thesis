@@ -61,9 +61,9 @@ class student_profile extends Model
 public $timestamps = true;
 
 //student has many subjects
-public function subjects()
-{
-    return $this->belongsToMany(classes::class, 'student_subject', 'studentprofile_id', 'class_id');
-}
+public function classes()
+    {
+        return $this->belongsToMany(classes::class);
+    }
 
 }

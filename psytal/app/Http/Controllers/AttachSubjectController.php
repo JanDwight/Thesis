@@ -14,49 +14,48 @@ class AttachSubjectController extends Controller
     {
         // Validate the request data
         $request->validate([
-            'studentId' => 'required',
-            'subjectData' => 'required', 
+            'studentData' => 'required|array',
+            'studentData.first_name' => 'required', // Replace 'first_name' with the actual key in your nested array
+            'studentData.last_name' => 'required', // Replace 'last_name' with the actual key in your nested array
+            'subjectData' => 'required|array',
+            'subjectData.*.classCode' => 'required', // Replace 'class_code' with the actual key in your nested array
+            'subjectData.*.courseCode' => 'required', // Replace 'course_code' with the actual key in your nested array
         ]);
 
-        // Attach the subject to the student
-        //$student = student_profile::find($request->input('studentId'));
-        //$subject = classes::find($request->input('subjectId'));
-    
-        //$student->classes()->attach($subject);
-    
+        //they have auto generated ID's so I have to find them first
+        //how do I find which ID to use?
+        //subjectData is an array of Objects
+
+       // Access the validated data
+        //$studentFirstName = $request['studentData']['first_name'];
+        //$studentLastName = $request['studentData']['last_name'];
+
+        //$studentProfile = student_profile::find($request->input('studentData.first_name'));
+        $studentProfile = student_profile::where('first_name', $request->input('studentData.first_name'))
+                        ->where('last_name', $request->input('studentData.last_name'))
+                        ->first();
+
+        $classID = classes::find($request->input('subjectData.*.classCode'));
+        //$studentID = student_profile::find($studentProfile['studentprofile_id']);
+        $studentID = $studentProfile->studentprofile_id;
+        
+
+        $studentProfile->classes()->attach($classID); // there is error
+
+        // Find the student_profile and class based on IDs
+        //$studentProfile = student_profile::find($request->input('studentId')); <><><>
+        //$class = classes::find($request->input('subjectId')); <><><>
+
+        // Attach the class to the student_profile using the pivot table
+        //$studentProfile->classes()->attach($class); <><><>
+
         // You can return a response if needed
-        //return response(['message' => 'Subject attached to student successfully'], 200);
-
-        //----------------------------*****------------------------------------
-
-        // Get the validated data
-        $student_school_id = $request->input('studentId');
-        $subjectData = $request->input('subjectData');
-
-        // Find the student_profile_id based on student_school_id
-        $studentProfile = student_profile::where('student_school_id', $student_school_id)->first();
-
-        if ($studentProfile) {
-            $studentProfileId = $studentProfile->studentprofile_id;
-    
-            // Include the studentProfileId in the response
-            return response([
-                'message' => 'Subject attached to student successfully',
-                'studentProfileId' => $studentProfileId,
-                'subjectData' => $subjectData,
-                'studentProfileId' => $studentProfile,
-            ], 200);
-        } else {
-            // If the student_profile is not found, you might want to handle this case
-            return response([
-                'error' => 'Student profile not found',
-            ], 404);
-        }
-
-        // You can include the data in the response
+        //$studentProfile
+        //$classID
         return response([
-            'message' => 'Subject attached to student successfully',
-            
+            'message' => 'Class attached to student successfully',
+            'studentProfile' => $studentProfile,
+            'classID' => $classID,
         ], 200);
     }
 }

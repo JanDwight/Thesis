@@ -16,10 +16,10 @@ return new class extends Migration
             $table->bigInteger('studentprofile_id')->unsigned()->index(); // Use the custom foreign key name
             $table->bigInteger('class_id')->unsigned()->index(); // Use the custom foreign key name
             // Add any other columns you may need in this table
-            $table->string('course_code'); // Adjust the data type accordingly
-            $table->integer('units');
-            $table->integer('grade'); //change data type based on what is needed
-            $table->string('course_type')->default('n/a'); //back course (bc), advanced course (ac) or n/a
+            $table->string('course_code')->default('TBA');;
+            $table->integer('units')->default(0);
+            $table->integer('grade')->default(0); // Change data type based on what is needed
+            $table->string('course_type')->default('n/a'); // Back course (bc), advanced course (ac) or n/a
 
             $table->timestamps();
         });

@@ -17,12 +17,12 @@ export default function PreRegistrationFormView({prereg}) {
 
     //<><><><><>
     const [inputFields, setInputFields] = useState([
-      { classCode: '', courseCode: '', units: '', bcac: '' },
+      { classCode: '', courseCode: '', units: '', bcac: '' }, //changed classCode to classId
     ]);
 
     const handleClearSubjects = () => {
       // Clear the inputFields state and set totalUnits to 0
-      setInputFields([{ classCode: '', courseCode: '', units: '', bcac: 'N/A' }]);
+      setInputFields([{ classCode: '', courseCode: '', units: '', bcac: 'N/A' }]); //changed classCode to classId
       setTotalUnits(0);
     };
 
@@ -167,24 +167,6 @@ export default function PreRegistrationFormView({prereg}) {
   const onClickAccept = (ev) => {
     ev.preventDefault();
     setError({ __html: "" });
-
-    //put axios here
-    console.log("InputFields", inputFields);
-    console.log("Student ID", preregData.student_school_id);
-    //console.log("Subject ID", inputFields.classCode); // does not work, result is undefined
-
-    //--------------------------//
-
-    axiosClient.post('/student_subject', {
-      studentId: preregData.student_school_id,
-      subjectData: inputFields,
-      //subjectId: inputFields.courseCode, // result is undefined
-      //add also classCode
-      //add also units
-      //if back course or advance course
-     })
-
-    //--------------------------//
 
     const fullName = `${preregData.last_name}, ${preregData.first_name} ${preregData.middle_name.charAt(0)}.`;
 
@@ -425,6 +407,30 @@ export default function PreRegistrationFormView({prereg}) {
     
     // Call the fetchPdf function directly in your component code
     fetchPdf();
+
+
+    //put axios here
+    console.log("InputFields:", inputFields);
+    console.log("Pre-Reg Data:", preregData);
+    console.log("Student ID:", preregData.student_school_id);
+    console.log("First Name:", preregData.first_name);
+    console.log("Last Name:", preregData.last_name);
+    
+
+    //--------------------------//
+
+    //idea how about fetching the data here then passing it in axios instead??? Should be easier.
+
+    axiosClient.post('/student_subject', {
+      studentData: preregData,
+      subjectData: inputFields,
+      //subjectId: inputFields.courseCode, // result is undefined
+      //add also classCode
+      //add also units
+      //if back course or advance course
+     })
+
+    //--------------------------//
 
   };
 
@@ -1325,7 +1331,7 @@ export default function PreRegistrationFormView({prereg}) {
                                       Class Code
                                     </option>
                                     {subjectData.map(item => (
-                                      <option key={item.id} value={item.class_code}>
+                                      <option key={item.id} value={item.class_id}>
                                         {item.class_code + ' - ' + item.course_code}
                                       </option>
                                     ))}
