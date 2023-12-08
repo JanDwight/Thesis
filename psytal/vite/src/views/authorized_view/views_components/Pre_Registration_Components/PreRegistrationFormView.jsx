@@ -315,6 +315,8 @@ export default function PreRegistrationFormView({prereg}) {
         console.error(error)
     });
 
+
+
     // PDF modification code======================================================================
     //for new incoming first years
     const fetchPdf = async () => {
@@ -323,23 +325,99 @@ export default function PreRegistrationFormView({prereg}) {
 
       // Combine last name, first name, and middle initial with comma and dot
       const fullName = `${preregData.last_name}, ${preregData.first_name} ${middleInitial}`;
+
+      // Convert the integer term to text
+      // Combine two terms start and End
+      const integerstartOfSchoolYear = preregData.start_of_school_year;
+      const textstartOfSchoolYear = integerstartOfSchoolYear.toString();
+      const integerendOfSchoolYear = preregData.end_of_school_year;
+      const textendOfSchoolYear = integerendOfSchoolYear.toString();
+      const fullTerm = 'First Semester, ' + textstartOfSchoolYear + ' - ' + textendOfSchoolYear;
+
+      // Convert the integer to text before assigning
+      const integerstudentSchoolId = preregData.student_school_id;
+      const textstudentSchoolId = integerstudentSchoolId.toString();
+
+      const integerValuecontactnumber = preregData.contact_number;
+      const textcontactnumber = integerValuecontactnumber.toString();
+
+      const integerValuecontactPersonNumber = preregData.contact_person_number;
+      const textcontactPersonNumber = integerValuecontactPersonNumber.toString();
+
+      const integerValuecontactPersonAddress = preregData.contact_person_address;
+      const textcontactPersonAddress = integerValuecontactPersonAddress.toString();
+
+      const integerValuelearnersReferenceNumber = preregData.learners_reference_number;
+      const textlearnersReferenceNumber = integerValuelearnersReferenceNumber.toString();
+
+      const integerValuecontributionAmount = preregData.contribution_amount;
+      const textcontributionAmount = integerValuecontributionAmount.toString();
+
       
       try {
         const pdfBytes = await fetch(preregFirstYearForm).then((res) => res.arrayBuffer());
         const pdfDoc = await PDFDocument.load(pdfBytes);
     
         const form = pdfDoc.getForm();
-    
-        //const startOfSchoolYear = form.getTextField(); //get the name of the field from the form
-        //const endOfSchoolYear = form.getTextField();
-        //const studentSchoolId = form.getTextField('text_student_ID');
-        //const learnersReferenceNumber = form.getTextField('text_student_lrn');
+
+
+        const dateField = form.getTextField('text_date_applied');
+        if (dateField) {
+          // Current date
+          const currentDate = new Date();
+
+          // Format of date 'Text-DD-YYYY'
+          const formattedDate = currentDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit',
+          });
+          // Set the text of the date field
+          dateField.setText(formattedDate);
+        } else {
+          console.error("Field 'text_date_applied' not found");
+        }
+
+        
+        const Term = form.getTextField('text_term');
+        Term.setText(fullTerm);
+
+
+        const studentSchoolId = form.getTextField('text_student_ID');
+        if (studentSchoolId) {
+          studentSchoolId.setText(textstudentSchoolId);
+        } else {
+          console.error(`Field ${studentSchoolId} not found`);
+        }
         const name = form.getTextField('text_student_name');
         const maidenName = form.getTextField('text_student_maiden');
-        //const academicClassification = form.getTextField();
+
+        // Check or uncheck each checkbox based on the value of academicClassification
+        const checkboxSHS = form.getCheckBox('checkbox_SHS');
+        const checkboxHS = form.getCheckBox('checkbox_HS');
+        const checkboxALS = form.getCheckBox('checkbox_ALS');
+        const academicClassification = preregData.academic_classification;
+        if (academicClassification === 'SHS graduate') {
+          checkboxSHS.check();
+        } else {
+          checkboxSHS.uncheck();
+        }
+
+        if (academicClassification === 'HS graduate') {
+          checkboxHS.check();
+        } else {
+          checkboxHS.uncheck();
+        }
+
+        if (academicClassification === 'ALS completer') {
+          checkboxALS.check();
+        } else {
+          checkboxALS.uncheck();
+        }
+
         const lastSchoolAttended = form.getTextField('text_lastSchool');
         const addressOfSchoolAttended = form.getTextField('text_lastSchool_address');
-        //const degreeProgram = form.getTextField('text_degree'); what is the name of the field?
+        const degreeProgram = form.getTextField('text_degree_program');
         const dateOfBirth = form.getTextField('text_date_birth');
         const citizenship = form.getTextField('text_citizenship');
         const ethnicity = form.getTextField('text_ethnicity');
@@ -347,33 +425,111 @@ export default function PreRegistrationFormView({prereg}) {
         const sexAtBirth = form.getTextField('text_student_sex');
         const specialNeeds = form.getTextField('text_special_needs');
         const emailAddress = form.getTextField('text_student_email');
-        //const contactNumber = form.getTextField('text_student_contact_num');
+        
+        const contactNumber = form.getTextField('text_student_contact_num');
+        if (contactNumber) {
+          contactNumber.setText(textcontactnumber);
+        } else {
+          console.error(`Field ${contactNumber} not found`);
+        }
+
         const permanentAddress = form.getTextField('text_pAddress');
         const addressWhileStudying = form.getTextField('text_wsAddress');
+
         //person to contact in case of emergency
         const contactPersonName = form.getTextField('text_em_name');
-        //const contactPersonAddress = form.getTextField('text_em_address'); it says the type is number
-        //const contactPersonNumber = form.getTextField('text_em_number');
-         const contactPersonRelationship = form.getTextField('text_em_relationship');
+        const contactPersonAddress = form.getTextField('text_em_address'); 
+        if (contactPersonAddress) {
+          contactPersonAddress.setText(textcontactPersonAddress);
+        } else {
+          console.error(`Field ${contactPersonAddress} not found`);
+        }
+
+        const contactPersonNumber = form.getTextField('text_em_number');
+        if (contactPersonNumber) {
+          contactPersonNumber.setText(textcontactPersonNumber);
+        } else {
+          console.error(`Field ${contactPersonNumber} not found`);
+        }
+        const contactPersonRelationship = form.getTextField('text_em_relationship');
         const healthfacilityregistered = form.getTextField('text_ic_registered');
         const parentHealthFacilityDependent = form.getTextField('text_ic_dependent');
         const vaccinationStatus = form.getTextField('text_ic_vax_stat');
-        //const technologyLevel = form.getTextField('text_dcl_level');
-        //const digitalLiteracy = form.getTextField('text_dcl_category');
-        //const availFreeHigherEducation = form.getTextField();
-        //const contributionAmount = form.getTextField('text_fhe_amount');
-        //const compliedToAdmissionPolicy = form.getTextField('text_fhe_complied');
 
-        //startOfSchoolYear.setText(preregData.start_of_school_year);
-        //endOfSchoolYear.setText(preregData.end_of_school_year);
-        //studentSchoolId.setText(preregData.student_school_id);
-        //learnersReferenceNumber.setText(preregData.learners_reference_number);
+        const txttechnologyLevel = preregData.technology_level;
+        const technologylevel = form.getTextField('text_dcl_level');
+        if (txttechnologyLevel === 'category1') {
+          technologylevel.setText('Proficient');
+        } else if (txttechnologyLevel === 'category2') {
+          technologylevel.setText('Advanced');
+        } else if (txttechnologyLevel === 'category3') {
+          technologylevel.setText('Beginner');
+        } else {
+          console.error(`Field ${technologylevel} not found`);
+        }
+
+        const txtdigitalLiteracy = preregData.digital_literacy;
+        const digitalLiteracy = form.getTextField('text_dcl_category');
+        if (txtdigitalLiteracy === 'lvl1') {
+          digitalLiteracy.setText('High Level Technology');
+        }
+        else if (txtdigitalLiteracy === 'lvl2') {
+          digitalLiteracy.setText('Medium Level Technology');
+        }  
+        else if (txtdigitalLiteracy === 'lvl3') {
+          digitalLiteracy.setText('Low Level Technology');
+        }  
+        else {
+          console.error(`Field ${digitalLiteracy} not found`);
+        }
+
+        // Check or uncheck each checkbox based on the value of availFreeHigherEducation
+        const availFreeHigherEducation = preregData.avail_free_higher_education;
+        const checkboxfheavailyes = form.getCheckBox('checkbox_fhe_avail_yes');
+        const checkboxfheavailno = form.getCheckBox('checkbox_fhe_avail_no');
+        if (availFreeHigherEducation === 'YesAvail') {
+          checkboxfheavailyes.check();
+          checkboxfheavailno.uncheck();
+          console.log("checkbox", availFreeHigherEducation);
+        } else {
+          checkboxfheavailyes.uncheck();
+          checkboxfheavailno.check();
+          console.log("checkbox", availFreeHigherEducation);
+        }
+
+        const contributionAmount = form.getTextField('text_fhe_amount');
+        if (contributionAmount) {
+          contributionAmount.setText(textcontributionAmount);
+        } else {
+          console.error(`Field ${contributionAmount} not found`);
+        }
+
+        const voluntaryContribution = preregData.voluntary_contribution;
+        const checkboxYesContribute = form.getCheckBox('checkbox_fhe_con_yes');
+        const checkboxNoContribute = form.getCheckBox('checkbox_fhe_con_no');
+        if (voluntaryContribution === 'YesContribute') {
+          checkboxYesContribute.check();
+          checkboxNoContribute.uncheck();
+          console.log("checkbox", voluntaryContribution);
+        } else {
+          checkboxYesContribute.uncheck();
+          checkboxNoContribute.check();
+          console.log("checkbox", voluntaryContribution);
+        }
+
+        //const compliedToAdmissionPolicy = form.getTextField('text_fhe_complied'); TO ADD, FRONTEND NOT YET FINISHED
+
+        const learnersReferenceNumber = form.getTextField('text_student_lrn');
+        if (learnersReferenceNumber) {
+          learnersReferenceNumber.setText(textlearnersReferenceNumber);
+        } else {
+          console.error(`Field ${learnersReferenceNumber} not found`);
+        }
         name.setText(fullName)
         maidenName.setText(preregData.maiden_name);
-        //academicClassification.setText(preregData.academic_classification);
         lastSchoolAttended.setText(preregData.last_school_attended);
         addressOfSchoolAttended.setText(preregData.address_of_school_attended);
-        //degreeProgram.setText(preregData.degree);
+        degreeProgram.setText(preregData.degree);
         dateOfBirth.setText(preregData.date_of_birth);
         citizenship.setText(preregData.citizenship);
         ethnicity.setText(preregData.ethnicity);
@@ -381,22 +537,16 @@ export default function PreRegistrationFormView({prereg}) {
         sexAtBirth.setText(preregData.sex_at_birth);
         specialNeeds.setText(preregData.special_needs);
         emailAddress.setText(preregData.email_address);
-        //contactNumber.setText(preregData.contact_number);
         permanentAddress.setText(preregData.home_address);
         addressWhileStudying.setText(preregData.address_while_studying);
         contactPersonName.setText(preregData.contact_person_name);
-        //contactPersonAddress.setText(preregData.contact_person_number);
-        //contactPersonNumber.setText(preregData.contact_person_relationship);
         contactPersonRelationship.setText(preregData.contact_person_relationship);
         healthfacilityregistered.setText(preregData.health_facility_registered);
         parentHealthFacilityDependent.setText(preregData.parent_health_facility_dependent);
         vaccinationStatus.setText(preregData.vaccination_status);
-        //technologyLevel.setText(preregData.first_name);
-        //digitalLiteracy.setText(preregData.first_name);
-        //availFreeHigherEducation.setText(preregData.first_name);
-        //contributionAmount.setText(preregData.first_name);
-        //compliedToAdmissionPolicy.setText(preregData.first_name);
 
+        //compliedToAdmissionPolicy.setText(preregData.first_name); TO ADD, FRONTEND NOT YET FINISHED
+        
         const finalPDF = await pdfDoc.save();
         
         download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
@@ -407,6 +557,7 @@ export default function PreRegistrationFormView({prereg}) {
     
     // Call the fetchPdf function directly in your component code
     fetchPdf();
+<<<<<<< HEAD
 
 
     //put axios here
@@ -432,6 +583,9 @@ export default function PreRegistrationFormView({prereg}) {
 
     //--------------------------//
 
+=======
+    
+>>>>>>> f0bedfa83b8fd08efc34be9bf3b73372a282f9c2
   };
 
   const onSubmit = (ev) => {
