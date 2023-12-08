@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
@@ -7,6 +8,8 @@ import "../../../../../src/styles.css";
 export default function PreRegistrationForm() {
   
   const [error, setError] = useState({__html: ""});
+  const [successMessage, setSuccessMessage] = useState(null);
+  const navigate = useNavigate();
 
   //variables for the user inputs
   const [startOfSchoolYear, setStartOfSchoolYear] = useState('');
@@ -132,6 +135,16 @@ export default function PreRegistrationForm() {
     })
     .then(({ data }) => {
       //setFamilyName(data.family_name)
+      setSuccessMessage({
+        message: 'You have submitted your pre-registration form successfully!\n Please check your email within zero to three (0-3) working days \n for further instructions.',
+      });
+
+      setTimeout(() => {
+        setSuccessMessage(null);
+        closeModal();
+        handleClear();//not working
+        navigate('/');//not working
+      }, 7000);
     })
     .catch(( error ) => {
       if (error.response) {
@@ -149,8 +162,8 @@ export default function PreRegistrationForm() {
           dangerouslySetInnerHTML={error}>
         </div>)}
         
-    <main>
-      <div className="w-full lg:w-8/12 px-4 container mx-auto">          
+    <main className="w-[100%] h-[100%] py-[10%]">
+      <div className="lg:w-8/12 mx-auto px-4 container">          
         <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
           <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div >
@@ -168,7 +181,7 @@ export default function PreRegistrationForm() {
       </div>
 
       {/**STUDENT DETAILS */}
-      <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">  
+      <div className="lg:w-8/12 px-4 mx-auto mt-6">  
               <div className="text-center flex justify-between">
                 <h6 className="text-blueGray-700 text-sm">
                     STUDENT DETAILS
@@ -921,20 +934,31 @@ export default function PreRegistrationForm() {
         </div>
         
         {/**===========SUMBIT Button============= */}
-        <div className="text-center flex justify-end my-8">
-                <button 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
+        <div className="text-center items-center my-8">
+            <button 
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                   Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
+            </button>
+            <button 
+                type="submit"
+                className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
                   Submit
-                </button>
-              </div>
+            </button>
+        </div>  
         </form>
       </div>
     </main>
+    {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
     
   )
