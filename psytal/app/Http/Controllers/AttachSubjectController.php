@@ -34,27 +34,42 @@ class AttachSubjectController extends Controller
         $studentProfile = student_profile::where('first_name', $request->input('studentData.first_name'))
                         ->where('last_name', $request->input('studentData.last_name'))
                         ->first();
-
-        $classID = classes::find($request->input('subjectData.*.classCode'));
-        //$studentID = student_profile::find($studentProfile['studentprofile_id']);
-        $studentID = $studentProfile->studentprofile_id;
         
+      
 
-        $studentProfile->classes()->attach($classID); // there is error
+        $classID = classes::find($request->input('subjectData.*.classCode')); //loop for each item in the data sent
+        
+        $studentID = $studentProfile->student_profile_id;
+
+        //$studentattach = student_profile::find($studentProfile->studentprofile_id); how to make
+
+        //$studentProfileID = student_profile::find($studentID); //error here
+        
+        //student_profile_id cannot be null is the error //
+
+        //$classID->students()->attach($studentID);
+
+        $studentProfile->classes()->attach($classID, ['student_profile_id' => $studentProfile->student_profile_id]);
+
+        //$studentProfile->classes()->attach($classID); // there is error here
+        //----------
+
+        //----------
 
         // Find the student_profile and class based on IDs
+
         //$studentProfile = student_profile::find($request->input('studentId')); <><><>
         //$class = classes::find($request->input('subjectId')); <><><>
 
         // Attach the class to the student_profile using the pivot table
         //$studentProfile->classes()->attach($class); <><><>
 
-        // You can return a response if needed
-        //$studentProfile
-        //$classID
+        //if this works figure out how to handle multiple subjects sent
+
         return response([
             'message' => 'Class attached to student successfully',
             'studentProfile' => $studentProfile,
+            'studentProfileID' => $studentProfile->student_profile_id,
             'classID' => $classID,
         ], 200);
     }

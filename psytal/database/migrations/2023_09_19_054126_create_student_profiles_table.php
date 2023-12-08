@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_profiles', function (Blueprint $table) {
-            $table->id('studentprofile_id');
+            $table->id('student_profile_id');
+            //$table->id('studentprofile_id');
             $table->foreignId('user_id')->onDelete('cascade');
             $table->integer('start_of_school_year');
             $table->integer('end_of_school_year');

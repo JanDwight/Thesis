@@ -11,10 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_subject', function (Blueprint $table) {
+        //Schema::create('student_subject', function (Blueprint $table) {
+        Schema::create('classes_student_profile', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('studentprofile_id')->unsigned()->index(); // Use the custom foreign key name
-            $table->bigInteger('class_id')->unsigned()->index(); // Use the custom foreign key name
+            $table->bigInteger('student_profile_id')->unsigned()->index(); // Use the custom foreign key name
+            $table->bigInteger('classes_class_id')->unsigned()->index(); // Use the custom foreign key name
+            //add ->onDelete('cascade'); when working
+            /*
+            
+            $table->foreign('student_profile_id')->references('id')->on('student_profiles')->onDelete('cascade');
+            $table->foreign('classes_class_id')->references('id')->on('classes')->onDelete('cascade');
+            
+            */
+            //$table->bigInteger('class_id')->unsigned()->index(); // Use the custom foreign key name
             // Add any other columns you may need in this table
             $table->string('course_code')->default('TBA');;
             $table->integer('units')->default(0);
@@ -30,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subject_student');
+        Schema::dropIfExists('classes_student_profile');
     }
 };

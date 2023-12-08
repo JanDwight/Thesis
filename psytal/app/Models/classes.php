@@ -9,9 +9,9 @@ class classes extends Model
 {
     use HasFactory;
 
-    protected $table = 'classes'; // Specify the database table name
+    protected $table = 'classes'; // Specify the database table name >>>causes error in attaching
 
-    protected $primaryKey = 'class_id'; // Specify the primary key column name (if it's not 'id')
+    protected $primaryKey = 'class_id'; // Specify the primary key column name (if it's not 'id') >>>causes error in attaching
 
     // Define the fillable fields that can be mass-assigned
     protected $fillable = [
