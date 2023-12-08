@@ -557,7 +557,6 @@ export default function PreRegistrationFormView({prereg}) {
     
     // Call the fetchPdf function directly in your component code
     fetchPdf();
-<<<<<<< HEAD
 
 
     //put axios here
@@ -583,9 +582,6 @@ export default function PreRegistrationFormView({prereg}) {
 
     //--------------------------//
 
-=======
-    
->>>>>>> f0bedfa83b8fd08efc34be9bf3b73372a282f9c2
   };
 
   const onSubmit = (ev) => {
