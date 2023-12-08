@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axiosClient from '../../../axios';
 import image from "@assets/icons8image.png";
 
@@ -11,7 +11,6 @@ export default function AddingPost() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
 
- 
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -50,7 +49,6 @@ export default function AddingPost() {
     setError('');
     setLoading(true);
 
-    
     try {
       if (!title || !description) {
         setError('Please enter both a title and description.');
@@ -86,7 +84,6 @@ export default function AddingPost() {
           setTimeout(() => {
             setSuccessMessage(null);
             closeModal();
-            window.location.reload(); 
           }, 2000);
         } else {
           setError('An error occurred while posting.');
@@ -100,7 +97,7 @@ export default function AddingPost() {
     } catch (error) {
       console.error(error);
       setError('An error occurred while posting.');
-      setLoading(false); 
+      setLoading(false); // Add this line to ensure loading is set to false in case of an error.
     }
   };
 
@@ -227,7 +224,7 @@ export default function AddingPost() {
         <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6">
-              <div className="text-center text-green-600 font-semibold my-3">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
                 {successMessage.message}
               </div>
             </div>

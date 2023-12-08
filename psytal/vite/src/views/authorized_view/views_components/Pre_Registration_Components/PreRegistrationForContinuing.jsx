@@ -1,9 +1,14 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 
 export default function PreRegistrationForContinuing() {
+
+    const [successMessage, setSuccessMessage] = useState(null);
+    const navigate = useNavigate();
+
     const [error, setError] = useState({__html: ""});
     const onhandleChange = (event) => {
         setSelectedValue(event.target.value);
@@ -169,6 +174,16 @@ export default function PreRegistrationForContinuing() {
         })
         .then(({ data }) => {
           //setFamilyName(data.family_name)
+          setSuccessMessage({
+            message: 'You have submitted your pre-registration form successfully!\n Please check your email within zero to three (0-3) working days \n for further instructions.',
+          });
+    
+          setTimeout(() => {
+            setSuccessMessage(null);
+            closeModal();
+            handleClear();//not working
+            navigate('/');//not working
+          }, 7000);
         })
         .catch(( error ) => {
           if (error.response) {
@@ -181,8 +196,8 @@ export default function PreRegistrationForContinuing() {
 
   return (
     <>
-    <main>
-        <div className="w-full lg:w-8/12 px-4 container mx-auto">          
+    <main className="w-[100%] h-[100%] py-[10%]">
+        <div className="lg:w-8/12 px-4 container mx-auto">          
             <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
                 <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className="">
@@ -200,7 +215,7 @@ export default function PreRegistrationForContinuing() {
         </div>
 
         {/**STUDENT DETAILS */}
-        <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">  
+        <div className="lg:w-8/12 px-4 mx-auto mt-6">  
                 <div className="text-center flex justify-between">
                     <h6 className="text-blueGray-700 text-sm">
                         STUDENT DETAILS
@@ -239,12 +254,14 @@ export default function PreRegistrationForContinuing() {
                                         name="start"
                                         type="number" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                                        placeholder="20-"
+                                        placeholder="20XX"
                                         min="2000" // Minimum year
                                         max="2099" // Maximum year
                                         step="1" // Year step
                                         value={startOfSchoolYear}
-                                        onChange={ev => setStartOfSchoolYear(ev.target.value)}
+                                        onChange={ev => {
+                                            setStartOfSchoolYear(ev.target.value);
+                                            setEndOfSchoolYear(parseInt(ev.target.value) + 1);}}
                                     />
                                     </div>
                                     <span className="mx-4 text-gray-500">to</span>
@@ -256,12 +273,14 @@ export default function PreRegistrationForContinuing() {
                                         name="end"
                                         type="number" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                                        placeholder="20-"
+                                        placeholder="20XX"
                                         min="2000" 
                                         max="2099" 
                                         step="1" 
                                         value={endOfSchoolYear}
-                                        onChange={ev => setEndOfSchoolYear(ev.target.value)}
+                                        onChange={ev => {
+                                            setEndOfSchoolYear(ev.target.value);
+                                            setStartOfSchoolYear(parseInt(ev.target.value) - 1);}}
                                     />
                                     </div>
                                 </div>
@@ -1091,6 +1110,17 @@ export default function PreRegistrationForContinuing() {
         </div>
         {/*moved 'section/course(s) to be enrolled' to formviews*/}
     </main>
+    {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
 
   )

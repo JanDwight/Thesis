@@ -71,7 +71,7 @@ export default function Curriculum(){
 
   return (
         <>
-        <div className="w-full h-[500px] px-4 mx-auto  rounded-3xl bg-white shadow-2xl pt-5 pb-12  table-container overflow-y-auto">{/*For the Container*/}
+        <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white pt-5 pb-12  table-container ">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-6xl text-[#525252]">Curriculum</div>
                 {/*Search and Add Courses */}
@@ -102,7 +102,7 @@ export default function Curriculum(){
             
             <div className="table-container overflow-y-auto">
             <table className="table w-full table-striped text-gray-700 mt-5" >
-		            <thead>
+		            <thead >
 		              <tr>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Class Year</th>
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Semester</th>
@@ -115,7 +115,10 @@ export default function Curriculum(){
                     <th className="text-center text-gray-700 bg-gray-200 p-2">Action</th>
 		              </tr>
                 </thead>
-
+                </table>
+                </div>
+                <div className="w-full h-[500px] px-4 mx-auto  bg-white   pb-12  table-container overflow-y-auto">
+                <table className="table w-full table-striped text-gray-700 ">
                 <tbody>
                     {filteredData.map((curriculum, index) => (
                       <tr 

@@ -12,11 +12,13 @@ export default function AddUsers({ showModal, onClose}) {
   const [selectedRole, setSelectedRole] = useState(''); // Required by AddUsers
   const [email, setEmail] = useState(''); // Required by AddUsers
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const resetForm = () => {
     setFullName('');
     setEmail('');
     setSelectedRole('');
+    setSuccessMessage(null);
   };
   
   //add users onsubmit
@@ -70,24 +72,33 @@ export default function AddUsers({ showModal, onClose}) {
       .post('/adduser', formData) // Back end, needs edit
       .then((response) => {
         console.log('Success:', response.data);
-        // Close the modal
-        onClose();
         //reset feilds
         resetForm();
         window.location.reload();
+
+        setSuccessMessage({
+          message: 'The USER was added successfully!',
+        });
+
+        setTimeout(() => {
+          setSuccessMessage(null);
+          resetForm();
+          onClose();
+        }, 5000);
       })
       .catch((error) => {
         console.error(error);
       });
   };  
 
-  const handleCloseModal = () => {
-    // Reset input field values when the modal is closed
-    resetForm();
-    onClose();
-  };
+  // const handleCloseModal = () => {
+  //   // Reset input field values when the modal is closed
+  //   resetForm();
+  //   onClose();
+  // };
 
   return (
+    <>
     <ReactModal
       appElement={document.getElementById('root')}
       isOpen={showModal}
@@ -142,7 +153,7 @@ export default function AddUsers({ showModal, onClose}) {
               <button type="submit" className="bg-[#0FE810]  hover:bg-lime-700 text-white font-bold py-2 px-4 mt-5 rounded-full">
                 Save
               </button>
-              <button type="button" onClick={handleCloseModal} className="bg-[#f34450]  hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-5 ml-3 font-size">
+              <button type="button" onClick={onClose} className="bg-[#f34450]  hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-5 ml-3 font-size">
                 Cancel
               </button>
 
@@ -150,6 +161,18 @@ export default function AddUsers({ showModal, onClose}) {
           </form>
       </div>
     </div>
+    {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </ReactModal>
+    </>
   );
 }

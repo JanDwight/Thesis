@@ -2,7 +2,8 @@ import { useState } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychCircle.png';
-import { NavLink } from 'react-router-dom';
+import ReactModal from 'react-modal';
+import InputEmail from '../views_components/Forgot_Password/InputEmail';
 
 export default function Login() {
   const {setCurrentUser, setUserToken, setUserRole} = useStateContext();
@@ -10,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState({__html: ""});
   const [userRole, currentUser, userToken] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -42,8 +44,8 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex min-h-[100%] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="mt-10 sm:mx-auto sm:w-[100%] sm:max-w-sm">
 
         {error.__html && (
         <div className='bg-red-500 rounded py-2 px-2 text-white'
@@ -78,7 +80,7 @@ export default function Login() {
                   required
                   value={fullName}
                   onChange={ev => setFullName(ev.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -99,7 +101,7 @@ export default function Login() {
                   required
                   value={password}
                   onChange={ev => setPassword(ev.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <div>
                   <label onClick={toggleVisibility} className='text-blue-400 text-sm text px-2 mb-2'>
@@ -109,14 +111,14 @@ export default function Login() {
               </div>
             </div>
             <div className="text-sm">
-            <NavLink to="/forgotpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            <label onClick={() => setIsModalOpen(true)} className="font-semibold text-indigo-600 hover:text-indigo-500">
               Forgot password?
-            </NavLink>
+            </label>
             </div>
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-[#397439] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#367E18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-[100%] justify-center rounded-md bg-[#397439] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#367E18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
@@ -126,6 +128,18 @@ export default function Login() {
 
         </div>
       </div>
+
+      <ReactModal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            className="w-[100%] md:w-[30%] h-fit bg-gray-300 rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-2"
+        >
+            <div>
+                <InputEmail
+                 closeModal={() => setIsModalOpen(false)}/>
+            </div>
+      </ReactModal>
+
     </>
   )
 }
