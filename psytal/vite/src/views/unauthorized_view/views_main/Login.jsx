@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axiosClient from '../../../axios';
 import { useStateContext } from '../../../context/ContextProvider';
 import PsychLogo from '../../../assets/PsychCircle.png';
@@ -12,6 +12,33 @@ export default function Login() {
   const [error, setError] = useState({__html: ""});
   const [userRole, currentUser, userToken] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [displayTime, setDisplayTime] = useState(false);
+  const [countdown, setCountdown] = useState(180); // Set the countdown time in seconds (3 minutes)
+
+  useEffect(() => {
+    let timer;
+
+    if (attempts === 3) {
+      setDisplayTime(true);
+
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => Math.max(0, prevCountdown - 1)); // Ensure countdown doesn't go below 0
+
+        if (countdown === 0) {
+          window.location.reload();
+          setDisplayTime(false);
+        }
+      }, 1000);
+    } else {
+      setDisplayTime(false);
+      setCountdown(180); // Reset the countdown when attempts are not equal to 3
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [attempts, countdown]);
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -28,11 +55,8 @@ export default function Login() {
       setUserRole(data.role)
     })
     .catch(( error ) => {
-      if (error.response) {
-        const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
-        setError({__html: finalErrors.join('<br>')})
-      }
-        console.error(error)
+      setAttempts(attempts + 1)
+      console.log(attempts);
     });
   };
 
@@ -40,6 +64,7 @@ export default function Login() {
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
+    
   };
 
   return (
@@ -116,12 +141,21 @@ export default function Login() {
             </label>
             </div>
             <div>
-              <button
-                type="submit"
-                className="flex w-[100%] justify-center rounded-md bg-[#397439] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#367E18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+            <button
+        type="submit"
+        className={`flex w-[100%] justify-center rounded-md ${
+          attempts === 3 ? 'bg-gray-500' : 'bg-[#397439]'
+        } px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#367E18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+        disabled={attempts === 3 && countdown > 0} // Disable the button when attempts are 3 and countdown is not zero
+        onClick={onSubmit}
+      >
                 Sign in
               </button>
+              {attempts === 3 && displayTime && (
+        <p className="text-sm text-gray-600 mt-2">
+          Please wait {Math.floor(countdown / 60)}:{countdown % 60} before trying again.
+        </p>
+      )}
             </div>
           </form>
           </div>
