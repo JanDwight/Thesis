@@ -23,6 +23,7 @@ import ClassesForInstructors from "./views/authorized_view/views_main/ClassesFor
 import ClassesForStudents from "./views/authorized_view/views_main/ClassesForStudents";
 import InputEmail from "./views/unauthorized_view/views_components/Forgot_Password/InputEmail";
 import InputCode from "./views/unauthorized_view/views_components/Forgot_Password/InputCode";
+import Settings from "./views/authorized_view/views_main/Settings";
 
 const router = createBrowserRouter([
     
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
                 path: 'curriculum',
                 element: <Curriculum />
             },
+            {
+                path: 'settings',
+                element: <Settings />
+            }
         ]
     },
 

@@ -16,6 +16,7 @@ export default function Login() {
   const [displayTime, setDisplayTime] = useState(false);
   const [countdown, setCountdown] = useState(180); // Set the countdown time in seconds (3 minutes)
 
+  //This is for the 3 attempts
   useEffect(() => {
     let timer;
 
@@ -39,7 +40,8 @@ export default function Login() {
       clearInterval(timer);
     };
   }, [attempts, countdown]);
-
+  //-------------------------------------------------------------------------
+  
   const onSubmit = (ev) => {
     ev.preventDefault();
     setError({ __html: "" });

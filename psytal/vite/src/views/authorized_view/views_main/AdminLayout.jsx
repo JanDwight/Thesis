@@ -9,6 +9,7 @@ import link from "@assets/icons8link.png";
 import curriculum from "@assets/icons8curriculum.png";
 import archive from "@assets/icons8archive60.png"
 import classicon from "@assets/icons8book.png";
+import settingsIcon from "@assets/Settings Icon.png"
 import ReactModal from 'react-modal';
 import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react'
@@ -25,7 +26,7 @@ const navigation = [
   { img: file, name: 'Pre-registration', to: 'preregistration'},
   { img: link, name: 'Links', to: 'links'},
   { img: curriculum, name: 'Curriculum', to: 'curriculum'},
-  //{ img: archive, name: 'Archives', to: 'links'}
+  { img: settingsIcon, name: 'Settings', to: 'settings'}
   //add view archives
 ]
 function classNames(...classes) {
