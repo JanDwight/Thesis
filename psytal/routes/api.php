@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurriculumController;
+use App\Http\Controllers\EmailDomainsController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\StudentProfileController;
@@ -30,7 +31,9 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    
+    //Email Domains
+    Route::post('/addemaildomains', [EmailDomainsController::class, 'addEmailDomain']);
+
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
     Route::put('/posts/{postId}', [PostController::class, 'update']);
