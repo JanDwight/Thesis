@@ -18,17 +18,27 @@ class EmailDomainsController extends Controller
         return response([$items]);         
     }
     public function addEmailDomain(EmailDomains $request)
-    {
-        $data = $request->validated();
+{
+    $data = $request->validated();
 
-        /** @var \App\Models\curriculum $curriculum */
+    // Check if the email domain already exists
+    $existingDomain = email_domains::where('email_domains', $data['email_domains'])->first();
 
+    if ($existingDomain) {
+        // Email domain already exists, return an error response
+        return response([
+            'error' => 'Email Domain already exists',
+        ], 422); // You can choose an appropriate HTTP status code
+
+    } else {
+        // Email domain doesn't exist, proceed with creating a new one
         $emailDomains = email_domains::create([
             'email_domains' => $data['email_domains']
         ]);
 
         return response([
-            'Success' => 'Email Domain Added',
+            'success' => 'Email Domain Added',
         ]);
     }
+}
 }
