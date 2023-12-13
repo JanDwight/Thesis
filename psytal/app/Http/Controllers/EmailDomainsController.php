@@ -18,27 +18,45 @@ class EmailDomainsController extends Controller
         return response([$items]);         
     }
     public function addEmailDomain(EmailDomains $request)
-{
-    $data = $request->validated();
+    {
+        $data = $request->validated();
 
-    // Check if the email domain already exists
-    $existingDomain = email_domains::where('email_domains', $data['email_domains'])->first();
+        // Check if the email domain already exists
+        $existingDomain = email_domains::where('email_domains', $data['email_domains'])->first();
 
-    if ($existingDomain) {
-        // Email domain already exists, return an error response
+        if ($existingDomain) {
+            // Email domain already exists, return an error response
+            return response([
+                'error' => 'Email Domain already exists',
+            ], 422); // You can choose an appropriate HTTP status code
+
+        } else {
+            // Email domain doesn't exist, proceed with creating a new one
+            $emailDomains = email_domains::create([
+                'email_domains' => $data['email_domains']
+            ]);
+
+            return response([
+                'success' => 'Email Domain Added',
+            ]);
+        }
+    }
+
+    public function updateemaildomain(Request $request, $id)
+    {
+        $emailDomain = email_domains::find($id);
+
+        if($emailDomain){
+             // Extract the attributes from the request
+            $attributes = $request->all();
+    
+            $emailDomain->update($attributes); 
+            return response([
+                'success' => 'Email Domain Updated',
+            ]);
+        }
         return response([
-            'error' => 'Email Domain already exists',
-        ], 422); // You can choose an appropriate HTTP status code
-
-    } else {
-        // Email domain doesn't exist, proceed with creating a new one
-        $emailDomains = email_domains::create([
-            'email_domains' => $data['email_domains']
-        ]);
-
-        return response([
-            'success' => 'Email Domain Added',
+            'error' => 'something Went Wrong',
         ]);
     }
-}
 }
