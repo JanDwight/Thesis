@@ -31,6 +31,17 @@ class classes extends Model
 
     public function students()
     {
-        return $this->belongsToMany(student_profile::class);
+        //return $this->belongsToMany(student_profile::class);
+
+        return $this->belongsToMany(student_profile::class)
+        ->withPivot([
+            'class_code',
+            'course_code',
+            'course_title',
+            'units',
+            'grade',
+            'course_type',
+            'bcac',
+        ]);
     }
 }

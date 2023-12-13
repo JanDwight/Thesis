@@ -63,7 +63,17 @@ public $timestamps = true;
 //student has many subjects
 public function classes()
     {
-        return $this->belongsToMany(classes::class);
+       // return $this->belongsToMany(classes::class);
+
+       return $this->belongsToMany(classes::class)->withPivot([
+            'class_code',
+            'course_code',
+            'course_title',
+            'units',
+            'grade',
+            'course_type',
+            'bcac',
+        ]);
     }
 
 }

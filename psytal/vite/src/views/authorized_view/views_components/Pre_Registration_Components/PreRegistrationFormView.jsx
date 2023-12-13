@@ -17,7 +17,7 @@ export default function PreRegistrationFormView({prereg}) {
 
     //<><><><><>
     const [inputFields, setInputFields] = useState([
-      { classCode: '', courseCode: '', units: '', bcac: '' }, //changed classCode to classId
+      { classCode: '', courseCode: '', units: '', bcac: 'N/A' }, //changed classCode to classId
     ]);
 
     const handleClearSubjects = () => {
@@ -44,7 +44,7 @@ export default function PreRegistrationFormView({prereg}) {
       }
     //For Adding
     const handleAddFields = () => {
-        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: '' }])
+        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: 'N/A' }])
       }
     //For removing
     const handleRemoveFields = (index) => {
@@ -567,20 +567,16 @@ export default function PreRegistrationFormView({prereg}) {
     console.log("Last Name:", preregData.last_name);
     
 
-    //--------------------------//
+    //--------------------------// <><><><><>
 
     //idea how about fetching the data here then passing it in axios instead??? Should be easier.
 
     axiosClient.post('/student_subject', {
       studentData: preregData,
       subjectData: inputFields,
-      //subjectId: inputFields.courseCode, // result is undefined
-      //add also classCode
-      //add also units
-      //if back course or advance course
      })
 
-    //--------------------------//
+    //--------------------------// <><><><><>
 
   };
 
@@ -1481,7 +1477,7 @@ export default function PreRegistrationFormView({prereg}) {
                                       Class Code
                                     </option>
                                     {subjectData.map(item => (
-                                      <option key={item.id} value={item.class_id}>
+                                      <option key={item.id} value={item.class_id + '-' + item.class_code}>
                                         {item.class_code + ' - ' + item.course_code}
                                       </option>
                                     ))}

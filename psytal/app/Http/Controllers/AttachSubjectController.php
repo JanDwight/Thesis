@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\attachRequest;
 use App\Models\student_profile;
 use App\Models\classes;
+use App\Models\Attachment;
 
 class AttachSubjectController extends Controller
 {
     //
     public function attachSubjectToStudent(Request $request)
     {
+        //note: classCode is actually the class_id
         // Validate the request data
         $request->validate([
             'studentData' => 'required|array',
@@ -20,57 +22,62 @@ class AttachSubjectController extends Controller
             'subjectData' => 'required|array',
             'subjectData.*.classCode' => 'required', // Replace 'class_code' with the actual key in your nested array
             'subjectData.*.courseCode' => 'required', // Replace 'course_code' with the actual key in your nested array
+            'subjectData.*.units' => 'required',
+            //'subjectData.*.bcac' => 'required',
         ]);
 
-        //they have auto generated ID's so I have to find them first
-        //how do I find which ID to use?
-        //subjectData is an array of Objects
-
-       // Access the validated data
-        //$studentFirstName = $request['studentData']['first_name'];
-        //$studentLastName = $request['studentData']['last_name'];
-
-        //$studentProfile = student_profile::find($request->input('studentData.first_name'));
         $studentProfile = student_profile::where('first_name', $request->input('studentData.first_name'))
-                        ->where('last_name', $request->input('studentData.last_name'))
-                        ->first();
-        
-      
+                    ->where('last_name', $request->input('studentData.last_name'))
+                    ->first();
 
-        $classID = classes::find($request->input('subjectData.*.classCode')); //loop for each item in the data sent
-        
-        $studentID = $studentProfile->student_profile_id;
+    // Arrays to store values
+    $courseCodes = [];
+    $classCodes = [];
+    $units = [];
+    $bcacs = [];
 
-        //$studentattach = student_profile::find($studentProfile->studentprofile_id); how to make
+    foreach ($request->input('subjectData') as $subject) {
+        $classCode = $subject['classCode'];
 
-        //$studentProfileID = student_profile::find($studentID); //error here
-        
-        //student_profile_id cannot be null is the error //
+        // Split classCode into ID and ClassCode
+        list($firstNumber, $secondNumber) = explode('-', $classCode);
+        $classCode2 = $secondNumber;
 
-        //$classID->students()->attach($studentID);
+        $courseCode = $subject['courseCode'];
+        $unit = $subject['units'];
+        $bcac = $subject['bcac']; // Uncomment if bcac is present in the request
 
-        $studentProfile->classes()->attach($classID, ['student_profile_id' => $studentProfile->student_profile_id]);
+        // Split classCode into ID and ClassCode
+        //list($class_id, $classCode) = explode('-', $classCode);
 
-        //$studentProfile->classes()->attach($classID); // there is error here
-        //----------
+        // Save values to arrays or use them as needed
+        //$class_id[] = $class_id;
+        $courseCodes[] = $courseCode;
+        $classCodes[] = $classCode2;
+        $units[] = $unit;
+        $bcacs[] = $bcac; // Uncomment if bcac is present in the request
 
-        //----------
-
-        // Find the student_profile and class based on IDs
-
-        //$studentProfile = student_profile::find($request->input('studentId')); <><><>
-        //$class = classes::find($request->input('subjectId')); <><><>
-
-        // Attach the class to the student_profile using the pivot table
-        //$studentProfile->classes()->attach($class); <><><>
-
-        //if this works figure out how to handle multiple subjects sent
+        // Find the class by classCode and attach it
+        $class = classes::where('class_id', $classCode)->first();
+        if ($class) {
+            $studentProfile->classes()->attach($class->class_id, [
+                'student_profile_id' => $studentProfile->student_profile_id,
+                'class_code' => $classCode2,
+                'course_code' => $courseCode,
+                'units' => $unit,
+                'course_type' => $bcac, // Uncomment if bcac is present in the request
+            ]);
+        }
+    }
 
         return response([
             'message' => 'Class attached to student successfully',
             'studentProfile' => $studentProfile,
             'studentProfileID' => $studentProfile->student_profile_id,
-            'classID' => $classID,
+            'courseCodes' => $courseCodes,
+            'classCodes' => $classCodes,
+            'units' => $units,
+            'bcacs' => $bcacs,
         ], 200);
     }
 }

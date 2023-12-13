@@ -11,21 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //Schema::create('student_subject', function (Blueprint $table) {
         Schema::create('classes_student_profile', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('student_profile_id')->unsigned()->index(); // Use the custom foreign key name
-            $table->bigInteger('classes_class_id')->unsigned()->index(); // Use the custom foreign key name
+            $table->bigInteger('student_profile_id')->unsigned()->index()->onDelete('cascade'); // Use the custom foreign key name
+            $table->bigInteger('classes_class_id')->unsigned()->index()->onDelete('cascade'); // Use the custom foreign key name
             //add ->onDelete('cascade'); when working
             /*
-            
+            $table->bigInteger('student_profile_id')->unsigned()->index(); // Use the custom foreign key name
+            $table->bigInteger('classes_class_id')->unsigned()->index(); // Use the custom foreign key name
+
             $table->foreign('student_profile_id')->references('id')->on('student_profiles')->onDelete('cascade');
             $table->foreign('classes_class_id')->references('id')->on('classes')->onDelete('cascade');
             
             */
-            //$table->bigInteger('class_id')->unsigned()->index(); // Use the custom foreign key name
-            // Add any other columns you may need in this table
+            $table->string('class_code')->default('TBA');;
             $table->string('course_code')->default('TBA');;
+            $table->string('course_title')->default('TBA');;
             $table->integer('units')->default(0);
             $table->integer('grade')->default(0); // Change data type based on what is needed
             $table->string('course_type')->default('n/a'); // Back course (bc), advanced course (ac) or n/a
