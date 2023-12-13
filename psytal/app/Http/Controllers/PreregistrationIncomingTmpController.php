@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PreRegistrationIncomingTmpRequest;
+use App\Models\email_domains;
 use App\Models\preregistration_incoming_tmp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,19 @@ class PreregistrationIncomingTmpController extends Controller
     {
         $data = $request->validated();
 
+        // Extract everything after '@' in the email address
+        $emailParts = explode('@', $data['email_address']);
+        $domain = '@' . end($emailParts);
+
+        // Check if the email domain already exists
+        $existingDomain = email_domains::where('email_domains', $domain)->first();
+
+        if (!$existingDomain) {
+            return response([
+                'error' => 'Email Domain Not Valid',
+            ], 422);
+        }
+        
         $preRegTmpincoming = preregistration_incoming_tmp::create([
             'start_of_school_year' => $data['start_of_school_year'],
             'end_of_school_year' => $data['end_of_school_year'],
@@ -70,6 +84,18 @@ class PreregistrationIncomingTmpController extends Controller
         $userId = Auth::id();
         $data = $request->validated();
 
+         // Extract everything after '@' in the email address
+         $emailParts = explode('@', $data['email_address']);
+         $domain = '@' . end($emailParts);
+ 
+         // Check if the email domain already exists
+         $existingDomain = email_domains::where('email_domains', $domain)->first();
+ 
+         if (!$existingDomain) {
+             return response([
+                 'error' => 'Email Domain Not Valid',
+             ], 422);
+         }
 
         $preRegTmpincoming = preregistration_incoming_tmp::create([
             'start_of_school_year' => $data['start_of_school_year'],

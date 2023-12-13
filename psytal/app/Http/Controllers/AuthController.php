@@ -28,18 +28,24 @@ class AuthController extends Controller
     public function addUser(AddUserRequest $request) {
         $data = $request->validated();
 
-        // Check if the email domain already exists
-        $existingDomain = email_domains::where('email_domains')->first();
-
         // Extract everything after '@' in the email address
         $emailParts = explode('@', $data['email']);
-        $domain = end($emailParts);
+        $domain = '@' . end($emailParts);
+
+        // Check if the email domain already exists
+        $existingDomain = email_domains::where('email_domains', $domain)->first();
+
+        if (!$existingDomain) {
+            return response([
+                'error' => 'Email Domain Not Valid',
+            ], 422);
+        }
 
         $user = User::create([
             'name' => $data['name'],
             'password' => bcrypt($data['password']),
             'role' => $data['role'],
-            'email' => $data['email']
+            'email' => $data['email'],
         ]);
 
         
