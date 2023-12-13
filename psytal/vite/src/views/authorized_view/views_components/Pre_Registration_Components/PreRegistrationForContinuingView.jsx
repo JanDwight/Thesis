@@ -2,6 +2,11 @@ import React, {useEffect, useState} from 'react'
 import schoolLogo from "@assets/BSUlogo.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
+import { Navigate } from 'react-router-dom';
+import { PDFDocument } from 'pdf-lib'
+import download from 'downloadjs';
+import preregContinuingForm from '../../../../assets/FINAL_PRE-REG_FORM-_CONTINUING_STUDENT-FILLABLE_1.pdf';
+
 
 export default function PreRegistrationForContinuingView({prereg}) {
     const [error, setError] = useState({__html: ""});
@@ -38,6 +43,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
         contact_person_address: '',
         contact_person_relationship: '',
         type_of_student: 'Regular',
+        student_status: '',
       });
 
 
@@ -66,7 +72,34 @@ export default function PreRegistrationForContinuingView({prereg}) {
         values.splice(index, 1);
         setInputFields(values);
       }
-
+      const onDecline = (ev) => {
+        ev.preventDefault();
+        
+        axiosClient
+        // create Update function for preregincommingtmp
+        .put(`/preregcheck/${id}`, {
+          pre_reg_status: 'Decline'
+        })
+        .then(({ data }) => {
+          //setFamilyName(data.family_name)
+          window.location.reload();
+        })
+      }
+    
+      //On Return
+      const onReturn = (ev) => {
+        ev.preventDefault();
+        
+        axiosClient
+        // create Update function for preregincommingtmp
+        .put(`/preregcheck/${id}`, {
+          pre_reg_status: 'Returned'
+        })
+        .then(({ data }) => {
+          //setFamilyName(data.family_name)
+          window.location.reload();
+        })
+      }
     //units calc
     const handleChangeUnits = (index, value) => {
         // Calculate the unit difference
@@ -82,7 +115,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
         fields[index] = { ...fields[index], units: value };
         setInputFields(fields);
       };
-  
+
         //auto fill dropdown
         useEffect(() => {
           async function fetchData() {
@@ -97,12 +130,14 @@ export default function PreRegistrationForContinuingView({prereg}) {
         
           fetchData(); // Call the fetchData function
         }, []);
-    
-    //On submit axios
-      const onSubmit = (ev) => {
-        ev.preventDefault();
-        setError({ __html: "" });
-            
+
+       //On Accept Click
+        const onClickAccept = (ev) => {
+          ev.preventDefault();
+          setError({ __html: "" });
+        
+        const fullName = `${preregData.last_name}, ${preregData.first_name} ${preregData.middle_name.charAt(0)}.`;
+
         axiosClient
         .post('/preregcontinuingtmp', {
             start_of_school_year: parseInt(preregData.start_of_school_year),
@@ -142,19 +177,328 @@ export default function PreRegistrationForContinuingView({prereg}) {
             pre_reg_status: 'Accepted',
             type_of_student: preregData.type_of_student,
             year_level: preregData.year_level,
-            candidate_for_graduation: preregData.candidate_for_graduation
+            candidate_for_graduation: preregData.candidate_for_graduation,
+            student_status: preregData.student_status
         })
-        .then(() => {
-            window.location.reload();
-        })
-        .catch(( error ) => {
-          if (error.response) {
-            const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
-            setError({__html: finalErrors.join('<br>')})
-          }
-            console.error(error)
-        });
-      };
+
+        //prereg update===============================================================================
+            axiosClient
+            .put(`/preregcheck/${preregData.id}`, {
+              start_of_school_year: parseInt(preregData.start_of_school_year),
+              end_of_school_year: parseInt(preregData.end_of_school_year),
+              student_school_id: parseInt(preregData.student_school_id),
+              learners_reference_number: parseInt(preregData.learners_reference_number),
+              last_name: preregData.last_name,
+              first_name: preregData.first_name,
+              middle_name: preregData.middle_name,
+              maiden_name: preregData.maiden_name,
+              academic_classification: preregData.academic_classification,
+              last_school_attended: preregData.last_school_attended,
+              address_of_school_attended: preregData.address_of_school_attended,
+              degree: preregData.degree,
+              date_of_birth: preregData.date_of_birth,
+              place_of_birth: preregData.place_of_birth,
+              citizenship: preregData.citizenship,
+              sex_at_birth: preregData.sex_at_birth,
+              ethnicity: preregData.ethnicity,
+              special_needs: preregData.special_needs,
+              contact_number: parseInt(preregData.contact_number),
+              email_address: preregData.email_address,
+              home_address: preregData.home_address,
+              address_while_studying: preregData.address_while_studying,
+              contact_person_name: preregData.contact_person_name,
+              contact_person_number: parseInt(preregData.contact_person_number), 
+              contact_person_address: preregData.contact_person_address,
+              contact_person_relationship: preregData.contact_person_relationship,
+              health_facility_registered: preregData.health_facility_registered,
+              parent_health_facility_dependent: preregData.parent_health_facility_dependent,
+              vaccination_status: preregData.vaccination_status,
+              technology_level: preregData.technology_level,
+              digital_literacy: preregData.digital_literacy,
+              avail_free_higher_education: preregData.avail_free_higher_education,
+              voluntary_contribution: preregData.voluntary_contribution,
+              contribution_amount: preregData.contribution_amount,
+              complied_to_admission_policy: preregData.complied_to_admission_policy,
+
+              pre_reg_status: 'Accepted',
+              type_of_student: preregData.type_of_student,
+              student_status: preregData.student_status
+            })
+
+            //for sending emails============================================================================
+            // Assuming formData is your FormData object
+            // let formData = new FormData();
+
+            // Append some data to the FormData object
+            // formData.append('lastName', fullName);
+            // formData.append('email', preregData.email_address);
+            // formData.append('password', password);
+
+            // Convert FormData to an object
+            // let formDataObject = Array.from(formData.entries()).reduce((obj, [key, value]) => {
+            //   obj[key] = value;
+            //   return obj;
+            // }, {});
+
+            // PDF modification code======================================================================
+    //for new incoming first years
+    const fetchPdf = async () => {
+      // Extract the first character of the middle name as the middle initial
+      const middleInitial = preregData.middle_name ? preregData.middle_name.charAt(0) + '.' : '';
+
+      // Combine last name, first name, and middle initial with comma and dot
+      const fullName = `${preregData.last_name}, ${preregData.first_name} ${middleInitial}`;
+
+      // Convert the integer term to text
+      // Combine two terms start and End
+       const integerstartOfSchoolYear = preregData.start_of_school_year;
+       const textstartOfSchoolYear = integerstartOfSchoolYear.toString();
+       const integerendOfSchoolYear = preregData.end_of_school_year;
+       const textendOfSchoolYear = integerendOfSchoolYear.toString();
+       const fullTerm = 'First Semester, ' + textstartOfSchoolYear + ' - ' + textendOfSchoolYear;
+
+      // Convert the integer to text before assigning TO FIX!!
+      //  const integerstudentSchoolId = preregData.student_school_id;
+      //  const textstudentSchoolId = integerstudentSchoolId.toString();
+
+       const integerValuecontactnumber = preregData.contact_number;
+       const textcontactnumber = integerValuecontactnumber.toString();
+
+       const integerValuecontactPersonNumber = preregData.contact_person_number;
+       const textcontactPersonNumber = integerValuecontactPersonNumber.toString();
+
+       const integerValuecontactPersonAddress = preregData.contact_person_address;
+       const textcontactPersonAddress = integerValuecontactPersonAddress.toString();
+
+       const integerValuecontributionAmount = preregData.contribution_amount;
+       const textcontributionAmount = integerValuecontributionAmount.toString();
+
+      
+      try {
+        const pdfBytes = await fetch(preregContinuingForm).then((res) => res.arrayBuffer()); 
+        const pdfDoc = await PDFDocument.load(pdfBytes);
+    
+        const form = pdfDoc.getForm();
+
+
+        const dateField = form.getTextField('text_c_date_applied');
+        if (dateField) {
+          // Current date
+          const currentDate = new Date();
+
+          // Format of date 'Text-DD-YYYY'
+          const formattedDate = currentDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: '2-digit',
+          });
+          // Set the text of the date field
+          dateField.setText(formattedDate);
+        } else {
+          console.error("Field 'text_c_date_applied' not found");
+        }
+
+        
+         const Term = form.getTextField('text_c_term');
+         Term.setText(fullTerm);
+
+
+        //  const studentSchoolId = form.getTextField('text_c_student_ID');
+        //  if (studentSchoolId) {
+        //    studentSchoolId.setText(textstudentSchoolId);
+        //  } else {
+        //    console.error(`Field ${studentSchoolId} not found`);
+        //  }
+         const name = form.getTextField('text_c_student_name');
+         const maidenName = form.getTextField('text_c_student_maiden');
+
+        // // Check or uncheck each checkbox based on the value of academicClassification
+        // const checkboxSHS = form.getCheckBox('checkbox_SHS');
+        // const checkboxHS = form.getCheckBox('checkbox_HS');
+        // const checkboxALS = form.getCheckBox('checkbox_ALS');
+        // const academicClassification = preregData.academic_classification;
+        // if (academicClassification === 'SHS graduate') {
+        //   checkboxSHS.check();
+        // } else {
+        //   checkboxSHS.uncheck();
+        // }
+
+        // if (academicClassification === 'HS graduate') {
+        //   checkboxHS.check();
+        // } else {
+        //   checkboxHS.uncheck();
+        // }
+
+        // if (academicClassification === 'ALS completer') {
+        //   checkboxALS.check();
+        // } else {
+        //   checkboxALS.uncheck();
+        // }
+
+
+         const degreeProgram = form.getTextField('text_c_degree');
+         const dateOfBirth = form.getTextField('text_c_date_birth');
+         const citizenship = form.getTextField('text_c_citizenship');
+         const ethnicity = form.getTextField('text_c_ethnicity');
+         const placeOfBirth = form.getTextField('text_c_birth_place');
+         const sexAtBirth = form.getTextField('text_c_student_sex');
+         const specialNeeds = form.getTextField('text_c_special_needs');
+         const emailAddress = form.getTextField('text_c_student_email');
+        
+         const contactNumber = form.getTextField('text_c_student_contact_num');
+         if (contactNumber) {
+           contactNumber.setText(textcontactnumber);
+         } else {
+           console.error(`Field ${contactNumber} not found`);
+         }
+
+         const permanentAddress = form.getTextField('text_c_pAddress');
+         const addressWhileStudying = form.getTextField('text_c_wsAddress');
+
+        //person to contact in case of emergency
+        const contactPersonName = form.getTextField('text_c_em_name');
+        const contactPersonAddress = form.getTextField('text_c_em_address'); 
+         if (contactPersonAddress) {
+           contactPersonAddress.setText(textcontactPersonAddress);
+         } else {
+           console.error(`Field ${contactPersonAddress} not found`);
+         }
+
+         const contactPersonNumber = form.getTextField('text_c_em_number');
+         if (contactPersonNumber) {
+           contactPersonNumber.setText(textcontactPersonNumber);
+         } else {
+           console.error(`Field ${contactPersonNumber} not found`);
+         }
+         const contactPersonRelationship = form.getTextField('text_c_em_relationship');
+         const healthfacilityregistered = form.getTextField('text_c_ic_registered');
+         const parentHealthFacilityDependent = form.getTextField('text_c_ic_dependent');
+         const vaccinationStatus = form.getTextField('text_c_ic_vax_stat');
+
+         const txttechnologyLevel = preregData.technology_level;
+         const technologylevel = form.getTextField('text_c_dcl_level');
+         if (txttechnologyLevel === 'category1') {
+           technologylevel.setText('Proficient');
+         } else if (txttechnologyLevel === 'category2') {
+           technologylevel.setText('Advanced');
+         } else if (txttechnologyLevel === 'category3') {
+           technologylevel.setText('Beginner');
+         } else {
+           console.error(`Field ${technologylevel} not found`);
+         }
+
+         const txtdigitalLiteracy = preregData.digital_literacy;
+         const digitalLiteracy = form.getTextField('text_c_dcl_category');
+        if (txtdigitalLiteracy === 'lvl1') {
+          digitalLiteracy.setText('High Level Technology');
+        }
+        else if (txtdigitalLiteracy === 'lvl2') {
+          digitalLiteracy.setText('Medium Level Technology');
+        }  
+        else if (txtdigitalLiteracy === 'lvl3') {
+          digitalLiteracy.setText('Low Level Technology');
+        }  
+        else {
+          console.error(`Field ${digitalLiteracy} not found`);
+        }
+
+        // Check or uncheck each checkbox based on the value of availFreeHigherEducation
+        const availFreeHigherEducation = preregData.avail_free_higher_education;
+        const checkboxfheavailyes = form.getCheckBox('checkbox_c_fhe_avail_yes');
+        const checkboxfheavailno = form.getCheckBox('checkbox_c_fhe_avail_no');
+        if (availFreeHigherEducation === 'YesAvail') {
+          checkboxfheavailyes.check();
+          checkboxfheavailno.uncheck();
+          console.log("checkbox", availFreeHigherEducation);
+        } else {
+          checkboxfheavailyes.uncheck();
+          checkboxfheavailno.check();
+          console.log("checkbox", availFreeHigherEducation);
+        }
+
+         const contributionAmount = form.getTextField('text_c_fhe_amount');
+         if (contributionAmount) {
+           contributionAmount.setText(textcontributionAmount);
+         } else {
+           console.error(`Field ${contributionAmount} not found`);
+         }
+
+         const voluntaryContribution = preregData.voluntary_contribution;
+         const checkboxYesContribute = form.getCheckBox('checkbox_c_fhe_con_yes');
+         const checkboxNoContribute = form.getCheckBox('checkbox_c_fhe_con_no');
+         if (voluntaryContribution === 'YesContribute') {
+           checkboxYesContribute.check();
+           checkboxNoContribute.uncheck();
+           console.log("checkbox", voluntaryContribution);
+         } else {
+           checkboxYesContribute.uncheck();
+           checkboxNoContribute.check();
+           console.log("checkbox", voluntaryContribution);
+         }
+
+        //const compliedToAdmissionPolicy = form.getTextField('text_fhe_complied'); TO ADD, FRONTEND NOT YET FINISHED
+
+        console.log('Test')
+
+         name.setText(fullName)
+         maidenName.setText(preregData.maiden_name);
+         degreeProgram.setText(preregData.degree);
+         dateOfBirth.setText(preregData.date_of_birth);
+         citizenship.setText(preregData.citizenship);
+         ethnicity.setText(preregData.ethnicity);
+         placeOfBirth.setText(preregData.place_of_birth);
+         sexAtBirth.setText(preregData.sex_at_birth);
+         specialNeeds.setText(preregData.special_needs);
+         emailAddress.setText(preregData.email_address);
+         permanentAddress.setText(preregData.home_address);
+         addressWhileStudying.setText(preregData.address_while_studying);
+        contactPersonName.setText(preregData.contact_person_name);
+         contactPersonRelationship.setText(preregData.contact_person_relationship);
+         healthfacilityregistered.setText(preregData.health_facility_registered);
+         parentHealthFacilityDependent.setText(preregData.parent_health_facility_dependent);
+         vaccinationStatus.setText(preregData.vaccination_status);
+
+        //compliedToAdmissionPolicy.setText(preregData.first_name); TO ADD, FRONTEND NOT YET FINISHED
+        
+        const finalPDF = await pdfDoc.save();
+        
+        download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+      }
+    };
+    
+    // Call the fetchPdf function directly in your component code
+    fetchPdf();
+
+        //put axios here
+        console.log("InputFields:", inputFields);
+        console.log("Pre-Reg Data:", preregData);
+        console.log("Student ID:", preregData.student_school_id);
+        console.log("First Name:", preregData.first_name);
+        console.log("Last Name:", preregData.last_name);
+    
+
+    };
+    const onSubmit = (ev) => {
+      ev.preventDefault();
+      setError({ __html: "" });
+      
+      axiosClient
+      .put(`/preregview/${preregData}`)
+      .then(({ data }) => {
+        
+      })
+      .catch(( error ) => {
+        if (error.response) {
+          const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
+          setError({__html: finalErrors.join('<br>')})
+        }
+          console.error(error)
+      });
+    };
+
+
   return (
     <>
     <main>
@@ -974,11 +1318,11 @@ export default function PreRegistrationForContinuingView({prereg}) {
                 </div>
              {/**===========SUMBIT Button============= */}
             <div className="text-center flex justify-end my-8">
-                    <button //onClick={onDecline}
+                    <button onClick={onDecline}
                     className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mr-6 rounded-full">
                     Decline
                     </button>
-                    <button //onClick={onClickAccept}
+                    <button onClick={onClickAccept}
                     type="submit"
                     className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
                     Accept
