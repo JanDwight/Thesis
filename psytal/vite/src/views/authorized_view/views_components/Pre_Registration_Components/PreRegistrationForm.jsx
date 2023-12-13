@@ -130,6 +130,7 @@ export default function PreRegistrationForm() {
       complied_to_admission_policy: compliedtoadmissionpolicy,
       pre_reg_status: 'Pending',
       type_of_student: 'Incoming',
+      student_status: 'Regular',
       year_level: '1st Year',
       
     })

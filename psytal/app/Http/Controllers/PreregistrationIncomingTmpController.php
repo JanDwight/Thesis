@@ -54,6 +54,7 @@ class PreregistrationIncomingTmpController extends Controller
             'complied_to_admission_policy' => $data['complied_to_admission_policy'],
             'pre_reg_status' => $data['pre_reg_status'],
             'type_of_student' => $data['type_of_student'],
+            'student_status' => $data['student_status']
         ]);
 
         

@@ -74,7 +74,6 @@ export default function AddUsers({ showModal, onClose}) {
         console.log('Success:', response.data);
         //reset feilds
         resetForm();
-        window.location.reload();
 
         setSuccessMessage({
           message: 'The USER was added successfully!',

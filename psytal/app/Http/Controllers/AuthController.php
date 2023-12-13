@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\email_domains;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,13 @@ class AuthController extends Controller
     public function addUser(AddUserRequest $request) {
         $data = $request->validated();
 
+        // Check if the email domain already exists
+        $existingDomain = email_domains::where('email_domains')->first();
+
+        // Extract everything after '@' in the email address
+        $emailParts = explode('@', $data['email']);
+        $domain = end($emailParts);
+
         $user = User::create([
             'name' => $data['name'],
             'password' => bcrypt($data['password']),
@@ -41,6 +49,7 @@ class AuthController extends Controller
         return response([
             'user' => $user,
             'token' => $token,
+            'domain' => $domain
         ]);
     }
 
