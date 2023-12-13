@@ -28,6 +28,11 @@ export default function PreRegistrationForContinuingView({prereg}) {
         last_school_attended: '',
         address_of_school_attended: '',
         degree: '',
+        major:'',
+        //section here
+        //end of term here
+        end_of_term_to_finnish_degree: '',
+        last_of_term_to_finnish_degree: '',
         date_of_birth: '',
         place_of_birth: '',
         citizenship: '',
@@ -43,7 +48,9 @@ export default function PreRegistrationForContinuingView({prereg}) {
         contact_person_address: '',
         contact_person_relationship: '',
         type_of_student: 'Regular',
+        year_level: '',
         student_status: '',
+        candidate_for_graduation: '',
       });
 
 
@@ -179,6 +186,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
             year_level: preregData.year_level,
             candidate_for_graduation: preregData.candidate_for_graduation,
             student_status: preregData.student_status
+            
         })
 
         //prereg update===============================================================================
@@ -196,6 +204,10 @@ export default function PreRegistrationForContinuingView({prereg}) {
               last_school_attended: preregData.last_school_attended,
               address_of_school_attended: preregData.address_of_school_attended,
               degree: preregData.degree,
+              major: preregData.major,
+              //section here
+              end_of_term_to_finnish_degree: preregData.end_of_term_to_finnish_degree,
+              last_of_term_to_finnish_degree: preregData.last_of_term_to_finnish_degree,
               date_of_birth: preregData.date_of_birth,
               place_of_birth: preregData.place_of_birth,
               citizenship: preregData.citizenship,
@@ -219,9 +231,11 @@ export default function PreRegistrationForContinuingView({prereg}) {
               voluntary_contribution: preregData.voluntary_contribution,
               contribution_amount: preregData.contribution_amount,
               complied_to_admission_policy: preregData.complied_to_admission_policy,
+              candidate_for_graduation: preregData.candidate_for_graduation,
 
               pre_reg_status: 'Accepted',
               type_of_student: preregData.type_of_student,
+              year_level: preregData.year_level,
               student_status: preregData.student_status
             })
 
@@ -312,8 +326,19 @@ export default function PreRegistrationForContinuingView({prereg}) {
          const name = form.getTextField('text_c_student_name');
          const maidenName = form.getTextField('text_c_student_maiden');
 
-        // // Check or uncheck each checkbox based on the value of academicClassification
-        // const checkboxSHS = form.getCheckBox('checkbox_SHS');
+          const candidate_for_graduation = form.getTextField('text_c_candidate');
+         if (preregData.candidate_for_graduation === 'YesCandidate') {
+          candidate_for_graduation.setText('Yes');
+         } if(preregData.candidate_for_graduation === 'NoCandidate'){
+          candidate_for_graduation.setText('No');
+         }
+         else {
+          console.error(`Field ${candidate_for_graduation} not found`);
+         }
+         const student_status = form.getTextField('text_10bwea'); //Unedited PDF form, still working
+
+        // // Check or uncheck each checkbox based on the value of Candidate for Graduation
+        // const checkboxSHS = form.getCheckBox('text_c_candidate');
         // const checkboxHS = form.getCheckBox('checkbox_HS');
         // const checkboxALS = form.getCheckBox('checkbox_ALS');
         // const academicClassification = preregData.academic_classification;
@@ -337,6 +362,9 @@ export default function PreRegistrationForContinuingView({prereg}) {
 
 
          const degreeProgram = form.getTextField('text_c_degree');
+         const major = form.getTextField('text_c_major');
+         const end_of_term_to_finnish_degree = form.getTextField('text_c_endTerm');
+         const last_of_term_to_finnish_degree = form.getTextField('text_c_lastTerm');
          const dateOfBirth = form.getTextField('text_c_date_birth');
          const citizenship = form.getTextField('text_c_citizenship');
          const ethnicity = form.getTextField('text_c_ethnicity');
@@ -344,7 +372,8 @@ export default function PreRegistrationForContinuingView({prereg}) {
          const sexAtBirth = form.getTextField('text_c_student_sex');
          const specialNeeds = form.getTextField('text_c_special_needs');
          const emailAddress = form.getTextField('text_c_student_email');
-        
+         
+
          const contactNumber = form.getTextField('text_c_student_contact_num');
          if (contactNumber) {
            contactNumber.setText(textcontactnumber);
@@ -354,6 +383,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
 
          const permanentAddress = form.getTextField('text_c_pAddress');
          const addressWhileStudying = form.getTextField('text_c_wsAddress');
+         const year_level = form.getTextField('text_c_year_level');
 
         //person to contact in case of emergency
         const contactPersonName = form.getTextField('text_c_em_name');
@@ -386,6 +416,15 @@ export default function PreRegistrationForContinuingView({prereg}) {
          } else {
            console.error(`Field ${technologylevel} not found`);
          }
+
+         const txttype_of_student = preregData.type_of_student;
+         const checkbox_c_continuing = form.getCheckBox('checkbox_c_continuing');
+         if (txttype_of_student === 'Regular') {
+          checkbox_c_continuing.check();
+        } else {
+          checkbox_c_continuing.check();
+          console.log("checkbox", txttype_of_student);
+        }
 
          const txtdigitalLiteracy = preregData.digital_literacy;
          const digitalLiteracy = form.getTextField('text_c_dcl_category');
@@ -436,13 +475,22 @@ export default function PreRegistrationForContinuingView({prereg}) {
            console.log("checkbox", voluntaryContribution);
          }
 
-        //const compliedToAdmissionPolicy = form.getTextField('text_fhe_complied'); TO ADD, FRONTEND NOT YET FINISHED
-
-        console.log('Test')
+        //const compliedToAdmissionPolicy = form.getTextField('text_c_fhe_complied'); TO ADD, FRONTEND NOT YET FINISHED
+        //const curriculum_used = form.getTextField('text_c_curriculum_used'); TO ADD, FRONTEND NOT YET FINISHED
+        // add here major if applicable
+        // add here year level
+        // add here readmission form
+        // add here need shifting form
+        // add here end of residency
+        // add here section
+        // add here Irregular students code/units/course/total units
 
          name.setText(fullName)
          maidenName.setText(preregData.maiden_name);
          degreeProgram.setText(preregData.degree);
+         major.setText(preregData.major);
+         end_of_term_to_finnish_degree.setText(preregData.end_of_term_to_finnish_degree);
+         last_of_term_to_finnish_degree.setText(preregData.last_of_term_to_finnish_degree);
          dateOfBirth.setText(preregData.date_of_birth);
          citizenship.setText(preregData.citizenship);
          ethnicity.setText(preregData.ethnicity);
@@ -452,17 +500,27 @@ export default function PreRegistrationForContinuingView({prereg}) {
          emailAddress.setText(preregData.email_address);
          permanentAddress.setText(preregData.home_address);
          addressWhileStudying.setText(preregData.address_while_studying);
-        contactPersonName.setText(preregData.contact_person_name);
+         year_level.setText(preregData.year_level);
+         contactPersonName.setText(preregData.contact_person_name);
          contactPersonRelationship.setText(preregData.contact_person_relationship);
          healthfacilityregistered.setText(preregData.health_facility_registered);
          parentHealthFacilityDependent.setText(preregData.parent_health_facility_dependent);
          vaccinationStatus.setText(preregData.vaccination_status);
+        student_status.setText(preregData.student_status);
 
-        //compliedToAdmissionPolicy.setText(preregData.first_name); TO ADD, FRONTEND NOT YET FINISHED
+        //compliedToAdmissionPolicy.setText(preregData.compliedToAdmissionPolicy); TO ADD, FRONTEND NOT YET FINISHED
+        //curriculum_used.setText(preregData.curriculum_used); TO ADD, FRONTEND NOT YET FINISHED
+        // add here major if applicable
+        // add here year level
+        // add here readmission form
+        // add here need shifting form
+        // add here end of residency
+        // add here section
+        // add here Irregular students code/units/course/total units
         
         const finalPDF = await pdfDoc.save();
         
-        download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
+        download(finalPDF, 'Student_Continuing.pdf', 'application/pdf');
       } catch (error) {
         console.error('Error loading PDF:', error);
       }
@@ -470,14 +528,6 @@ export default function PreRegistrationForContinuingView({prereg}) {
     
     // Call the fetchPdf function directly in your component code
     fetchPdf();
-
-        //put axios here
-        console.log("InputFields:", inputFields);
-        console.log("Pre-Reg Data:", preregData);
-        console.log("Student ID:", preregData.student_school_id);
-        console.log("First Name:", preregData.first_name);
-        console.log("Last Name:", preregData.last_name);
-    
 
     };
     const onSubmit = (ev) => {
