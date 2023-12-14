@@ -38,7 +38,16 @@ export default function AdminLayout() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
-  const [isSearchToggled, setIsSearchToggled] = useState(false);
+  
+  if (!userToken) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+
+  if (userRole != 1) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
 
   console.log(userRole)
 

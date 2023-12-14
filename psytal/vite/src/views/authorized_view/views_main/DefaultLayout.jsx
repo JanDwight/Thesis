@@ -40,6 +40,12 @@ export default function DefaultLayout() {
   const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
 
   if (!userToken) {
+    localStorage.clear();
+    return <Navigate to='/' />
+  }
+
+  if (userRole != 4) {
+    localStorage.clear();
     return <Navigate to='/' />
   }
 
