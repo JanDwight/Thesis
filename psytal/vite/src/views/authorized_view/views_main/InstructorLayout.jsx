@@ -233,6 +233,8 @@ export default function InstructorLayout() {
           <UserProfile />
         </div>
       </ReactModal>
+
+      <Navigate to='/instructor/home' /> {/**This prevents the user from gaining access to /admin URL*/}
     </>
   );
 }

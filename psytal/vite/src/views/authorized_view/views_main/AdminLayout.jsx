@@ -261,6 +261,8 @@ export default function AdminLayout() {
           <UserProfile closeModal={() => setIsProfileOpen(false)}/>
         </div>
       </ReactModal>
+
+      <Navigate to='/admin/home' /> {/**This prevents the user from gaining access to /admin URL*/}
   </>
   );
 }
