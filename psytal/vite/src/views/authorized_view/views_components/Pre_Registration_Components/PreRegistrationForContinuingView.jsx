@@ -636,6 +636,17 @@ export default function PreRegistrationForContinuingView({prereg}) {
 
                         {/**=========================== Last Name - Madain Name ==========================*/} 
                         <div className="flex flex-wrap flex-row -mx-3 mb-2">
+                          {/**SCHOOL ID */}
+                            <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
+                                    Student ID No:
+                                </label>
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                id="grid-studentSchoolID" 
+                                type="number" 
+                                placeholder=""
+                                />  
+                            </div>
                             {/**column1 */}
                             <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
