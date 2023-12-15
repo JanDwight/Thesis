@@ -14,7 +14,6 @@ class AttachSubjectController extends Controller
     public function attachSubjectToStudent(Request $request)
     {
         //note: classCode is actually the class_id
-        // Validate the request data
         $request->validate([
             'studentData' => 'required|array',
             'studentData.first_name' => 'required', // Replace 'first_name' with the actual key in your nested array
@@ -47,11 +46,6 @@ class AttachSubjectController extends Controller
         $unit = $subject['units'];
         $bcac = $subject['bcac']; // Uncomment if bcac is present in the request
 
-        // Split classCode into ID and ClassCode
-        //list($class_id, $classCode) = explode('-', $classCode);
-
-        // Save values to arrays or use them as needed
-        //$class_id[] = $class_id;
         $courseCodes[] = $courseCode;
         $classCodes[] = $classCode2;
         $units[] = $unit;
@@ -69,6 +63,9 @@ class AttachSubjectController extends Controller
             ]);
         }
     }
+
+    // Attach course/class details
+    // Option: Create Different DB
 
         return response([
             'message' => 'Class attached to student successfully',
