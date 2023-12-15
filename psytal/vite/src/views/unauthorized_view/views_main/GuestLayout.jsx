@@ -8,8 +8,7 @@ import logo from "@assets/PsychCircle.png";
 
 const navigation = [
   { name: 'Home', to: 'landingpage' },
-  { name: 'Pre-Registration-Incoming Students', to: 'preregistrationforincoming' },
-  { name: 'Pre-Registration-Continuing Students', to: 'preregistrationforcontinuing' },
+  { name: 'Pre-Registration-Incoming Students', to: 'preregistrationforincoming' }
 ];
 
 function classNames(...classes) {

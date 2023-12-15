@@ -5,6 +5,7 @@ use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\EmailDomainsController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
+use App\Http\Controllers\SemesterInformationController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UpdateLinksController;
@@ -30,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    //Semester Information
+    Route::post('/addsemesterinformation', [SemesterInformationController::class, 'addsemesterinformation']);
 
     //Email Domains
     Route::post('/addemaildomains', [EmailDomainsController::class, 'addEmailDomain']);

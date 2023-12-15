@@ -30,7 +30,7 @@ export default function Settings() {
         <ReactModal
             isOpen={showOpenPreRegModal}
             onRequestClose={() => setShowOpenPreRegModal(false)}
-            className="w-full md:w-[30%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+            className="w-full md:w-[30%] lg:w-fit h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
         >
             <div>
                 <OpenPreRegModal

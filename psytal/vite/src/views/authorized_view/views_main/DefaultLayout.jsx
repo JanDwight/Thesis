@@ -37,7 +37,7 @@ export default function DefaultLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   
-  const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole} = useStateContext();
+  const {currentUser, userToken, setCurrentUser, setUserToken, setUserRole, userRole} = useStateContext();
 
   if (!userToken) {
     localStorage.clear();
