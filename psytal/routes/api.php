@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/addemaildomains', [EmailDomainsController::class, 'addEmailDomain']);
     Route::get('/emaildomainindex', [EmailDomainsController::class, 'index']);
     Route::put('/updateemaildomain/{id}', [EmailDomainsController::class, 'updateemaildomain']);
+    Route::get('/getallemaildomains', [EmailDomainsController::class,'getAllEmailDomains']);
 
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 

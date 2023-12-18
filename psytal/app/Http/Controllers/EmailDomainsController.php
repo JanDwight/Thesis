@@ -59,4 +59,11 @@ class EmailDomainsController extends Controller
             'error' => 'something Went Wrong',
         ]);
     }
+    public function getAllEmailDomains()
+    {
+        // Retrieve all email domains from the database using the model
+        $emailDomains = email_domains::all();
+
+        return response()->json($emailDomains);
+    }
 }

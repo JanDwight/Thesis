@@ -7,12 +7,27 @@ import EditEmailDomain from './EditEmailDomain';
 
 export default function EmailDomainModal({closeModal}) {
     const [error, setError] = useState({__html: ""});
+    const [successMessage, setSuccessMessage] = useState(null);
 
     const [emailDomain, setEmailDomain] = useState('');
     const [emailDomainList, setEmailDomainList] = useState([]);
 
     const [showEditEmailDomainModal, setShowEditEmailDomainModal] = useState(false);
     const [selectedEmailDomain, setSelectedEmailDomain] = useState('');
+
+    const [existingEmailDomains, setExistingEmailDomains] = useState('');
+
+    // Fetch all existing email domains from your data source
+    useEffect(() => {
+      axiosClient.get(`/getallemaildomains`)
+        .then(({ data }) => {
+          setExistingEmailDomains(data);          
+        })
+        .catch((error) => {
+          console.error('Error fetching existing email domains:', error);
+        });
+    }, []);
+
 
     //For fetching the list of the saved Email Domain from the Database
     useEffect(() => {
@@ -32,17 +47,40 @@ export default function EmailDomainModal({closeModal}) {
     const onSubmit = (ev) => {
         ev.preventDefault();
         setError({ __html: "" });
+
+         // Check if the updated email domain already exists
+         const isDuplicate = existingEmailDomains.some(domain => domain.email_domains === emailDomain);
+
+         if (isDuplicate) {
+             setSuccessMessage({ message: "Email Domain Already Exists." });
+             setTimeout(() => {
+                 setSuccessMessage(null); 
+               }, 1500);
+             return; // Exit the function 
+         }
         
         axiosClient
         .post('/addemaildomains', {
             email_domains: (emailDomain)
         })
         .then(({ data }) => {
+          // Handle success, e.g., show a success message
+          console.log(data);
+    
           setSuccessMessage({
-            data,
+            message: 'Email domain added successfully!',
           });
+    
+          setTimeout(() => {
+            setSuccessMessage(null);
+          }, 2000);
         })
-    }
+        .catch((error) => {
+          // Handle errors, including validation errors
+          console.error('Error sending data:', error);
+          
+        });
+    };
 
     //For Updating Email Domains
     const handleEditClick = (item) => {
@@ -112,6 +150,17 @@ export default function EmailDomainModal({closeModal}) {
                     ))}
                 </tbody>
             </table>
+            {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
         </div>
 
         <ReactModal
