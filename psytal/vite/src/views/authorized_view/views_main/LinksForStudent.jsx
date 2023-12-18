@@ -69,6 +69,10 @@ export default function LinksForStudent() {
                     <th className="text-center bg-gray-200 p-2">Link Code</th>
 		              </tr>
                 </thead>
+                </table>
+                </div>
+                <div className="max-h-[400px] overflow-y-auto">
+                  <table>
                  <tbody>
                      {filteredData.map((link, index) => (//edited
                       <tr key={index} className={`${index % 2 === 0 ? 'odd:bg-green-100' : ''}`}>

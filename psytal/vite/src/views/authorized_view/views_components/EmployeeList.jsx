@@ -76,16 +76,36 @@ class EmployeeList extends Component {
   };
 
   render() {
-    const { data, selectedEmployee } = this.state;
-    const { filterText } = this.props; // Receive filterText from parent component
 
-    // Apply filtering for searchbar
-    const filteredData = data.filter(
-      (employee) =>
-        employee.id.toString().includes(filterText) || // Filter by ID
-        employee.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        employee.role.toString().includes(filterText.toLowerCase())
-    );
+    const getRoleText = (role) => {
+      switch (role) {
+        case 1:
+          return 'Admin';
+        case 2:
+          return 'Staff';
+        case 3:
+          return 'Instructor';
+        default:
+          return 'Unknown Role';
+      }
+    };
+    
+    const { data, selectedEmployee } = this.state;
+    const { filterText } = this.props;
+
+      // Apply filtering for searchbar
+      const filteredData = data.filter((employee) => {
+        const roleText = getRoleText(employee.role).toLowerCase(); //Used to filter text values instead of numeric value 1,2,3
+
+        return (
+          employee.id.toString().includes(filterText) || // Filter by ID
+          employee.name.toLowerCase().includes(filterText.toLowerCase()) ||
+          employee.email.toLowerCase().includes(filterText.toLowerCase()) ||
+          roleText.includes(filterText.toLowerCase()) //returns the text values of the role 
+        );
+      });
+
+    
 
     return (
       <>
@@ -95,6 +115,7 @@ class EmployeeList extends Component {
             <tr>
               <th className="text-left bg-gray-200 p-2">Employee ID</th>
               <th className="bg-gray-200 text-left p-2">Name</th>
+              <th className="bg-gray-200 text-left p-2">Email</th>
               <th className="bg-gray-200 text-left p-2">Role</th>
               <th className="bg-gray-200 text-left p-2">Action</th>
             </tr>
@@ -104,7 +125,8 @@ class EmployeeList extends Component {
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
                 <td className="text-left p-2">{employee.id}</td>
                 <td className="text-left p-2">{employee.name}</td>
-                <td className="text-left p-2">{employee.role}</td>
+                <td className="text-left p-2">{employee.email}</td>
+                <td className="text-left p-2">{getRoleText(employee.role)}</td>
                 <td className="text-left p-2">
                 <div className="flex items-center">
                   <img

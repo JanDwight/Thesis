@@ -86,7 +86,9 @@ class StudentList extends Component {
     const filteredData = data.filter(
       (student) =>
         student.id.toString().includes(filterText) || // Filter by ID
-        student.name.toLowerCase().includes(filterText.toLowerCase()) 
+        student.name.toLowerCase().includes(filterText.toLowerCase()) ||
+        student.email.toLowerCase().includes(filterText.toLowerCase()) 
+        //add year and section here
     );
 
     return (
@@ -96,6 +98,7 @@ class StudentList extends Component {
             <tr>
               <th className="text-left bg-gray-200 p-2">School ID</th>
               <th className="text-left bg-gray-200 p-2">Name</th>
+              <th className="text-left bg-gray-200 p-2">Email</th>
               <th className="text-left bg-gray-200 p-2">Year & Section</th>
               <th className="text-left bg-gray-200 p-2">Action</th>
             </tr>
@@ -105,6 +108,7 @@ class StudentList extends Component {
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
                 <td className="text-left p-2">{student.id}</td>
                 <td className="text-left p-2">{student.name}</td>
+                <td className="text-left p-2">{student.email}</td>
                 <td className="text-left p-2">{student.yrsection}</td>
                 <td className="text-left p-2">
                 <div className="flex items-center">
