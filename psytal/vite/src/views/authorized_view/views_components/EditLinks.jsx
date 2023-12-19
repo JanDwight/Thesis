@@ -7,6 +7,7 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
    const [class_description, setClassDescription] = useState(selected.class_description || '');
    const [instructor_name, setInstructorName] = useState(selected.instructor_name || '');
    const [url, setUrl] = useState(selected.url || '');
+   const [successMessage, setSuccessMessage] = useState(null);
 
  // Set initial values when modal is opened
  useEffect(() => {
@@ -30,15 +31,23 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
 
       axiosClient
       .put(`/updatelink/${selected.id}`, updatedUserLinks)
-      .then((response) => {
-        console.log('Links Updated Successfully');
-        onClose();
+      .then(({ data }) => {
+        // Handle success, e.g., show a success message
+        setSuccessMessage({
+          message: 'Link Edited successfully!',
+        });
+  
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 2000);
         window.location.reload();
       })
       .catch((error) => {
-        console.error('Error:', error);
+        // Handle errors, including validation errors
+        console.error('Error sending data:', error);
+        
       });
-
+ 
     };
   
     if (!showEditlink) {
@@ -121,6 +130,17 @@ export default function EditLinks({ showEditlink, onClose, selected }) {
           </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

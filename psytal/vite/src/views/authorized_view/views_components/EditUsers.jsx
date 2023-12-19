@@ -6,6 +6,7 @@ export default function EditUsers({ showModal, onClose, user }) {
   const [name, setName] = useState(user.name);
   const [role, setRole] = useState(user.role);
   const [email, setEmail] = useState(user.email);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [lastedit, setLastedit] = useState(user.updated_at);
   console.log('role: ', role);
 
@@ -25,17 +26,22 @@ export default function EditUsers({ showModal, onClose, user }) {
     try {
       const response = await axiosClient.put(`/updateuser/${user.id}`, updatedUser);
   
-      if (response.status === 200) {
-        // Update was successful
+      console.log(response.data);
+      // Handle success, e.g., show a success message
+      setSuccessMessage({
+        message: 'Account Updated successfully!',
+      });
+
+      setTimeout(() => {
+        setSuccessMessage(null);
+        // Close the modal
         onClose();
-        window.location.reload();
-      } else {
-        // Handle errors or display feedback to the user
-        console.error('Update failed');
-      }
+        window.location.reload(); // Consider if you really need to reload the page
+      }, 2000);
+
     } catch (error) {
-      // Handle network errors or other exceptions
-      console.error('Error:', error);
+      // Handle errors here, e.g., display an error message
+      console.error('Error Updating Account:', error);
     }
   };
 
@@ -134,6 +140,17 @@ export default function EditUsers({ showModal, onClose, user }) {
           </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     // ... (rest of your component code)
   );
