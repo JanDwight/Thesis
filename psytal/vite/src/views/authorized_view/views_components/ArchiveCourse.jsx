@@ -29,7 +29,7 @@ export default function ArchiveCourse({showArchivecourse, onClose, curriculum}) 
 
     } catch (error) {
       // Handle errors here, e.g., display an error message
-      console.error('Error archiving course', error);
+      console.error('Error Deleting course', error);
     }
   }
 

@@ -24,7 +24,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
 
     } catch (error) {
       // Handle errors here, e.g., display an error message
-      console.error('Error archiving user:', error);
+      console.error('Error Deleting user:', error);
     }
   }
 

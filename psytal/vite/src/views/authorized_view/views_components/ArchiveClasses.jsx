@@ -27,7 +27,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
 
     } catch (error) {
       // Handle errors here, e.g., display an error message
-      console.error('Error archiving class:', error);
+      console.error('Error Deleting class:', error);
     }
   }
 

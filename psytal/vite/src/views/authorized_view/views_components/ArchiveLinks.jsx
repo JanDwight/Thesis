@@ -28,7 +28,7 @@ export default function ArchiveLinks({onclose, selected}) {
             
 
             } catch (error) {
-            console.error('Error archiving link:', error);
+            console.error('Error Deleting link:', error);
           }
     };
 
