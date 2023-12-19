@@ -149,8 +149,8 @@ export default function EmailDomainModal({closeModal}) {
                         </tr>
                     ))}
                 </tbody>
-            </table>
-            {successMessage && (
+            </table> 
+        {successMessage && (
         <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
             <div className="w-full px-4 mx-auto mt-6">

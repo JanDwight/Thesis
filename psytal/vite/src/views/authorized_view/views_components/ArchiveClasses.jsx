@@ -3,6 +3,7 @@ import axiosClient from '../../../axios.js';
 
 export default function ArchiveClasses({ showModal, onClose, subject }) {
 
+  const [successMessage, setSuccessMessage] = useState(null);
   const handleSave = async() => {
     //Create new migration w/ the archivde field
     try {
@@ -11,10 +12,19 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
       const response = await axiosClient.put(`/archiveclasses/${subject.class_id}`);
 
       console.log('Class archived successfully.');
+      console.log(response.data);
+      // Handle success, e.g., show a success message
+      setSuccessMessage({
+        message: 'Classes Deleted successfully!',
+      });
 
-      // Close the modal
-      onClose();
-      window.location.reload();
+      setTimeout(() => {
+        setSuccessMessage(null);
+        // Close the modal
+        onClose();
+        window.location.reload(); // Consider if you really need to reload the page
+      }, 2000);
+
     } catch (error) {
       // Handle errors here, e.g., display an error message
       console.error('Error archiving class:', error);
@@ -29,7 +39,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
         <div className="w-full px-4 mx-auto mt-6">
-          <p className="block uppercase tracking-wide font-bold text-green-800 my-3 text-center">Archive Class?</p>
+          <p className="block uppercase tracking-wide font-bold text-green-800 my-3 text-center">Delete Class?</p>
           <form className="text-center">
             <br></br>
             <div className="flex items-center justify-center flex-row"> 
@@ -44,12 +54,12 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
               />
             </div>
             <br></br>
-            <p>Archiving a class will make it uneditable and hidden from low level users. </p>
+            <p>Deleting a class will make it uneditable and hidden from low level users. </p>
             <p>Are you sure you want to proceeed?</p>
           </form>
           <div className="flex items-center justify-center my-7 space-x-4">
             <button onClick={handleSave} className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded-full">
-                Archive
+                Delete
             </button>
             <button onClick={onClose} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                 Cancel
@@ -57,6 +67,17 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
             </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
