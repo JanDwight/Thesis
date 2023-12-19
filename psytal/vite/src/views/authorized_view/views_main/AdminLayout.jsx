@@ -262,7 +262,6 @@ export default function AdminLayout() {
         </div>
       </ReactModal>
 
-      <Navigate to='/admin/home' /> {/**This prevents the user from gaining access to /admin URL*/}
   </>
   );
 }

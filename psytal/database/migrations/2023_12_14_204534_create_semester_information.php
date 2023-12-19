@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('semester_information', function (Blueprint $table) {
             $table->id();
-            $table->string('start_of_prereg');
-            $table->string('end_of_prereg');
-            $table->string('start_of_semester');
-            $table->string('end_of_semester');
+            $table->string('start_of_prereg')->nullable();
+            $table->string('end_of_prereg')->nullable();
+            $table->string('start_of_semester')->nullable();
+            $table->string('end_of_semester')->nullable();
+            $table->string('start_of_school_year');
+            $table->string('end_of_school_year');
+            $table->string('semester')->nullable();
             $table->boolean('open_pre_reg');
             $table->timestamps();
         });

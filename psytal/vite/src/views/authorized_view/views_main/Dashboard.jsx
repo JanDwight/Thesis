@@ -17,6 +17,21 @@ export default function Dashboard() {
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false);
 
+  const [semesterInformation, setSemesterInformation] = useState('');
+
+  //For Ongoing Semester and School Year
+  useEffect(() => {
+    axiosClient
+      .get('/getsemesterinformation')
+      .then((res) => {
+        setSemesterInformation(res.data);  // Assuming res.data is an array
+        console.log(semesterInformation)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   const openArchiveModal = () => {
     setIsArchiveModalOpen(true);
   };
@@ -105,7 +120,7 @@ export default function Dashboard() {
 
     fetchData();
   }, []);
-
+  
   return (
     <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
       <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
@@ -167,6 +182,18 @@ export default function Dashboard() {
           </div>
         </div> 
       
+        {/**For Ongoing Semester and School Year */}
+        <div className='flex flex-col px-3 mt-5 w-full md:w-1/2'>
+            <span className= "text-sm font-semibold">School Year : </span> <hr className="w-[40%]"/>
+            <div className='mt-2'>
+                <input className="bg-gray-50 border border-gray-300 mt-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
+                    name="degree"
+                    type='text'
+                    placeholder=''
+                    value={semesterInformation}
+                    disabled readOnly/>
+            </div>
+        </div>
         
         {/**Archive: */}
         <h2 className="text-base font-semibold mt-8 mb-2">Recent Archives: </h2>

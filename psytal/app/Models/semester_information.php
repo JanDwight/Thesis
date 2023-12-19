@@ -19,6 +19,10 @@ class semester_information extends Model
         'start_of_prereg',
         'end_of_prereg',
         'start_of_semester',
-        'end_of_semester'
+        'end_of_semester',
+        'start_of_school_year',
+        'end_of_school_year',
+        'semester',
+        'open_pre_reg'
     ];
 }

@@ -167,16 +167,6 @@ class PreregistrationIncomingTmpController extends Controller
             return $PreReg->toArray();
     }
 
-    
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request, $student_profile_id)
-{
-    
-}
-
     /**
      * Update the specified resource in storage.
      */

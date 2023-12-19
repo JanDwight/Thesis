@@ -25,7 +25,11 @@ class SemesterInformationRequest extends FormRequest
             'start_of_prereg' => 'required|string',
             'end_of_prereg' => 'required|string',
             'start_of_semester' => 'required|string',
-            'end_of_semester' => 'required|string'
+            'end_of_semester' => 'required|string',
+            'start_of_school_year' => 'required|string',
+            'end_of_school_year'=> 'required|string',
+            'semester' => 'required|string',
+            'open_pre_reg' => 'required|boolean'
         ];
     }
 }

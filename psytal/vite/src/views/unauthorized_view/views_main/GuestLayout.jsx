@@ -5,6 +5,7 @@ import { NavLink, Navigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../../../context/ContextProvider';
 import { useState, useEffect } from 'react';
 import logo from "@assets/PsychCircle.png";
+import axiosClient from '../../../axios';
 
 const navigation = [
   { name: 'Home', to: 'landingpage' },
@@ -17,6 +18,23 @@ function classNames(...classes) {
 
 export default function GuestLayout() {
   const { userToken, userRole } = useStateContext();
+  const [isPreRegOpen, setIsPreRegOpen] = useState();
+  
+  //Get open_pre_reg
+  useEffect(() => {
+    axiosClient
+      .get('/getopenprereg')
+      .then((res) => {
+        setIsPreRegOpen(res.data[0])
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  
+  const dynamicNavigation = isPreRegOpen === 0
+    ? navigation.filter(item => item.name !== 'Pre-Registration-Incoming Students')
+    : navigation;
 
   if (userToken && userRole === 1) {
     return <Navigate to='/admin/home' />;
@@ -58,7 +76,7 @@ export default function GuestLayout() {
                 <div className="flex justify-center items-center px-10 py-2 bg-[#739072]">
                 <div>
                   <div className="ml-10 flex items-baseline space-x-10">
-                    {navigation.map((item) => (
+                    {dynamicNavigation.map((item) => (
                       <NavLink
                         key={item.name}
                         to={item.to}
@@ -75,7 +93,7 @@ export default function GuestLayout() {
                       </NavLink>
                     ))}
                   </div>
-                  </div>
+                </div>
           </div>
 
                 {/*Background*/}
