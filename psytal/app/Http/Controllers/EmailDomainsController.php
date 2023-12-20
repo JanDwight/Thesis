@@ -66,4 +66,16 @@ class EmailDomainsController extends Controller
 
         return response()->json($emailDomains);
     }
+
+    public function deleteEmailDomain($id)
+    {
+    try {
+        $emailDomain = email_domains::findOrFail($id);
+        $emailDomain->delete();
+
+        return response()->json(['message' => 'Email Domain deleted successfully']);
+        } catch (\Exception $e) {
+        return response()->json(['message' => 'Error deleting email domain: ' . $e->getMessage()], 500);
+        }
+    }
 }

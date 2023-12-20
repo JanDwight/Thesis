@@ -89,7 +89,7 @@ class LinksController extends Controller
     $attributes = $request->all();
     
     $link->update($attributes); 
-    return response()->json(['message' => 'Curriculum updated successfully']);
+    return response()->json(['message' => 'Link updated successfully']);
     }
     
 }

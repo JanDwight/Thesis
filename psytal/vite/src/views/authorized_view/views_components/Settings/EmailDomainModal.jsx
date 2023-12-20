@@ -4,6 +4,7 @@ import edit from "@assets/icons8createpost.png";
 import archive from "@assets/delete.png"
 import ReactModal from 'react-modal';
 import EditEmailDomain from './EditEmailDomain';
+import DeleteEmailDomainModal from './DeleteEmailDomainModal';
 
 export default function EmailDomainModal({closeModal}) {
     const [error, setError] = useState({__html: ""});
@@ -16,6 +17,10 @@ export default function EmailDomainModal({closeModal}) {
     const [selectedEmailDomain, setSelectedEmailDomain] = useState('');
 
     const [existingEmailDomains, setExistingEmailDomains] = useState('');
+
+    const [showDeleteEmailDomainModal, setShowDeleteEmailDomainModal] = useState(false);
+    // const [selectedEmailDomain, setSelectedEmailDomain] = useState(null); // Assuming selectedEmailDomain should be of type object
+
 
     // Fetch all existing email domains from your data source
     useEffect(() => {
@@ -70,7 +75,18 @@ export default function EmailDomainModal({closeModal}) {
           setSuccessMessage({
             message: 'Email domain added successfully!',
           });
-    
+          
+          // Assuming the server response contains the newly added email domain
+          // const updatedEmailDomains = [...existingEmailDomains, {
+          //   id: data.id,
+          //   email_domains: data.email_domains,
+          //   created_at: data.created_at,
+          //   updated_at: data.updated_at,
+          //   deleted_at: data.deleted_at,
+          // }]; NOT WORKING
+
+          setExistingEmailDomains(updatedEmailDomains);
+
           setTimeout(() => {
             setSuccessMessage(null);
           }, 2000);
@@ -88,10 +104,11 @@ export default function EmailDomainModal({closeModal}) {
         setSelectedEmailDomain(item);
     };
 
-    //For Archiving Email Domain
-    const onSubmitarchivelink = (item) => {
-        
-    };
+    //For Deleting Email Domains
+    const handleDeleteClick = (item) => {
+      setShowDeleteEmailDomainModal(true);
+      setSelectedEmailDomain(item);
+  };
 
   return (
     <>
@@ -142,7 +159,7 @@ export default function EmailDomainModal({closeModal}) {
                               <button onClick={() => handleEditClick(item)}>
                                 <img src={edit} alt='edit' className='h-5 w-5 cursor-pointer transform transition-transform hover:scale-125'/>
                               </button>
-                              <button onClick={() => onSubmitarchivelink(true, index)}>
+                              <button onClick={() => handleDeleteClick(item)}>
                                 <img src={archive} alt='archive' className='h-7 w-7 cursor-pointer transform transition-transform hover:scale-125'/>
                               </button>      
                             </td>
@@ -175,6 +192,24 @@ export default function EmailDomainModal({closeModal}) {
                 />
             </div>
         </ReactModal>
+        
+        {showDeleteEmailDomainModal && (
+                <ReactModal
+                isOpen={showDeleteEmailDomainModal}
+                onRequestClose={() => setShowDeleteEmailDomainModal(false)}
+                className="w-full md:w-[30%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+              >
+                <DeleteEmailDomainModal
+                  closeModal={() => setShowDeleteEmailDomainModal(false)}
+                  emailDomain={selectedEmailDomain}
+                  onDelete={() => {
+                    // You can implement a fetch or any logic to refresh the email domain list after deletion
+                    // For simplicity, I'm just calling the existing useEffect that fetches email domains
+                    setEmailDomainList([]);
+                  }}
+                />
+              </ReactModal>
+            )}
     </>
   )
 }
