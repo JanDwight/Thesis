@@ -57,6 +57,12 @@ export default function Login() {
       setUserRole(data.role)
     })
     .catch(( error ) => {
+      if (error.response && error.response.status === 401) {
+        setError({ __html: "Username or Password is incorrect. Please try again later." });
+      } else {
+        setError({ __html: "Username or Password is incorrect. Please try again." });
+      }
+
       setAttempts(attempts + 1)
       
     });
@@ -75,16 +81,7 @@ export default function Login() {
     <>
       <div className="flex min-h-[100%] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-[100%] sm:max-w-sm">
-
-        {error.__html && (
-        <div className='bg-red-500 rounded py-2 px-2 text-white'
-          dangerouslySetInnerHTML={error}>
-        </div>)}
-        
-{/*box*/}
-
         <div className="box-border md:box-content rounded-3xl bg-gradient-to-r from-[#739072]/80 via-gray-400/80 to-[#739072]/80 p-9 shadow-2xl">
-          
           <img
             className="mx-auto h-20 w-auto"
             src={PsychLogo}
@@ -138,6 +135,9 @@ export default function Login() {
                   </label>
                 </div>
               </div>
+              {error.__html && (
+            <div className='bg-red-500 rounded py-2 px-2 text-white' dangerouslySetInnerHTML={error}></div>
+          )}
             </div>
             <div className="text-sm">
             <label onClick={() => setIsModalOpen(true)} className="font-semibold text-indigo-600 hover:text-indigo-500">
