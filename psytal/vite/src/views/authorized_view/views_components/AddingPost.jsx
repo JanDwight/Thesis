@@ -125,7 +125,7 @@ export default function AddingPost() {
             <div className="w-full px-4 mx-auto mt-6">
               <form onSubmit={onSubmit}>
                 {/* Attach Photo / File */}
-                <div className="rounded-md bg-transparent p-3 w-30 h-30">
+                {/* {<div className="rounded-md bg-transparent p-3 w-30 h-30">
                   <label htmlFor="upload" className="flex flex-row items-center gap-2 cursor-pointer">
                     <img src={image} className="h-8 w-auto mt-5" alt="Upload Icon" />
                     <span className="text-md lg-text-md mx-2 font-semibold text-green-800 mt-5">Attach Photo / File</span>
@@ -139,7 +139,7 @@ export default function AddingPost() {
                     onChange={handleImageUpload}
                     className="hidden"
                   />
-                </div>
+                </div>} */}
                 {selectedImages.length > 0 && (
                     <div className="flex flex-wrap">
                       {selectedImages.map((image, index) => (

@@ -99,13 +99,13 @@ export default function PostArticles() {
 
           {/* Profile section and Description */}
           <div className="flex h-1/2">
-            <a href="#">
+            {/* {<a href="#">
               <img
                 className="mx-4 w-10 h-10 object-cover rounded-full sm-block"
                 src={post.author?.profile_picture || avatar}
                 alt="avatar"
               />
-            </a>
+            </a>} */}
             <div className="w-3/4">
               <h1 className="text-green-700 font-bold text-2xl">{post.author_name || 'Author Name'}</h1>
               <Timestamp timestamp={post.created_at} updatedAt={post.updated_at} />
@@ -121,7 +121,7 @@ export default function PostArticles() {
           </div>
 
           {/* Images section */}
-          <ImageGallery images={post.images} />
+          {/*<ImageGallery images={post.images} />*/}
         </div>
       ))}
 

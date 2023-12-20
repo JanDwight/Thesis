@@ -52,15 +52,17 @@ export default function Login() {
       password,
     })
     .then(({ data }) => {
-      setCurrentUser(data.user)
+      setCurrentUser(data.user_name)
       setUserToken(data.token)
       setUserRole(data.role)
     })
     .catch(( error ) => {
       setAttempts(attempts + 1)
-      console.log(attempts);
+      
     });
   };
+
+  
 
   const [isVisible, setIsVisible] = useState(false);
 

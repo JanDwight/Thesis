@@ -37,7 +37,7 @@ export default function AdminLayout() {
   // Calling the ProfilePopupSample
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currenUser} = useStateContext();
+  const {setCurrentUser, setUserToken, setUserRole, userToken, userRole, currentUser} = useStateContext();
   
   if (!userToken) {
     localStorage.clear();
@@ -64,6 +64,8 @@ export default function AdminLayout() {
         setUserRole(null);
       })
   }
+
+  console.log('Current User' + currentUser)
 
   return (
     <>
@@ -218,7 +220,7 @@ export default function AdminLayout() {
         <aside className="lg:min-w-[250px] hidden lg:h-fit lg:flex lg:flex-col lg:w-1/4 lg:h-50 lg:px-5 lg:py-5 lg:bg-white lg:border-r lg:rtl:border-r-0 lg:rtl:border-1 lg:rounded-lg  lg:shadow-2xl  " >
           <div className="flex flex-col items-center mt-6 -mx-2">
             <img className="object-cover w-15 h-15 mx-2 rounded-full cursor-pointer" src={avatar} alt="avatar" onClick={() => setIsProfileOpen(true)}/>
-            <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">John Doe</h4>
+            <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-600">{currentUser}</h4>
             <p className="mx-2 text-sm font-medium text-gray-600 dark:text-lime-600">Admin</p>
           </div>
 

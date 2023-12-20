@@ -54,7 +54,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'role' => 'required|integer|min:1|max:4',
             'email' => 'required|email|max:255',
-            'lastedit' => 'required|date', // Modify this validation rule as needed
+            //'lastedit' => 'required|date', // Modify this validation rule as needed
         ]);
 
         // Retrieve the user based on the provided ID
