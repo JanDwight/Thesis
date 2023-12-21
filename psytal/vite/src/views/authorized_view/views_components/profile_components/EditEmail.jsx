@@ -1,18 +1,20 @@
 import React, {useState} from 'react'
+import axiosClient from '../../../../axios';
 
-export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
+export const EditEmail = ({onCloseEditEmail, data}) => {
     //calling the sample data
-    const [email, setEmail] = useState(displayData);
+    const [email, setEmail] = useState(data);
 
-    //changing the email
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-      };
     //Bahalakana dito hahahha
     const handleSubmit = () => {
-        onEmailChange(email);
+            axiosClient.post('/userprofileemailupdate', {email: email})
+            .then((res) => {
+            });
+
         onClose();
       };
+
+      console.log(email)
   return (
     <div className="popup">
       <div className="popup-content">
@@ -35,8 +37,8 @@ export const EditEmail = ({onCloseEditEmail, displayData, onEmailChange}) => {
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             type="email"
                             name="newemail"
-                            value={email.newemail}
-                            onChange={handleEmailChange}
+                            value={email}
+                            onChange={ev => setEmail(event.target.value)}
                             placeholder="New Email"
                             style={{
                                 border: "none",

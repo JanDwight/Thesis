@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\archive;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -71,6 +73,41 @@ class UserController extends Controller
         // Return a success response
         return response()->json(['message' => 'User updated successfully']);
     }
+
+    //User profile Update========================================================================
+    public function userprofileemailupdate(Request $request){
+        // Retrieve the authenticated user
+        $user = Auth::user();
+    
+        // Validate the request data, assuming you have a form field named 'email'
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$user->id,
+        ]);
+    
+        // Update the user's email
+        $user->email = $request->input('email');
+        $user->save();
+    
+        return response(['success' => 'Email updated successfully']);
+    }
+    
+    //User profile Update========================================================================
+    public function userprofilepasswordupdate(Request $request){
+        // Retrieve the authenticated user
+        $user = Auth::user();
+    
+        // Validate the request data, assuming you have a form field named 'password'
+        $request->validate([
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
+        ]);
+    
+        // Update the user's password
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+    
+        return response(['success' => 'Password updated successfully']);
+    }
+    
 
     //Change Password========================================================================
     public function changepassword(Request $request)

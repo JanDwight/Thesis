@@ -1,16 +1,19 @@
 import React, {useState} from 'react'
+import axiosClient from '../../../../axios';
 
-
-export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChange }) => {
+export const EditPassword = ({ onCloseEditPassword, data }) => {
     //calling the sample data
-    const [password, setPassword] = useState(displayData);
+    const [password, setPassword] = useState(data);
 
     const handlePasswordChange = (event) => {
       setPassword(event.target.value);
     };
   
     const handleSubmit = () => {
-      onPasswordChange(password);
+      axiosClient.post('/userprofilepasswordupdate', {password: password})
+            .then((res) => {
+            });
+
       onClose();
     };
     //Password can be seen/not
@@ -24,19 +27,6 @@ export const EditPassword = ({ onCloseEditPassword, displayData, onPasswordChang
     <div className="popup">
       <div className="popup-content">
                 <div className="flex flex-wrap flex-col mx-2 mb-2">
-                    <label className="text-lg font-franklin">Password:</label>
-                        <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                            type={isVisible ? "text" : "password"}
-                            name="password"
-                            value={password.password}
-                            readOnly
-                            placeholder="old password"
-                            style={{
-                                border: "none",
-                                outline: "none",
-                                fontSize: 16,
-                                }}
-                        ></input>
                         
                     <label className="mt-3 text-lg font-franklin">New Password</label>
                         <input className="appearance-none block bg-gray-300 rounded-md w-full py-1.5 text-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"

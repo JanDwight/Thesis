@@ -32,6 +32,9 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    Route::post('/userprofileemailupdate', [UserController::class, 'userprofileemailupdate']);
+    Route::post('/userprofilepasswordupdate', [UserController::class, 'userprofilepasswordupdate']);
+
     //Semester Information
     Route::post('/addsemesterinformation', [SemesterInformationController::class, 'addsemesterinformation']);
     Route::get('/getsemesterinformation', [SemesterInformationController::class, 'index']);

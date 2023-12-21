@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import avatar from "@assets/icons8avatar.png";
 import edit from "@assets/icons8createpost.png";
 import ReactModal from 'react-modal';
-import { StudentEditEmail } from './StudentEditEmail';
-import { StudentEditPassword } from './StudentEditPassword';
+import { EditEmail } from './EditEmail';
+import { EditPassword } from './EditPassword';
 import { StudentUserInformationPopup } from './StudentUserInformationPopup';
 import axiosClient from '../../../../axios';
 
@@ -22,9 +22,9 @@ export default function UserProfile({closeModal}) {
   }, []);
     
     //CALLING EditPassword
-    const [isStudentEditPasswordOpen, setIsStudentEditPasswordOpen] = useState(false);
+    const [isEditPasswordOpen, setIsStudentEditPasswordOpen] = useState(false);
     //CALLING EditPEmail
-    const [isStudentEditEmailOpen, setIsStudentEditEmailOpen] = useState(false);
+    const [isEditEmailOpen, setIsStudentEditEmailOpen] = useState(false);
     //CALLING UserInformation
     const [isStudentUserInformationOpen, setIsStudentUserInformationOpen] = useState(false);
     //Password can be seen/not
@@ -33,11 +33,11 @@ export default function UserProfile({closeModal}) {
     const toggleVisibility = () => {
       setIsVisible(!isVisible);
     };
-    
+    console.log(data)
   return (
     <>
     <div>
-      <form action="">
+      <form>
         <div className='flex flex-row-3 w-full'>
             <img className="object-cover w-20 h-20 mx-2 rounded-full" src={avatar} alt="avatar"/>
             <div className="flex flex-row justify-between mx-2 mb-2">
@@ -130,11 +130,7 @@ export default function UserProfile({closeModal}) {
                     />
                 </div>
             </div>
-            <div>
-                <label onClick={toggleVisibility} className=' text-blue-400 text-sm px-2 mb-2'>
-                    {isVisible ? "Hide Password" : "Show Password"}
-                </label>
-            </div>
+            
         </div>       
 
         <div className='mt-5 grid grid-row-2 justify-center'>
@@ -149,12 +145,12 @@ export default function UserProfile({closeModal}) {
 
     {/**Setting the Edit Email*/}
     <ReactModal
-    isOpen={isStudentEditEmailOpen}
+    isOpen={isEditEmailOpen}
     onRequestClose={() => setIsStudentEditEmailOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
         <div>
-            <StudentEditEmail  
+            <EditEmail 
                 onCloseStudentEditEmail={()=> setIsStudentEditEmailOpen (false)}
                 data={data}/>
         </div>
@@ -162,11 +158,15 @@ export default function UserProfile({closeModal}) {
 
     {/**Setting the Edit Password*/}   
     <ReactModal
-    isOpen={isStudentEditPasswordOpen}
+    isOpen={isEditPasswordOpen}
     onRequestClose={() => setIsStudentEditPasswordOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentEditPassword  onCloseStudentEditPassword={()=> setIsStudentEditPasswordOpen (false)} data={data}/></div>
+        <div>
+            <EditPassword 
+                onCloseEditPassword={()=> setIsStudentEditPasswordOpen (false)} 
+                data={data}/>
+        </div>
     </ReactModal>
 
     {/**Setting the User Information*/} 
@@ -175,7 +175,10 @@ export default function UserProfile({closeModal}) {
     onRequestClose={()=> setIsStudentUserInformationOpen(false)}
     className="w-full lg:w-[30%] h-fit bg-white rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
     >
-        <div><StudentUserInformationPopup  onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)} data={data}/></div>
+        <div>
+            <StudentUserInformationPopup  
+                onCloseStudentUserInfo={()=> setIsStudentUserInformationOpen (false)} 
+                data={data}/></div>
     </ReactModal>
 
     </>
