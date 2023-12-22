@@ -83,6 +83,7 @@ class StudentProfileController extends Controller
             'contact_person_relationship' => $data['contact_person_relationship'],
             'pre_reg_status' => $data['pre_reg_status'],
             'type_of_student' => $data['type_of_student'],
+            'archived' => 0,
         ]);
 
         
@@ -105,9 +106,37 @@ class StudentProfileController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+{
+    // Excludes showing archived users
+    $users = student_profile::where('archived', 0)->get(); // Change '0' to '1' to get archived users
+
+    $userList = [];
+
+    foreach ($users as $user) {
+        $fullName = $user['last_name'] . ', ' . $user['first_name'];
+
+        if (!empty($user['middle_name'])) {
+            $middleInitial = substr($user['middle_name'], 0, 1);
+            $fullName .= ' ' . $middleInitial . '.';
+        }
+
+        $yearLevel = $user['year_level']. $user['section'];
+
+        if (empty($yearLevel)) {
+            $yearLevel = 'n/a';
+        }
+
+        $userList[] = [
+            'student_school_id' => $user['student_school_id'],
+            'full_name' => $fullName,
+            'email' => $user['email_address'],
+            'yrsection' => $yearLevel,
+        ];
     }
+
+    return response()->json($userList);
+}
+
 
   
 

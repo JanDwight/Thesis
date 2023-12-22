@@ -35,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/userprofileemailupdate', [UserController::class, 'userprofileemailupdate']);
     Route::post('/userprofilepasswordupdate', [UserController::class, 'userprofilepasswordupdate']);
 
+    Route::get('/studentprofile', [StudentProfileController::class, 'index']); //<><><> index users
+
     //Semester Information
     Route::post('/addsemesterinformation', [SemesterInformationController::class, 'addsemesterinformation']);
     Route::get('/getsemesterinformation', [SemesterInformationController::class, 'index']);

@@ -22,14 +22,11 @@ class StudentList extends Component {
 
   fetchData = () =>{
     //<><><> try function componentDidMount the use useEffect for axios
-    axiosClient.get('/users')
+    axiosClient.get('/studentprofile')
     .then((response) => {
       const data = response.data;
 
-      // Filter the data to only include role 4 (student)
-      const filteredData = data.filter(user => [4].includes(user.role));
-
-      this.setState({ data: filteredData });
+      this.setState({ data: data });
       //this.fetchData();
 
     })
@@ -85,7 +82,7 @@ class StudentList extends Component {
     // Apply filtering for search bar
     const filteredData = data.filter(
       (student) =>
-        student.id.toString().includes(filterText) || // Filter by ID
+        student.student_school_id.toString().includes(filterText) || // Filter by ID
         student.name.toLowerCase().includes(filterText.toLowerCase()) ||
         student.email.toLowerCase().includes(filterText.toLowerCase()) 
         //add year and section here
@@ -106,8 +103,8 @@ class StudentList extends Component {
           <tbody>
             {filteredData.map((student, index) => (
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
-                <td className="text-left p-2">{student.id}</td>
-                <td className="text-left p-2">{student.name}</td>
+                <td className="text-left p-2">{student.student_school_id}</td>
+                <td className="text-left p-2">{student.full_name}</td>
                 <td className="text-left p-2">{student.email}</td>
                 <td className="text-left p-2">{student.yrsection}</td>
                 <td className="text-left p-2">

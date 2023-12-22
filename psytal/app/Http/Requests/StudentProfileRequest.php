@@ -57,7 +57,8 @@ class StudentProfileRequest extends FormRequest
             'contact_person_relationship' => 'required|string',
             'section' => 'string',
             'image' => 'string',
-            'pre_reg_status' => 'string'
+            'pre_reg_status' => 'string',
+            'archived' => 'boolean'
         ];  
     }
 }
