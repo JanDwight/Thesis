@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\email_domains;
+use App\Models\employee_profile;
+use App\Models\student_profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +30,34 @@ class AuthController extends Controller
     public function addUser(AddUserRequest $request) {
         $data = $request->validated();
 
+        $name = $request->input('name');
+
+        // Break down the name into firstName, lastName, and middleInitial
+        $nameParts = explode(' ', $name);
+        $firstName = '';
+        $lastName = '';
+        $middleName = '';
+        $middleInitial = '';
+
+        $namePartsCount = count($nameParts);
+
+        if ($namePartsCount > 0) {
+            $lastName = rtrim($nameParts[0], ',');
+        }
+
+        if ($namePartsCount > 1) {
+            // Extract the last word as the middle name
+            $middleName = end($nameParts);
+        
+            // Save only the first character as the middle initial
+            $middleInitial = substr($middleName, 0, 1);
+        }
+
+        if ($namePartsCount > 2) {
+            // Remove the middleName from the firstName
+            $firstName = implode(' ', array_slice($nameParts, 1, $namePartsCount - 2));
+        }
+        
         // Extract everything after '@' in the email address
         $emailParts = explode('@', $data['email']);
         $domain = '@' . end($emailParts);
@@ -41,6 +71,9 @@ class AuthController extends Controller
             ], 422);
         }
 
+        // Update $data['name'] with $lastName, $firstName, $middleName
+        $data['name'] = implode(' ', array_filter([$lastName . ',', $firstName, $middleInitial . '.']));
+
         $user = User::create([
             'name' => $data['name'],
             'password' => bcrypt($data['password']),
@@ -48,7 +81,35 @@ class AuthController extends Controller
             'email' => $data['email'],
         ]);
 
+        // Perform the search based on the provided name
+        $users = User::where('name', 'like', '%' . $data['name'] . '%')->get();
         
+        if ($users->isEmpty()) {
+            return response([
+                'message' => 'No users found with the provided name.',
+            ], 404);
+        }
+
+        // Create profile based on user role
+        if ($data['role'] == 4) {
+            // Student Profile
+            student_profile::create([
+                'user_id' => $user->id,
+                'student_school_id' => 0,
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+                'email_address' => $data['email'],
+                'archived' => 0
+                // Add other student profile fields here
+            ]);
+        } else {
+            // Employee Profile
+            //employee_profile::create([
+              //  'user_id' => $user->id,
+                // Add other employee profile fields here
+           // ]);
+        }
 
         $token = $user->createToken('main')->plainTextToken;
 

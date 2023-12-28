@@ -9,7 +9,7 @@ export default function AddUsers({ showModal, onClose}) {
   const [fullName, setFullName] = useState(''); // Required by AddUsers
   const [includeNumbers] = useState(true); // Required by AddUsers
   const [includeSymbols] = useState(true); // Required by AddUsers
-  const [selectedRole, setSelectedRole] = useState(''); // Required by AddUsers
+  const [selectedRole, setSelectedRole] = useState('1'); // Required by AddUsers
   const [email, setEmail] = useState(''); // Required by AddUsers
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState(null);
@@ -88,7 +88,25 @@ export default function AddUsers({ showModal, onClose}) {
       .catch((error) => {
         console.error(error);
       });
+
+      axiosClient
+    .get('/sendstudentaccountpassword', {
+      params: formData
+    })
+      .then(({ data }) => {
+      console.log('this is form sendemails' + data);
+      })
+
+    .catch(( error ) => {
+      if (error.response) {
+        const finalErrors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum,...next], [])
+        setError({__html: finalErrors.join('<br>')})
+      }
+        console.error(error)
+    });
   };  
+
+  
 
   // const handleCloseModal = () => {
   //   // Reset input field values when the modal is closed
@@ -116,7 +134,7 @@ export default function AddUsers({ showModal, onClose}) {
                 name="fullname"
                 type="text"
                 autoComplete="fullname"
-                placeholder="Full Name"
+                placeholder="Last Name, First Name, M.I."
                 required
                 onChange={ev => setFullName(ev.target.value)}
                 className="block w-full rounded-md border-0 py-2 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder-text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-5"
@@ -128,7 +146,7 @@ export default function AddUsers({ showModal, onClose}) {
                 name="email"
                 type="text"
                 autoComplete="email"
-                placeholder="Email"
+                placeholder="Email Address"
                 required
                 onChange={ev => setEmail(ev.target.value)}
                 className="block w-full rounded-md border-0 py-2 text-gray-700 shadow-sm ring-1 ring-inset ring-black placeholder-text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-5"
