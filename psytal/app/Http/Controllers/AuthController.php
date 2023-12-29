@@ -105,10 +105,13 @@ class AuthController extends Controller
             ]);
         } else {
             // Employee Profile
-            //employee_profile::create([
-              //  'user_id' => $user->id,
-                // Add other employee profile fields here
-           // ]);
+            employee_profile::create([
+                'user_id' => $user->id,
+                'employee_id' => 0,
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+           ]);
         }
 
         $token = $user->createToken('main')->plainTextToken;
