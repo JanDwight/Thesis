@@ -32,8 +32,6 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
     return null;
   }
 
-  console.log(user)
-
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">

@@ -37,6 +37,7 @@ class EmployeeProfileController extends Controller
             $userRole = User::where('id', $user['user_id'])->first();
         
             $userList[] = [
+                'user_id' => $user['user_id'],
                 'employee_id' => $user['employee_id'],
                 'full_name' => $fullName,
                 'email_address' => $userRole ? $userRole['email'] : 'n/a',

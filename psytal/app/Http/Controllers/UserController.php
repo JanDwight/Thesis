@@ -147,12 +147,7 @@ class UserController extends Controller
     {
         try {
             // Find the user by ID or fail with a 404 response if not found
-            $user = User::findOrFail($userId);
-
-            //check if the user exist
-            if(!$user){
-                return response()->json(['error' => 'User Not Found', 'user' => $userId]);
-            }
+            $user = User::findOrFail($userId); 
 
             //update the student_profile and employee_profile
             if($user['role'] === 4){
@@ -163,7 +158,9 @@ class UserController extends Controller
                 $userProfile->archived = 1;
                 $userProfile->save();
             } else {
-                $userProfile = employee_profile::findOrFail($userId);
+                $userProfile = employee_profile::where('user_id', $userId)->firstOrFail();
+                $userprofileID = $userProfile['id'];
+                $userProfile = employee_profile::findOrFail($userprofileID);
 
                 $userProfile->archived = 1;
                 $userProfile->save();
@@ -193,7 +190,7 @@ class UserController extends Controller
             return response()->json(['message' => 'User archived successfully']);
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
-            return response()->json(['error' => $e->getMessage(), 'user' => $userprofileID], 500);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
     // COPY FOR ALL CONTROLLERS WITH ARCHIVE
