@@ -7,7 +7,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
 
     try {
       // send selected user to archive controller
-      const response = await axiosClient.put(`/archiveuser/${user.id}`);
+      const response = await axiosClient.put(`/archiveuser/${user.user_id}`);
       
       console.log(response.data);
       // Handle success, e.g., show a success message
@@ -32,6 +32,8 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
     return null;
   }
 
+  console.log(user)
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
@@ -45,7 +47,7 @@ export default function ArchiveUsers({ showModal, onClose, user }) {
                 id="user"
                 type="text"
                 name="user"
-                value={user.name}
+                value={user.full_name}
                 disabled // makes field uneditable
                 className="block w-1/3 rounded-md border border-gray-300 bg-gray-100 py-1.5 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
               />

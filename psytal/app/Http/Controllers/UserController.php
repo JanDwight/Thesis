@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\employee_profile;
+use App\Models\student_profile;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\archive;
@@ -111,37 +113,34 @@ class UserController extends Controller
 
     //Change Password========================================================================
     public function changepassword(Request $request)
-{
-    // Use input() method to get the value of the "email" parameter from the request
-    $email = $request->input('email');
-
-    // Check if the email parameter is present
-    if ($email) {
-        $users = User::where('email', $email)->get();
-
-        if ($users->count() > 0) {
-            // Generate a random password
-            $newPassword = Str::random(8); // You can adjust the length as needed
-
-            // Update the password for each user
-            foreach ($users as $user) {
-                $user->password = bcrypt($newPassword);
-                $user->update();
+    {
+        // Use input() method to get the value of the "email" parameter from the request
+        $email = $request->input('email');
+    
+        // Check if the email parameter is present
+        if ($email) {
+            $users = User::where('email', $email)->get();
+        
+            if ($users->count() > 0) {
+                // Generate a random password
+                $newPassword = Str::random(8); // You can adjust the length as needed
+            
+                // Update the password for each user
+                foreach ($users as $user) {
+                    $user->password = bcrypt($newPassword);
+                    $user->update();
+                }
+            
+                // Additional logic if needed
+            
+                return response()->json(['success' => true, 'message' => 'Password Changed', 'new_password' => $newPassword]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'User not found']);
             }
-
-            // Additional logic if needed
-
-            return response()->json(['success' => true, 'message' => 'Password Changed', 'new_password' => $newPassword]);
         } else {
-            return response()->json(['success' => false, 'message' => 'User not found']);
+            return response()->json(['success' => false, 'message' => 'Email parameter missing']);
         }
-    } else {
-        return response()->json(['success' => false, 'message' => 'Email parameter missing']);
     }
-}
-
-
-
 
     // for archive user
     public function archiveUser(Request $request, $userId)
@@ -150,6 +149,27 @@ class UserController extends Controller
             // Find the user by ID or fail with a 404 response if not found
             $user = User::findOrFail($userId);
 
+            //check if the user exist
+            if(!$user){
+                return response()->json(['error' => 'User Not Found', 'user' => $userId]);
+            }
+
+            //update the student_profile and employee_profile
+            if($user['role'] === 4){
+                $userProfile = student_profile::where('user_id', $userId)->firstOrFail();
+                $userprofileID = $userProfile['student_profile_id'];
+                $userProfile = student_profile::findOrFail($userprofileID);
+
+                $userProfile->archived = 1;
+                $userProfile->save();
+            } else {
+                $userProfile = employee_profile::findOrFail($userId);
+
+                $userProfile->archived = 1;
+                $userProfile->save();
+            }
+
+            
             $userTableName = (new User)->getTable(); //getting table associated w/ User model
 
             // Get the name of the current model
@@ -173,7 +193,7 @@ class UserController extends Controller
             return response()->json(['message' => 'User archived successfully']);
         } catch (\Exception $e) {
             // Handle exceptions, e.g., log the error
-            return response()->json(['message' => 'Error archiving user'], 500);
+            return response()->json(['error' => $e->getMessage(), 'user' => $userprofileID], 500);
         }
     }
     // COPY FOR ALL CONTROLLERS WITH ARCHIVE

@@ -9,6 +9,7 @@ class student_profile extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'student_profile_id';
     
     /**
      * The attributes that are mass assignable.
