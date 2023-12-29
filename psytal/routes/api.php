@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\EmailDomainsController;
+use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\SemesterInformationController;
@@ -35,7 +36,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/userprofileemailupdate', [UserController::class, 'userprofileemailupdate']);
     Route::post('/userprofilepasswordupdate', [UserController::class, 'userprofilepasswordupdate']);
 
-    Route::get('/studentprofile', [StudentProfileController::class, 'index']); //<><><> index users
+    //For Manage User Lists
+    Route::get('/studentprofile', [StudentProfileController::class, 'index']); //For Students
+    Route::get('/employeeprofile', [EmployeeProfileController::class, 'index']); //For Employees
 
     //Semester Information
     Route::post('/addsemesterinformation', [SemesterInformationController::class, 'addsemesterinformation']);

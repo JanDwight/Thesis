@@ -19,14 +19,11 @@ class EmployeeList extends Component {
 
   componentDidMount() {
     //<><><>
-    axiosClient.get('/users')
+    axiosClient.get('/employeeprofile')
       .then((response) => {
         const data = response.data;
 
-        // Filter the data to only include roles 1, 2, and 3 (admin, staff and instructor)
-        const filteredData = data.filter(user => [1, 2, 3].includes(user.role));
-
-        this.setState({ data: filteredData });
+        this.setState({ data: data   });
 
       })
       .catch((error) => {
@@ -98,14 +95,14 @@ class EmployeeList extends Component {
         const roleText = getRoleText(employee.role).toLowerCase(); //Used to filter text values instead of numeric value 1,2,3
 
         return (
-          employee.id.toString().includes(filterText) || // Filter by ID
-          employee.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          employee.email.toLowerCase().includes(filterText.toLowerCase()) ||
+          employee.employee_id.toString().includes(filterText) || // Filter by ID
+          employee.full_name.toLowerCase().includes(filterText.toLowerCase()) ||
+          employee.email_address.toLowerCase().includes(filterText.toLowerCase()) ||
           roleText.includes(filterText.toLowerCase()) //returns the text values of the role 
         );
       });
 
-    
+      console.log('employee', data);
 
     return (
       <>
@@ -123,9 +120,9 @@ class EmployeeList extends Component {
           <tbody>
             {filteredData.map((employee, index) => (
               <tr key={index} className={index % 2 === 0 ? 'odd:bg-green-100' : ''}>
-                <td className="text-left p-2">{employee.id}</td>
-                <td className="text-left p-2">{employee.name}</td>
-                <td className="text-left p-2">{employee.email}</td>
+                <td className="text-left p-2">{employee.employee_id}</td>
+                <td className="text-left p-2">{employee.full_name}</td>
+                <td className="text-left p-2">{employee.email_address}</td>
                 <td className="text-left p-2">{getRoleText(employee.role)}</td>
                 <td className="text-left p-2">
                 <div className="flex items-center">
