@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class student_profile extends Model
 {
@@ -62,20 +63,23 @@ class student_profile extends Model
  */
 public $timestamps = true;
 
-//student has many subjects
-public function classes()
+    public function classes() : HasMany
     {
-       // return $this->belongsToMany(classes::class);
-
-       return $this->belongsToMany(classes::class)->withPivot([
-            'class_code',
-            'course_code',
-            'course_title',
-            'units',
-            'grade',
-            'course_type',
-            'bcac',
-        ]);
+        return $this->hasMany(classes::class, 'class_id');
     }
+
+    //student has many subjects
+    // public function classes()
+    //     {
+    //        return $this->belongsToMany(classes::class)->withPivot([
+    //             'class_code',
+    //             'course_code',
+    //             'course_title',
+    //             'units',
+    //             'grade',
+    //             'course_type',
+    //             'bcac',
+    //         ]); 
+    //     }
 
 }
