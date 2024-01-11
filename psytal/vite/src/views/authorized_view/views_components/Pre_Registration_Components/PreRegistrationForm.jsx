@@ -322,11 +322,11 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentLastname"
                     type="text"
-                    pattern="[a-zA-Z]+"
+                    pattern="[a-zA-Z ]+"
                     value={lastName}
                     maxLength={30}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z]/g, '');
+                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
                       setLastName(value);
                     }}
                    />  
@@ -351,11 +351,11 @@ export default function PreRegistrationForm() {
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white pr-10"
                         id="grid-studentFirstname"
                         type="text"
-                        pattern="[a-zA-Z]+"
+                        pattern="[a-zA-Z ]+"
                         value={firstName}
                         maxLength={50}
                         onChange={ev => {
-                          const value = ev.target.value.replace(/[^A-Za-z]/g, '');
+                          const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
                           setFirstName(value);
                         }}
                       />
@@ -376,11 +376,11 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMiddlename" 
                     type="text" 
-                    pattern="[a-zA-Z]+"
+                    pattern="[a-zA-Z ]+"
                     value={middleName}
                     maxLength={30}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z]/g, '');
+                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
                       setMiddleName(value);
                     }}
                     />  
@@ -401,11 +401,11 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMaidenname" 
                     type="text" 
-                    pattern="[a-zA-Z/]+"
+                    pattern="[a-zA-Z/ ]+"
                     value={maidenName}
                     maxLength={30}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z/]/g, '');
+                      const value = ev.target.value.replace(/[^A-Za-z/ ]/g, '');
                       setMaidenName(value);
                     }}
                     />  
