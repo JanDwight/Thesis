@@ -97,7 +97,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/show_classes', [ClassesController::class, 'index']); //<><><> show for logs
 
     //pre-reg attach subjects to student
-    Route::post('/student_subject', [AttachSubjectController::class, 'attachSubjectToStudent']);
+    Route::post('/student_subject', [AttachSubjectController::class, 'createstudentclasses']);
     
     //curriculum tab
     Route::post('/addcurriculum', [CurriculumController::class, 'addCurriculum']);

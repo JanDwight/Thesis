@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\student_classes;
 use Illuminate\Http\Request;
 use App\Http\Requests\attachRequest;
 use App\Models\student_profile;
@@ -10,6 +11,46 @@ use App\Models\Attachment;
 
 class AttachSubjectController extends Controller
 {
+    public function createStudentClasses(Request $request)
+    {
+        $request->validate([
+            'studentData' => 'required|array',
+            'studentData.first_name' => 'required',
+            'studentData.middle_name' => 'required',
+            'studentData.last_name' => 'required',
+            'subjectData' => 'required'
+        ]);
+
+        $student = student_profile::where('first_name', $request->input('studentData.first_name'))
+            ->where('middle_name', $request->input('studentData.middle_name'))
+            ->where('last_name', $request->input('studentData.last_name'))
+            ->first();
+
+        if (!$student) {
+            return response()->json(['error' => 'Student not found.'], 404);
+        }
+
+        // Retrieve the student_profile_id
+        $studentProfileID = $student->student_profile_id;
+
+        $subjects = $request->input('subjectData');
+
+        // Create an instance of the student_classes model for each class
+        foreach ($request->input('subjectData') as $subject) {
+            $studentClasses = new student_classes();
+        
+            // Set the attributes
+            $studentClasses->student_profile_id = $studentProfileID;
+            $studentClasses->class_id = $subject['class_id']; // Adjust this line based on your data structure
+            $studentClasses->grade = '0';
+        
+            // Save the record to the student_classes table
+            $studentClasses->save();
+        }
+
+        return response()->json(['message' => $subjects]);
+    }
+
     //
     public function attachSubjectToStudent(Request $request)
     {
