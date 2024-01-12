@@ -36,6 +36,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/userprofileemailupdate', [UserController::class, 'userprofileemailupdate']);
     Route::post('/userprofilepasswordupdate', [UserController::class, 'userprofilepasswordupdate']);
 
+    //curriculum Chacklist
+    Route::get('/curriculumnCheckListIndex', [ClassesController::class, 'curriculumnCheckListIndex']);
+    
     //For Manage User Lists
     Route::get('/studentprofile', [StudentProfileController::class, 'index']); //For Students
     Route::get('/employeeprofile', [EmployeeProfileController::class, 'index']); //For Employees
@@ -53,6 +56,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getallemaildomains', [EmailDomainsController::class,'getAllEmailDomains']);
     Route::delete('/deleteemaildomain/{id}', [EmailDomainsController::class, 'deleteEmailDomain']);
 
+    //post
     Route::post('/createposts', [PostController::class, 'createPosts']);
     Route::get('/posts', [PostController::class, 'getPosts']); 
     Route::put('/posts/{postId}', [PostController::class, 'update']);

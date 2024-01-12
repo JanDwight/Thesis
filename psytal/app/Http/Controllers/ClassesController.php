@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\curriculum;
+use App\Models\student_classes;
+use App\Models\student_profile;
 use Illuminate\Http\Request;
 use App\Models\classes;
 use App\Http\Requests\AddClassRequest;
 use App\Models\archive;
+use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
 {
@@ -18,10 +22,60 @@ class ClassesController extends Controller
     {
         //$subjects = classes::all();
         //return response()->json($subjects); //sends ALL data from classes table
+        $user = Auth::user();
+        $DataBaseCleaner = student_profile::where('start_of_school_year', null);
+
+        // Delete all records that match the condition in $DataBaseCleaner
+        $DataBaseCleaner->delete();
+
+        if($user->role === 4){
+            $student = student_profile::where('archived', 0)
+            ->where('user_id', $user->id)
+            ->first();
+
+            $studentSubjects = student_classes::where('archived', 0)
+            ->where('ongoing', 2) //2 = ongoing, 1 = enrolled previous semester, 0 = previously enrolled subjects
+            ->where('student_profile_id', $student->student_profile_id)
+            ->get();
+
+            $classDetails = [];
+
+            foreach ($studentSubjects as $subject) {
+                $classDetails[] = classes::where('archived', 0)
+                ->where('class_id', $subject->class_id)->first();
+            }
+
+            return response()->json($classDetails);
+        }
 
         $subjects = classes::where('archived', 0)->get(); // Change '0' to '1' to get archived users
 
         return response()->json($subjects);
+    }
+
+    public function curriculumnCheckListIndex()
+    {
+        $user = Auth::user();
+
+        if($user->role === 4){
+            $student = student_profile::where('archived', 0)
+            ->where('user_id', $user->id)
+            ->first();
+
+            $studentSubjects = student_classes::where('archived', 0)
+            ->where('ongoing', 2) //2 = ongoing, 1 = enrolled previous semester, 0 = previously enrolled subjects
+            ->where('student_profile_id', $student->student_profile_id)
+            ->get();
+
+            $classDetails = [];
+
+            foreach ($studentSubjects as $subject) {
+                $classDetails[] = classes::where('archived', 0)
+                ->where('class_id', $subject->class_id)->first();
+            }
+
+            return response()->json($classDetails);
+        }
     }
     //add class
     public function addClass(AddClassRequest $request)

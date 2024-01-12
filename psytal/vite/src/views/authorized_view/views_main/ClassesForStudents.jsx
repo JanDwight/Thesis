@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios.js';
+import ClassPopUp from '../views_components/ClassPopUp.jsx';
 
 export default function ClassesForStudent() {
-    const [classes, setClasses] = useState([]); 
+    const test = [
+        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" },              
+        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" },
+        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" }
+    ]
 
+    const [isClassPopUpOpen, setClassPopUpOpen]= useState(false);
+    const [selectedClass, setSelectedClass] = useState([]);
+
+    const handleOpenPopUp = (subject) => {
+        setClassPopUpOpen(true);
+        setSelectedClass(subject);
+      }
+
+    const [classes, setClasses] = useState([]);   
       useEffect(() => {
-          //send student ID then fetch
-          //optional: add total units at bottom of page
           fetchClasses();
         }, []);
       
@@ -14,17 +26,21 @@ export default function ClassesForStudent() {
           try {
             const response = await axiosClient.get('/classes');
             //console.log('Server Response: ', response);
-            setClasses(response.data);
+            
+            const classesArray = Object.values(response.data);
+            setClasses(classesArray);
+            console.log('Response Data:', classesArray);
           } catch (error) {
             console.error(error);
           }
-        }
+        };
 
+        console.log('Classes:', classes);
     return (
       <>
       <div className="w-full h-[auto] px-4 mx-auto rounded-3xl bg-white shadow-2xl pt-5 pb-12">
         <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
-          <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Currently Enrolled Classes tmp</div>
+          <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Classes</div>
         </div>
       
         {/* <div className="table-container overflow-x-auto"> Edited*/}
@@ -52,7 +68,7 @@ export default function ClassesForStudent() {
                   <td className="text-left p-2">{classItem.semester}</td>
                   <td className="text-left p-2">{classItem.class_year}</td>
                   <td className="text-left p-2">{classItem.class_section}</td>
-                  <td className="text-left p-2">TBA</td>
+                  <td className="text-left p-2">{classItem.units}</td>
                 </tr>
               ))}
             </tbody>
