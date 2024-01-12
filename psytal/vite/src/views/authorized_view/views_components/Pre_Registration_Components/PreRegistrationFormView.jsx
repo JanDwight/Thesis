@@ -9,63 +9,20 @@ import preregFirstYearForm from '../../../../assets/preregFirstYearForm.pdf';
 
 export default function PreRegistrationFormView({prereg}) {
   const [subjectData, setSubjectData] = useState([]); //<><><><><>
-  const [firstYearSubjects, setFirstYearSubjects] = useState([]);
   const [totalUnits, setTotalUnits] = useState(0); //<><><><><>
 
   const includeNumbers = true;  // Include numbers in the password
   const includeSymbols = true;  // Include symbols in the password
   const role = "4";
 
-  //auto fill dropdown
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axiosClient.get('/show_classes');
-        const classData = response.data; // Set the data in the state
-        setSubjectData(classData); // Set the data in the state
-      } catch (error) {
-        console.error('Error fetching data from the database:', error);
-      }
-    }
-  
-    fetchData(); // Call the fetchData function
-  }, []);
-
     //<><><><><>
     const [inputFields, setInputFields] = useState([
-      { class_id: '', classCode: '', courseCode: '', units: '', bcac: 'N/A' }, //changed classCode to classId
+      { classCode: '', courseCode: '', units: '', bcac: 'N/A' }, //changed classCode to classId
     ]);
-
-    // Check if class_year is "1st" and semester is "1st"
-    useEffect(() => {
-      // Filter the data based on conditions
-      const filteredData = subjectData.filter(item => item.class_year === '1st' && item.semester === '1st');
-    
-      // Map the filtered data to the structure of inputFields and set classCode and courseCode
-      const updatedInputFields = filteredData.map(item => ({
-        class_id: item.class_id,
-        classCode: item.class_code,
-        courseCode: item.course_code,
-        units: item.units,
-        bcac: 'N/A',
-      }));
-    
-      // Set the updated data into inputFields with data that has neither null nor undefined on its class_id
-      setInputFields(updatedInputFields.filter(field => field.class_id != null || field.class_id != undefined));
-      console.log('This is the data', updatedInputFields);
-    }, [subjectData]);
-    
-
-    // If you want to add fields when there is more data
-    useEffect(() => {
-      if (subjectData.length !== inputFields.length) {
-        handleAddFields();
-      }
-    }, [subjectData]);
 
     const handleClearSubjects = () => {
       // Clear the inputFields state and set totalUnits to 0
-      setInputFields([{ class_id: '', classCode: '', courseCode: '', units: '', bcac: 'N/A' }]); //changed classCode to classId
+      setInputFields([{ classCode: '', courseCode: '', units: '', bcac: 'N/A' }]); //changed classCode to classId
       setTotalUnits(0);
     };
 
@@ -73,71 +30,60 @@ export default function PreRegistrationFormView({prereg}) {
     //unused, remove later <><><>
     const handleSubmitCourseDetails = (e) => {
         e.preventDefault();
+        console.log("InputFields", inputFields);
+        console.log("Student ID", preregData.student_school_id);
         //axios
         //send student info (preferably student ID number)
         //send course details to curriculum checklist, ideally just the course_id + class_code [already sending course_id + class_code]
       };
+    //Changing the input fields
+    const handleChangeInput = (index, event) => {
+        const values = [...inputFields];
+        values [index][event.target.name] = event.target.value;     
+        setInputFields(values);
+      }
+    //For Adding
+    const handleAddFields = () => {
+        setInputFields([...inputFields, { classCode: '', courseCode: '', units: '', bcac: 'N/A' }])
+      }
+    //For removing
+    const handleRemoveFields = (index) => {
+        const values  = [...inputFields];
+        values.splice(index, 1);
+        setInputFields(values);
+      }
+
+    //units calc
+    const handleChangeUnits = (index, value) => {
+      // Calculate the unit difference
+      const oldUnits = parseInt(inputFields[index].units || 0, 10);
+      const newUnits = parseInt(value || 0, 10);
+      const unitDifference = newUnits - oldUnits;
     
-    // Changing the input fields
-const handleChangeInput = (index, event) => {
-  const { name, value } = event.target;
-  const updatedInputFields = [...inputFields];
-
-  // Update the input field based on the name
-  updatedInputFields[index] = {
-    ...updatedInputFields[index],
-    [name]: value,
-  };
-
-  // If the changed field is Class Code, update Course Code and Unit/s
-  if (name === 'classCode') {
-    const [classId, classCode] = value.split('-');
-
-    // Find the selected subject data based on classId
-    const selectedSubject = subjectData.find(item => item.class_id === parseInt(classId, 10));
-
-    // Update Course Code and Unit/s
-    updatedInputFields[index] = {
-      ...updatedInputFields[index],
-      class_id: selectedSubject ? selectedSubject.class_id : '',
-      courseCode: selectedSubject ? selectedSubject.course_code : '',
-      units: selectedSubject ? selectedSubject.units : '',
+      // Update the total units by adding the unit difference
+      setTotalUnits(totalUnits + unitDifference);
+    
+      // Update the input fields with the new "units" value
+      const fields = [...inputFields];
+      fields[index] = { ...fields[index], units: value };
+      setInputFields(fields);
     };
-  }
 
-  setInputFields(updatedInputFields);
-};
-
-// For adding fields
-const handleAddFields = () => {
-  const newFields = { class_id: '', classCode: '', courseCode: '', units: '', bcac: 'N/A' };
-
-  setInputFields((prevFields) => [...prevFields, newFields]);
-};
-
-// For removing fields
-const handleRemoveFields = (index) => {
-  const values = [...inputFields];
-  values.splice(index, 1);
-  setInputFields(values);
-};
-
-// Units calculation
-const handleChangeUnits = (index, value) => {
-  // Calculate the unit difference
-  const oldUnits = parseInt(inputFields[index].units || 0, 10);
-  const newUnits = parseInt(value || 0, 10);
-  const unitDifference = newUnits - oldUnits;
-
-  // Update the total units by adding the unit difference
-  setTotalUnits(totalUnits + unitDifference);
-
-  // Update the input fields with the new "units" value
-  const fields = [...inputFields];
-  fields[index] = { ...fields[index], units: value };
-  setInputFields(fields);
-};
+      //auto fill dropdown
+      useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axiosClient.get('/show_classes');
+            const classData = response.data; // Set the data in the state
+            setSubjectData(classData); // Set the data in the state
+          } catch (error) {
+            console.error('Error fetching data from the database:', error);
+          }
+        }
       
+        fetchData(); // Call the fetchData function
+      }, []);
+
   const [preregData, setPreregData] = useState(prereg, {
     user_id: '',
     start_of_school_year: '',   
@@ -336,6 +282,8 @@ const handleChangeUnits = (index, value) => {
       type_of_student: 'Regular',
     })
 
+    console.log('password: ' + password);
+
     //for sending emails============================================================================
     // Assuming formData is your FormData object
     let formData = new FormData();
@@ -356,6 +304,7 @@ const handleChangeUnits = (index, value) => {
       params: formDataObject
     })
       .then(({ data }) => {
+      console.log('this is form sendemails' + data);
       })
 
     .catch(( error ) => {
@@ -598,7 +547,7 @@ const handleChangeUnits = (index, value) => {
 
         //compliedToAdmissionPolicy.setText(preregData.first_name); TO ADD, FRONTEND NOT YET FINISHED
         
-        //const finalPDF = await pdfDoc.save();
+        const finalPDF = await pdfDoc.save();
         
         download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
       } catch (error) {
@@ -620,12 +569,12 @@ const handleChangeUnits = (index, value) => {
 
     //--------------------------// <><><><><>
 
-    
+    //idea how about fetching the data here then passing it in axios instead??? Should be easier.
 
     axiosClient.post('/student_subject', {
       studentData: preregData,
-      subjectData: inputFields.slice(0, -1).map(field => ({ ...field })), // Exclude the last element
-    }).then(console.log('1', inputFields))
+      subjectData: inputFields,
+     })
 
     //--------------------------// <><><><><>
 
@@ -649,6 +598,8 @@ const handleChangeUnits = (index, value) => {
     });
   };
 
+
+  
   return (
     <>
         {error.__html && (
