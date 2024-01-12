@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import schoolLogo from "@assets/BSUlogo.png";
-import info from "@assets/info.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 import "../../../../../src/styles.css";
@@ -146,7 +145,7 @@ export default function PreRegistrationForm() {
         closeModal();
         handleClear();//not working
         navigate('/');//not working
-      }, 7000);
+      }, 2000);
     })
     .catch(( error ) => {
       if (error.response) {
@@ -203,7 +202,7 @@ export default function PreRegistrationForm() {
           <div className='relative flex flex-col min-w-0 break-words w-full shadow-md rounded-t-lg px-4 py-5 bg-white border-0'>
             <div className="flex-auto px-4 lg:px-10 py-5 pt-0 mt-1">
               
-                {/**=========================== SchoolYear - Date ==========================*/}  
+                {/**=========================== Shoolyear - Date ==========================*/}  
                 <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
@@ -260,54 +259,29 @@ export default function PreRegistrationForm() {
                 <div className="flex flex-wrap flex-row -mx-3 mb-2">
                       {/*column1*/}
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                      <div className="input-container relative">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentID">
                           student id no :
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-studentID"
-                        type="text"
-                        pattern="\d{0,7}"
-                        inputmode="numeric"
-                        maxLength={7}
+                        type="number"
+                        placeholder=""
                         value={studentSchoolId}
-                        onChange={ev => {
-                          // Ensure that only numeric values are entered
-                          const value = ev.target.value.replace(/\D/g, '');
-                          setStudentSchoolId(value);}}
-                        />
-                        <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input numeric characters only. (0 to 9)"
-                      />
-                        </div>                          
+                        onChange={ev => setStudentSchoolId(ev.target.value)}
+                        />                          
                       </div>
                       {/*column2*/}
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                      <div className="input-container relative">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-lrn">
                           learner's reference number (lrn) :
                         </label>
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-lrn"
-                        type="text"
-                        pattern="\d{0,12}"
-                        inputmode="numeric"
-                        maxLength={12}
+                        type="number"
+                        placeholder=""
                         value={learnersReferenceNumber}
-                        onChange={ev => {
-                          const value = ev.target.value.replace(/\D/g, '');
-                          setLearnersReferenceNumber(value);}}
+                        onChange={ev => setLearnersReferenceNumber(ev.target.value)}
                         />        
-                        <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input numeric characters only. (0 to 9)"
-                      />
-                        </div> 
                       </div>
                 </div> 
 
@@ -315,108 +289,51 @@ export default function PreRegistrationForm() {
                 <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   {/**column1 */}
                   <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <div className="input-container relative">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
                       Last Name :
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentLastname"
                     type="text"
-                    pattern="[a-zA-Z ]+"
+                    placeholder=""
                     value={lastName}
-                    maxLength={30}
-                    onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
-                      setLastName(value);
-                    }}
-                   />  
-                   <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your Legal Last Name with your Suffix, if applicable."
-                      />
-                  </div>
+                    onChange={ev => setLastName(ev.target.value)}/>  
                   </div>
                   {/**column2 */}
                   <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <div className="input-container relative">
-                      <label
-                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="grid-studentFirstname"
-                      >
-                        First Name:
-                      </label>
-                      <input
-                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white pr-10"
-                        id="grid-studentFirstname"
-                        type="text"
-                        pattern="[a-zA-Z ]+"
-                        value={firstName}
-                        maxLength={50}
-                        onChange={ev => {
-                          const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
-                          setFirstName(value);
-                        }}
-                      />
-                      <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your Legal Given Name/s."
-                      />
-                  </div>
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentFirstname">
+                      First Name :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    id="grid-studentFirstname" 
+                    type="text" 
+                    placeholder="Juan"
+                    value={firstName}
+                    onChange={ev => setFirstName(ev.target.value)}/>  
                   </div>
                   {/**column3 */}
                   <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
-                  <div className="input-container relative">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMiddlename">
                       Middle Name :
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMiddlename" 
                     type="text" 
-                    pattern="[a-zA-Z ]+"
+                    placeholder=""
                     value={middleName}
-                    maxLength={30}
-                    onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
-                      setMiddleName(value);
-                    }}
-                    />  
-                     <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your Legal Middle Name. Leave blank if not applicable."
-                      />
-                  </div>
+                    onChange={ev => setMiddleName(ev.target.value)}/>  
                   </div>
                   {/** */}
                   <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <div className="input-container relative">
                     <label className='text-xs' htmlFor="grid-studentMaidenname">
-                      <strong className="block tracking-wide text-gray-700 text-xs font-bold mb-2">MAIDEN NAME : (For female students, if married)</strong>
+                      <strong className="block tracking-wide text-gray-700 text-xs font-bold mb-2">MAIDEN NAME : (For female students, if married)</strong><i>(input <strong>n/a</strong> if not applicable)</i>
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMaidenname" 
                     type="text" 
-                    pattern="[a-zA-Z/ ]+"
+                    placeholder=""
                     value={maidenName}
-                    maxLength={30}
-                    onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z/ ]/g, '');
-                      setMaidenName(value);
-                    }}
-                    />  
-                    <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input 'N/A' if not applicable."
-                      />
-
-                  </div>
+                    onChange={ev => setMaidenName(ev.target.value)}/>  
                   </div>
                 </div> <hr />
                 
@@ -424,15 +341,7 @@ export default function PreRegistrationForm() {
                 {/**re-do the implementation of the radio button */} 
                 <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <div className="relative">
-                    <label className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: <img
-                        src={info}
-                        alt="info"
-                        className="absolute top-[50%] h-6 w-6"
-                        title="Input your Legal Given Name/s"
-                      /></label>
-                    
-                  </div>
+                    <span className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: </span>
                   </div>
                       
                   <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
@@ -498,15 +407,9 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-lastschoolattended" 
                     type="text" 
-                    pattern="[a-zA-Z]+"
-                    title="Do not abbreviate."
+                    placeholder=""
                     value={lastSchoolAttended}
-                    minLength={10}
-                    onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z]/g, '');
-                      setLastSchoolAttended(value);
-                    }}
-                    />  
+                    onChange={ev => setLastSchoolAttended(ev.target.value)}/>  
                   </div>
                   <div className="w-full px-3 mb-6 md:mb-0 mt-2">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-addresslastschoolattended">
@@ -514,8 +417,8 @@ export default function PreRegistrationForm() {
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-addresslastschoolattended" 
-                    type="text"
-                    placeholder="Bldg No., Street, Barangay, City/Municipality"
+                    type="text" 
+                    placeholder=""
                     value={addressOfSchoolAttended}
                     onChange={ev => setAddressOfSchoolAttended(ev.target.value)}/>  
                   </div>
@@ -572,15 +475,10 @@ export default function PreRegistrationForm() {
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-contactnumber" 
-                    type="text" 
-                    pattern="^09[0-9]{9}$"
-                    placeholder="09XXXXXXXXX"
-                    maxLength={11}
+                    type="number" 
+                    placeholder=""
                     value={contactNumber}
-                    onChange={ev => {
-                      const value = ev.target.value.replace(/\D/g, '');
-                      setContactNumber(value);}}
-                    />                    
+                    onChange={ev => setContactNumber(ev.target.value)}/>                    
                   </div>
 
                   {/*column2*/}
@@ -591,7 +489,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-placeofbirth" 
                     type="text" 
-                    placeholder="City/Municipality"
+                    placeholder=""
                     value={placeOfBirth}
                     onChange={ev => setPlaceOfBirth(ev.target.value)}/>
                       
@@ -601,7 +499,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-sexatbirth" 
                       type="text" 
-                      placeholder="Male/Female"
+                      placeholder="(eg. Male)"
                       value={sexAtBirth}
                       onChange={ev => setSexAtBirth(ev.target.value)}/>
 
@@ -618,25 +516,12 @@ export default function PreRegistrationForm() {
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="emailaddress">
                       Email Address :
                     </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-emailaddress" 
                     type="text" 
-                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                     placeholder=""
                     value={email}
-                    onChange={ev => {
-                      const value = ev.target.value;
-                      setEmail(value); // Update the state with the input value
-                  
-                      // Custom validation logic
-                      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                      if (!isValidEmail) {
-                        setEmailError('Invalid email format');
-                      } else {
-                        setEmailError('');
-                      }
-                    }}
-                    />
+                    onChange={ev => setEmail(ev.target.value)}/>
                   </div>
                 </div> <hr />
 
