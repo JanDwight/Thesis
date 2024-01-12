@@ -146,7 +146,7 @@ export default function PreRegistrationForm() {
         closeModal();
         handleClear();//not working
         navigate('/');//not working
-      }, 7000);
+      }, 2000);
     })
     .catch(( error ) => {
       if (error.response) {
@@ -329,12 +329,12 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentLastname"
                     type="text"
-                    pattern="[a-zA-Z ]+"
+                    pattern="[a-zA-Z .]+"
                     title="Input your Legal Last Name with your Suffix, if applicable."
                     value={lastName}
                     maxLength={30}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
+                      const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
                       setLastName(value);
                     }}
                    />  
@@ -359,12 +359,12 @@ export default function PreRegistrationForm() {
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white pr-10"
                         id="grid-studentFirstname"
                         type="text"
-                        pattern="[a-zA-Z ]+"
+                        pattern="[a-zA-Z .]+"
                         title="Input your Legal Given Name/s."
                         value={firstName}
                         maxLength={50}
                         onChange={ev => {
-                          const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
+                          const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
                           setFirstName(value);
                         }}
                       />
@@ -435,16 +435,8 @@ export default function PreRegistrationForm() {
                 {/**re-do the implementation of the radio button */} 
                 <div className="flex flex-wrap flex-row -mx-3 mb-2">
                   <div className="w-full px-3 mb-6 md:mb-0 mt-2">
-                  <div className="relative">
                     <label className= "text-sm font-semibold">ACADEMIC CLASSIFICATION: 
                     </label>
-                    <img
-                        src={info}
-                        alt="info"
-                        className="absolute right-[73%] top-[10%] h-6 w-6"
-                        title="Select what is appropriate."
-                      />
-                  </div>
                   </div>
                       
                   <div className="w-full px-3 md:mb-0 flex flex-wrap flex-row mb-2">
@@ -748,73 +740,137 @@ export default function PreRegistrationForm() {
                 {/**=========================== Filling the Adresses ==========================*/} 
                 <div className="flex flex-wrap -mx-3 mb-2">
                   <div className="w-full px-3 mb-3 md:mb-0 mt-2">
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-homeaddress">Home Address :</label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-homeaddress" 
                     type="text" 
-                    placeholder=""
+                    title="Input your home address using the format given."
+                    placeholder="Bldg No., Street, Barangay, City/Municipality"
                     value={homeAddress}
                     onChange={ev => setHomeAddress(ev.target.value)}/>
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input your home address using the format given."
+                      />
                   </div>
+                  </div>
+
                   <div className="w-full px-3 mb-3 md:mb-0 mt-2">
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="studyaddress">
                       Address while studying at BSU :
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-studyaddress" 
                     type="text" 
-                    placeholder=""
+                    title="Input your address while studying at BSU using the format given."
+                    placeholder="Bldg No., Street, Barangay, City/Municipality"
                     value={addressWhileStudyingAtBsu}
                     onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input your address while studying at BSU using the format given."
+                      />
+                  </div>
                   </div>
                 </div> <hr />
 
-                {/**=========================== Emergy Contact ==========================*/} 
+                {/**=========================== Emergency Contact ==========================*/} 
                 <div className="text-normal font-medium text-center mt-2">EMERGENCY CONTACT (Person to be contacted in case of emergency)</div> <hr className='mt-2'/>
                 <div className="flex flex-wrap -mx-3 mb-2"> 
                   
                   {/*column1*/}
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactname">Complete Name :</label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-contactname" 
                     type="text" 
-                    placeholder=""
+                    placeholder="Given Name M.I. Last Name"
+                    pattern="[a-zA-Z .]+"
+                    title="Input the name of the person to be contacted in case of emergency using the format given."
                     value={emergencyContactName}
-                    onChange={ev => setEmergencyContactName(ev.target.value)}/>
-                    
+                    onChange={ev => {
+                      const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
+                      setEmergencyContactName(value);
+                    }}/>
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input the name of the person to be contacted in case of emergency using the format given."
+                      />
+                  </div>
+
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-address">Address :</label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-address" 
                       type="text" 
-                      placeholder=""
+                      placeholder="Bldg No., Street, Barangay, City/Municipality"
+                      title="Input the address of the person to be contacted in case of emergency using the format given."
                       value={emergencyContactAddress}
                       onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
+                       <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input the address of the person to be contacted in case of emergency using the format given."/>
+                  </div>
                   </div>
 
                   {/*column2*/}
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-2">
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnum">
                       Contact Number :
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-contactnum" 
-                    type="number"
-                    onUpM
-                    placeholder=""
+                    type="text" 
+                    pattern="^09[0-9]{9}$"
+                    placeholder="09XXXXXXXXX"
+                    title="Input the contact number of the person to be contacted in case of emergency using the format given."
+                    maxLength={11}
                     value={emergencyContactNumber}
-                    onChange={ev => setEmergencyContactNumber(ev.target.value)}
+                    onChange={ev => {
+                      const value = ev.target.value.replace(/\D/g, '');
+                      setEmergencyContactNumber(value);}}
                     />
-                        
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input the contact number of the person to be contacted in case of emergency using the format given."
+                      />
+                    </div>
+
+                    <div className="input-container relative">    
                     <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-relationship">
                       Relationship :
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-relationship" 
                     type="text" 
-                    placeholder=""
+                    pattern="[a-zA-Z/ ]+"
+                    title="Input your relationship with the person to be contacted in case of emergency. Example: Parent"
                     value={relationship}
-                    onChange={ev => setRelationship(ev.target.value)}/>
+                    onChange={ev => {
+                      const value = ev.target.value.replace(/[^A-Za-z/ ]/g, '');
+                      setRelationship(value);
+                    }}/>
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input your relationship with the person to be contacted in case of emergency. Example: Parent"
+                      />
+                  </div>
                   </div>
                 </div> <hr />
 
@@ -1114,7 +1170,8 @@ export default function PreRegistrationForm() {
                                         id="yescontribute"
                                         value="YesContribute" 
                                         checked={voluntarycontribution === 'YesContribute'}
-                                        onChange={ev => setvoluntarycontribution(ev.target.value)}
+                                        onChange={ev => {setvoluntarycontribution(ev.target.value);
+                                                        setcontributionamount("");}}
                                     />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -1129,7 +1186,8 @@ export default function PreRegistrationForm() {
                                         id="nocontribute"
                                         value="NoContribute" 
                                         checked={voluntarycontribution === 'NoContribute'}
-                                        onChange={ev => setvoluntarycontribution(ev.target.value)}
+                                        onChange={ev => {setvoluntarycontribution(ev.target.value);
+                                                        setcontributionamount(0);}}
                                     />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -1141,16 +1199,30 @@ export default function PreRegistrationForm() {
 
                   {/**column4 */}
                   <div className="w-full md:w-[30%] px-3 mb-6 md:mb-0 mt-2">
+                  <div className="input-container relative">
                     <label className=" text-gray-700 text-xs font-bold mb-2">
                       AMOUNT <em>(If YES, indicate amount)</em>
                     </label>
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-amtcontibute" 
                     type="text" 
-                    placeholder=""
+                    pattern="\d{0,12}"
+                    maxLength={12}
+                    title="Input numeric characters only. (0 to 9)"
+                    inputmode="numeric"
                     value={contributionamount}
-                    onChange={ev => setcontributionamount(ev.target.value)}
+                    onChange={ev => {
+                      // Ensure that only numeric values are entered
+                      const value = ev.target.value.replace(/\D/g, '');
+                      setcontributionamount(value);}}
                     />
+                    <img
+                        src={info}
+                        alt="info"
+                        className="absolute right-3 top-[50%] h-6 w-6"
+                        title="Input numeric characters only. (0 to 9)"
+                      />
+                  </div>
                   </div>
                 </div>
                 
