@@ -20,7 +20,7 @@ export default function DeleteEmailDomainModal({ closeModal, emailDomain, onDele
                 setSuccessMessage(null);
                 onDelete(); // Trigger a callback to update the UI or close the modal
                 closeModal(); // Close the modal after successful deletion
-            }, 3000);
+            }, 2000);
             window.location.reload(true);
 
         } catch (error) {

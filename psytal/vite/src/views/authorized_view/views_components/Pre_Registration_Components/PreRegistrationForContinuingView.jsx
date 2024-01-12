@@ -336,31 +336,6 @@ export default function PreRegistrationForContinuingView({prereg}) {
           console.error(`Field ${candidate_for_graduation} not found`);
          }
          const student_status = form.getTextField('text_10bwea'); //Unedited PDF form, still working
-
-        // // Check or uncheck each checkbox based on the value of Candidate for Graduation
-        // const checkboxSHS = form.getCheckBox('text_c_candidate');
-        // const checkboxHS = form.getCheckBox('checkbox_HS');
-        // const checkboxALS = form.getCheckBox('checkbox_ALS');
-        // const academicClassification = preregData.academic_classification;
-        // if (academicClassification === 'SHS graduate') {
-        //   checkboxSHS.check();
-        // } else {
-        //   checkboxSHS.uncheck();
-        // }
-
-        // if (academicClassification === 'HS graduate') {
-        //   checkboxHS.check();
-        // } else {
-        //   checkboxHS.uncheck();
-        // }
-
-        // if (academicClassification === 'ALS completer') {
-        //   checkboxALS.check();
-        // } else {
-        //   checkboxALS.uncheck();
-        // }
-
-
          const degreeProgram = form.getTextField('text_c_degree');
          const major = form.getTextField('text_c_major');
          const end_of_term_to_finnish_degree = form.getTextField('text_c_endTerm');
@@ -372,7 +347,6 @@ export default function PreRegistrationForContinuingView({prereg}) {
          const sexAtBirth = form.getTextField('text_c_student_sex');
          const specialNeeds = form.getTextField('text_c_special_needs');
          const emailAddress = form.getTextField('text_c_student_email');
-         
 
          const contactNumber = form.getTextField('text_c_student_contact_num');
          if (contactNumber) {
@@ -475,16 +449,6 @@ export default function PreRegistrationForContinuingView({prereg}) {
            console.log("checkbox", voluntaryContribution);
          }
 
-        //const compliedToAdmissionPolicy = form.getTextField('text_c_fhe_complied'); TO ADD, FRONTEND NOT YET FINISHED
-        //const curriculum_used = form.getTextField('text_c_curriculum_used'); TO ADD, FRONTEND NOT YET FINISHED
-        // add here major if applicable
-        // add here year level
-        // add here readmission form
-        // add here need shifting form
-        // add here end of residency
-        // add here section
-        // add here Irregular students code/units/course/total units
-
          name.setText(fullName)
          maidenName.setText(preregData.maiden_name);
          degreeProgram.setText(preregData.degree);
@@ -508,16 +472,6 @@ export default function PreRegistrationForContinuingView({prereg}) {
          vaccinationStatus.setText(preregData.vaccination_status);
         student_status.setText(preregData.student_status);
 
-        //compliedToAdmissionPolicy.setText(preregData.compliedToAdmissionPolicy); TO ADD, FRONTEND NOT YET FINISHED
-        //curriculum_used.setText(preregData.curriculum_used); TO ADD, FRONTEND NOT YET FINISHED
-        // add here major if applicable
-        // add here year level
-        // add here readmission form
-        // add here need shifting form
-        // add here end of residency
-        // add here section
-        // add here Irregular students code/units/course/total units
-        
         const finalPDF = await pdfDoc.save();
         
         download(finalPDF, 'Student_Continuing.pdf', 'application/pdf');
@@ -548,6 +502,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
       });
     };
 
+    console.log(preregData)
 
   return (
     <>
@@ -645,6 +600,8 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                 id="grid-studentSchoolID" 
                                 type="number" 
                                 placeholder=""
+                                value={preregData.student_school_id}
+                                onChange={(ev) => setPreregData({ ...preregData, student_school_id: ev.target.value })} 
                                 />  
                             </div>
                             {/**column1 */}
@@ -765,8 +722,8 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                             type="radio"
                                             name="candidateofgraduation"
                                             id="yes"
-                                            value='Yes' 
-                                            checked={preregData.candidate_for_graduation === 'Yes'}
+                                            value='YesCandidate' 
+                                            checked={preregData.candidate_for_graduation === 'YesCandidate'}
                                             onChange={(ev) => setPreregData({ ...preregData, candidate_for_graduation: ev.target.value })}
                                             />
                                             
@@ -782,11 +739,11 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                             type="radio"
                                             name="candidateofgraduation"
                                             id="no"
-                                            value="No"
-                                            checked={preregData.candidate_for_graduation === 'No'}
+                                            value="NoCandidate"
+                                            checked={preregData.candidate_for_graduation === 'NoCandidate'}
                                             onChange={(ev) => setPreregData({ ...preregData, candidate_for_graduation: ev.target.value })}
                                             />
-                                            
+    
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
                                             htmlFor="candidateforgrad">No
@@ -823,8 +780,8 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                             name="studentstatus"
                                             id="yes"
                                             value="Regular" 
-                                            checked={preregData.type_of_student === 'Regular'}
-                                            onChange={(ev) => setPreregData({ ...preregData, type_of_student: ev.target.value })}
+                                            checked={preregData.student_status === 'Regular'}
+                                            onChange={(ev) => setPreregData({ ...preregData, student_status: ev.target.value })}
                                             />
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -839,8 +796,8 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                             name="studentstatus"
                                             id="no"
                                             value="Irregular"
-                                            checked={preregData.type_of_student === 'Irregular'}
-                                            onChange={(ev) => setPreregData({ ...preregData, type_of_student: ev.target.value })}
+                                            checked={preregData.student_status === 'Irregular'}student_status
+                                            onChange={(ev) => setPreregData({ ...preregData, student_status: ev.target.value })}
                                             />
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -1160,7 +1117,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                 name="highlvl"
                                 id="highlvl"
                                 value="High Level" 
-                                checked={preregData.technology_level === 'High Level'}
+                                checked={preregData.technology_level === 'category1'}
                                 onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
                                 />
                         <label
@@ -1177,7 +1134,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                 name="mediumlvl"
                                 id="mediumlvl"
                                 value="Medium Level" 
-                                checked={preregData.technology_level === 'Medium Level'}
+                                checked={preregData.technology_level === 'category2'}
                                 onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
                                 />
                         <label
@@ -1194,7 +1151,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                 name="lowlvl"
                                 id="lowlvl"
                                 value="Low Level" 
-                                checked={preregData.technology_level === 'Low Level'}
+                                checked={preregData.technology_level === 'category3'}
                                 onChange={(ev) => setPreregData({ ...preregData, technology_level: ev.target.value })}
                                 />
                         <label
@@ -1220,7 +1177,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                               name="proficient"
                               id="proficient"
                               value="Proficient" 
-                              checked={preregData.digital_literacy === 'Proficient'}
+                              checked={preregData.digital_literacy === 'lvl1'}
                               onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}
                               />
                       <label
@@ -1235,7 +1192,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                               name="advanced"
                               id="advanced"
                               value="Advanced" 
-                              checked={preregData.digital_literacy === 'Advanced'}
+                              checked={preregData.digital_literacy === 'lvl2'}
                               onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}
                               />
                       <label
@@ -1250,7 +1207,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                               name="beginner"
                               id="beginner"
                               value="Beginner" 
-                              checked={preregData.digital_literacy === 'Beginner'}
+                              checked={preregData.digital_literacy === 'lvl3'}
                               onChange={(ev) => setPreregData({ ...preregData, digital_literacy: ev.target.value })}
                               />
                       <label

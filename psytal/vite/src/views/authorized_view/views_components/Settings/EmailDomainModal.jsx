@@ -77,13 +77,13 @@ export default function EmailDomainModal({closeModal}) {
           });
           
           // Assuming the server response contains the newly added email domain
-          // const updatedEmailDomains = [...existingEmailDomains, {
-          //   id: data.id,
-          //   email_domains: data.email_domains,
-          //   created_at: data.created_at,
-          //   updated_at: data.updated_at,
-          //   deleted_at: data.deleted_at,
-          // }]; NOT WORKING
+          const updatedEmailDomains = [...existingEmailDomains, {
+            id: data.id,
+            email_domains: data.email_domains,
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            deleted_at: data.deleted_at,
+          }]; //NOT WORKING
 
           setExistingEmailDomains(updatedEmailDomains);
 
