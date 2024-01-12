@@ -145,7 +145,7 @@ export default function PreRegistrationForm() {
         closeModal();
         handleClear();//not working
         navigate('/');//not working
-      }, 7000);
+      }, 2000);
     })
     .catch(( error ) => {
       if (error.response) {
