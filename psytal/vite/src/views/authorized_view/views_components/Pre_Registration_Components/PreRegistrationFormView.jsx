@@ -1352,7 +1352,7 @@ const handleChangeUnits = (index, value) => {
                           name="yesavail"
                           id="yesavail"
                           value="Yes"
-                          checked={preregData.avail_free_higher_education === 'Yes'}
+                          checked={preregData.avail_free_higher_education === 'YesAvail'}
                           onChange={(ev) => setPreregData({ ...preregData, avail_free_higher_education: ev.target.value })}
                           />
                           <label
@@ -1367,7 +1367,7 @@ const handleChangeUnits = (index, value) => {
                           name="noavail"
                           id="noavail"
                           value="No" 
-                          checked={preregData.avail_free_higher_education === 'No'}
+                          checked={preregData.avail_free_higher_education === 'NoAvail'}
                           onChange={(ev) => setPreregData({ ...preregData, avail_free_higher_education: ev.target.value })}
                           />
                           <label
@@ -1391,7 +1391,7 @@ const handleChangeUnits = (index, value) => {
                           name="yescontribute"
                           id="yescontribute"
                           value="Yes"
-                          checked={preregData.voluntary_contribution === 'Yes'}
+                          checked={preregData.voluntary_contribution === 'YesContribute'}
                           onChange={(ev) => setPreregData({ ...preregData, voluntary_contribution: ev.target.value })} />
                           
                           <label
@@ -1406,7 +1406,7 @@ const handleChangeUnits = (index, value) => {
                           name="nocontribute"
                           id="nocontribute"
                           value="No"
-                          checked={preregData.voluntary_contribution === 'No'}
+                          checked={preregData.voluntary_contribution === 'NoContribute'}
                           onChange={(ev) => setPreregData({ ...preregData, voluntary_contribution: ev.target.value })} 
                           />
                           

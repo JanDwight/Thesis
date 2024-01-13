@@ -3,6 +3,7 @@ import axiosClient from '../../../axios.js';
 
 export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const [selectedRows, setSelectedRows] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   if (!showModal) {
     return null;
@@ -27,14 +28,19 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     try {
       // Make a POST request to your backend endpoint with selectedItems as the request payload
       const response = await axiosClient.post('/backup_archives', { selectedItems });
+      setSuccessMessage({
+        message: 'Items backed up and deleted successfully!',
+      });
 
+      setTimeout(() => {
+        setSuccessMessage(null);
+        setSelectedRows([]);
+        onClose();
+        window.location.reload();
+      }, 3000);
       // Handle the response from the backend as needed
       console.log('Response from backend:', response.data);
-
-      // Reset selectedRows when handling restore
-      setSelectedRows([]);
-      onClose();
-      window.location.reload();
+      
     } catch (error) {
       console.error('Error restoring items:', error);
       // Handle errors
@@ -55,10 +61,19 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
       // Handle the response from the backend as needed
       console.log('Response from backend:', response.data);
 
+      setSuccessMessage({
+        message: 'The USER has been restored successfully!',
+      });
+
+      setTimeout(() => {
+        setSuccessMessage(null);
+        setSelectedRows([]);
+        onClose();
+        window.location.reload();
+      }, 3000);
+  
       // Reset selectedRows when handling restore
-      setSelectedRows([]);
-      onClose();
-      window.location.reload();
+      
     } catch (error) {
       console.error('Error restoring items:', error);
       // Handle errors
@@ -126,6 +141,18 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
           </button>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+    
   );
 }
