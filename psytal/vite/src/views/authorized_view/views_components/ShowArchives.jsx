@@ -5,6 +5,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
   const [selectedRows, setSelectedRows] = useState([]);
   const [successMessage, setSuccessMessage] = useState(null);
 
+
   if (!showModal) {
     return null;
   }
@@ -24,6 +25,17 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     // Get the data of the selected rows
     const selectedItems = selectedRows.map((index) => dataTable[index].id);
     console.log('Selected Items for backup:', selectedItems);
+
+    if (selectedItems.length === 0) {
+      // No items selected, show an error message
+      setSuccessMessage({
+        message: 'There is nothing to backup. Please select items to backup.',
+      });
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 3000);
+      return;
+    }
     
     try {
       // Make a POST request to your backend endpoint with selectedItems as the request payload
@@ -53,6 +65,17 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
     // Get the data of the selected rows
     const selectedItems = selectedRows.map((index) => dataTable[index].id);
     console.log('Selected:', selectedItems);
+
+    if (selectedItems.length === 0) {
+      // No items selected, show an error message
+      setSuccessMessage({
+        message: 'There is nothing to restore. Please select items to restore.',
+      });
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 3000);
+      return;
+    }
 
     try {
       // Make a POST request to your backend endpoint with selectedItems as the request payload
