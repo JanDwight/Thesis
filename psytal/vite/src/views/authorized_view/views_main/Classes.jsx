@@ -33,7 +33,7 @@ export default function Classes(){
 
     return(
     <>
-        <div className="w-full h-[auto] rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[auto] rounded-3xl bg-white shadow-2xl pt-5 pb-12 table-container overflow-y-auto">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Classes</div>
 
