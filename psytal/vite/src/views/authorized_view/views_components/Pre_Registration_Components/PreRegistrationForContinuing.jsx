@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import schoolLogo from "@assets/BSUlogo.png";
+import info from "@assets/info.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 
@@ -199,7 +200,7 @@ export default function PreRegistrationForContinuing() {
 
   return (
     <>
-    <main className="w-[100%] h-[100%] py-[10%]">
+    <main className="w-[100%] h-[100%]">
         <div className="lg:w-8/12 px-4 container mx-auto">          
             <div className="rounded-t bg-grayGreen mb-0 px-6 py-9 items-center  "> {/**BOX  with contents*/}
                 <section style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

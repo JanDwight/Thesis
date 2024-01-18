@@ -62,7 +62,7 @@ class PreRegistrationIncomingTmpRequest extends FormRequest
             'digital_literacy' => 'string',
             'avail_free_higher_education' => 'string',
             'voluntary_contribution' => 'string',
-            'contribution_amount' => 'string',
+            'contribution_amount' => 'integer',
             'complied_to_admission_policy' => 'string',
             'section' => 'string',
             'image' => 'string',

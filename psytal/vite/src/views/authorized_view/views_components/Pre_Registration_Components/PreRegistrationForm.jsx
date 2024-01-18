@@ -411,12 +411,12 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMaidenname" 
                     type="text" 
-                    pattern="[a-zA-Z/ ]+"
+                    pattern="[a-zA-Z\/ ]+"
                     title="Input 'N/A' if not applicable."
                     value={maidenName}
                     maxLength={30}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z/ ]/g, '');
+                      const value = ev.target.value.replace(/[a-zA-Z\/ ]/g, '');
                       setMaidenName(value);
                     }}
                     />  
@@ -857,11 +857,11 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-relationship" 
                     type="text" 
-                    pattern="[a-zA-Z/ ]+"
+                    pattern="[a-zA-Z\/ ]+"
                     title="Input your relationship with the person to be contacted in case of emergency. Example: Parent"
                     value={relationship}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z/ ]/g, '');
+                      const value = ev.target.value.replace(/[a-zA-Z\/ ]/g, '');
                       setRelationship(value);
                     }}/>
                     <img
@@ -1211,10 +1211,7 @@ export default function PreRegistrationForm() {
                     title="Input numeric characters only. (0 to 9)"
                     inputmode="numeric"
                     value={contributionamount}
-                    onChange={ev => {
-                      // Ensure that only numeric values are entered
-                      const value = ev.target.value.replace(/\D/g, '');
-                      setcontributionamount(value);}}
+                    onChange={ev => {setcontributionamount(ev.target.value);}}
                     />
                     <img
                         src={info}
