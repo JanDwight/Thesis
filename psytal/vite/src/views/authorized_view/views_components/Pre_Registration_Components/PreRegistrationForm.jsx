@@ -601,11 +601,11 @@ export default function PreRegistrationForm() {
                     id="grid-ethnicity" 
                     type="text" 
                     placeholder=""
-                    pattern="[a-zA-Z ]+"
+                    pattern="[^a-zA-Z\s/]+"
                     value={ethnicity}
                     title="Input your Ethnicity or Tribal Affilation. Example: Ilocano"
                     onChange={ev => {
-                      const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
+                      const value = ev.target.value.replace(/[^a-zA-Z\s/]/g, '');
                       setEthnicity(value);
                     }}/>
                     <img
