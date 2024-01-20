@@ -62,7 +62,7 @@ export default function InputEmail() {
 
   return (
     <>
-      <div className='flex min-h-full flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8'>
+      <div className='flex min-h-[100%] flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8'>
         <div className="flex items-center justify-between">
           <label htmlFor="password" className="block font-medium leading-6 text-gray-900 text-xl">
             Please Enter Your Email:
@@ -73,7 +73,7 @@ export default function InputEmail() {
             <input
               name="end"
               type="text"
-              className="flex w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+              className="w-[100%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
               value={email}
               onChange={ev => setEmail(ev.target.value)}
             />
@@ -81,7 +81,7 @@ export default function InputEmail() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-lime-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-[100%] justify-center rounded-md bg-lime-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Send Code
             </button>
@@ -102,9 +102,9 @@ export default function InputEmail() {
             </div>
       </ReactModal>
       {successMessage && (
-        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+        <div className="fixed top-0 left-0 w-[100%] h-[100%] overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
-            <div className="w-full px-4 mx-auto mt-6">
+            <div className="w-[100%] px-4 mx-auto mt-6">
               <div className="text-center text-xl text-green-600 font-semibold my-3">
                 {successMessage.message}
               </div>

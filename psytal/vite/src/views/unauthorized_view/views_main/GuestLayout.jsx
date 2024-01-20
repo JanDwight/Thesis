@@ -50,11 +50,11 @@ export default function GuestLayout() {
     <>
       <div>
         <header>
-        <Disclosure as="nav" className="fixed h-[20%] w-full z-20 bg-gray-600">
+        <Disclosure as="nav" className="fixed h-[20%] w-[100%] z-20 bg-gray-600">
           {({ open }) => (
             <>
             {/* 1st Header */}
-            <div  className="bg-viridian w-full"> 
+            <div  className="bg-viridian w-[100%]"> 
               <div className="flex justify-center space-x-5 px-10 py-2">
                 <div className="flex items-center">
                   <a href="/landingpage">
@@ -138,7 +138,7 @@ export default function GuestLayout() {
 
       <div>
         <main>
-          <div className='h-screen w-full py-[10%]'>
+          <div className='h-[100%] w-[100%] py-[1%]'>
             <Outlet/>
           </div>
         </main>

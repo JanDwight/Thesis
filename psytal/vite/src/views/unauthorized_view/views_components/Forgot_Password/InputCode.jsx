@@ -54,7 +54,7 @@ export default function InputCode({ closeModal, propData}) {
 
   return (
     <>
-      <div className='flex min-h-full flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8'>
+      <div className='flex min-h-[100%] flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8'>
         <div className='flex items-center justify-between'>
           <label htmlFor='password' className='block text-xl font-medium leading-6 text-gray-900'>
             Please Enter The 4-Digit Code We Sent You:
@@ -75,7 +75,7 @@ export default function InputCode({ closeModal, propData}) {
           <div>
             <button
               type='submit'
-              className='flex w-full justify-center rounded-md bg-lime-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+              className='flex w-[100%] justify-center rounded-md bg-lime-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
             >
               Enter
             </button>
@@ -83,9 +83,9 @@ export default function InputCode({ closeModal, propData}) {
         </form>
       </div>
       {successMessage && (
-        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+        <div className="fixed top-0 left-0 w-[100%] h-[100%] overflow-y-auto bg-black bg-opacity-50">
           <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
-            <div className="w-full px-4 mx-auto mt-6">
+            <div className="w-[100%] px-4 mx-auto mt-6">
               <div className="text-center text-xl text-green-600 font-semibold my-3">
                 {successMessage.message}
               </div>
