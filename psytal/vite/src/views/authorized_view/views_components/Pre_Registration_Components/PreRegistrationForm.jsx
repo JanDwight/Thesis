@@ -528,7 +528,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-addresslastschoolattended" 
                     type="text"
-                    title="Input the school address using the format given."
+                    title="Input the school address using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                     placeholder="Bldg No., Street, Barangay, City/Municipality"
                     value={addressOfSchoolAttended}
                     onChange={ev => setAddressOfSchoolAttended(ev.target.value)}/>  
@@ -536,7 +536,7 @@ export default function PreRegistrationForm() {
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input the school address using the format given."
+                        title="Input the school address using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                       />
                   </div>
                   </div>
@@ -623,18 +623,18 @@ export default function PreRegistrationForm() {
                     type="text" 
                     pattern="^09[0-9]{9}$"
                     placeholder="09XXXXXXXXX"
-                    title="Input your contact number using the format given."
+                    title="Input your contact number using the format given. FORMAT: 09XXXXXXXXX"
                     maxLength={11}
                     value={contactNumber}
                     onChange={ev => {
-                      const value = ev.target.value.replace(/\D/g, '');
-                      setContactNumber(value);}}
+                        const value = ev.target.value.replace(/\D/g, '');
+                        setContactNumber(value);}}
                     /> 
                     <img
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your Contact Number using the format given."
+                        title="Input your contact number using the format given. FORMAT: 09XXXXXXXXX"
                       />
                     </div>                   
                   </div>
@@ -745,7 +745,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-homeaddress" 
                     type="text" 
-                    title="Input your home address using the format given."
+                    title="Input your home address using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                     placeholder="Bldg No., Street, Barangay, City/Municipality"
                     value={homeAddress}
                     onChange={ev => setHomeAddress(ev.target.value)}/>
@@ -753,7 +753,7 @@ export default function PreRegistrationForm() {
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your home address using the format given."
+                        title="Input your home address using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                       />
                   </div>
                   </div>
@@ -766,7 +766,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-studyaddress" 
                     type="text" 
-                    title="Input your address while studying at BSU using the format given."
+                    title="Input your address while studying at BSU using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                     placeholder="Bldg No., Street, Barangay, City/Municipality"
                     value={addressWhileStudyingAtBsu}
                     onChange={ev => setAddressWhileStudyingAtBsu(ev.target.value)}/>
@@ -774,7 +774,7 @@ export default function PreRegistrationForm() {
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input your address while studying at BSU using the format given."
+                        title="Input your address while studying at BSU using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                       />
                   </div>
                   </div>
@@ -793,7 +793,7 @@ export default function PreRegistrationForm() {
                     type="text" 
                     placeholder="Given Name M.I. Last Name"
                     pattern="[a-zA-Z .]+"
-                    title="Input the name of the person to be contacted in case of emergency using the format given."
+                    title="Input the name of the person to be contacted in case of emergency using the format given. FORMAT: Given Name M.I. Last Name"
                     value={emergencyContactName}
                     onChange={ev => {
                       const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
@@ -803,7 +803,7 @@ export default function PreRegistrationForm() {
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input the name of the person to be contacted in case of emergency using the format given."
+                        title="Input the name of the person to be contacted in case of emergency using the format given. FORMAT: Given Name M.I. Last Name"
                       />
                   </div>
 
@@ -813,14 +813,14 @@ export default function PreRegistrationForm() {
                       id="grid-address" 
                       type="text" 
                       placeholder="Bldg No., Street, Barangay, City/Municipality"
-                      title="Input the address of the person to be contacted in case of emergency using the format given."
+                      title="Input the address of the person to be contacted in case of emergency using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"
                       value={emergencyContactAddress}
                       onChange={ev => setEmergencyContactAddress(ev.target.value)}/>
                        <img
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input the address of the person to be contacted in case of emergency using the format given."/>
+                        title="Input the address of the person to be contacted in case of emergency using the format given. FORMAT: Bldg No., Street, Barangay, City/Municipality"/>
                   </div>
                   </div>
 
@@ -835,7 +835,7 @@ export default function PreRegistrationForm() {
                     type="text" 
                     pattern="^09[0-9]{9}$"
                     placeholder="09XXXXXXXXX"
-                    title="Input the contact number of the person to be contacted in case of emergency using the format given."
+                    title="Input the contact number of the person to be contacted in case of emergency using the format given. FORMAT: 09XXXXXXXXX"
                     maxLength={11}
                     value={emergencyContactNumber}
                     onChange={ev => {
@@ -846,7 +846,7 @@ export default function PreRegistrationForm() {
                         src={info}
                         alt="info"
                         className="absolute right-3 top-[50%] h-6 w-6"
-                        title="Input the contact number of the person to be contacted in case of emergency using the format given."
+                        title="Input the contact number of the person to be contacted in case of emergency using the format given. FORMAT: 09XXXXXXXXX"
                       />
                     </div>
 
@@ -1187,7 +1187,9 @@ export default function PreRegistrationForm() {
                                         value="NoContribute" 
                                         checked={voluntarycontribution === 'NoContribute'}
                                         onChange={ev => {setvoluntarycontribution(ev.target.value);
-                                                        setcontributionamount(0);}}
+                                                        setcontributionamount(0);
+                                                        const inputField = document.getElementById('grid-amtcontibute');
+                                                        inputField.disabled = true;}}
                                     />
                                     <label
                                         className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -1211,7 +1213,10 @@ export default function PreRegistrationForm() {
                     title="Input numeric characters only. (0 to 9)"
                     inputmode="numeric"
                     value={contributionamount}
-                    onChange={ev => {setcontributionamount(ev.target.value);}}
+                    disabled={false}
+                    onChange={ev => {
+                      const value = ev.target.value.replace(/\D/g, '');
+                      setcontributionamount(value);}}
                     />
                     <img
                         src={info}

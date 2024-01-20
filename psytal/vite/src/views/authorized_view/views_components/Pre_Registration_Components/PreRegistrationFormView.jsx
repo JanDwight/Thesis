@@ -598,7 +598,7 @@ const handleChangeUnits = (index, value) => {
 
         //compliedToAdmissionPolicy.setText(preregData.first_name); TO ADD, FRONTEND NOT YET FINISHED
         
-        //const finalPDF = await pdfDoc.save();
+        const finalPDF = await pdfDoc.save();
         
         download(finalPDF, 'pdf-lib_form_creation_example.pdf', 'application/pdf');
       } catch (error) {
@@ -694,13 +694,18 @@ const handleChangeUnits = (index, value) => {
               {/**=========================== Schoolyear - Date ==========================*/}  
               <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
-                    School year :
-                  </label>
-                  <span className="text-sm mt-2 pl-10"> First Semester </span> 
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
+                      Semester :
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                     value= "First Semester"
+                     />
                 </div>
                 
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
+                      School Year :
+                    </label>
                   <div className="flex items-center mt-2 pl-3">
                     <div className="relative w-fit">
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -711,7 +716,7 @@ const handleChangeUnits = (index, value) => {
                         name="start"
                         type="number" 
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                        placeholder="20-"
+                        placeholder="20XX"
                         min="2000" // Minimum year
                         max="2099" // Maximum year
                         step="1" // Year step
@@ -728,7 +733,7 @@ const handleChangeUnits = (index, value) => {
                         name="end"
                         type="number" 
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                        placeholder="20-"
+                        placeholder="20XX"
                         min="2000" 
                         max="2099" 
                         step="1" 
@@ -963,7 +968,7 @@ const handleChangeUnits = (index, value) => {
                   <label className=" text-gray-700 text-xs font-bold mb-2" htmlFor="grid-contactnumber">Contact Number :</label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                    id="grid-contactnumber" 
-                   type="number" 
+                   type="text" 
                    placeholder=""
                    value={preregData.contact_number}
                    onChange={(ev) => setPreregData({ ...preregData, contact_number: ev.target.value })}
@@ -1076,8 +1081,7 @@ const handleChangeUnits = (index, value) => {
                   </label>
                   <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                    id="grid-contactnum" 
-                   type="number"
-                   onUpM
+                   type="text"
                    placeholder=""
                    value={preregData.contact_person_number}
                    onChange={(ev) => setPreregData({ ...preregData, contact_person_number: ev.target.value })}
