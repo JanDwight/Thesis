@@ -4,12 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\EmailDomainsController;
 use App\Http\Controllers\EmployeeProfileController;
+use App\Http\Controllers\InstructorClassesController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PreregistrationIncomingTmpController;
 use App\Http\Controllers\SemesterInformationController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UpdateLinksController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\UserController;
@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/classes', [ClassesController::class, 'index']); //<><><> index classes
     Route::put('/updateclasses/{id}', [ClassesController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ClassesController::class, 'archiveclasses']); //<><><> archive class
+    Route::get('/instructorclasses', [InstructorClassesController::class, 'index']);
 
     //edit/add class modal
     Route::get('/show_instructors', [UserController::class, 'show_instructors']); //<><><><><><><>

@@ -625,8 +625,8 @@ const handleChangeUnits = (index, value) => {
     axiosClient.post('/student_subject', {
       studentData: preregData,
       subjectData: inputFields.slice(0, -1).map(field => ({ ...field })), // Exclude the last element
-    }).then(console.log('1', inputFields))
-
+    }).then(data)
+    console.log('This is the Data: ', data)
     //--------------------------// <><><><><>
 
   };

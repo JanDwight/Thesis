@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\instructor_classes;
+use App\Models\classes;
+use App\Models\student_classes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class InstructorClassesController extends Controller
@@ -12,7 +14,24 @@ class InstructorClassesController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $studentClasses = student_classes::where('archived', 0)
+            ->where('instructor_profile', $user->name)
+            ->get();
+
+        if ($studentClasses->isEmpty()) {
+            return response()->json(['message' => 'No classes found for the instructor.'], 404);
+        }
+
+        $classDetails = [];
+
+            foreach ($studentClasses as $subject) {
+                $classDetails[] = classes::where('archived', 0)
+                ->where('class_id', $subject->class_id)->first();
+            }
+
+        return response()->json($classDetails);
     }
 
     /**

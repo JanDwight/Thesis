@@ -20,16 +20,16 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
     async function fetchTable() {
 
       const [show_instructors] = await Promise.all([
-        fetchInstructorData('/show_instructors'),
-      ]);
-      console.log('data: ', show_instructors);
+       fetchInstructorData('/show_instructors'),
+       ]);
+       console.log('data: ', show_instructors);
 
-      const instructor_Table = show_instructors.map(instructor => ({
-        id: instructor.id,
-        name: instructor.name,
-      }));
+       const instructor_Table = show_instructors.map(instructor => ({
+         id: instructor.id,
+         name: instructor.name,
+       }));
       
-      setInstructorsTable(instructor_Table);
+       setInstructorsTable(instructor_Table);
     }
 
     async function fetchInstructorData(endpoint) {

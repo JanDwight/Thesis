@@ -30,6 +30,7 @@ class AttachSubjectController extends Controller
             return response()->json(['error' => 'Student not found.'], 404);
         }
 
+        
         // Retrieve the student_profile_id
         $studentProfileID = $student->student_profile_id;
 
@@ -41,14 +42,19 @@ class AttachSubjectController extends Controller
         
             // Set the attributes
             $studentClasses->student_profile_id = $studentProfileID;
-            $studentClasses->class_id = $subject['class_id']; // Adjust this line based on your data structure
+            $studentClasses->class_id = $subject['class_id']; 
             $studentClasses->grade = '0';
-        
+            
+            $instructor = classes::findOrFail($subject['class_id']);
+            
+            $instructorName = $instructor->instructor_name;
+
+            $studentClasses->instructor_profile = $instructorName;
             // Save the record to the student_classes table
             $studentClasses->save();
         }
 
-        return response()->json(['message' => $subjects]);
+        return response()->json(['message' => $instructor]);
     }
 
     //
@@ -97,6 +103,7 @@ class AttachSubjectController extends Controller
         if ($class) {
             $studentProfile->classes()->attach($class->class_id, [
                 'student_profile_id' => $studentProfile->student_profile_id,
+                'instructor_profile' => $class->instructor_name,
                 'class_code' => $classCode2,
                 'course_code' => $courseCode,
                 'units' => $unit,

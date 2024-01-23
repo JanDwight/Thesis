@@ -14,7 +14,7 @@ export default function CurriculumChecklist(){
         
         const fetchCurriculum = async () => {
             try {
-              const response = await axiosClient.get('/getcurriculum');
+              const response = await axiosClient.get('/curriculumnCheckListIndex');
               setCurriculum(response.data.curriculum);
             } catch (error) {
               console.error(error);
@@ -22,11 +22,12 @@ export default function CurriculumChecklist(){
           };
 
           const [grade, setGrade] = useState([]);   
+          
           useEffect(() => {
               fetchGrade();
             }, []);
           
-          const fetchGrade = async () => {
+            const fetchGrade = async () => {
               try {
                 const response = await axiosClient.get('/getgrade');
                 setGrade(response.data.grade);
@@ -46,7 +47,7 @@ export default function CurriculumChecklist(){
     curriculum.hoursperWeek.toString().includes(filterText) ||
     curriculum.course_type.toLowerCase().includes(filterText.toLowerCase()) ||
     curriculum.preReq.toLowerCase().includes(filterText.toLowerCase()) ||
-    grade.grade.toString().includes(filterText) // this should be from studentclasslist db
+    curriculum.grade.toString().includes(filterText) // this should be from studentclasslist db
 
   );
 
@@ -78,40 +79,44 @@ export default function CurriculumChecklist(){
             </div>
             
             <div className="table-container overflow-y-auto">
-            <table className="table w-full table-striped text-gray-700 mt-5">
-		            <thead>
-		              <tr>
-                    <th className="text-center bg-gray-200 p-2">Class Year</th>
-                    <th className="text-center bg-gray-200 p-2">Semester</th>
-                    <th className="text-center bg-gray-200 p-2">Course Code</th>
-                    <th className="text-center bg-gray-200 p-2">Units</th>
-                    <th className="text-center bg-gray-200 p-2">Course Title</th>
-                    <th className="text-center bg-gray-200 p-2">Hours/Week</th>
-                    <th className="text-center bg-gray-200 p-2">Lec/Lab</th>
-                    <th className="text-center bg-gray-200 p-2">Pre-Requisite</th>
-                    <th className="text-center bg-gray-200 p-2">Grade</th>
-		              </tr>
-                </thead>
+              {curriculum.length === 0 ? (
+                <p className="text-center text-gray-500 text-lg font-bold my-8">No Data To Show</p>
+                  ) : (
+                    <table className="table w-full table-striped text-gray-700 mt-5">
+		                    <thead>
+		                      <tr>
+                            <th className="text-center bg-gray-200 p-2">Class Year</th>
+                            <th className="text-center bg-gray-200 p-2">Semester</th>
+                            <th className="text-center bg-gray-200 p-2">Course Code</th>
+                            <th className="text-center bg-gray-200 p-2">Units</th>
+                            <th className="text-center bg-gray-200 p-2">Course Title</th>
+                            {/* {<th className="text-center bg-gray-200 p-2">Hours/Week</th>} */}
+                            <th className="text-center bg-gray-200 p-2">Lec/Lab</th>
+                            <th className="text-center bg-gray-200 p-2">Pre-Requisite</th>
+                            <th className="text-center bg-gray-200 p-2">Grade</th>
+		                      </tr>
+                        </thead>
 
-                <tbody>
-                    {filteredData.map((curriculum, index) => (
-                      <tr 
-                        key={index} 
-                        className={`${index % 2 === 0 ? 'odd:bg-green-100' : ''}`}
-                      >
-                          <td className="text-center p-2">{curriculum.class_year}</td>
-                          <td className="text-center p-2">{curriculum.semester}</td>
-                          <td className="text-center p-2">{curriculum.course_code}</td>
-                          <td className="text-center p-2">{curriculum.units}</td>
-                          <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.course_title}</td>
-                          <td className="text-center p-2">{curriculum.hoursperWeek}</td>
-                          <td className="text-center p-2">{curriculum.course_type}</td>
-                          <td className="text-center p-2">{curriculum.preReq}</td>
-                          <td className="text-center p-2">{grade.grade}</td>  {/* //no data/ not working */}
-                        </tr>
-                        ))}
-                </tbody>
-	          </table>
+                        <tbody>
+                            {filteredData.map((curriculum, index) => (
+                              <tr 
+                                key={index} 
+                                className={`${index % 2 === 0 ? 'odd:bg-green-100' : ''}`}
+                              >
+                                  <td className="text-center p-2">{curriculum.class_year}</td>
+                                  <td className="text-center p-2">{curriculum.semester}</td>
+                                  <td className="text-center p-2">{curriculum.course_code}</td>
+                                  <td className="text-center p-2">{curriculum.units}</td>
+                                  <td className="text-center p-2 overflow-hidden overflow-wrap break-word">{curriculum.course_title}</td>
+                                  {/* {<td className="text-center p-2">{curriculum.hoursperWeek}</td>} */}
+                                  <td className="text-center p-2">{curriculum.course_type}</td>
+                                  <td className="text-center p-2">{curriculum.preReq}</td>
+                                  <td className="text-center p-2">{curriculum.grade !== '0' ? curriculum.grade : 'N/A'}</td>  
+                                </tr>
+                                ))}
+                        </tbody>
+	                  </table>
+                  )}
             </div>
           </div>     
         </>

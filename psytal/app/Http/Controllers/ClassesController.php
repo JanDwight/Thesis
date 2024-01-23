@@ -57,26 +57,43 @@ class ClassesController extends Controller
     {
         $user = Auth::user();
 
-        if($user->role === 4){
+        if ($user->role === 4) {
             $student = student_profile::where('archived', 0)
-            ->where('user_id', $user->id)
-            ->first();
-
+                ->where('user_id', $user->id)
+                ->first();
+        
             $studentSubjects = student_classes::where('archived', 0)
-            ->where('ongoing', 2) //2 = ongoing, 1 = enrolled previous semester, 0 = previously enrolled subjects
-            ->where('student_profile_id', $student->student_profile_id)
-            ->get();
+                ->where('ongoing', 1)
+                ->where('student_profile_id', $student->student_profile_id)
+                ->get();
 
-            $classDetails = [];
-
+            $curriculum = [];
+        
             foreach ($studentSubjects as $subject) {
-                $classDetails[] = classes::where('archived', 0)
-                ->where('class_id', $subject->class_id)->first();
+                $class = classes::where('archived', 0)
+                    ->where('class_id', $subject->class_id)
+                    ->first();
+        
+                $preRequisite = curriculum::where('course_code', $class->course_code)->first();
+        
+                $grade = $subject->grade; // Assuming the column name is 'grade' in the student_classes table
+        
+                // Concatenate the grade and prerequisites to the class details
+                $classes = $class->toArray();
+                $classes['grade'] = $grade;
+        
+                if ($preRequisite) {
+                    $classes['preReq'] = $preRequisite->preReq;
+                }
+        
+                $curriculum[] = $classes;
             }
 
-            return response()->json($classDetails);
+            return response()->json(['curriculum' => $curriculum], 200);
         }
+        
     }
+    
     //add class
     public function addClass(AddClassRequest $request)
     {

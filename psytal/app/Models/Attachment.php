@@ -14,13 +14,10 @@ class Attachment extends Model
     // Define the fillable fields that can be mass-assigned
     protected $fillable = [
         'student_profile_id',
-        'classes_classes_id',
-        'class_code',
-        'course_code',
-        'course_title',
-        'units',
+        'instructor_profile',
+        'class_id',
         'grade',
-        'course_type', // Add the 'archived' field to the fillable array <><><>
-        // Add other columns here time and day
+        'ongoing',
+        'archived',
     ];
 }
