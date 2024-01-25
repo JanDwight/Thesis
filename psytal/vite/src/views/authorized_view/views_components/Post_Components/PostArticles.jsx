@@ -91,7 +91,7 @@ export default function PostArticles() {
                   className="cursor-pointer hover:bg-green-200 hover:w-full"
                   onClick={() => handleArchiveConfirmation(post)}
                 >
-                  Archive
+                  Delete
                 </div>
               </div>
             )}

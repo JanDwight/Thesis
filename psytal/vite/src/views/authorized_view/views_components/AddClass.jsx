@@ -107,7 +107,7 @@ export default function AddClass({closeModal}) {
         setTimeout(() => {
           setSuccessMessage(null);
           closeModal();
-        }, 5000);
+        }, 3000);
       })
       .catch((error) => {
         // Handle errors here
