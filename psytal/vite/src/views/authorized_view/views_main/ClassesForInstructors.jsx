@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from '../../../axios';
-import ClassPopUp from '../views_components/ClassPopUp';
+import ClassPopUp from '../views_components/Instructor/ClassPopUp';
+import ReactModal from 'react-modal';
 
 export default function ClassesForInstructors(){  
 
-    const test = [
-        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" },              
-        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" },
-        {class_code: "ABC1", course_code: "TEST", course_title: "TEST", semester: "TEST", class_year: "TEST", class_section: "TEST" }
-    ]
-
     const [isClassPopUpOpen, setClassPopUpOpen]= useState(false);
-    const [selectedClass, setSelectedClass] = useState([]);
+    const [selectedClass, setSelectedClass] = useState({});
 
     const handleOpenPopUp = (subject) => {
         setClassPopUpOpen(true);
@@ -73,12 +68,18 @@ export default function ClassesForInstructors(){
               </div>
             </div>    
 
-            
-        <ClassPopUp
-          isClassPopUpOpen={isClassPopUpOpen}
-          onClose={() => setClassPopUpOpen(false)}
-          subject={selectedClass}
-        />
+        <ReactModal
+          isOpen={isClassPopUpOpen}
+          onRequestClose={() => setClassPopUpOpen(false)}
+          className="w-fit"
+        >
+            <ClassPopUp
+              onClose={() => setClassPopUpOpen(false)}
+              subject={selectedClass}
+            />
+          
+        </ReactModal>
+        
         </>
   
       

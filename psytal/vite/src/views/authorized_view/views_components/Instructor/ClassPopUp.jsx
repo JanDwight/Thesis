@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axiosClient from '../../../axios.js';
+import React, {useState, useEffect} from 'react';
+import axiosClient from '../../../../axios';
 
 export default function ClassPopUp({ showModal, onClose, subject }) {
 
@@ -10,29 +10,29 @@ export default function ClassPopUp({ showModal, onClose, subject }) {
         {name: "Magno, Emilia"}
     ]
 
-  if (!showModal) {
-    return null;
-  }
+  console.log(subject)
 
-  /*const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   
-  useEffect(() => {
-    if (showModal) {
-      fetchData();
-    }
-  }, [showModal]);
+  
+    
+  
+      useEffect(() => {
+        fetchClasses();
+    }, []);
+    
+    const fetchClasses = async () => {
+        try {
+            // Fetch data from the Laravel API endpoint
+    axiosClient.get('/showstudentclasses') // take from student_profiles???
+    .then((response) => {
+      setData(response.data);
+    })
 
-  const fetchData = () => {
-    // Fetch data from the Laravel API endpoint
-    axiosClient.get('/class_students') // take from student_profiles???
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching students:', error);
-      });
-  }*/
-
+  } catch (error) {
+      console.error(error);
+  }
+    };
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
@@ -58,13 +58,13 @@ export default function ClassPopUp({ showModal, onClose, subject }) {
                     </div>
                 </div>
              
-                {students.map((itemn, index) => (
+                {data.map((itemn, index) => (
                   <div className={index % 2 === 0 ? "bg-[#D9D9D9]" : "bg-white"}>
                     {itemn.name}
                   </div>
                 ))}
                 <div className='text-xs font-bold text-right'>
-                    Total Students: 32
+                    Total Students: {data.length}
                 </div>
             </div>
         </div>

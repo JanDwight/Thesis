@@ -6,9 +6,6 @@ use App\Models\classes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\instructor_profile;
-use App\Models\student_profile;
-use App\Models\classes;
 
 
 return new class extends Migration
