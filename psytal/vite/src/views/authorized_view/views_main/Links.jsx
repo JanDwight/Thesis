@@ -166,7 +166,7 @@ export default function Links() {
       <ReactModal
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
-      className="w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
+      className="lg:w-1/2 md:w-[40%] sm:w-[20%] h-fit bg-[#FFFFFF] rounded-3xl ring-1 ring-black shadow-2xl mt-[10%] mx-auto p-5"
       >
         <div>
           <AddLinks closeModal={() => setIsModalOpen(false)}/>
