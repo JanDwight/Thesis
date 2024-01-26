@@ -48,24 +48,27 @@ export default function GuestLayout() {
 
   return (
     <>
-      <div>
+      <div className='min-h-full'>
         <header>
-        <Disclosure as="nav" className="fixed h-[20%] w-[100%] z-20 bg-gray-600">
+        <Disclosure as="nav" className="bg-viridian">
           {({ open }) => (
             <>
             {/* 1st Header */}
-            <div  className="bg-viridian w-[100%]"> 
+            <div  className=" w-[100%]"> 
               <div className="flex justify-center space-x-5 px-10 py-2">
                 <div className="flex items-center">
+                  <div className='flex-shrink-0'>
                   <a href="/landingpage">
                     <img
-                      className="h-20 w-20"
+                      className="sm:h-20 sm:w-20 h-14 w-14"
                       src={logo}
                       alt="Department of Psychology"
                     />
                   </a>
+                  </div>
+                  
                   <div className="flex items-center px-10">
-                    <p className="font-semibold text-3xl ml-2 font-franklin text-white">
+                    <p className="font-semibold text-lg sm:text-3xl ml-2 font-franklin text-white">
                       DEPARTMENT OF PSYCHOLOGY PORTAL
                     </p>
                   </div>
@@ -73,7 +76,7 @@ export default function GuestLayout() {
                 </div>
                 </div>
               {/* 2nd Header */}
-                <div className="flex justify-center items-center px-10 py-2 bg-[#739072]">
+                <div className="hidden md:flex justify-center items-center px-10 py-2 bg-[#739072]">
                 <div>
                   <div className="ml-10 flex items-baseline space-x-10">
                     {dynamicNavigation.map((item) => (
@@ -119,7 +122,7 @@ export default function GuestLayout() {
                       to={item.to}
                       className={({ isActive }) =>
                         classNames(
-                          isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-500 hover:text-white',
                           'block rounded-md px-3 py-2 text-base font-medium'
                         )
                       }
@@ -138,7 +141,7 @@ export default function GuestLayout() {
 
       <div>
         <main>
-          <div className='h-[100%] w-[100%] py-[1%]'>
+          <div className='h-[100%] w-[100%]'>
             <Outlet/>
           </div>
         </main>
