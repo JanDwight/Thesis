@@ -226,16 +226,20 @@ export default function PreRegistrationForm() {
                         
                         <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
                           name="start"
-                          type="number" 
+                          type="text" 
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                          pattern="\d{0,4}"
                           placeholder="20XX"
                           min="2000" // Minimum year
                           max="2099" // Maximum year
                           step="1" // Year step
+                          maxLength={4}
                           value={startOfSchoolYear}
-                          onChange={ev => {
-                            setStartOfSchoolYear(ev.target.value);
-                            setEndOfSchoolYear(parseInt(ev.target.value) + 1);}}
+                          onChange= {ev => {
+                              // Ensure that only numeric values are entered
+                              const value = ev.target.value.replace(/\D/g, '');
+                              setStartOfSchoolYear(value);
+                              setEndOfSchoolYear(parseInt(value) + 1);}}
                         />
                       </div>
                       <span className="mx-4 text-gray-500">to</span>
@@ -245,16 +249,20 @@ export default function PreRegistrationForm() {
                         </div>
                         <input
                           name="end"
-                          type="number" 
+                          type="text"  
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
+                          pattern="\d{0,4}"
                           placeholder="20XX"
                           min="2000" 
                           max="2099" 
                           step="1" 
+                          maxLength={4}
                           value={endOfSchoolYear}
                           onChange={ev => {
-                            setEndOfSchoolYear(ev.target.value);
-                            setStartOfSchoolYear(parseInt(ev.target.value) - 1);}}
+                              // Ensure that only numeric values are entered
+                              const value = ev.target.value.replace(/\D/g, '');
+                              setEndOfSchoolYear(value);
+                              setStartOfSchoolYear(parseInt(value) - 1);}}
                         />
                       </div>
                     </div>
