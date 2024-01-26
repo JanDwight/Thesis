@@ -51,6 +51,9 @@ export default function AddingPost() {
 
     try {
       if (!title || !description) {
+        setSuccessMessage({
+          message: 'Please enter both a title and description.',
+        }), 2000;
         setError('Please enter both a title and description.');
         setLoading(false);
         return;
@@ -84,7 +87,9 @@ export default function AddingPost() {
           setTimeout(() => {
             setSuccessMessage(null);
             closeModal();
+            window.location.reload();
           }, 2000);
+          
         } else {
           setError('An error occurred while posting.');
         }
@@ -229,6 +234,17 @@ export default function AddingPost() {
               </div>
             </div>
           </div>
+          {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
         </div>
       )}
     </>

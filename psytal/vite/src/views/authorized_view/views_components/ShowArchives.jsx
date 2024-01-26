@@ -85,7 +85,7 @@ export default function ShowArchiveTable({ showModal, onClose, dataTable}) {
       console.log('Response from backend:', response.data);
 
       setSuccessMessage({
-        message: 'The USER has been restored successfully!',
+        message: 'This ITEM has been restored successfully!',
       });
 
       setTimeout(() => {

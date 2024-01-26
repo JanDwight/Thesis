@@ -3,6 +3,7 @@ import axiosClient from '../../../../axios';
 
 export default function ArchivePost({ showArchivepost, onClose, postId, onArchiveSuccess }) {
   const [isArchiving, setIsArchiving] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const confirmArchive = async () => {
     try {
@@ -10,6 +11,7 @@ export default function ArchivePost({ showArchivepost, onClose, postId, onArchiv
       if (response.status === 204) {
         // Post archived successfully, inform the parent component
         onArchiveSuccess();
+
       } else {
         throw new Error('Error Network response');
       }
@@ -21,7 +23,16 @@ export default function ArchivePost({ showArchivepost, onClose, postId, onArchiv
   };
 
   const handleArchive = async () => {
-    setIsArchiving(true);
+            setSuccessMessage({
+          message: 'Deleting this post was successful!',
+        });
+
+        setTimeout(() => {
+          setSuccessMessage(null);
+          
+          setIsArchiving(true);
+        }, 2000);
+    
     confirmArchive();
   };
 
@@ -58,6 +69,17 @@ export default function ArchivePost({ showArchivepost, onClose, postId, onArchiv
           </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     if (selectedPost) {
@@ -108,17 +109,27 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
           description: editedPost.description,
           images: response.data.post.images || [],
         });
+        setSuccessMessage({
+          message: 'Editing this post was successful!',
+        });
 
-        closeModal();
+        setTimeout(() => {
+          setSuccessMessage(null);
+          closeModal();
+          window.location.reload();
+        }, 2000);
+        
       } else {
-        throw new Error('Network response was not ok');
+        setError('An error occurred while posting.');
       }
     } catch (error) {
-      console.error('Error updating data: ', error);
+      console.error(error);
+      setError('An error occurred while posting.');
     } finally {
       setLoading(false);
     }
-  };
+  }
+
 
   if (!selectedPost) {
     return null;
@@ -227,6 +238,17 @@ export default function EditPostModal({ selectedPost, closeModal, handleSave }) 
           </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
