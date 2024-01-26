@@ -30,7 +30,7 @@ export default function AddCourse({closeModal}) {
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);
-        window.location.reload();
+        
 
           setSuccessMessage({
             message: 'The COURSE was added successfully!',
@@ -39,7 +39,8 @@ export default function AddCourse({closeModal}) {
           setTimeout(() => {
             setSuccessMessage(null);
             closeModal();
-          }, 5000);
+            window.location.reload();
+          }, 2000);
       })
       .catch(error => {
         // Handle errors, including validation errors

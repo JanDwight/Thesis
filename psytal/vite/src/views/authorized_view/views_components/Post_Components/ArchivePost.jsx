@@ -29,11 +29,11 @@ export default function ArchivePost({ showArchivepost, onClose, postId, onArchiv
 
         setTimeout(() => {
           setSuccessMessage(null);
-          
           setIsArchiving(true);
+          confirmArchive();
         }, 2000);
     
-    confirmArchive();
+
   };
 
   if (!showArchivepost) {

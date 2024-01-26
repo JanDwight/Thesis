@@ -16,8 +16,9 @@ export default function ArchiveLinks({onclose, selected}) {
           
                 setTimeout(() => {
                   setSuccessMessage(null);
+                  window.location.reload();
                 }, 2000);
-                window.location.reload();
+                
               })
               .catch((error) => {
                 // Handle errors, including validation errors

@@ -28,7 +28,7 @@ export default function AddLinks({closeModal}) {
       .then(response => {
         // Handle success, e.g., show a success message
         console.log(response.data);
-        window.location.reload();
+        
 
         setSuccessMessage({
           message: 'The LINK was added successfully!',
@@ -37,7 +37,8 @@ export default function AddLinks({closeModal}) {
         setTimeout(() => {
           setSuccessMessage(null);
           closeModal();
-        }, 5000);
+          window.location.reload();
+        }, 3000);
       })
       .catch(error => {
         // Handle errors, including validation errors
