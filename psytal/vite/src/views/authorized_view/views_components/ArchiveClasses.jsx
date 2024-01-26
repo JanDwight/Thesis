@@ -15,7 +15,7 @@ export default function ArchiveClasses({ showModal, onClose, subject }) {
       console.log(response.data);
       // Handle success, e.g., show a success message
       setSuccessMessage({
-        message: 'Classes Deleted successfully!',
+        message: 'Class Deleted successfully!',
       });
 
       setTimeout(() => {

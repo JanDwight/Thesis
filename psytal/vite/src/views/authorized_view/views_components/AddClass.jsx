@@ -98,7 +98,7 @@ export default function AddClass({closeModal}) {
         console.log('Data sent successfully:', response.data);
 
         // Close the modal or perform any other action as needed
-        window.location.reload();
+   
 
         setSuccessMessage({
           message: 'The CLASS was added successfully!',
@@ -107,7 +107,8 @@ export default function AddClass({closeModal}) {
         setTimeout(() => {
           setSuccessMessage(null);
           closeModal();
-        }, 3000);
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => {
         // Handle errors here

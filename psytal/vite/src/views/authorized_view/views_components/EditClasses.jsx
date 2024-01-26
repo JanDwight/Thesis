@@ -11,7 +11,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
   const [instructor_name, setInstructor] = useState(instructor_old);
   const [class_section, setClass_Section] = useState(section_old);
   const [class_code, setClass_Code] = useState(class_code_old);
-  
+  const [successMessage, setSuccessMessage] = useState(null);
   
   const [instructorsTable, setInstructorsTable] = useState([]);
 
@@ -59,8 +59,15 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
       .put(`/updateclasses/${subject.class_id}`, updatedClass)
       .then((response) => {
         console.log('Class Updated Successfully');
-        onSave();
-        window.location.reload();
+        setSuccessMessage({
+          message: 'The CLASS was Updated successfully!',
+        });
+
+        setTimeout(() => {
+          setSuccessMessage(null);
+          onSave();
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -156,6 +163,17 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
           </div>
         </div>
       </div>
+      {successMessage && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     // ... (rest of your component code)
   );
