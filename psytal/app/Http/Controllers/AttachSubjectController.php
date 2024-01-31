@@ -8,6 +8,7 @@ use App\Http\Requests\attachRequest;
 use App\Models\student_profile;
 use App\Models\classes;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\Auth;
 
 class AttachSubjectController extends Controller
 {
@@ -57,6 +58,84 @@ class AttachSubjectController extends Controller
         return response()->json(['message' => $instructor]);
     }
 
+    public function editGrade(Request $request, $studentName)
+    {
+        // Split the full name into an array
+        $nameParts = explode(' ', $studentName);
+
+        // Initialize variables for lastName, firstName, and middleInitial
+        $lastName = '';
+        $firstName = '';
+        $middleInitial = '';
+
+        // Extract the values based on the array length
+        $namePartsCount = count($nameParts);
+
+        // If there are at least 2 elements, consider the first as the last name and the rest as the first name
+        if ($namePartsCount >= 2) {
+            $lastName = rtrim($nameParts[0], ',');
+            $firstNameArray = array_slice($nameParts, 1, -1); // Exclude the last element
+            $firstName = implode(' ', $firstNameArray);
+
+            // If there are more than 2 elements, consider the last element as the middle initial
+            if ($namePartsCount > 2) {
+                $middleInitial = end($nameParts); // Get the last element as the middle initial
+            }
+        }
+
+        // Create an array with the separated values
+        $separatedNames = [
+            'lastName' => $lastName,
+            'firstName' => $firstName,
+            'middleInitial' => $middleInitial,
+        ];
+
+        // Modify the query to include the last name and first name conditions
+        $selectedStudent = student_profile::where('last_name', $separatedNames['lastName'])
+            ->where('first_name', $separatedNames['firstName'])
+            ->first();
+
+        // Check if the selected student exists
+        if (!$selectedStudent) {
+            return response()->json(['error' => 'Student not found'], 404);
+        }
+
+        // Modify the query to include the class ID condition
+        $selectedClass = student_classes::where('class_id', $request['class_id'])
+            ->where('student_profile_id', $selectedStudent->student_profile_id)
+            ->get()
+            ->first();
+
+        // Check if the selected class exists for the student
+        if (!$selectedClass) {
+            return response()->json(['error' => 'Student not found in the selected class'], 404);
+        }
+
+        // Create a collection to store the updated records
+$updatedRecords = collect();
+
+// Check if $selectedClass is a single record or a collection of records
+if ($selectedClass instanceof \Illuminate\Database\Eloquent\Collection) {
+    // Loop through each class record and update the grade for the selected student
+    foreach ($selectedClass as $class) {
+        if ($class) {
+            $class->grade = $request['grade'];
+            $class->save();
+            $updatedRecords->push($class);
+        }
+    }
+} elseif ($selectedClass instanceof \Illuminate\Database\Eloquent\Model) {
+    // If it's a single record, update the grade directly
+    $selectedClass->grade = $request['grade'];
+    $selectedClass->save();
+    $updatedRecords->push($selectedClass);
+}
+
+// You may want to return a success message or the updated data here
+return response()->json(['message' => 'Grade updated successfully', 'updatedRecords' => $updatedRecords]);
+    }
+
+    
     //
     public function attachSubjectToStudent(Request $request)
     {

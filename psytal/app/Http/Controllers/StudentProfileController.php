@@ -106,37 +106,40 @@ class StudentProfileController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Excludes showing archived users
-    $users = student_profile::where('archived', 0)->get(); // Change '0' to '1' to get archived users
-
-    $userList = [];
-
-    foreach ($users as $user) {
-        $fullName = $user['last_name'] . ', ' . $user['first_name'];
-
-        if (!empty($user['middle_name'])) {
-            $middleInitial = substr($user['middle_name'], 0, 1);
-            $fullName .= ' ' . $middleInitial . '.';
+    {
+        // Excludes showing archived users and where learners_reference_Number is not null
+        $users = student_profile::where('archived', 0)
+                                ->whereNotNull('learners_reference_Number')
+                                ->get();
+    
+        $userList = [];
+    
+        foreach ($users as $user) {
+            $fullName = $user['last_name'] . ', ' . $user['first_name'];
+        
+            if (!empty($user['middle_name'])) {
+                $middleInitial = substr($user['middle_name'], 0, 1);
+                $fullName .= ' ' . $middleInitial . '.';
+            }
+        
+            $yearLevel = $user['year_level'] . $user['section'];
+        
+            if (empty($yearLevel)) {
+                $yearLevel = 'n/a';
+            }
+        
+            $userList[] = [
+                'student_school_id' => $user['student_school_id'],
+                'full_name' => $fullName,
+                'email' => $user['email_address'],
+                'user_id' => $user['user_id'],
+                'yrsection' => $yearLevel,
+            ];
         }
-
-        $yearLevel = $user['year_level']. $user['section'];
-
-        if (empty($yearLevel)) {
-            $yearLevel = 'n/a';
-        }
-
-        $userList[] = [
-            'student_school_id' => $user['student_school_id'],
-            'full_name' => $fullName,
-            'email' => $user['email_address'],
-            'user_id' => $user['user_id'],
-            'yrsection' => $yearLevel,
-        ];
+    
+        return response()->json($userList);
     }
-
-    return response()->json($userList);
-}
+    
 
 
   

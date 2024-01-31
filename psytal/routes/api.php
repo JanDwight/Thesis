@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+//C:\Thesis\Thesis\psytal\routes\api.php
 
 Route::middleware('auth:sanctum')->group(function() {
     
@@ -35,6 +36,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::post('/userprofileemailupdate', [UserController::class, 'userprofileemailupdate']);
     Route::post('/userprofilepasswordupdate', [UserController::class, 'userprofilepasswordupdate']);
+
+    //grades
+    Route::put('/editGrade/{selectedStudent}', [AttachSubjectController::class, 'editGrade']);
 
     //curriculum Chacklist
     Route::get('/curriculumnCheckListIndex', [ClassesController::class, 'curriculumnCheckListIndex']);
@@ -75,6 +79,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put('/updateclasses/{id}', [ClassesController::class, 'updateClasses']); //<><><> update user
     Route::put('/archiveclasses/{id}', [ClassesController::class, 'archiveclasses']); //<><><> archive class
     Route::get('/instructorclasses', [InstructorClassesController::class, 'index']);
+    Route::get('/showstudentclasses', [InstructorClassesController::class, 'showStudentClasses']);
 
     //edit/add class modal
     Route::get('/show_instructors', [UserController::class, 'show_instructors']); //<><><><><><><>

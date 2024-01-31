@@ -419,7 +419,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     id="grid-studentMaidenname" 
                     type="text" 
-                    pattern="[^a-zA-Z\s/]+"
+                    //pattern="[^a-zA-Z\s/]+"
                     title="Input 'N/A' if not applicable."
                     value={maidenName}
                     maxLength={30}
@@ -609,7 +609,7 @@ export default function PreRegistrationForm() {
                     id="grid-ethnicity" 
                     type="text" 
                     placeholder=""
-                    pattern="[^a-zA-Z\s/]+"
+                    //pattern="[^a-zA-Z\s/]+"
                     value={ethnicity}
                     title="Input your Ethnicity or Tribal Affilation. Example: Ilocano"
                     onChange={ev => {
@@ -865,7 +865,7 @@ export default function PreRegistrationForm() {
                     <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-relationship" 
                     type="text" 
-                    pattern="[^a-zA-Z\s/]+"
+                    //pattern="[^a-zA-Z\s/]+"
                     title="Input your relationship with the person to be contacted in case of emergency. Example: Parent"
                     value={relationship}
                     onChange={ev => {

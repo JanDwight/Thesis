@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
-import axiosClient from '../../../axios.js';
+import React, {useState, useEffect} from 'react';
+import axiosClient from '../../../../axios';
+import ReactModal from 'react-modal';
+import SelectedStudentsPopUp from './SelectedStudentsPopUp';
 
 export default function ClassPopUp({ showModal, onClose, subject }) {
+  
+  const [isSelectedStudentPopUpOpen, setIsSelectedStudentPopUpOpen]= useState(false);
+  const [details, setDetails] = useState({
+    selectedStudent: '',
+    class_id: subject.class_id,
+  });
 
-    const students = [
-        {name: "Garcia, Eduardo"},
-        {name: "Mendoza, Rosalinda"},
-        {name: "Bautista, Fernando"},
-        {name: "Magno, Emilia"}
-    ]
-
-  if (!showModal) {
-    return null;
+  const handleOpenPopUp = (selectedStudent) => {
+    setIsSelectedStudentPopUpOpen(true);
+    setDetails({
+      ...details,  // Keep existing details
+      selectedStudent: selectedStudent
+    });
   }
 
-  /*const [data, setData] = useState([]);
-  
-  useEffect(() => {
-    if (showModal) {
-      fetchData();
-    }
-  }, [showModal]);
+  const [data, setData] = useState([]);
 
-  const fetchData = () => {
-    // Fetch data from the Laravel API endpoint
-    axiosClient.get('/class_students') // take from student_profiles???
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching students:', error);
-      });
-  }*/
+      useEffect(() => {
+        fetchClasses();
+    }, []);
+    
+    const fetchClasses = async () => {
+        try {
+            // Fetch data from the Laravel API endpoint
+    axiosClient.get('/showstudentclasses') // take from student_profiles???
+    .then((response) => {
+      setData(response.data);
+    })
 
-
+  } catch (error) {
+      console.error(error);
+  }
+    };
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white w-full lg:w-1/2 px-4 py-6 shadow-lg rounded-lg">
@@ -48,25 +51,31 @@ export default function ClassPopUp({ showModal, onClose, subject }) {
                     <b>Instructor:</b> {subject.instructor_name}
                 </div>
             </div>
-            <div>
-                <div className='flex items-baseline justify-between'>
-                    <div className='font-bold text-center'>
-                        Students:
-                    </div>
-                    <div className='text-right'>
-                        <b>Section: </b> {subject.class_year + ' - ' + subject.class_section}
-                    </div>
-                </div>
-             
-                {students.map((itemn, index) => (
-                  <div className={index % 2 === 0 ? "bg-[#D9D9D9]" : "bg-white"}>
-                    {itemn.name}
-                  </div>
+            <table className="table w-full table-striped text-gray-700">
+                <thead className='flex items-baseline justify-between'>
+                  <tr>
+                      <th className='font-bold text-center'>
+                          Students:
+                      </th>
+                      <th className='text-right'>
+                          <b>Section: </b> {subject.class_year + ' - ' + subject.class_section}
+                      </th>
+                  </tr>
+                </thead>
+            <tbody> 
+                {data.map((itemn, index) => (
+                  <tr 
+                    key={index}
+                    className={index % 2 === 0 ? "bg-[#D9D9D9]" : "bg-white"}
+                  >
+                    <td className="text-left p-2" onClick={() => handleOpenPopUp(itemn)}>{itemn.name}</td>
+                  </tr>
                 ))}
+            </tbody>
                 <div className='text-xs font-bold text-right'>
-                    Total Students: 32
+                    Total Students: {data.length}
                 </div>
-            </div>
+            </table>
         </div>
 
 
@@ -80,6 +89,17 @@ export default function ClassPopUp({ showModal, onClose, subject }) {
             </div>
         </div>
       </div>
+
+      <ReactModal
+    isOpen={isSelectedStudentPopUpOpen}
+    onRequestClose={() => setIsSelectedStudentPopUpOpen(false)}
+    >
+      <SelectedStudentsPopUp
+          onClose={() => setIsSelectedStudentPopUpOpen(false)}
+          student={details.selectedStudent} // Use details.selectedStudent instead
+          class_id={details.class_id} // Assuming you meant to use the `subject.class_id` here
+      />
+    </ReactModal>
     </div>
   );
 }
