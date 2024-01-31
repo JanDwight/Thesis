@@ -83,10 +83,20 @@ export default function AddUsers({ showModal, onClose}) {
           setSuccessMessage(null);
           resetForm();
           onClose();
-        }, 5000);
+        }, 2000);
       })
       .catch((error) => {
         console.error(error);
+        setError({
+          message: 'This user cannot be added, double check the email domain if it is applicable',
+          
+      });
+      setTimeout(() => {
+        resetForm();
+        onClose();
+        window.location.reload();
+      }, 2000);
+
       });
 
       axiosClient
@@ -184,6 +194,17 @@ export default function AddUsers({ showModal, onClose}) {
             <div className="w-full px-4 mx-auto mt-6">
               <div className="text-center text-xl text-green-600 font-semibold my-3">
                 {successMessage.message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+       {error && (
+        <div className="fixed top-0 left-0 w-full h-full overflow-y-auto bg-black bg-opacity-50">
+          <div className="lg:w-1/2 px-4 py-1 shadow-lg w-[20%] h-fit bg-[#FFFFFF] rounded-xl mt-[10%] mx-auto p-5">
+            <div className="w-full px-4 mx-auto mt-6">
+              <div className="text-center text-xl text-green-600 font-semibold my-3">
+                {error.message}
               </div>
             </div>
           </div>

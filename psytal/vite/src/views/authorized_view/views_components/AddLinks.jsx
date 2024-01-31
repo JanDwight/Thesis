@@ -38,7 +38,7 @@ export default function AddLinks({closeModal}) {
           setSuccessMessage(null);
           closeModal();
           window.location.reload();
-        }, 3000);
+        }, 2000);
       })
       .catch(error => {
         // Handle errors, including validation errors

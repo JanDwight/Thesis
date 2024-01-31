@@ -33,14 +33,13 @@ export default function Classes(){
 
     return(
     <>
-        <div className="w-full h-[auto] rounded-3xl bg-white shadow-2xl pt-5 pb-12">{/*For the Container*/}
+        <div className="w-full h-[auto]  rounded-t-3xl  bg-white shadow-2xl pt-5 pb-6 ">{/*For the Container*/}
             <div className="mt-5 mx-5 pb-5 border-b-2 border-black flex flex-row justify-between items-baseline">
                 <div className="font-bold text-4xl lg:text-6xl text-[#525252]">Classes</div>
-
                 <div className="mt-5 mx-5 flex flex-row justify-between items-baseline">
+                  
                     
                     {/*search*/}
-
                     <div className="flex items-baseline">
                         
                         <div className="my-4 mx-4" id="magnifying_glass">
@@ -67,25 +66,34 @@ export default function Classes(){
 
                 </div>
             </div>
+            <div className="table-container overflow-x-auto max-h-[400px] overflow-y-auto">
+          <table className="table w-full px-4 table-striped text-gray-700 mt-5" >
+            <thead>
+              <tr>
+                        <th className="text-left bg-gray-200 p-2">Class Code</th>
+                        <th className="text-left bg-gray-200 p-2">Course Code</th>
+                        <th className="bg-gray-200 text-left p-2">Course Title</th>
+                        <th className="bg-gray-200 text-left p-2">Semester</th>
+                        <th className="bg-gray-200 text-left p-2">Year</th> 
+                        <th className="bg-gray-200 text-left p-2">Section</th> 
+                        <th className="bg-gray-200 text-left p-2">Instructor</th>
+                        <th className="bg-gray-200 text-left p-2">Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    </div>
+            </div>
+          
 
-            <div className="m-5">
                     {/* table */}
-                    <div className="m-5">
-                    <div className="">
-                    <div className="">
                       <div>
                       {activeTab === 1 && (
                         <ClassList filterText={filterText} />
                       )}
                       </div>
-                    </div>
 
-                  </div>
-                </div>
-
-            </div>
-        </div>
-
+       
+                        
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}

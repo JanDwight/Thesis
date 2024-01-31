@@ -109,21 +109,9 @@ handleSaveClassChanges = () => {
     );
 
     return (
-      <div>
-        <table className="table w-full table-striped text-gray-700">
-          <thead>
-            <tr>
-              <th className="text-left bg-gray-200 p-2">Class Code</th>
-              <th className="text-left bg-gray-200 p-2">Course Code</th>
-              <th className="bg-gray-200 text-left p-2">Course Title</th>
-              <th className="bg-gray-200 text-left p-2">Semester</th>
-              <th className="bg-gray-200 text-left p-2">Year</th> 
-              <th className="bg-gray-200 text-left p-2">Section</th> 
-              <th className="bg-gray-200 text-left p-2">Instructor</th>
-              <th className="bg-gray-200 text-left p-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>{filteredData.map((subject, index) => (
+      <div className="w-full h-[auto] px-4 mx-auto rounded-b-3xl bg-white shadow-2xl max-h-[400px] overflow-y-auto">
+      
+          <tbody className="">{filteredData.map((subject, index) => (
                 <tr key={index} className='odd:bg-green-100 cursor-pointer'>
                 <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.class_code}</td>
                 <td className="text-left p-2" onClick={() => this.handleOpenPopUp(subject)}>{subject.course_code}</td>
@@ -151,7 +139,7 @@ handleSaveClassChanges = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        
         {this.state.isArchiveClassesOpen && (
           <ArchiveClasses
             showModal={this.state.isArchiveClassesOpen}
@@ -176,6 +164,7 @@ handleSaveClassChanges = () => {
           />
         )}
       </div>
+      
     );
   }
 }

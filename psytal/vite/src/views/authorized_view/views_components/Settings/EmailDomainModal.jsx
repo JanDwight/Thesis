@@ -85,10 +85,22 @@ export default function EmailDomainModal({closeModal}) {
             deleted_at: data.deleted_at,
           }]; //NOT WORKING
 
-          setExistingEmailDomains(updatedEmailDomains);
+        //   setExistingEmailDomains(prevEmailDomains => [
+        //     ...prevEmailDomains,
+        //     {
+        //         id: data.id,
+        //         email_domains: data.email_domains,
+        //         created_at: data.created_at,
+        //         updated_at: data.updated_at,
+        //         deleted_at: data.deleted_at,
+        //     }
+        // ]);
+
+          
 
           setTimeout(() => {
             setSuccessMessage(null);
+            setExistingEmailDomains(updatedEmailDomains);
           }, 2000);
         })
         .catch((error) => {
@@ -143,8 +155,8 @@ export default function EmailDomainModal({closeModal}) {
             </form>
         </div>
 
-        <div className='pt-2'>
-            <table className="table w-full table-striped">
+        <div className="pt-2  table-container overflow-x-auto max-h-[400px] overflow-y-auto">
+            <table className="table w-full table-striped ">
                 <tbody>
                     {emailDomainList.map((item, index) => (
                         <tr 
