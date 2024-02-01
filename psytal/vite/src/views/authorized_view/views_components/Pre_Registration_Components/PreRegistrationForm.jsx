@@ -1280,7 +1280,7 @@ export default function PreRegistrationForm() {
                     <img
                         src={info}
                         alt="info"
-                        className="absolute right-3 top-[50%] h-6 w-6"
+                        className="absolute right-3 top-[60%] h-6 w-6"
                         title="Input numeric characters only. (0 to 9)"
                       />
                   </div>
