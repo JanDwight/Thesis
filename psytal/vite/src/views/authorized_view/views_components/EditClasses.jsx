@@ -60,7 +60,7 @@ export default function EditClasses({ showModal, onClose, subject, onSave}) {
       .then((response) => {
         console.log('Class Updated Successfully');
         setSuccessMessage({
-          message: 'The CLASS was Updated successfully!',
+          message: 'The Class was Updated successfully!',
         });
 
         setTimeout(() => {
