@@ -84,9 +84,6 @@
                           alt="Your Company"
                         />
                       </div>
-                      <div className="hidden md:flex md:flex-col">
-                        <p className="font-semibold text-xl  ml-5 font-franklin text-white ">Department of Psychology</p>
-                      </div>
                     </div>
 
                     <div className="hidden md:block">
