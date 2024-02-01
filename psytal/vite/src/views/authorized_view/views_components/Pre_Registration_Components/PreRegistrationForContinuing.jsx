@@ -18,7 +18,7 @@ export default function PreRegistrationForContinuing() {
       //variables for the user inputs
   const [startOfSchoolYear, setStartOfSchoolYear] = useState('');
   const [endOfSchoolYear, setEndOfSchoolYear] = useState('');   
-  const [studentSchoolId, setStudentSchoolId] = useState(0); 
+  const [studentSchoolId, setStudentSchoolId] = useState(''); 
   const [learnersReferenceNumber, setLearnersReferenceNumber] = useState(0);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -241,31 +241,40 @@ export default function PreRegistrationForContinuing() {
                         {/**=========================== Shoolyear - Date ==========================*/}  
                         <div className="flex flex-wrap flex-row px-3 -mx-3 mb-3">               
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
-                                    School year :
-                                </label>
-                                <span className="text-sm mt-2 pl-10"> First Semester </span> 
-                            </div>
-                            
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
-                                <div className="flex items-center mt-2 pl-3">
-                                    <div className="relative w-fit">
-                                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <img src={date} className='h-5 w-5'/>
-                                    </div>
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
+                              Semester :
+                            </label>
+                            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            value= "First Semester"
+                            />
+                          </div>
+                          
+                          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-5">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2 mb-2" htmlFor="grid-schoolyear">
+                              School Year :
+                            </label>
+                            <div className="flex items-center mt-2 pl-3">
+                              <div className="relative w-fit">
+                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                  <img src={date} className='h-5 w-5'/>
+                                </div>
                                     
                                     <input //Update this to automatically set the min to current year and max to 5 yeas after for better user experience
                                         name="start"
-                                        type="number" 
+                                        type="text" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                                        pattern="\d{0,4}"
                                         placeholder="20XX"
                                         min="2000" // Minimum year
                                         max="2099" // Maximum year
                                         step="1" // Year step
+                                        maxLength={4}
                                         value={startOfSchoolYear}
                                         onChange={ev => {
-                                            setStartOfSchoolYear(ev.target.value);
-                                            setEndOfSchoolYear(parseInt(ev.target.value) + 1);}}
+                                            // Ensure that only numeric values are entered
+                                            const value = ev.target.value.replace(/\D/g, '');
+                                            setStartOfSchoolYear(value);
+                                            setEndOfSchoolYear(parseInt(value) + 1);}}
                                     />
                                     </div>
                                     <span className="mx-4 text-gray-500">to</span>
@@ -275,88 +284,157 @@ export default function PreRegistrationForContinuing() {
                                     </div>
                                     <input
                                         name="end"
-                                        type="number" 
+                                        type="text" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
+                                        pattern="\d{0,4}"
                                         placeholder="20XX"
                                         min="2000" 
                                         max="2099" 
                                         step="1" 
                                         value={endOfSchoolYear}
                                         onChange={ev => {
-                                            setEndOfSchoolYear(ev.target.value);
-                                            setStartOfSchoolYear(parseInt(ev.target.value) - 1);}}
+                                            // Ensure that only numeric values are entered
+                                            const value = ev.target.value.replace(/\D/g, '');
+                                            setEndOfSchoolYear(value);
+                                            setStartOfSchoolYear(parseInt(value) - 1);}}
                                     />
                                     </div>
                                 </div>
                             </div>                 
                         </div> <hr />
 
-                        {/**=========================== Last Name - Madain Name ==========================*/} 
+                        {/**=========================== Last Name - Maiden Name ==========================*/} 
                         <div className="flex flex-wrap flex-row -mx-3 mb-2">
                             {/**SCHOOL ID */}
                             <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                            <div className="input-container relative">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
                                     Student ID No:
                                 </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-studentSchoolID" 
-                                type="number" 
-                                placeholder=""
+                                type="text"
+                                pattern="\d{0,7}"
+                                title="Input numeric characters only. (0 to 9)"
+                                inputmode="numeric"
+                                maxLength={7}
                                 value={studentSchoolId}
-                                onChange={ev => setStudentSchoolId(ev.target.value)}
+                                onChange= {ev => {
+                                  // Ensure that only numeric values are entered
+                                  const value = ev.target.value.replace(/\D/g, '');
+                                  setStudentSchoolId(value);}}
                                 />  
+                                <img
+                                  src={info}
+                                  alt="info"
+                                  className="absolute right-3 top-[50%] h-6 w-6"
+                                  title="Input numeric characters only. (0 to 9)"
+                                />
+                                </div>
                             </div>
                             {/**column1 */}
                             <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                            <div className="input-container relative">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentLastname">
                                     Last Name :
                                 </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-studentLastname"
                                 type="text"
-                                placeholder=""
+                                pattern="[a-zA-Z .]+"
+                                title="Input your Legal Last Name with your Suffix, if applicable."
                                 value={lastName}
-                                onChange={ev => setLastName(ev.target.value)}
+                                maxLength={30}
+                                onChange={ev => {
+                                  const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
+                                  setLastName(value);
+                                }}
                                 />  
+                                <img
+                                  src={info}
+                                  alt="info"
+                                  className="absolute right-3 top-[50%] h-6 w-6"
+                                  title="Input your Legal Last Name with your Suffix, if applicable."
+                                />
+                                </div>
                             </div>
                             {/**column2 */}
                             <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                            <div className="input-container relative">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentFirstname">
                                     First Name :
                                 </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-studentFirstname" 
-                                type="text" 
-                                placeholder=""
+                                type="text"
+                                pattern="[a-zA-Z .]+"
+                                title="Input your Legal Given Name/s."
                                 value={firstName}
-                                onChange={ev => setFirstName(ev.target.value)}
+                                maxLength={50}
+                                onChange={ev => {
+                                  const value = ev.target.value.replace(/[^A-Za-z .]/g, '');
+                                  setFirstName(value);
+                                }}
                                 />  
+                                <img
+                                  src={info}
+                                  alt="info"
+                                  className="absolute right-3 top-[50%] h-6 w-6"
+                                  title="Input your Legal Given Name/s."
+                                />
+                                </div>
                             </div>
                             {/**column3 */}
                             <div className="w-full md:w-[33.33%] px-3 mb-6 md:mb-0 mt-2">
+                            <div className="input-container relative">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMiddlename">
                                     Middle Name :
                                 </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-studentMiddlename" 
                                 type="text" 
-                                placeholder=""
+                                pattern="[a-zA-Z ]+"
+                                title="Input your Legal Middle Name. Leave blank if not applicable."
                                 value={middleName}
-                                onChange={ev => setMiddleName(ev.target.value)}
+                                maxLength={30}
+                                onChange={ev => {
+                                  const value = ev.target.value.replace(/[^A-Za-z ]/g, '');
+                                  setMiddleName(value);
+                                }}
                                 />  
+                                <img
+                                  src={info}
+                                  alt="info"
+                                  className="absolute right-3 top-[50%] h-6 w-6"
+                                  title="Input your Legal Middle Name. Leave blank if not applicable."
+                                />
+                                </div>
                             </div>
                             {/** */}
                             <div className="w-full px-3 mb-6 md:mb-0 mt-2">
+                            <div className="input-container relative">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-studentMaidenname">
                                     Maiden Name :
                                 </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-studentMaidenname" 
                                 type="text" 
-                                placeholder=""
+                                //pattern="[^a-zA-Z\s/]+"
+                                title="Input 'N/A' if not applicable."
                                 value={maidenName}
-                                onChange={ev => setMaidenName(ev.target.value)}
+                                maxLength={30}
+                                onChange={ev => {
+                                  const value = ev.target.value.replace(/[^a-zA-Z\s/]/g, '');
+                                  setMaidenName(value);
+                                }}
                                 />  
+                                <img
+                                    src={info}
+                                    alt="info"
+                                    className="absolute right-3 top-[50%] h-6 w-6"
+                                    title="Input 'N/A' if not applicable."
+                                />
+                                </div>
                             </div>
                         </div> <hr />
 
@@ -366,18 +444,33 @@ export default function PreRegistrationForContinuing() {
 
                             {/**Year Level */}
                             <div className='flex flex-col w-full md:w-1/2 px-3 mt-5'>
+                            <div className="input-container relative">
                                 <span className= "text-sm font-semibold">Year Level : </span> <hr className="w-[40%]"/>
                                 <div className='mt-2'>
                                     <input name="yearlevel"
-                                            type="number" 
                                             className="bg-gray-50 border border-gray-300 mt-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
-                                            placeholder=""
-                                            min="0" 
-                                            max="99" 
-                                            step="1"
+                                            type="text"
+                                            pattern="^[1-4]$"
+                                            title="Input numeric characters only. (1 to 4)"
+                                            inputmode="numeric"
+                                            maxLength={1}
                                             value={yearLevel}
-                                            onChange={ev => setYearLevel(ev.target.value)}
+                                            onChange={(ev) => {
+                                              const value = ev.target.value;
+                                              // Check if the input matches the pattern or if it's an empty string (allowing backspace and delete)
+                                              if (/^[1-4]*$/.test(value)) {
+                                                // Update the state with the valid input
+                                                setYearLevel(value);
+                                              }
+                                            }}
                                             />
+                                            <img
+                                              src={info}
+                                              alt="info"
+                                              className="absolute right-3 top-[50%] h-6 w-6"
+                                              title="Input numeric characters only. (1 to 4)"
+                                            />
+                                </div> 
                                 </div>                            
                             </div>
                         </div> <hr/>
@@ -399,15 +492,24 @@ export default function PreRegistrationForContinuing() {
 
                             {/**Major */}
                             <div className='flex flex-col px-3 mt-5 w-full md:w-1/2'>
+                            <div className="input-container relative">
                                 <span className= "text-sm font-semibold">Major if Applicable : </span> <hr className="w-[40%]"/>
                                 <div className='mt-2'>
                                     <input className="bg-gray-50 border border-gray-300 mt-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
                                         name="major"
                                         type='text'
                                         placeholder='(optional)'
+                                        title="Leave blank if not applicable."
                                         value={major}
                                         onChange={ev => setMajor(ev.target.value)}
                                     />
+                                    <img
+                                      src={info}
+                                      alt="info"
+                                      className="absolute right-3 top-[50%] h-6 w-6"
+                                      title="Leave blank if not applicable."
+                                    />
+                                </div>
                                 </div>
                             </div>
                         </div> <hr />
@@ -493,7 +595,7 @@ export default function PreRegistrationForContinuing() {
                                     {/**Radio buttion for Irregular */}
                                     <div className='mx-5 mt-2'>
                                         <input
-                                            className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] "
+                                            className="relative float-left -ml-[1.5rem] mr-1 mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"
                                             type="radio"
                                             name="studentstatus"
                                             id="no"
@@ -503,7 +605,7 @@ export default function PreRegistrationForContinuing() {
                                             />
                                         <label
                                             className="mt-px inline-block pl-[0.15rem] hover:cursor-pointer"
-                                            htmlFor="student status">Irregular
+                                            htmlFor="studentstatus">Irregular
                                         </label>
                                     </div>
                                 </div>
