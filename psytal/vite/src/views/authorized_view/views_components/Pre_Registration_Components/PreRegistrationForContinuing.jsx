@@ -600,7 +600,7 @@ export default function PreRegistrationForContinuing() {
                                             name="studentstatus"
                                             id="no"
                                             value="Irregular"
-                                            checked={typeofstudent === 'Irregular'}
+                                            checked={studentStatus === 'Irregular'}
                                             onChange={ev => setStudentStatus(ev.target.value)}
                                             />
                                         <label

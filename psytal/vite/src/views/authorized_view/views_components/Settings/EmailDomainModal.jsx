@@ -16,7 +16,7 @@ export default function EmailDomainModal({closeModal}) {
     const [showEditEmailDomainModal, setShowEditEmailDomainModal] = useState(false);
     const [selectedEmailDomain, setSelectedEmailDomain] = useState('');
 
-    const [existingEmailDomains, setExistingEmailDomains] = useState('');
+    const [existingEmailDomains, setExistingEmailDomains] = useState([]);
 
     const [showDeleteEmailDomainModal, setShowDeleteEmailDomainModal] = useState(false);
     // const [selectedEmailDomain, setSelectedEmailDomain] = useState(null); // Assuming selectedEmailDomain should be of type object
@@ -82,8 +82,8 @@ export default function EmailDomainModal({closeModal}) {
             email_domains: data.email_domains,
             created_at: data.created_at,
             updated_at: data.updated_at,
-            deleted_at: data.deleted_at,
-          }]; //NOT WORKING
+            
+          }]; console.log(updatedEmailDomains);//NOT WORKING
 
         //   setExistingEmailDomains(prevEmailDomains => [
         //     ...prevEmailDomains,

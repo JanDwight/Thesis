@@ -796,7 +796,7 @@ export default function PreRegistrationForContinuingView({prereg}) {
                                             name="studentstatus"
                                             id="no"
                                             value="Irregular"
-                                            checked={preregData.student_status === 'Irregular'}student_status
+                                            checked={preregData.student_status === 'Irregular'}
                                             onChange={(ev) => setPreregData({ ...preregData, student_status: ev.target.value })}
                                             />
                                         <label
