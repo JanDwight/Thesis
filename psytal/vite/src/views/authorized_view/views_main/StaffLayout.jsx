@@ -67,8 +67,7 @@ export default function StaffLayout() {
                     className="block btn- h-11 w-auto" alt="Department of Psychology" />
                 </div>
                 <div className="hidden md:flex md:flex-col">
-                  <p className="font-semibold text-sm ml-5 font-franklin text-white ">Department of</p>
-                  <p className="font-semibold text-sm ml-6 font-franklin text-white">Psychology</p>
+                  <p className="font-semibold text-xl  ml-5 font-franklin text-white ">Department of Psychology</p>
                 </div>
               </div>
               
