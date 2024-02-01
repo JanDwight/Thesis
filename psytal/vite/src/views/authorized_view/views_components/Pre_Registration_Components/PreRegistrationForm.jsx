@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+
 import schoolLogo from "@assets/BSUlogo.png";
 import info from "@assets/info.png";
 import date from "@assets/calendar.png";
 import axiosClient from '../../../../axios';
 import "../../../../../src/styles.css";
+
 
 export default function PreRegistrationForm() {
   
@@ -91,48 +93,48 @@ export default function PreRegistrationForm() {
     ev.preventDefault();
     setError({ __html: "" });
 
-    if (
-      !startOfSchoolYear ||
-      !endOfSchoolYear ||
-      !studentSchoolId ||
-      !learnersReferenceNumber ||
-      !lastName ||
-      !firstName ||
-      !middleName ||
-      !academicClassification ||
-      !lastSchoolAttended ||
-      !addressOfSchoolAttended ||
-      !dateOfBirth ||
-      !citizenship ||
-      !ethnicity ||
-      !contactNumber ||
-      !placeOfBirth ||
-      !sexAtBirth ||
-      !email ||
-      !homeAddress ||
-      !addressWhileStudyingAtBsu ||
-      !emergencyContactName ||
-      !emergencyContactAddress ||
-      !emergencyContactNumber ||
-      !relationship ||
-      !healthfacilityregistered ||
-      !parenthealthfacilitydependent ||
-      !technologylevel ||
-      !digitalliteracy ||
-      !availfreehighereducation ||
-      !voluntarycontribution ||
-      !contributionamount
-    ) {
-      setError({
-        __html: "Please fill in all required fields."
-      });
-      return;
+    // if (
+    //   !startOfSchoolYear ||
+    //   !endOfSchoolYear ||
+    //   !studentSchoolId ||
+    //   !learnersReferenceNumber ||
+    //   !lastName ||
+    //   !firstName ||
+    //   !middleName ||
+    //   !academicClassification ||
+    //   !lastSchoolAttended ||
+    //   !addressOfSchoolAttended ||
+    //   !dateOfBirth ||
+    //   !citizenship ||
+    //   !ethnicity ||
+    //   !contactNumber ||
+    //   !placeOfBirth ||
+    //   !sexAtBirth ||
+    //   !email ||
+    //   !homeAddress ||
+    //   !addressWhileStudyingAtBsu ||
+    //   !emergencyContactName ||
+    //   !emergencyContactAddress ||
+    //   !emergencyContactNumber ||
+    //   !relationship ||
+    //   !healthfacilityregistered ||
+    //   !parenthealthfacilitydependent ||
+    //   !technologylevel ||
+    //   !digitalliteracy ||
+    //   !availfreehighereducation ||
+    //   !voluntarycontribution ||
+    //   !contributionamount
+    // ) {
+    //   setError({
+    //     __html: "Please fill in all required fields."
+    //   });
+    //   return;
       // setSuccessMessage({
       //   message: 'Please fill in all required fields.',
       // });
       
-      // return;
-    }
+    //   // return;
+    // }
 
     axiosClient
     .post('/preregincommingtmp', {
@@ -190,10 +192,10 @@ export default function PreRegistrationForm() {
 
       setTimeout(() => {
         setSuccessMessage(null);
+        handleClear();
+        navigate('/landingpage');
         closeModal();
-        handleClear();//not working
-        navigate('/');//not working
-      }, 2000);
+      }, 3000);
 
 
     })

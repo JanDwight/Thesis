@@ -184,10 +184,9 @@ export default function PreRegistrationForContinuing() {
     
           setTimeout(() => {
             setSuccessMessage(null);
+            handleClear();
             closeModal();
-            handleClear();//not working
-            navigate('/');//not working
-          }, 7000);
+          }, 3000);
         })
         .catch(( error ) => {
           if (error.response) {
